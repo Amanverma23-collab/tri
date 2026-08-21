@@ -120,7 +120,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     return () => window.removeEventListener('resize', handleResize);
   }, [drawFrame]);
 
-  // Scroll listener & 60FPS Lerp loop
+  // Scroll listener & smooth 60FPS Lerp loop with slower, more deliberate scroll pacing
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -130,7 +130,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
 
       if (scrollableDistance <= 0) return;
 
-      // Scroll progress from 0 (top of page) to 1 (end of 350vh container)
+      // Scroll progress mapped across the extended 650vh track
       const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
       const targetFrame = Math.min(
         TOTAL_FRAMES - 1,
@@ -147,12 +147,12 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // Smooth Lerp animation loop
+    // Smooth Lerp animation loop with gentle easing
     const renderLoop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
       if (Math.abs(diff) > 0.04) {
-        currentFrameRef.current += diff * 0.2; // Silky smooth 60fps lerp
+        currentFrameRef.current += diff * 0.12; // Smooth cinematic pacing
         const index = Math.round(currentFrameRef.current);
 
         const img = imagesRef.current[index] || imagesRef.current[0];
@@ -178,9 +178,9 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     <div
       ref={containerRef}
       id="scroll-intro-container"
-      className="relative w-full h-[350vh] bg-black m-0 p-0"
+      className="relative w-full h-[650vh] bg-black m-0 p-0"
     >
-      {/* Pinned Sticky 100vh Viewport (100% Pure Full-Screen Canvas) */}
+      {/* Pinned Sticky 100vh Viewport */}
       <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-black m-0 p-0">
         <canvas
           ref={canvasRef}
