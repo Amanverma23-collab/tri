@@ -22,56 +22,64 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     return `/frames/ezgif-frame-${num}.jpg`;
   }, []);
 
-  // Draw current frame to canvas using full-bleed "cover" geometry
+  // Draw current frame to canvas with Ultra-High-Definition DPR scaling & High-Quality interpolation
   const drawFrame = useCallback((img: HTMLImageElement | undefined) => {
     const canvas = canvasRef.current;
     if (!canvas || !img) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
     if (!ctx) return;
 
-    const dpr = window.devicePixelRatio || 1;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.5); // Sharp Retina DPR scaling
+    const rect = canvas.getBoundingClientRect();
+    const width = Math.round(rect.width);
+    const height = Math.round(rect.height);
 
-    // Adjust canvas buffer resolution to physical pixels for crystal clarity
-    if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+    const physicalWidth = Math.round(width * dpr);
+    const physicalHeight = Math.round(height * dpr);
+
+    // Synchronize physical canvas buffer
+    if (canvas.width !== physicalWidth || canvas.height !== physicalHeight) {
+      canvas.width = physicalWidth;
+      canvas.height = physicalHeight;
     }
 
-    ctx.save();
-    ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, width, height);
+    // Reset transformation matrix & configure high quality bicubic smoothing
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
-    // Full-screen cover calculation
+    // Source image dimensions
     const imgWidth = img.naturalWidth || 1280;
     const imgHeight = img.naturalHeight || 720;
     const imgAspect = imgWidth / imgHeight;
-    const canvasAspect = width / height;
+    const canvasAspect = physicalWidth / physicalHeight;
 
-    let drawWidth = width;
-    let drawHeight = height;
+    let drawWidth = physicalWidth;
+    let drawHeight = physicalHeight;
     let offsetX = 0;
     let offsetY = 0;
 
+    // Full-screen cover geometry with subpixel precision
     if (canvasAspect > imgAspect) {
-      drawWidth = width;
-      drawHeight = width / imgAspect;
+      drawWidth = physicalWidth;
+      drawHeight = Math.round(physicalWidth / imgAspect);
       offsetX = 0;
-      offsetY = (height - drawHeight) / 2;
+      offsetY = Math.round((physicalHeight - drawHeight) / 2);
     } else {
-      drawHeight = height;
-      drawWidth = height * imgAspect;
-      offsetX = (width - drawWidth) / 2;
+      drawHeight = physicalHeight;
+      drawWidth = Math.round(physicalHeight * imgAspect);
+      offsetX = Math.round((physicalWidth - drawWidth) / 2);
       offsetY = 0;
     }
 
+    // Clear and draw with high quality
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, physicalWidth, physicalHeight);
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-    ctx.restore();
   }, []);
 
-  // Preload frames in background
+  // Preload and decode frames in background
   useEffect(() => {
     let isMounted = true;
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
@@ -85,7 +93,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
       drawFrame(firstImg);
     };
 
-    // Load remaining frames progressively
+    // Load remaining frames
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       if (i === 0) continue;
       const img = new Image();
@@ -107,7 +115,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     };
   }, [getFrameUrl, drawFrame]);
 
-  // Window resize handler
+  // Window resize & orientation change handler
   useEffect(() => {
     const handleResize = () => {
       const img = imagesRef.current[Math.round(currentFrameRef.current)] || imagesRef.current[0];
@@ -120,7 +128,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     return () => window.removeEventListener('resize', handleResize);
   }, [drawFrame]);
 
-  // Scroll listener & smooth 60FPS Lerp loop with slower, more deliberate scroll pacing
+  // Scroll listener & smooth 60FPS Lerp loop
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -130,7 +138,6 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
 
       if (scrollableDistance <= 0) return;
 
-      // Scroll progress mapped across the extended 650vh track
       const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
       const targetFrame = Math.min(
         TOTAL_FRAMES - 1,
@@ -147,12 +154,12 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // Smooth Lerp animation loop with gentle easing
+    // 60FPS Render loop with high-fidelity frame switching
     const renderLoop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
       if (Math.abs(diff) > 0.04) {
-        currentFrameRef.current += diff * 0.12; // Smooth cinematic pacing
+        currentFrameRef.current += diff * 0.12;
         const index = Math.round(currentFrameRef.current);
 
         const img = imagesRef.current[index] || imagesRef.current[0];
@@ -181,10 +188,16 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
       className="relative w-full h-[650vh] bg-black m-0 p-0"
     >
       {/* Pinned Sticky 100vh Viewport */}
-      <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-black m-0 p-0">
+      <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-black m-0 p-0 flex items-center justify-center">
         <canvas
           ref={canvasRef}
           className="w-full h-full block object-cover m-0 p-0 pointer-events-none"
+          style={{
+            filter: 'contrast(1.06) saturate(1.05) brightness(1.02)',
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            WebkitFontSmoothing: 'antialiased'
+          }}
         />
       </div>
     </div>
