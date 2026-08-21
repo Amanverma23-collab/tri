@@ -5,7 +5,8 @@ import { Hero } from './components/Hero';
 import { SplitCurtainSection } from './components/SplitCurtainSection';
 import { HRServicesSection } from './components/HRServicesSection';
 import { InsuranceServicesSection } from './components/InsuranceServicesSection';
-import { ServiceEcosystem } from './components/ServiceEcosystem';
+import { FoodComplianceSection } from './components/FoodComplianceSection';
+import { DigitalMarketingSection } from './components/DigitalMarketingSection';
 import { ComplianceReadinessTool } from './components/ComplianceReadinessTool';
 import { HowWeHelp } from './components/HowWeHelp';
 import { WhyTriSecure } from './components/WhyTriSecure';
@@ -57,7 +58,7 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 4. HR Services Comprehensive Detailed Dossier */}
+        {/* 4. HR Services Detailed Information Section */}
         <HRServicesSection onOpenConsultation={handleOpenConsultation} />
 
         {/* 5. Insurance & Loans Split Curtain Reveal */}
@@ -72,22 +73,49 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 6. Insurance & Loans Comprehensive Detailed Dossier */}
+        {/* 6. Insurance & Loans Detailed Information Section */}
         <InsuranceServicesSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 7. 4 Core Practice Bento Service Directory */}
-        <ServiceEcosystem onOpenConsultation={handleOpenConsultation} />
+        {/* 7. Food Compliance Split Curtain Reveal */}
+        <SplitCurtainSection
+          id="split-reveal-food"
+          badge="PRACTICE VERTICAL 03 // TRISECURE"
+          title="FOOD COMPLIANCE"
+          subtext="FSSAI Basic, State & Central • Health Trade License • DPCC Clearances • Shop Act Registration"
+          buttonText="EXPLORE FOOD COMPLIANCE"
+          serviceName="Food Compliance & Licensing"
+          targetDetailsId="food-details"
+          onOpenConsultation={handleOpenConsultation}
+        />
 
-        {/* 8. Interactive Business Readiness Evaluator */}
+        {/* 8. Food Compliance Detailed Information Section */}
+        <FoodComplianceSection onOpenConsultation={handleOpenConsultation} />
+
+        {/* 9. Digital Marketing Split Curtain Reveal */}
+        <SplitCurtainSection
+          id="split-reveal-marketing"
+          badge="PRACTICE VERTICAL 04 // TRISECURE"
+          title="DIGITAL MARKETING"
+          subtext="High-Intent Google Ads • Technical SEO Authority • Corporate Branding • CRO Funnels"
+          buttonText="EXPLORE DIGITAL MARKETING"
+          serviceName="Digital Marketing & Growth"
+          targetDetailsId="marketing-details"
+          onOpenConsultation={handleOpenConsultation}
+        />
+
+        {/* 10. Digital Marketing Detailed Information Section */}
+        <DigitalMarketingSection onOpenConsultation={handleOpenConsultation} />
+
+        {/* 11. Interactive Business Readiness Evaluator */}
         <ComplianceReadinessTool onOpenConsultation={handleOpenConsultation} />
 
-        {/* 9. 4-Stage Engagement Process */}
+        {/* 12. 4-Stage Engagement Process */}
         <HowWeHelp onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 10. Why TriSecure Credibility Pillars */}
+        {/* 13. Why TriSecure Credibility Pillars */}
         <WhyTriSecure onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 11. High-Value FAQ Accordion Section */}
+        {/* 14. High-Value FAQ Accordion Section */}
         <FAQSection onOpenConsultation={() => handleOpenConsultation()} />
       </main>
 
