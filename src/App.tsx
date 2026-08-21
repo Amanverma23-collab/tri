@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { FrameScrollIntro } from './components/FrameScrollIntro';
 import { Hero } from './components/Hero';
-import { SplitRevealSection } from './components/SplitRevealSection';
+import { SplitCurtainSection } from './components/SplitCurtainSection';
+import { HRServicesSection } from './components/HRServicesSection';
+import { InsuranceServicesSection } from './components/InsuranceServicesSection';
 import { ServiceEcosystem } from './components/ServiceEcosystem';
 import { ComplianceReadinessTool } from './components/ComplianceReadinessTool';
 import { HowWeHelp } from './components/HowWeHelp';
@@ -37,28 +39,55 @@ export function App() {
 
       {/* Main Content Flow */}
       <main className="flex-1 w-full m-0 p-0">
-        {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro (HR -> Insurance -> Food -> Digital Marketing) */}
+        {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro */}
         <FrameScrollIntro />
 
-        {/* 2. Hero Section (Appears after intro finishes) */}
+        {/* 2. Hero Section (Commanding Masthead & Double-Bezel Directory) */}
         <Hero onOpenConsultation={handleOpenConsultation} />
 
-        {/* 3. GSAP ScrollTrigger Split Curtain Reveal Section ("HR SERVICES") */}
-        <SplitRevealSection onOpenConsultation={handleOpenConsultation} />
+        {/* 3. HR Services Split Curtain Reveal */}
+        <SplitCurtainSection
+          id="split-reveal-hr"
+          badge="PRACTICE VERTICAL 01 // TRISECURE"
+          title="HR SERVICES"
+          subtext="Recruitment • Payroll • Training • Compliance • Employee Relations"
+          buttonText="EXPLORE HR SERVICES"
+          serviceName="HR & Workforce Solutions"
+          targetDetailsId="hr-details"
+          onOpenConsultation={handleOpenConsultation}
+        />
 
-        {/* 4. 4 Core Practice Bento Service Directory */}
+        {/* 4. HR Services Comprehensive Detailed Dossier */}
+        <HRServicesSection onOpenConsultation={handleOpenConsultation} />
+
+        {/* 5. Insurance & Loans Split Curtain Reveal */}
+        <SplitCurtainSection
+          id="split-reveal-insurance"
+          badge="PRACTICE VERTICAL 02 // TRISECURE"
+          title="INSURANCE & LOANS"
+          subtext="Working Capital Limits • MSME Term Loans • Home Finance • Corporate Group Insurance"
+          buttonText="EXPLORE LOAN & INSURANCE DESK"
+          serviceName="Insurance & Loan Advisory"
+          targetDetailsId="insurance-details"
+          onOpenConsultation={handleOpenConsultation}
+        />
+
+        {/* 6. Insurance & Loans Comprehensive Detailed Dossier */}
+        <InsuranceServicesSection onOpenConsultation={handleOpenConsultation} />
+
+        {/* 7. 4 Core Practice Bento Service Directory */}
         <ServiceEcosystem onOpenConsultation={handleOpenConsultation} />
 
-        {/* 5. Interactive Business Readiness Evaluator */}
+        {/* 8. Interactive Business Readiness Evaluator */}
         <ComplianceReadinessTool onOpenConsultation={handleOpenConsultation} />
 
-        {/* 6. 4-Stage Engagement Process */}
+        {/* 9. 4-Stage Engagement Process */}
         <HowWeHelp onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 7. Why TriSecure Credibility Pillars */}
+        {/* 10. Why TriSecure Credibility Pillars */}
         <WhyTriSecure onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 8. High-Value FAQ Accordion Section */}
+        {/* 11. High-Value FAQ Accordion Section */}
         <FAQSection onOpenConsultation={() => handleOpenConsultation()} />
       </main>
 
