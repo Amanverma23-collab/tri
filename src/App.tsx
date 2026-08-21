@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { IntroSplitSection } from './components/IntroSplitSection';
+import { Hero } from './components/Hero';
 import { SplitCurtainSection } from './components/SplitCurtainSection';
 import { HRServicesSection } from './components/HRServicesSection';
 import { InsuranceServicesSection } from './components/InsuranceServicesSection';
@@ -60,8 +60,8 @@ export function App() {
 
       {/* Main Content Flow */}
       <main className="flex-1 w-full m-0 p-0">
-        {/* 1. INTRO SPLASH SECTION: Pinned Cream Teaser Screen that Splits Open to Reveal Hero Section */}
-        <IntroSplitSection onOpenConsultation={handleOpenConsultation} />
+        {/* 1. Hero Section (Immediate Landing Masthead & Command Terminal) */}
+        <Hero onOpenConsultation={handleOpenConsultation} />
 
         {/* 2. HR Services Split Curtain Reveal */}
         <SplitCurtainSection
