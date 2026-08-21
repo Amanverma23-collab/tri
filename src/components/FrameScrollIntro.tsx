@@ -22,7 +22,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     return `/frames/ezgif-frame-${num}.jpg`;
   }, []);
 
-  // Draw current frame to canvas with Ultra-High-Definition DPR scaling & High-Quality interpolation
+  // Draw current frame to canvas with intelligent Responsive Mobile Fitting
   const drawFrame = useCallback((img: HTMLImageElement | undefined) => {
     const canvas = canvasRef.current;
     if (!canvas || !img) return;
@@ -30,7 +30,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
     if (!ctx) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2.5); // Sharp Retina DPR scaling
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.5); // Sharp Retina DPR
     const rect = canvas.getBoundingClientRect();
     const width = Math.round(rect.width);
     const height = Math.round(rect.height);
@@ -49,33 +49,53 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
-    // Source image dimensions
+    // Source image dimensions (1280x720)
     const imgWidth = img.naturalWidth || 1280;
     const imgHeight = img.naturalHeight || 720;
-    const imgAspect = imgWidth / imgHeight;
+    const imgAspect = imgWidth / imgHeight; // 1.7777 (16:9)
     const canvasAspect = physicalWidth / physicalHeight;
+
+    // Fill background with seamless deep palette
+    ctx.fillStyle = '#060a12';
+    ctx.fillRect(0, 0, physicalWidth, physicalHeight);
 
     let drawWidth = physicalWidth;
     let drawHeight = physicalHeight;
     let offsetX = 0;
     let offsetY = 0;
 
-    // Full-screen cover geometry with subpixel precision
-    if (canvasAspect > imgAspect) {
+    // Check if device is in portrait mode / mobile screen
+    const isPortrait = canvasAspect < 1.25 || width < 768;
+
+    if (isPortrait) {
+      // 📱 MOBILE / PORTRAIT: Fit 100% of the image width so ZERO TEXT IS CROPPED!
+      // Draw a soft ambient background fill first for rich aesthetics
+      ctx.save();
+      ctx.filter = 'blur(40px) brightness(0.4)';
+      ctx.drawImage(img, -physicalWidth * 0.2, -physicalHeight * 0.2, physicalWidth * 1.4, physicalHeight * 1.4);
+      ctx.restore();
+
+      // Draw the crystal-clear uncropped 16:9 frame centered vertically
       drawWidth = physicalWidth;
       drawHeight = Math.round(physicalWidth / imgAspect);
       offsetX = 0;
       offsetY = Math.round((physicalHeight - drawHeight) / 2);
     } else {
-      drawHeight = physicalHeight;
-      drawWidth = Math.round(physicalHeight * imgAspect);
-      offsetX = Math.round((physicalWidth - drawWidth) / 2);
-      offsetY = 0;
+      // 💻 DESKTOP / LANDSCAPE: High-precision cover scaling
+      if (canvasAspect > imgAspect) {
+        drawWidth = physicalWidth;
+        drawHeight = Math.round(physicalWidth / imgAspect);
+        offsetX = 0;
+        offsetY = Math.round((physicalHeight - drawHeight) / 2);
+      } else {
+        drawHeight = physicalHeight;
+        drawWidth = Math.round(physicalHeight * imgAspect);
+        offsetX = Math.round((physicalWidth - drawWidth) / 2);
+        offsetY = 0;
+      }
     }
 
-    // Clear and draw with high quality
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, physicalWidth, physicalHeight);
+    // Draw main frame
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   }, []);
 
@@ -125,7 +145,11 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, [drawFrame]);
 
   // Scroll listener & smooth 60FPS Lerp loop
@@ -185,13 +209,13 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     <div
       ref={containerRef}
       id="scroll-intro-container"
-      className="relative w-full h-[650vh] bg-black m-0 p-0"
+      className="relative w-full h-[550vh] sm:h-[650vh] bg-[#060a12] m-0 p-0"
     >
       {/* Pinned Sticky 100vh Viewport */}
-      <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-black m-0 p-0 flex items-center justify-center">
+      <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-[#060a12] m-0 p-0 flex items-center justify-center">
         <canvas
           ref={canvasRef}
-          className="w-full h-full block object-cover m-0 p-0 pointer-events-none"
+          className="w-full h-full block object-contain m-0 p-0 pointer-events-none"
           style={{
             filter: 'contrast(1.06) saturate(1.05) brightness(1.02)',
             transform: 'translateZ(0)',

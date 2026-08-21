@@ -41,7 +41,7 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=1200',
+          end: '+=1000',
           pin: true,
           scrub: 1,
           anticipatePin: 1
@@ -69,11 +69,11 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
         .fromTo(
           headingRef.current,
           {
-            scale: 0.92,
+            scale: 0.9,
             opacity: 0.85
           },
           {
-            scale: 1.05,
+            scale: 1.02,
             opacity: 1,
             ease: 'power2.out'
           },
@@ -84,7 +84,7 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
           subtextRef.current,
           {
             opacity: 0,
-            y: 35
+            y: 25
           },
           {
             opacity: 1,
@@ -98,7 +98,7 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
           actionButtonRef.current,
           {
             opacity: 0,
-            y: 20
+            y: 15
           },
           {
             opacity: 1,
@@ -128,15 +128,15 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
       {/* 1. Revealed Background Text Layer (Underneath the Curtains) */}
       <div className="relative z-10 w-full px-4 sm:px-8 text-center flex flex-col items-center justify-center">
         {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/5 text-[#a7f3d0] text-[11px] font-mono font-bold tracking-widest uppercase mb-4 shadow-lg">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#a7f3d0] text-[10px] sm:text-[11px] font-mono font-bold tracking-widest uppercase mb-3 sm:mb-4 shadow-lg">
           <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
           <span>{badge}</span>
         </div>
 
-        {/* Large Bold Heading */}
+        {/* Large Bold Responsive Heading (Clamped for Mobile & Desktop) */}
         <h2
           ref={headingRef}
-          className="text-[12vw] sm:text-[11vw] lg:text-[9.5vw] font-black uppercase tracking-tight leading-[0.88] text-[#fafaf7] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] font-sans"
+          className="text-[11vw] sm:text-[9.5vw] md:text-[8vw] lg:text-[7.5vw] font-black uppercase tracking-tight leading-[0.92] text-[#fafaf7] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] font-sans max-w-6xl mx-auto"
         >
           {title}
         </h2>
@@ -144,28 +144,28 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
         {/* Subtext Below Heading */}
         <p
           ref={subtextRef}
-          className="mt-6 text-[12px] sm:text-[15px] md:text-[17px] font-mono tracking-widest text-[#a7f3d0] uppercase max-w-4xl text-center font-medium"
+          className="mt-4 sm:mt-6 text-[11px] sm:text-[14px] md:text-[16px] font-mono tracking-wider sm:tracking-widest text-[#a7f3d0] uppercase max-w-3xl text-center font-medium px-2"
         >
           {subtext}
         </p>
 
         {/* Direct Action Buttons */}
-        <div ref={actionButtonRef} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div ref={actionButtonRef} className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 px-2">
           <button
             onClick={() => onOpenConsultation?.(serviceName)}
-            className="btn-island-primary bg-[#fafaf7] text-[#0a1118] hover:bg-white hover:text-black py-2.5 pl-5 pr-2 font-mono text-[12px] uppercase font-bold shadow-2xl cursor-pointer"
+            className="btn-island-primary bg-[#fafaf7] text-[#0a1118] hover:bg-white hover:text-black py-2 sm:py-2.5 pl-4 sm:pl-5 pr-1.5 sm:pr-2 font-mono text-[11px] sm:text-[12px] uppercase font-bold shadow-2xl cursor-pointer"
           >
             <span>{buttonText}</span>
-            <div className="btn-island-icon bg-[#0a1118] text-white">
-              <ArrowUpRight className="w-3.5 h-3.5" />
+            <div className="btn-island-icon bg-[#0a1118] text-white w-6 h-6 sm:w-7 sm:h-7">
+              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </div>
           </button>
 
           <button
             onClick={handleScrollToDetails}
-            className="btn-island-secondary bg-transparent text-white border-white/20 hover:bg-white/10 text-[12px] font-mono uppercase font-semibold"
+            className="btn-island-secondary bg-transparent text-white border-white/20 hover:bg-white/10 text-[11px] sm:text-[12px] font-mono uppercase font-semibold py-2 sm:py-2.5 px-4"
           >
-            <span>INSPECT SPECIFICATIONS ↓</span>
+            <span>SPECIFICATIONS ↓</span>
           </button>
         </div>
       </div>
@@ -177,8 +177,8 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
       >
         <div className="absolute top-0 left-0 w-full h-[100dvh] bg-[#111827] bg-alabaster-grid flex items-start justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-[#182234] via-[#0f172a] to-[#0b0f19] opacity-95" />
-          <div className="relative z-10 pt-12 flex flex-col items-center opacity-60">
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-[#94a3b8] uppercase">
+          <div className="relative z-10 pt-8 sm:pt-12 flex flex-col items-center opacity-60">
+            <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.3em] text-[#94a3b8] uppercase">
               TRISECURE SOLUTIONS // EXECUTIVE REVEAL
             </span>
           </div>
@@ -192,8 +192,8 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
       >
         <div className="absolute bottom-0 left-0 w-full h-[100dvh] bg-[#111827] bg-alabaster-grid flex items-end justify-center">
           <div className="absolute inset-0 bg-gradient-to-t from-[#182234] via-[#0f172a] to-[#0b0f19] opacity-95" />
-          <div className="relative z-10 pb-12 flex flex-col items-center opacity-60">
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-[#94a3b8] uppercase">
+          <div className="relative z-10 pb-8 sm:pb-12 flex flex-col items-center opacity-60">
+            <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.3em] text-[#94a3b8] uppercase">
               SCROLL DOWN TO SPLIT & REVEAL ↓
             </span>
           </div>
