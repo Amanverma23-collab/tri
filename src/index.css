@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+:root {
+  /* Colors from DESIGN.md */
+  --color-warm-cream: #ffedd7;
+  --color-walnut-shadow: #100904;
+  --color-bark-brown: #382416;
+  --color-cork-border: #40372e;
+  --color-driftwood: #6c5f51;
+  --color-ember-accent: #dc5000;
+  --color-pure-black: #000000;
+
+  /* Typography */
+  --font-halyard: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, monospace;
+  --font-arial: 'Arial', sans-serif;
+
+  /* Type Scale */
+  --text-subheading: 18px;
+  --leading-subheading: 1;
+  --text-heading-sm: 24px;
+  --leading-heading-sm: 1.09;
+  --text-body: 29px;
+  --leading-body: 1.26;
+  --text-heading: 41px;
+  --leading-heading: 0.9;
+  --text-display: 51px;
+  --leading-display: 0.9;
+
+  /* Spacing */
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-9: 9px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-18: 18px;
+  --spacing-24: 24px;
+  --spacing-31: 31px;
+  --spacing-41: 41px;
+  --spacing-45: 45px;
+  --spacing-68: 68px;
+  --spacing-204: 204px;
+
+  /* Radii */
+  --radius-cards: 12px;
+  --radius-inputs: 0px;
+  --radius-full-round: 9999px;
+  --radius-buttons-pill: 36px;
+  --radius-buttons-outlined: 22.5px;
+}
+
+@theme {
+  --color-warm-cream: #ffedd7;
+  --color-walnut-shadow: #100904;
+  --color-bark-brown: #382416;
+  --color-cork-border: #40372e;
+  --color-driftwood: #6c5f51;
+  --color-ember-accent: #dc5000;
+  --color-pure-black: #000000;
+
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, monospace;
+  --font-arial: 'Arial', sans-serif;
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: #100904;
+  color: #ffedd7;
+  font-family: var(--font-halyard);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #100904;
+  color: #ffedd7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Editorial Structural Utilities */
+.o-dashline {
+  height: 1px;
+  width: 100%;
+  border-top: 1px dashed #40372e;
+  margin: 1.5rem 0;
+}
+
+.o-dashline-v {
+  width: 1px;
+  border-left: 1px dashed #40372e;
+}
+
+.o-container {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .o-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Buttons from DESIGN.md */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 36px;
+  background-color: #382416;
+  color: #ffedd7;
+  padding: 12px 28px;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #40372e;
+  cursor: pointer;
+}
+
+.btn-pill:hover {
+  background-color: #4a301e;
+  border-color: #6c5f51;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 22.5px;
+  background-color: transparent;
+  color: #ffedd7;
+  padding: 10px 22px;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid #40372e;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  border-color: #ffedd7;
+  background-color: rgba(255, 237, 215, 0.05);
+}
+
+/* Input minimal bottom border */
+.input-editorial {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #40372e;
+  color: #ffedd7;
+  padding: 12px 4px;
+  font-size: 15px;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.input-editorial:focus {
+  border-bottom-color: #ffedd7;
+}
+
+.input-editorial::placeholder {
+  color: #6c5f51;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+/* Editorial Typography Helpers */
+.text-display-editorial {
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.text-heading-editorial {
+  font-size: clamp(24px, 3.5vw, 41px);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+.text-body-editorial {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: #ffedd7;
+  opacity: 0.88;
+}
+
+.text-legal {
+  font-family: var(--font-arial);
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6c5f51;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #100904;
+}
+::-webkit-scrollbar-thumb {
+  background: #382416;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #40372e;
+}
