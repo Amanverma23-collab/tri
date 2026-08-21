@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { FrameScrollIntro } from './components/FrameScrollIntro';
 import { Hero } from './components/Hero';
@@ -14,6 +14,10 @@ import { FAQSection } from './components/FAQSection';
 import { FloatingContactWidget } from './components/FloatingContactWidget';
 import { Footer } from './components/Footer';
 import { ConsultationModal } from './components/ConsultationModal';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function App() {
   const [consultationOpen, setConsultationOpen] = useState(false);
@@ -33,6 +37,23 @@ export function App() {
     setPrefilledService('');
   };
 
+  // Ensure all ScrollTrigger pin points recalculate accurately across all sections
+  useEffect(() => {
+    const refreshTriggers = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener('load', refreshTriggers);
+    const timer1 = setTimeout(refreshTriggers, 200);
+    const timer2 = setTimeout(refreshTriggers, 800);
+
+    return () => {
+      window.removeEventListener('load', refreshTriggers);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#fafaf7] text-[#0a1118] flex flex-col font-sans selection:bg-[#0a1118] selection:text-white relative">
       {/* Floating Fluid Island Navbar */}
@@ -41,7 +62,7 @@ export function App() {
       {/* Main Content Flow */}
       <main className="flex-1 w-full m-0 p-0">
         {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro */}
-        <FrameScrollIntro />
+        <FrameScrollIntro onIntroComplete={() => ScrollTrigger.refresh()} />
 
         {/* 2. Hero Section (Commanding Masthead & Double-Bezel Directory) */}
         <Hero onOpenConsultation={handleOpenConsultation} />

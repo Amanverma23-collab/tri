@@ -41,16 +41,7 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
 
     // 💻 DESKTOP CONFIG (min-width: 769px)
     mm.add('(min-width: 769px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=150%', // 150% pin distance for comfortable desktop scrubbing
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1
-        }
-      });
+      const tl = gsap.timeline();
 
       tl.to(
         topCurtainRef.current,
@@ -107,20 +98,22 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
           },
           0.25
         );
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=150%', // 150% pin distance for desktop
+        pin: true,
+        pinSpacing: true, // Guarantees proper freeze and unpin spacing
+        scrub: 1,
+        anticipatePin: 1,
+        animation: tl
+      });
     });
 
     // 📱 MOBILE CONFIG (max-width: 768px)
     mm.add('(max-width: 768px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=60%', // Much shorter pin distance to prevent mobile scroll fatigue
-          pin: true,
-          scrub: 0.8,
-          anticipatePin: 1
-        }
-      });
+      const tl = gsap.timeline();
 
       // Compressed Phase 1: Fast curtain split finishes early (by 25% progress)
       tl.to(
@@ -183,9 +176,28 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
           },
           0.15
         );
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=60%', // 60% pin distance on mobile
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.8,
+        anticipatePin: 1,
+        animation: tl
+      });
     });
 
-    return () => mm.revert();
+    // Ensure ScrollTrigger recalculates layout after mounting
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(timer);
+      mm.revert();
+    };
   }, []);
 
   const handleScrollToDetails = () => {
@@ -199,7 +211,7 @@ export const SplitCurtainSection: React.FC<SplitCurtainSectionProps> = ({
     <section
       ref={sectionRef}
       id={id}
-      className="relative w-full h-[70vh] md:h-screen md:h-[100dvh] overflow-hidden bg-[#0a1118] text-[#fafaf7] flex items-center justify-center select-none"
+      className="relative w-full h-[70vh] min-h-[70vh] md:h-screen md:min-h-[100dvh] overflow-hidden bg-[#0a1118] text-[#fafaf7] flex items-center justify-center select-none"
     >
       {/* 1. Revealed Background Text Layer (Underneath the Curtains) */}
       <div className="relative z-10 w-full px-4 sm:px-8 text-center flex flex-col items-center justify-center">
