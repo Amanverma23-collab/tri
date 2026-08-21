@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { FrameScrollIntro } from './components/FrameScrollIntro';
-import { Hero } from './components/Hero';
+import { IntroSplitSection } from './components/IntroSplitSection';
 import { SplitCurtainSection } from './components/SplitCurtainSection';
 import { HRServicesSection } from './components/HRServicesSection';
 import { InsuranceServicesSection } from './components/InsuranceServicesSection';
@@ -61,13 +60,10 @@ export function App() {
 
       {/* Main Content Flow */}
       <main className="flex-1 w-full m-0 p-0">
-        {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro (300 Frames with Dynamic Color Matching) */}
-        <FrameScrollIntro onIntroComplete={() => ScrollTrigger.refresh()} />
+        {/* 1. INTRO SPLASH SECTION: Pinned Cream Teaser Screen that Splits Open to Reveal Hero Section */}
+        <IntroSplitSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 2. Hero Section (Commanding Masthead & Double-Bezel Directory) */}
-        <Hero onOpenConsultation={handleOpenConsultation} />
-
-        {/* 3. HR Services Split Curtain Reveal */}
+        {/* 2. HR Services Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-hr"
           badge="PRACTICE VERTICAL 01 // TRISECURE"
@@ -79,10 +75,10 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 4. HR Services Detailed Information Section */}
+        {/* 3. HR Services Detailed Information Section */}
         <HRServicesSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 5. Insurance & Loans Split Curtain Reveal */}
+        {/* 4. Insurance & Loans Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-insurance"
           badge="PRACTICE VERTICAL 02 // TRISECURE"
@@ -94,10 +90,10 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 6. Insurance & Loans Detailed Information Section */}
+        {/* 5. Insurance & Loans Detailed Information Section */}
         <InsuranceServicesSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 7. Food Compliance Split Curtain Reveal */}
+        {/* 6. Food Compliance Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-food"
           badge="PRACTICE VERTICAL 03 // TRISECURE"
@@ -109,10 +105,10 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 8. Food Compliance Detailed Information Section */}
+        {/* 7. Food Compliance Detailed Information Section */}
         <FoodComplianceSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 9. Digital Marketing Split Curtain Reveal */}
+        {/* 8. Digital Marketing Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-marketing"
           badge="PRACTICE VERTICAL 04 // TRISECURE"
@@ -124,19 +120,19 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 10. Digital Marketing Detailed Information Section */}
+        {/* 9. Digital Marketing Detailed Information Section */}
         <DigitalMarketingSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 11. Interactive Business Readiness Evaluator */}
+        {/* 10. Interactive Business Readiness Evaluator */}
         <ComplianceReadinessTool onOpenConsultation={handleOpenConsultation} />
 
-        {/* 12. 4-Stage Engagement Process */}
+        {/* 11. 4-Stage Engagement Process */}
         <HowWeHelp onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 13. Why TriSecure Credibility Pillars */}
+        {/* 12. Why TriSecure Credibility Pillars */}
         <WhyTriSecure onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 14. High-Value FAQ Accordion Section */}
+        {/* 13. High-Value FAQ Accordion Section */}
         <FAQSection onOpenConsultation={() => handleOpenConsultation()} />
       </main>
 
