@@ -1,13 +1,43 @@
-import React from 'react';
-import { Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Phone, ArrowUpRight } from 'lucide-react';
 
 interface FloatingContactWidgetProps {
   onOpenConsultation: () => void;
 }
 
 export const FloatingContactWidget: React.FC<FloatingContactWidgetProps> = ({ onOpenConsultation }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroElem = document.getElementById('hero-section');
+      if (heroElem) {
+        const rect = heroElem.getBoundingClientRect();
+        // Show contact widget only once Hero section enters the viewport
+        if (rect.top <= window.innerHeight * 0.5) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      } else {
+        setIsVisible(window.scrollY > 300);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
+    <div
+      className={`fixed bottom-5 right-5 z-40 flex items-center gap-2 transition-all duration-500 ${
+        isVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-6 pointer-events-none'
+      }`}
+    >
       {/* WhatsApp / Phone Direct Link */}
       <a
         href="tel:+911149008800"

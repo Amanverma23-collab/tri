@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { ChevronDown, ArrowDown } from 'lucide-react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 const TOTAL_FRAMES = 300;
 
@@ -10,10 +9,6 @@ interface FrameScrollIntroProps {
 export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
-  const [loadPercent, setLoadPercent] = useState(0);
-  const [isReady, setIsReady] = useState(false);
 
   // Cached frame images array
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -61,13 +56,11 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     let offsetY = 0;
 
     if (canvasAspect > imgAspect) {
-      // Canvas is wider than 16:9
       drawWidth = width;
       drawHeight = width / imgAspect;
       offsetX = 0;
       offsetY = (height - drawHeight) / 2;
     } else {
-      // Canvas is taller than 16:9 (tablets, mobiles, portrait)
       drawHeight = height;
       drawWidth = height * imgAspect;
       offsetX = (width - drawWidth) / 2;
@@ -82,7 +75,6 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
   useEffect(() => {
     let isMounted = true;
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
-    let loadedCount = 0;
 
     // Load Frame 1 immediately
     const firstImg = new Image();
@@ -90,8 +82,6 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     firstImg.onload = () => {
       if (!isMounted) return;
       images[0] = firstImg;
-      loadedCount++;
-      setIsReady(true);
       drawFrame(firstImg);
     };
 
@@ -104,12 +94,6 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
       img.onload = () => {
         if (!isMounted) return;
         images[i] = img;
-        loadedCount++;
-        setLoadPercent(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
-      };
-
-      img.onerror = () => {
-        loadedCount++;
       };
     }
 
@@ -170,7 +154,6 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
       if (Math.abs(diff) > 0.04) {
         currentFrameRef.current += diff * 0.2; // Silky smooth 60fps lerp
         const index = Math.round(currentFrameRef.current);
-        setCurrentFrameIndex(index);
 
         const img = imagesRef.current[index] || imagesRef.current[0];
         if (img) {
@@ -191,53 +174,18 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     };
   }, [drawFrame, onIntroComplete]);
 
-  // Skip button click handler
-  const handleSkipIntro = () => {
-    const heroElement = document.getElementById('hero-section');
-    if (heroElement) {
-      heroElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div
       ref={containerRef}
       id="scroll-intro-container"
       className="relative w-full h-[350vh] bg-black m-0 p-0"
     >
-      {/* Pinned Sticky 100vh Viewport */}
+      {/* Pinned Sticky 100vh Viewport (100% Pure Full-Screen Canvas) */}
       <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-black m-0 p-0">
-        
-        {/* Full-Screen Pure Canvas (Zero Margins, Zero Gaps, Full Viewport Bleed) */}
         <canvas
           ref={canvasRef}
           className="w-full h-full block object-cover m-0 p-0 pointer-events-none"
         />
-
-        {/* Minimal Unobtrusive Controls (Top-Right Skip Button) */}
-        <div className="absolute top-6 right-6 z-30">
-          <button
-            onClick={handleSkipIntro}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white text-[12px] font-mono font-medium tracking-wide transition-all shadow-lg cursor-pointer"
-          >
-            <span>Skip Intro</span>
-            <ChevronDown className="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        {/* Minimal Unobtrusive Bottom Progress Indicator */}
-        <div className="absolute bottom-6 inset-x-0 z-30 px-6 max-w-7xl mx-auto flex items-center justify-between pointer-events-none">
-          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/80 text-[11px] font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
-            <span>FRAME {String(currentFrameIndex + 1).padStart(3, '0')} / {TOTAL_FRAMES}</span>
-          </div>
-
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/80 text-[11px] font-mono uppercase tracking-wider animate-bounce">
-            <span>SCROLL TO PROGRESS</span>
-            <ArrowDown className="w-3.5 h-3.5" />
-          </div>
-        </div>
-
       </div>
     </div>
   );
