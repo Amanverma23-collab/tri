@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle, ShieldCheck, ArrowRight, Phone, Mail, User, FileText, Building } from 'lucide-react';
+import { X, CheckCircle, ShieldCheck, ArrowRight } from 'lucide-react';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -23,18 +23,17 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   const [refId, setRefId] = useState('');
 
   const servicesList = [
-    'Food Compliance (FSSAI / MCD / DPCC / Trade License)',
-    'HR & Workforce (Staffing, Payroll, Labour Law Compliance)',
-    'Business & Commercial Loans (Working Capital, MSME Term Loans)',
-    'Personal / Home / Auto Loans & Mortgage',
+    'Food Compliance (FSSAI License, MCD Trade, DPCC, Shop Act)',
+    'HR Services (Staffing, Monthly Payroll, EPF/ESIC Compliance)',
+    'Business & MSME Loans (Working Capital, Term Loans)',
+    'Personal / Home / Mortgage Loans',
     'Corporate & Asset Insurance Solutions',
-    'Digital Marketing (SEO, Performance Ads, Brand Growth)',
-    'Integrated Multi-Vertical Enterprise Package'
+    'Digital Marketing (SEO, Google Ads, Brand Growth)',
+    'Complete Business Setup & Compliance Package'
   ];
 
   useEffect(() => {
     if (initialService) {
-      // Find closest match or prefill
       const match = servicesList.find((s) => s.toLowerCase().includes(initialService.toLowerCase()));
       setServiceRequired(match || initialService);
     } else {
@@ -57,13 +56,12 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
     if (!name || !phone) return;
 
     setIsSubmitting(true);
-    // Simulate reliable API submission
     setTimeout(() => {
       const generatedRef = 'TS-' + Math.floor(100000 + Math.random() * 900000);
       setRefId(generatedRef);
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    }, 500);
   };
 
   const handleReset = () => {
@@ -79,33 +77,33 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-[#100904]/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-[#0a1118]/60 backdrop-blur-xs animate-fadeIn">
       {/* Modal Container */}
       <div
-        className="relative w-full max-w-xl rounded-[12px] border border-[#40372e] bg-[#100904] p-6 sm:p-8 shadow-2xl overflow-hidden my-8"
+        className="relative w-full max-w-xl rounded-2xl border border-[#e5e4de] bg-[#ffffff] p-6 sm:p-8 shadow-2xl overflow-hidden my-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full border border-[#40372e] text-[#6c5f51] hover:text-[#ffedd7] hover:border-[#ffedd7] transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-full border border-[#e5e4de] text-[#64748b] hover:text-[#0a1118] hover:bg-[#fafaf7] transition-colors cursor-pointer"
           aria-label="Close modal"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
 
         {!isSubmitted ? (
           <div>
             {/* Modal Header */}
             <div className="mb-6">
-              <div className="flex items-center gap-2 text-[11px] font-medium tracking-[0.16em] text-[#dc5000] uppercase mb-1">
-                <ShieldCheck className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-[#047857] uppercase mb-1">
+                <ShieldCheck className="w-4 h-4" />
                 <span>CONFIDENTIAL CONSULTATION DESK</span>
               </div>
-              <h3 className="text-[24px] sm:text-[28px] font-medium text-[#ffedd7] uppercase leading-tight">
-                REQUEST EXPERT CONSULTATION.
+              <h3 className="text-[24px] sm:text-[26px] font-bold text-[#0a1118] leading-tight">
+                Request Free Expert Consultation
               </h3>
-              <p className="text-[13px] text-[#6c5f51] mt-1">
+              <p className="text-[14px] text-[#475569] mt-1">
                 Connect directly with our regulatory specialists, loan advisors, or HR managers.
               </p>
             </div>
@@ -115,84 +113,80 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               {/* Name & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[11px] font-medium text-[#6c5f51] uppercase tracking-wider block mb-1">
+                  <label className="text-[11px] font-mono font-semibold text-[#475569] uppercase tracking-wider block mb-1">
                     Your Full Name *
                   </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Rahul Sharma"
-                      className="input-editorial"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="e.g. Rahul Sharma"
+                    className="w-full bg-[#fafaf7] border border-[#e5e4de] focus:border-[#047857] focus:bg-white text-[#0a1118] text-[14px] rounded-lg p-3 outline-none transition-all"
+                  />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-medium text-[#6c5f51] uppercase tracking-wider block mb-1">
-                    Phone / WhatsApp *
+                  <label className="text-[11px] font-mono font-semibold text-[#475569] uppercase tracking-wider block mb-1">
+                    Phone / WhatsApp Number *
                   </label>
-                  <div className="relative">
-                    <input
-                      type="tel"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+91 98765 43210"
-                      className="input-editorial"
-                    />
-                  </div>
+                  <input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="w-full bg-[#fafaf7] border border-[#e5e4de] focus:border-[#047857] focus:bg-white text-[#0a1118] text-[14px] rounded-lg p-3 outline-none transition-all"
+                  />
                 </div>
               </div>
 
               {/* Email & City */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[11px] font-medium text-[#6c5f51] uppercase tracking-wider block mb-1">
-                    Corporate Email
+                  <label className="text-[11px] font-mono font-semibold text-[#475569] uppercase tracking-wider block mb-1">
+                    Email Address
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@company.com"
-                    className="input-editorial"
+                    className="w-full bg-[#fafaf7] border border-[#e5e4de] focus:border-[#047857] focus:bg-white text-[#0a1118] text-[14px] rounded-lg p-3 outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-medium text-[#6c5f51] uppercase tracking-wider block mb-1">
-                    City / State (Location)
+                  <label className="text-[11px] font-mono font-semibold text-[#475569] uppercase tracking-wider block mb-1">
+                    City / State
                   </label>
                   <input
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="e.g. Delhi, Mumbai, Bengaluru"
-                    className="input-editorial"
+                    className="w-full bg-[#fafaf7] border border-[#e5e4de] focus:border-[#047857] focus:bg-white text-[#0a1118] text-[14px] rounded-lg p-3 outline-none transition-all"
                   />
                 </div>
               </div>
 
               {/* Service Required Dropdown */}
               <div>
-                <label className="text-[11px] font-medium text-[#6c5f51] uppercase tracking-wider block mb-1">
-                  Primary Service Required *
+                <label className="text-[11px] font-mono font-semibold text-[#475569] uppercase tracking-wider block mb-1">
+                  Service You Need Help With *
                 </label>
                 <select
                   value={serviceRequired}
                   onChange={(e) => setServiceRequired(e.target.value)}
-                  className="w-full bg-[#100904] border-b border-[#40372e] text-[#ffedd7] text-[13px] uppercase py-3 outline-none focus:border-[#ffedd7] transition-colors"
+                  className="w-full bg-[#fafaf7] border border-[#e5e4de] focus:border-[#047857] focus:bg-white text-[#0a1118] text-[14px] rounded-lg p-3 outline-none transition-all"
                 >
                   {servicesList.map((srv, idx) => (
-                    <option key={idx} value={srv} className="bg-[#100904] text-[#ffedd7]">
+                    <option key={idx} value={srv}>
                       {srv}
                     </option>
                   ))}
                   {initialService && !servicesList.includes(initialService) && (
-                    <option value={initialService} className="bg-[#100904] text-[#ffedd7]">
+                    <option value={initialService}>
                       {initialService}
                     </option>
                   )}
@@ -201,15 +195,15 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
               {/* Requirement Notes */}
               <div>
-                <label className="text-[11px] font-medium text-[#6c5f51] uppercase tracking-wider block mb-1">
-                  Brief Requirement / Query (Optional)
+                <label className="text-[11px] font-mono font-semibold text-[#475569] uppercase tracking-wider block mb-1">
+                  Brief Requirement (Optional)
                 </label>
                 <textarea
                   rows={2}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Describe your current business stage, headcount, loan quantum, or specific license requirement..."
-                  className="w-full bg-transparent border border-[#40372e] focus:border-[#ffedd7] text-[#ffedd7] text-[13px] rounded-[8px] p-3 outline-none resize-none placeholder:text-[#6c5f51] placeholder:text-[12px]"
+                  placeholder="e.g. Need FSSAI State License for new cloud kitchen in Delhi / Need ₹20L Business loan..."
+                  className="w-full bg-[#fafaf7] border border-[#e5e4de] focus:border-[#047857] focus:bg-white text-[#0a1118] text-[14px] rounded-lg p-3 outline-none resize-none transition-all"
                 />
               </div>
 
@@ -217,57 +211,59 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-pill w-full justify-center py-3.5 text-[13px] tracking-wider"
+                  className="btn-island-primary w-full justify-between py-3 px-6 text-[14px] font-bold"
                 >
-                  <span>{isSubmitting ? 'PROCESSING CONSULTATION REQUEST...' : 'SUBMIT CONSULTATION REQUEST'}</span>
-                  {!isSubmitting && <ArrowRight className="w-4 h-4 text-[#ffedd7]" />}
+                  <span>{isSubmitting ? 'Submitting Details...' : 'Request Free Consultation'}</span>
+                  <div className="btn-island-icon">
+                    <ArrowRight className="w-4 h-4 text-white" />
+                  </div>
                 </button>
               </div>
 
-              <p className="text-legal text-center pt-2">
-                * YOUR INFORMATION IS SECURED UNDER STRICT NON-DISCLOSURE PROTOCOLS. ZERO SPAM GUARANTEE.
+              <p className="text-[11px] text-center text-[#64748b] pt-1 font-mono">
+                🔒 Strict Non-Disclosure Protected · Zero Spam Guarantee
               </p>
             </form>
           </div>
         ) : (
           /* Confirmation Success Screen */
           <div className="py-6 text-center">
-            <div className="w-14 h-14 rounded-full border border-[#40372e] bg-[#382416]/40 flex items-center justify-center mx-auto mb-5">
-              <CheckCircle className="w-7 h-7 text-[#dc5000]" />
+            <div className="w-14 h-14 rounded-full bg-[#ecfdf5] border border-[#a7f3d0] flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-[#047857]" />
             </div>
 
-            <span className="text-[11px] font-medium tracking-[0.2em] text-[#dc5000] uppercase block mb-1">
-              CONSULTATION INITIATED
+            <span className="text-[11px] font-mono font-bold tracking-widest text-[#047857] uppercase block mb-1">
+              REQUEST CONFIRMED
             </span>
 
-            <h3 className="text-[26px] font-medium text-[#ffedd7] uppercase mb-2">
-              REQUEST CONFIRMED.
+            <h3 className="text-[24px] font-bold text-[#0a1118] mb-2">
+              We'll Connect With You Shortly
             </h3>
 
-            <p className="text-[14px] text-[#ffedd7]/80 max-w-md mx-auto mb-6">
-              Thank you, <span className="text-[#ffedd7] font-medium">{name}</span>. Your consultation dossier has been routed to our senior lead for <span className="text-[#ffedd7] font-medium">{serviceRequired}</span>.
+            <p className="text-[14px] text-[#475569] max-w-md mx-auto mb-6">
+              Thank you, <span className="font-semibold text-[#0a1118]">{name}</span>. Our specialist lead for <span className="font-semibold text-[#0a1118]">{serviceRequired}</span> has received your dossier.
             </p>
 
-            <div className="p-4 rounded-[8px] border border-[#40372e] bg-[#382416]/20 max-w-sm mx-auto mb-6 text-left">
-              <div className="flex justify-between text-[12px] mb-1">
-                <span className="text-[#6c5f51] uppercase">Reference ID:</span>
-                <span className="font-mono font-medium text-[#ffedd7]">{refId}</span>
+            <div className="p-4 rounded-xl bg-[#fafaf7] border border-[#e5e4de] max-w-sm mx-auto mb-6 text-left space-y-1.5 text-[13px]">
+              <div className="flex justify-between">
+                <span className="text-[#64748b] font-mono">Reference ID:</span>
+                <span className="font-mono font-bold text-[#0a1118]">{refId}</span>
               </div>
-              <div className="flex justify-between text-[12px] mb-1">
-                <span className="text-[#6c5f51] uppercase">Contact Number:</span>
-                <span className="font-mono text-[#ffedd7]">{phone}</span>
+              <div className="flex justify-between">
+                <span className="text-[#64748b] font-mono">Contact Number:</span>
+                <span className="font-medium text-[#0a1118]">{phone}</span>
               </div>
-              <div className="flex justify-between text-[12px]">
-                <span className="text-[#6c5f51] uppercase">Expected Response:</span>
-                <span className="text-[#dc5000] font-medium">Within 2 Business Hours</span>
+              <div className="flex justify-between">
+                <span className="text-[#64748b] font-mono">Expected Response:</span>
+                <span className="text-[#047857] font-semibold">Within 2 Business Hours</span>
               </div>
             </div>
 
             <button
               onClick={handleReset}
-              className="btn-ghost px-6 py-2.5 text-[12px]"
+              className="btn-island-secondary px-6 py-2.5 text-[13px]"
             >
-              <span>CLOSE WINDOW</span>
+              <span>Close Window</span>
             </button>
           </div>
         )}

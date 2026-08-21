@@ -1,8 +1,8 @@
 import React from 'react';
-import { ArrowUp, Mail, Phone, MapPin, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUp, CheckCircle } from 'lucide-react';
 
 interface FooterProps {
-  onOpenConsultation: (prefillService?: string) => void;
+  onOpenConsultation: (service?: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
@@ -11,172 +11,152 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
   };
 
   return (
-    <footer className="bg-[#100904] border-t border-[#40372e] pt-20 pb-12">
+    <footer className="bg-[#0a1118] text-white pt-20 pb-12 border-t border-slate-800">
       <div className="o-container">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-          {/* Brand Identity Column */}
+          {/* Brand Info */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-full border border-[#40372e] flex items-center justify-center bg-[#382416] text-[#ffedd7] font-semibold text-xs tracking-wider">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-9 h-9 rounded-xl bg-[#047857] flex items-center justify-center text-white font-mono font-bold text-sm shadow-md">
                 TS
               </div>
               <div className="flex flex-col">
-                <span className="text-[17px] font-semibold tracking-[0.16em] text-[#ffedd7] uppercase">
-                  TRISECURE
+                <span className="text-[17px] font-bold tracking-tight text-white uppercase">
+                  TRISECURE <span className="text-[#34d399]">SOLUTIONS</span>
                 </span>
-                <span className="text-[9px] font-medium tracking-[0.24em] text-[#6c5f51] uppercase">
-                  SOLUTIONS
+                <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase">
+                  BUSINESS & STATUTORY ADVISORY
                 </span>
               </div>
             </div>
 
-            <p className="text-[14px] text-[#ffedd7]/80 leading-relaxed max-w-sm mb-6">
-              Institutional business infrastructure delivering statutory food compliance, enterprise workforce payroll, financial lending advisory, and data-driven digital growth across India.
+            <p className="text-[14px] text-slate-300 leading-relaxed max-w-sm mb-6">
+              Single-window partner for Indian enterprises delivering Food Regulatory Compliance, HR & Payroll Management, Banking Loan Syndication, and Strategic Digital Marketing.
             </p>
 
-            <div className="flex items-center gap-2 text-[11px] font-medium tracking-[0.1em] text-[#dc5000] uppercase">
-              <ShieldCheck className="w-4 h-4 text-[#dc5000]" />
-              <span>REGULATORY COMPLIANCE & FINANCIAL PARTNER</span>
+            <div className="flex items-center gap-2 text-[12px] font-semibold text-[#34d399]">
+              <CheckCircle className="w-4 h-4 text-[#34d399]" />
+              <span>Official Government Portal Liaison & Banking Consortium</span>
             </div>
           </div>
 
-          {/* Core Verticals Directory */}
+          {/* 4 Core Practices */}
           <div className="lg:col-span-3">
-            <div className="text-[11px] font-medium tracking-[0.16em] text-[#6c5f51] uppercase mb-4">
-              PRACTICE AREAS
-            </div>
-            <ul className="space-y-2.5 text-[13px] text-[#ffedd7]">
+            <h4 className="text-[11px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-4">
+              01 // PRACTICE DIRECTORY
+            </h4>
+            <ul className="space-y-2.5 text-[13px] text-slate-300">
               <li>
                 <button
                   onClick={() => onOpenConsultation('Food Compliance & Licensing')}
-                  className="hover:text-[#dc5000] transition-colors text-left uppercase"
+                  className="hover:text-[#34d399] transition-colors text-left uppercase cursor-pointer"
                 >
-                  Food Compliance (FSSAI/DPCC)
+                  Food Compliance & FSSAI (Central/State)
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onOpenConsultation('HR Services & Payroll')}
-                  className="hover:text-[#dc5000] transition-colors text-left uppercase"
+                  onClick={() => onOpenConsultation('HR Staffing & Payroll')}
+                  className="hover:text-[#34d399] transition-colors text-left uppercase cursor-pointer"
                 >
-                  Workforce Staffing & Payroll
+                  Workforce Staffing & Payroll Compliance
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onOpenConsultation('Labour Law Compliance')}
-                  className="hover:text-[#dc5000] transition-colors text-left uppercase"
+                  onClick={() => onOpenConsultation('Labour Law & Statutory Audit')}
+                  className="hover:text-[#34d399] transition-colors text-left uppercase cursor-pointer"
                 >
-                  Labour Law & Statutory Audit
+                  Labour Law, EPF, ESIC & POSH
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onOpenConsultation('Business & Working Capital Loans')}
-                  className="hover:text-[#dc5000] transition-colors text-left uppercase"
+                  className="hover:text-[#34d399] transition-colors text-left uppercase cursor-pointer"
                 >
-                  Commercial & MSME Loans
+                  Commercial, Working Capital & MSME Loans
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onOpenConsultation('Corporate Insurance')}
-                  className="hover:text-[#dc5000] transition-colors text-left uppercase"
+                  onClick={() => onOpenConsultation('Digital Marketing & Google Ads')}
+                  className="hover:text-[#34d399] transition-colors text-left uppercase cursor-pointer"
                 >
-                  Corporate Group Insurance
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onOpenConsultation('Digital Marketing & SEO')}
-                  className="hover:text-[#dc5000] transition-colors text-left uppercase"
-                >
-                  Digital Marketing & SEO
+                  Digital Marketing & Enterprise Growth
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Quick Navigation */}
+          {/* Quick Links */}
           <div className="lg:col-span-2">
-            <div className="text-[11px] font-medium tracking-[0.16em] text-[#6c5f51] uppercase mb-4">
-              NAVIGATION
-            </div>
-            <ul className="space-y-2.5 text-[13px] text-[#ffedd7] uppercase">
+            <h4 className="text-[11px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-4">
+              02 // NAVIGATION
+            </h4>
+            <ul className="space-y-2.5 text-[13px] text-slate-300 uppercase">
               <li>
-                <a href="#services" className="hover:text-[#dc5000] transition-colors">
+                <a href="#services" className="hover:text-[#34d399] transition-colors">
                   Services
                 </a>
               </li>
               <li>
-                <a href="#readiness" className="hover:text-[#dc5000] transition-colors">
+                <a href="#readiness" className="hover:text-[#34d399] transition-colors">
                   Checklist
                 </a>
               </li>
               <li>
-                <a href="#locations" className="hover:text-[#dc5000] transition-colors">
-                  Locations
-                </a>
-              </li>
-              <li>
-                <a href="#process" className="hover:text-[#dc5000] transition-colors">
+                <a href="#process" className="hover:text-[#34d399] transition-colors">
                   Process
                 </a>
               </li>
               <li>
-                <a href="#why-us" className="hover:text-[#dc5000] transition-colors">
+                <a href="#why-us" className="hover:text-[#34d399] transition-colors">
                   Why Us
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Direct Contact & Advisory Desk */}
+          {/* Contact Support Desk */}
           <div className="lg:col-span-3">
-            <div className="text-[11px] font-medium tracking-[0.16em] text-[#6c5f51] uppercase mb-4">
-              ADVISORY & LIAISON DESK
-            </div>
-            <div className="space-y-3 text-[13px] text-[#ffedd7]/90 mb-6">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#dc5000] shrink-0 mt-0.5" />
-                <span>Pan-India Statutory Operations & Regional Municipal Desks</span>
+            <h4 className="text-[11px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-4">
+              03 // ADVISORY DESK
+            </h4>
+            <div className="space-y-3 text-[13px] text-slate-300 mb-6">
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-[#34d399] shrink-0" />
+                <span>+91 11 4900 8800 (Direct Desk)</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#dc5000] shrink-0" />
+                <Mail className="w-4 h-4 text-[#34d399] shrink-0" />
                 <span>advisory@trisecuresolutions.com</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#dc5000] shrink-0" />
-                <span>+91 (0) 11 4900 8800 / Direct Desk</span>
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#34d399] shrink-0 mt-0.5" />
+                <span>Pan-India Statutory Operations & Municipal Desks</span>
               </div>
             </div>
 
             <button
               onClick={() => onOpenConsultation()}
-              className="btn-ghost w-full justify-center text-[11px]"
+              className="btn-island-secondary w-full justify-center text-[12px] bg-slate-800 text-white border-slate-700 hover:bg-slate-700 cursor-pointer"
             >
               <span>CONNECT WITH A CONSULTANT</span>
             </button>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="o-dashline my-8" />
-
-        {/* Bottom Bar & Legal compliance micro-text */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#6c5f51]">
-          <div className="flex flex-wrap items-center gap-6">
-            <span>© {new Date().getFullYear()} TRISECURE SOLUTIONS. ALL RIGHTS RESERVED.</span>
-            <span className="hidden sm:inline text-[#40372e]">|</span>
-            <span className="text-legal">
-              * STATUTORY FILINGS, COMPLIANCE REGISTRATIONS AND LOAN DISBURSEMENTS ARE SUBJECT TO GOVERNMENT BODY APPOINTMENT & BANKING SANCTION NORMS.
-            </span>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-slate-500 font-mono">
+          <div>
+            © {new Date().getFullYear()} TRISECURE SOLUTIONS. ALL RIGHTS RESERVED.
           </div>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-[11px] text-[#ffedd7] hover:text-[#dc5000] uppercase font-medium transition-colors"
+            className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-white transition-colors cursor-pointer uppercase"
           >
             <span>BACK TO TOP</span>
             <ArrowUp className="w-3.5 h-3.5" />

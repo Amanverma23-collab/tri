@@ -1,130 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenConsultation: (prefillService?: string) => void;
+  onOpenConsultation: (service?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-
-      const sections = ['services', 'readiness', 'locations', 'process', 'why-us'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-      if (window.scrollY < 200) {
-        setActiveSection('home');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navItems = [
-    { label: 'SERVICES', href: '#services', id: 'services' },
-    { label: 'CHECKLIST', href: '#readiness', id: 'readiness' },
-    { label: 'LOCATIONS', href: '#locations', id: 'locations' },
-    { label: 'PROCESS', href: '#process', id: 'process' },
-    { label: 'WHY TRISECURE', href: '#why-us', id: 'why-us' }
+  const navLinks = [
+    { label: 'SERVICES', href: '#services' },
+    { label: 'CHECKLIST', href: '#readiness' },
+    { label: 'PROCESS', href: '#process' },
+    { label: 'WHY TRISECURE', href: '#why-us' }
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#100904]/90 backdrop-blur-md border-b border-[#40372e]/60 py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="o-container flex items-center justify-between">
-        {/* Brand Wordmark */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 rounded-full border border-[#40372e] flex items-center justify-center bg-[#382416]/40 text-[#ffedd7] font-semibold text-xs tracking-wider group-hover:border-[#ffedd7] transition-colors">
+    <header className="fixed top-4 inset-x-0 z-50 px-4 sm:px-6 pointer-events-none">
+      <div className="max-w-5xl mx-auto rounded-full bg-white/90 backdrop-blur-xl border border-[#e5e4de] shadow-[0_8px_30px_rgba(10,17,24,0.04)] px-4 sm:px-6 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
+        {/* Brand Mark */}
+        <a href="#" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-lg bg-[#0a1118] flex items-center justify-center text-white font-mono font-bold text-xs group-hover:bg-[#047857] transition-colors">
             TS
           </div>
           <div className="flex flex-col">
-            <span className="text-[15px] font-semibold tracking-[0.18em] text-[#ffedd7] uppercase">
+            <span className="text-[14px] font-bold tracking-tight text-[#0a1118] uppercase">
               TRISECURE
             </span>
-            <span className="text-[9px] font-medium tracking-[0.24em] text-[#6c5f51] uppercase">
+            <span className="text-[9px] font-mono tracking-widest text-[#64748b] uppercase">
               SOLUTIONS
             </span>
           </div>
         </a>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => {
-            const isActive = activeSection === item.id;
-            return (
-              <a
-                key={item.id}
-                href={item.href}
-                className="relative text-[12px] font-medium text-[#ffedd7] uppercase tracking-[0.08em] hover:text-[#ffedd7] transition-colors py-1 group"
-              >
-                {item.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[1px] border-b border-dashed border-[#ffedd7]" />
-                )}
-                {!isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[1px] border-b border-dashed border-transparent group-hover:border-[#6c5f51] transition-all" />
-                )}
-              </a>
-            );
-          })}
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-[12px] font-semibold tracking-wider text-[#475569] hover:text-[#047857] transition-colors uppercase"
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
 
-        {/* CTA Actions */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Action Button-in-Button */}
+        <div className="hidden sm:flex items-center gap-3">
           <button
             onClick={() => onOpenConsultation()}
-            className="btn-pill group"
+            className="btn-island-primary text-[12px] py-1.5 pl-4 pr-1.5 uppercase font-medium"
           >
-            <span>GET CONSULTATION</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#ffedd7] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <span>FREE CONSULTATION</span>
+            <div className="btn-island-icon w-6 h-6">
+              <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+            </div>
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Trigger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-[#ffedd7] hover:bg-[#382416]/40 rounded-lg border border-[#40372e]"
+          className="md:hidden p-2 text-[#0a1118] hover:bg-[#f4f3ee] rounded-full"
           aria-label="Toggle Navigation"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[60px] bg-[#100904] border-b border-[#40372e] p-6 shadow-2xl animate-fadeIn">
-          <div className="flex flex-col gap-4">
-            {navItems.map((item) => (
+        <div className="md:hidden mt-2 max-w-sm mx-auto rounded-2xl bg-white/95 backdrop-blur-2xl border border-[#e5e4de] shadow-2xl p-5 pointer-events-auto animate-fadeIn">
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link) => (
               <a
-                key={item.id}
-                href={item.href}
+                key={link.label}
+                href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-[14px] font-medium text-[#ffedd7] uppercase tracking-[0.1em] py-2 border-b border-[#40372e]/40 flex items-center justify-between"
+                className="text-[13px] font-semibold tracking-wider text-[#0a1118] uppercase py-2 border-b border-[#f1f0ea] flex items-center justify-between"
               >
-                <span>{item.label}</span>
-                <span className="text-[#6c5f51] text-xs">→</span>
+                <span>{link.label}</span>
+                <span className="text-[#64748b]">→</span>
               </a>
             ))}
             <button
@@ -132,10 +89,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
                 setMobileMenuOpen(false);
                 onOpenConsultation();
               }}
-              className="btn-pill w-full mt-3 justify-center"
+              className="btn-island-primary w-full justify-between mt-2 py-2 px-4"
             >
-              <span>GET CONSULTATION</span>
-              <ArrowUpRight className="w-4 h-4 text-[#ffedd7]" />
+              <span className="text-xs uppercase">Get Free Consultation</span>
+              <div className="btn-island-icon w-6 h-6">
+                <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+              </div>
             </button>
           </div>
         </div>

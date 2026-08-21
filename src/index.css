@@ -1,102 +1,64 @@
 @import "tailwindcss";
 
 :root {
-  /* Colors from DESIGN.md */
-  --color-warm-cream: #ffedd7;
-  --color-walnut-shadow: #100904;
-  --color-bark-brown: #382416;
-  --color-cork-border: #40372e;
-  --color-driftwood: #6c5f51;
-  --color-ember-accent: #dc5000;
-  --color-pure-black: #000000;
+  /* Warm Alabaster & Luxury Forest Emerald Palette */
+  --bg-canvas: #fafaf7;
+  --bg-canvas-subtle: #f4f3ee;
+  --bg-surface: #ffffff;
+  --bg-shell: #f1f0ea;
+  
+  --text-heading: #0a1118;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  
+  --accent-emerald: #047857;
+  --accent-emerald-hover: #065f46;
+  --accent-emerald-light: #ecfdf5;
+  --accent-emerald-border: #a7f3d0;
+  
+  --accent-gold: #b45309;
+  --accent-gold-light: #fef3c7;
+  
+  --border-subtle: #e5e4de;
+  --border-hairline: rgba(10, 17, 24, 0.08);
 
-  /* Typography */
-  --font-halyard: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'Space Grotesk', ui-monospace, monospace;
-  --font-arial: 'Arial', sans-serif;
-
-  /* Type Scale */
-  --text-subheading: 18px;
-  --leading-subheading: 1;
-  --text-heading-sm: 24px;
-  --leading-heading-sm: 1.09;
-  --text-body: 29px;
-  --leading-body: 1.26;
-  --text-heading: 41px;
-  --leading-heading: 0.9;
-  --text-display: 51px;
-  --leading-display: 0.9;
-
-  /* Spacing */
-  --spacing-6: 6px;
-  --spacing-8: 8px;
-  --spacing-9: 9px;
-  --spacing-10: 10px;
-  --spacing-12: 12px;
-  --spacing-14: 14px;
-  --spacing-18: 18px;
-  --spacing-24: 24px;
-  --spacing-31: 31px;
-  --spacing-41: 41px;
-  --spacing-45: 45px;
-  --spacing-68: 68px;
-  --spacing-204: 204px;
-
-  /* Radii */
-  --radius-cards: 12px;
-  --radius-inputs: 0px;
-  --radius-full-round: 9999px;
-  --radius-buttons-pill: 36px;
-  --radius-buttons-outlined: 22.5px;
 }
 
 @theme {
-  --color-warm-cream: #ffedd7;
-  --color-walnut-shadow: #100904;
-  --color-bark-brown: #382416;
-  --color-cork-border: #40372e;
-  --color-driftwood: #6c5f51;
-  --color-ember-accent: #dc5000;
-  --color-pure-black: #000000;
-
-  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: 'Space Grotesk', ui-monospace, monospace;
-  --font-arial: 'Arial', sans-serif;
+  --color-canvas: #fafaf7;
+  --color-surface: #ffffff;
+  --color-shell: #f1f0ea;
+  --color-heading: #0a1118;
+  --color-body: #334155;
+  --color-muted: #64748b;
+  --color-emerald: #047857;
+  --color-emerald-dark: #065f46;
+  --color-emerald-light: #ecfdf5;
+  --color-gold: #b45309;
+  --color-border: #e5e4de;
 }
 
-/* Base resets & typography */
 html {
   scroll-behavior: smooth;
-  background-color: #100904;
-  color: #ffedd7;
-  font-family: var(--font-halyard);
+  background-color: #fafaf7;
+  color: #0a1118;
+  font-family: var(--font-sans);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #100904;
-  color: #ffedd7;
+  background-color: #fafaf7;
+  color: #0a1118;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Editorial Structural Utilities */
-.o-dashline {
-  height: 1px;
-  width: 100%;
-  border-top: 1px dashed #40372e;
-  margin: 1.5rem 0;
-}
-
-.o-dashline-v {
-  width: 1px;
-  border-left: 1px dashed #40372e;
-}
-
 .o-container {
   width: 100%;
-  max-width: 1360px;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.5rem;
@@ -105,129 +67,94 @@ body {
 
 @media (min-width: 1024px) {
   .o-container {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
-/* Buttons from DESIGN.md */
-.btn-pill {
+/* Double-Bezel (Doppelrand) Luxury Architecture */
+.bezel-shell {
+  background-color: #f1f0ea;
+  border: 1px solid #e5e4de;
+  border-radius: 2rem;
+  padding: 0.5rem;
+}
+
+.bezel-core {
+  background-color: #ffffff;
+  border-radius: calc(2rem - 0.5rem);
+  box-shadow: 0 20px 40px -15px rgba(10, 17, 24, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1);
+  border: 1px solid rgba(10, 17, 24, 0.06);
+}
+
+/* Luxury Island Buttons */
+.btn-island-primary {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 36px;
-  background-color: #382416;
-  color: #ffedd7;
-  padding: 12px 28px;
-  font-weight: 500;
+  gap: 0.75rem;
+  border-radius: 9999px;
+  background-color: #0a1118;
+  color: #ffffff;
+  padding: 8px 10px 8px 24px;
+  font-weight: 600;
   font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid #40372e;
+  letter-spacing: -0.01em;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  box-shadow: 0 4px 14px rgba(10, 17, 24, 0.15);
   cursor: pointer;
 }
 
-.btn-pill:hover {
-  background-color: #4a301e;
-  border-color: #6c5f51;
+.btn-island-primary:hover {
+  background-color: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(10, 17, 24, 0.22);
+}
+
+.btn-island-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-island-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.btn-island-primary:hover .btn-island-icon {
+  background-color: #047857;
+  transform: translate(2px, -2px) scale(1.05);
+}
+
+.btn-island-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  color: #0a1118;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid #e5e4de;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  cursor: pointer;
+}
+
+.btn-island-secondary:hover {
+  background-color: #f4f3ee;
+  border-color: #d1cfc7;
   transform: translateY(-1px);
 }
 
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 22.5px;
-  background-color: transparent;
-  color: #ffedd7;
-  padding: 10px 22px;
-  font-weight: 500;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 1px solid #40372e;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.btn-ghost:hover {
-  border-color: #ffedd7;
-  background-color: rgba(255, 237, 215, 0.05);
-}
-
-/* Input minimal bottom border */
-.input-editorial {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #40372e;
-  color: #ffedd7;
-  padding: 12px 4px;
-  font-size: 15px;
-  border-radius: 0;
-  outline: none;
-  transition: border-color 0.2s ease;
-  width: 100%;
-}
-
-.input-editorial:focus {
-  border-bottom-color: #ffedd7;
-}
-
-.input-editorial::placeholder {
-  color: #6c5f51;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-}
-
-/* Editorial Typography Helpers */
-.text-display-editorial {
-  font-size: clamp(32px, 5vw, 54px);
-  font-weight: 500;
-  text-transform: uppercase;
-  line-height: 0.92;
-  letter-spacing: -0.01em;
-}
-
-.text-heading-editorial {
-  font-size: clamp(24px, 3.5vw, 41px);
-  font-weight: 500;
-  text-transform: uppercase;
-  line-height: 0.95;
-}
-
-.text-body-editorial {
-  font-size: clamp(16px, 2vw, 22px);
-  font-weight: 400;
-  line-height: 1.45;
-  color: #ffedd7;
-  opacity: 0.88;
-}
-
-.text-legal {
-  font-family: var(--font-arial);
-  font-size: 9px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6c5f51;
-}
-
-/* Custom minimal scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #100904;
-}
-::-webkit-scrollbar-thumb {
-  background: #382416;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #40372e;
+/* Subtle Hairline Paper Grid Pattern */
+.bg-alabaster-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(10, 17, 24, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 17, 24, 0.035) 1px, transparent 1px);
 }
