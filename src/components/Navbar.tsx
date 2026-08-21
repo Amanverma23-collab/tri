@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -7,6 +7,29 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroElem = document.getElementById('hero-section');
+      if (heroElem) {
+        const rect = heroElem.getBoundingClientRect();
+        // Show navbar once Hero section enters or approaches the viewport
+        if (rect.top <= window.innerHeight * 0.5) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      } else {
+        setIsVisible(window.scrollY > 300);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { label: 'SERVICES', href: '#services' },
@@ -16,10 +39,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
   ];
 
   return (
-    <header className="fixed top-4 inset-x-0 z-50 px-4 sm:px-6 pointer-events-none">
+    <header
+      className={`fixed top-4 inset-x-0 z-50 px-4 sm:px-6 transition-all duration-500 ${
+        isVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 -translate-y-6 pointer-events-none'
+      }`}
+    >
       <div className="max-w-5xl mx-auto rounded-full bg-white/90 backdrop-blur-xl border border-[#e5e4de] shadow-[0_8px_30px_rgba(10,17,24,0.04)] px-4 sm:px-6 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
         {/* Brand Mark */}
-        <a href="#" className="flex items-center gap-2.5 group">
+        <a href="#hero-section" className="flex items-center gap-2.5 group">
           <div className="w-8 h-8 rounded-lg bg-[#0a1118] flex items-center justify-center text-white font-mono font-bold text-xs group-hover:bg-[#047857] transition-colors">
             TS
           </div>

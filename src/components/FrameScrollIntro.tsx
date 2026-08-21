@@ -1,35 +1,103 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, ChevronDown } from 'lucide-react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { ChevronDown, ArrowDown } from 'lucide-react';
 
 const TOTAL_FRAMES = 300;
 
-export const FrameScrollIntro: React.FC = () => {
+interface FrameScrollIntroProps {
+  onIntroComplete?: () => void;
+}
+
+export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
-  const [loadProgress, setLoadProgress] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadPercent, setLoadPercent] = useState(0);
+  const [isReady, setIsReady] = useState(false);
 
-  // Cached images array
+  // Cached frame images array
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const targetFrameRef = useRef(0);
   const currentFrameRef = useRef(0);
   const animationFrameIdRef = useRef<number | null>(null);
 
-  // Preload frames
+  // Helper to get frame path
+  const getFrameUrl = useCallback((index: number) => {
+    const num = String(index + 1).padStart(3, '0');
+    return `/frames/ezgif-frame-${num}.jpg`;
+  }, []);
+
+  // Draw current frame to canvas using full-bleed "cover" geometry
+  const drawFrame = useCallback((img: HTMLImageElement | undefined) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !img) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    // Adjust canvas buffer resolution to physical pixels for crystal clarity
+    if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+    }
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, width, height);
+
+    // Full-screen cover calculation
+    const imgWidth = img.naturalWidth || 1280;
+    const imgHeight = img.naturalHeight || 720;
+    const imgAspect = imgWidth / imgHeight;
+    const canvasAspect = width / height;
+
+    let drawWidth = width;
+    let drawHeight = height;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (canvasAspect > imgAspect) {
+      // Canvas is wider than 16:9
+      drawWidth = width;
+      drawHeight = width / imgAspect;
+      offsetX = 0;
+      offsetY = (height - drawHeight) / 2;
+    } else {
+      // Canvas is taller than 16:9 (tablets, mobiles, portrait)
+      drawHeight = height;
+      drawWidth = height * imgAspect;
+      offsetX = (width - drawWidth) / 2;
+      offsetY = 0;
+    }
+
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    ctx.restore();
+  }, []);
+
+  // Preload frames in background
   useEffect(() => {
     let isMounted = true;
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
     let loadedCount = 0;
 
-    const getFrameUrl = (idx: number) => {
-      const num = String(idx + 1).padStart(3, '0');
-      return `/frames/ezgif-frame-${num}.jpg`;
+    // Load Frame 1 immediately
+    const firstImg = new Image();
+    firstImg.src = getFrameUrl(0);
+    firstImg.onload = () => {
+      if (!isMounted) return;
+      images[0] = firstImg;
+      loadedCount++;
+      setIsReady(true);
+      drawFrame(firstImg);
     };
 
-    // Preload all 300 frames
+    // Load remaining frames progressively
     for (let i = 0; i < TOTAL_FRAMES; i++) {
+      if (i === 0) continue;
       const img = new Image();
       img.src = getFrameUrl(i);
 
@@ -37,17 +105,7 @@ export const FrameScrollIntro: React.FC = () => {
         if (!isMounted) return;
         images[i] = img;
         loadedCount++;
-        const prog = Math.floor((loadedCount / TOTAL_FRAMES) * 100);
-        setLoadProgress(prog);
-
-        // Draw first frame immediately
-        if (i === 0 && canvasRef.current) {
-          renderFrame(img);
-        }
-
-        if (loadedCount >= 20) {
-          setIsLoaded(true);
-        }
+        setLoadPercent(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
       };
 
       img.onerror = () => {
@@ -63,86 +121,67 @@ export const FrameScrollIntro: React.FC = () => {
         cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
-  }, []);
+  }, [getFrameUrl, drawFrame]);
 
-  // Draw image to canvas with perfect aspect scaling
-  const renderFrame = (img: HTMLImageElement | undefined) => {
-    const canvas = canvasRef.current;
-    if (!canvas || !img) return;
+  // Window resize handler
+  useEffect(() => {
+    const handleResize = () => {
+      const img = imagesRef.current[Math.round(currentFrameRef.current)] || imagesRef.current[0];
+      if (img) {
+        drawFrame(img);
+      }
+    };
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [drawFrame]);
 
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-
-    if (canvas.width !== rect.width * dpr || canvas.height !== rect.height * dpr) {
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-    }
-
-    ctx.save();
-    ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, rect.width, rect.height);
-
-    // Calculate aspect ratio containment (object-contain with zero stretch)
-    const imgAspect = img.naturalWidth / img.naturalHeight || 16 / 9;
-    const canvasAspect = rect.width / rect.height;
-
-    let drawWidth = rect.width;
-    let drawHeight = rect.height;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    if (canvasAspect > imgAspect) {
-      drawHeight = rect.height;
-      drawWidth = drawHeight * imgAspect;
-      offsetX = (rect.width - drawWidth) / 2;
-    } else {
-      drawWidth = rect.width;
-      drawHeight = drawWidth / imgAspect;
-      offsetY = (rect.height - drawHeight) / 2;
-    }
-
-    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-    ctx.restore();
-  };
-
-  // Scroll listener with 60FPS LERP
+  // Scroll listener & 60FPS Lerp loop
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
+
       const rect = containerRef.current.getBoundingClientRect();
-      const totalScrollable = containerRef.current.offsetHeight - window.innerHeight;
+      const scrollableDistance = containerRef.current.offsetHeight - window.innerHeight;
 
-      if (totalScrollable <= 0) return;
+      if (scrollableDistance <= 0) return;
 
-      // Progress from 0 to 1
-      const progress = Math.min(1, Math.max(0, -rect.top / totalScrollable));
-      const frame = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.floor(progress * (TOTAL_FRAMES - 1))));
-      targetFrameRef.current = frame;
+      // Scroll progress from 0 (top of page) to 1 (end of 350vh container)
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
+      const targetFrame = Math.min(
+        TOTAL_FRAMES - 1,
+        Math.max(0, Math.floor(progress * (TOTAL_FRAMES - 1)))
+      );
+
+      targetFrameRef.current = targetFrame;
+
+      if (progress >= 0.99 && onIntroComplete) {
+        onIntroComplete();
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // Smooth LERP animation loop
-    const loop = () => {
+    // Smooth Lerp animation loop
+    const renderLoop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
-      if (Math.abs(diff) > 0.05) {
-        currentFrameRef.current += diff * 0.18; // Smooth physics
+
+      if (Math.abs(diff) > 0.04) {
+        currentFrameRef.current += diff * 0.2; // Silky smooth 60fps lerp
         const index = Math.round(currentFrameRef.current);
         setCurrentFrameIndex(index);
 
         const img = imagesRef.current[index] || imagesRef.current[0];
         if (img) {
-          renderFrame(img);
+          drawFrame(img);
         }
       }
-      animationFrameIdRef.current = requestAnimationFrame(loop);
+
+      animationFrameIdRef.current = requestAnimationFrame(renderLoop);
     };
 
-    animationFrameIdRef.current = requestAnimationFrame(loop);
+    animationFrameIdRef.current = requestAnimationFrame(renderLoop);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -150,75 +189,51 @@ export const FrameScrollIntro: React.FC = () => {
         cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
-  }, []);
+  }, [drawFrame, onIntroComplete]);
 
-  const handleSkipToHero = () => {
-    const heroElem = document.getElementById('hero-section');
-    if (heroElem) {
-      heroElem.scrollIntoView({ behavior: 'smooth' });
+  // Skip button click handler
+  const handleSkipIntro = () => {
+    const heroElement = document.getElementById('hero-section');
+    if (heroElement) {
+      heroElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <div
       ref={containerRef}
-      className="relative h-[300vh] bg-[#fafaf7] text-[#0a1118]"
+      id="scroll-intro-container"
+      className="relative w-full h-[350vh] bg-black m-0 p-0"
     >
-      {/* Pinned Fullscreen Sticky Container */}
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between p-6 sm:p-8 border-b border-[#e5e4de]">
+      {/* Pinned Sticky 100vh Viewport */}
+      <div className="sticky top-0 left-0 w-screen h-screen h-[100dvh] overflow-hidden bg-black m-0 p-0">
         
-        {/* Subtle Hairline Paper Grid */}
-        <div className="absolute inset-0 bg-alabaster-grid pointer-events-none opacity-40" />
+        {/* Full-Screen Pure Canvas (Zero Margins, Zero Gaps, Full Viewport Bleed) */}
+        <canvas
+          ref={canvasRef}
+          className="w-full h-full block object-cover m-0 p-0 pointer-events-none"
+        />
 
-        {/* Top Minimalist HUD Header */}
-        <div className="relative z-30 max-w-7xl mx-auto w-full flex items-center justify-between pt-2">
-          {/* Brand Tag */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#e5e4de] bg-white/90 backdrop-blur-md text-[#0a1118] text-[11px] font-mono font-bold uppercase shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#047857] animate-pulse" />
-            <span>TRISECURE SOLUTIONS // INTRO SEQUENCE</span>
-          </div>
-
-          {/* Frame Counter & Skip Button */}
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-[#e5e4de] bg-white/80 backdrop-blur-md text-[11px] font-mono text-[#64748b]">
-              <span>FRAME {String(currentFrameIndex + 1).padStart(3, '0')} / {TOTAL_FRAMES}</span>
-              <div className="w-16 h-1 bg-[#e5e4de] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#047857] transition-all duration-75"
-                  style={{ width: `${((currentFrameIndex + 1) / TOTAL_FRAMES) * 100}%` }}
-                />
-              </div>
-            </div>
-
-            <button
-              onClick={handleSkipToHero}
-              className="text-[11px] font-mono font-semibold uppercase px-3.5 py-1.5 rounded-full border border-[#e5e4de] bg-white text-[#0a1118] hover:bg-[#0a1118] hover:text-white transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
-            >
-              <span>Skip Intro</span>
-              <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-          </div>
+        {/* Minimal Unobtrusive Controls (Top-Right Skip Button) */}
+        <div className="absolute top-6 right-6 z-30">
+          <button
+            onClick={handleSkipIntro}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white text-[12px] font-mono font-medium tracking-wide transition-all shadow-lg cursor-pointer"
+          >
+            <span>Skip Intro</span>
+            <ChevronDown className="w-3.5 h-3.5" />
+          </button>
         </div>
 
-        {/* Full-Screen Pure Canvas Animation (No Clashing Overlapping Text) */}
-        <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-12 pointer-events-none z-10">
-          <div className="w-full max-w-5xl h-[78vh] sm:h-[82vh] flex items-center justify-center">
-            <canvas
-              ref={canvasRef}
-              className="w-full h-full object-contain filter drop-shadow-2xl"
-            />
-          </div>
-        </div>
-
-        {/* Bottom Minimalist Scroll Prompt */}
-        <div className="relative z-30 max-w-7xl mx-auto w-full flex items-center justify-between pb-2 border-t border-[#e5e4de]/60 pt-4">
-          <div className="text-[11px] font-mono text-[#64748b] flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#047857]" />
-            <span>Scroll down to play animation & enter website</span>
+        {/* Minimal Unobtrusive Bottom Progress Indicator */}
+        <div className="absolute bottom-6 inset-x-0 z-30 px-6 max-w-7xl mx-auto flex items-center justify-between pointer-events-none">
+          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/80 text-[11px] font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
+            <span>FRAME {String(currentFrameIndex + 1).padStart(3, '0')} / {TOTAL_FRAMES}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#047857] uppercase tracking-wider animate-bounce">
-            <span>SCROLL TO ENTER</span>
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/80 text-[11px] font-mono uppercase tracking-wider animate-bounce">
+            <span>SCROLL TO PROGRESS</span>
             <ArrowDown className="w-3.5 h-3.5" />
           </div>
         </div>

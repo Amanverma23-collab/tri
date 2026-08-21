@@ -31,15 +31,15 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#fafaf7] text-[#0a1118] flex flex-col font-sans selection:bg-[#0a1118] selection:text-white relative">
-      {/* Floating Fluid Island Navbar */}
+      {/* Floating Fluid Island Navbar (Appears when Hero/Website content begins) */}
       <Navbar onOpenConsultation={handleOpenConsultation} />
 
-      {/* Main Content */}
-      <main className="flex-1">
-        {/* 1. Full-Screen 300-Frame Scroll Intro Sequence */}
+      {/* Main Content Flow */}
+      <main className="flex-1 w-full m-0 p-0">
+        {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro (HR -> Insurance -> Food -> Digital Marketing) */}
         <FrameScrollIntro />
 
-        {/* 2. Hero Section (Shows directly after scroll animation finishes) */}
+        {/* 2. Hero Section (Appears cleanly in normal flow after animation reaches Frame 300) */}
         <Hero onOpenConsultation={handleOpenConsultation} />
 
         {/* 3. 4 Core Practice Bento Service Directory */}
