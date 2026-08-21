@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
-import { FrameScrollAnimation } from './components/FrameScrollAnimation';
+import { FrameScrollIntro } from './components/FrameScrollIntro';
+import { Hero } from './components/Hero';
 import { ServiceEcosystem } from './components/ServiceEcosystem';
 import { ComplianceReadinessTool } from './components/ComplianceReadinessTool';
 import { HowWeHelp } from './components/HowWeHelp';
@@ -35,22 +36,25 @@ export function App() {
 
       {/* Main Content */}
       <main className="flex-1">
-        {/* Apple/Oryzo-Tier 300-Frame Scroll Canvas Hero */}
-        <FrameScrollAnimation onOpenConsultation={handleOpenConsultation} />
+        {/* 1. Full-Screen 300-Frame Scroll Intro Sequence */}
+        <FrameScrollIntro />
 
-        {/* 4 Core Practice Bento Service Directory */}
+        {/* 2. Hero Section (Shows directly after scroll animation finishes) */}
+        <Hero onOpenConsultation={handleOpenConsultation} />
+
+        {/* 3. 4 Core Practice Bento Service Directory */}
         <ServiceEcosystem onOpenConsultation={handleOpenConsultation} />
 
-        {/* Interactive Business Readiness Evaluator */}
+        {/* 4. Interactive Business Readiness Evaluator */}
         <ComplianceReadinessTool onOpenConsultation={handleOpenConsultation} />
 
-        {/* 4-Stage Engagement Process */}
+        {/* 5. 4-Stage Engagement Process */}
         <HowWeHelp onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* Why TriSecure Credibility Pillars */}
+        {/* 6. Why TriSecure Credibility Pillars */}
         <WhyTriSecure onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* High-Value FAQ Accordion Section */}
+        {/* 7. High-Value FAQ Accordion Section */}
         <FAQSection onOpenConsultation={() => handleOpenConsultation()} />
       </main>
 

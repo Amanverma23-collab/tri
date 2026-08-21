@@ -90,7 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
   const activeDossier = dossiers.find((d) => d.id === activeDossierId) || dossiers[0];
 
   return (
-    <section className="relative min-h-[92dvh] pt-32 pb-24 bg-[#fafaf7] bg-alabaster-grid border-b border-[#e5e4de] flex items-center">
+    <section id="hero-section" className="relative min-h-[92dvh] pt-32 pb-24 bg-[#fafaf7] bg-alabaster-grid border-b border-[#e5e4de] flex items-center scroll-mt-12">
       <div className="o-container w-full">
         {/* Asymmetrical Editorial Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
