@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
+import { FrameScrollIntro } from './components/FrameScrollIntro';
 import { Hero } from './components/Hero';
 import { SplitCurtainSection } from './components/SplitCurtainSection';
 import { HRServicesSection } from './components/HRServicesSection';
@@ -60,10 +61,13 @@ export function App() {
 
       {/* Main Content Flow */}
       <main className="flex-1 w-full m-0 p-0">
-        {/* 1. Hero Section (Immediate Landing Masthead & Command Terminal) */}
+        {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro (300 Frames with Dynamic Color Matching) */}
+        <FrameScrollIntro onIntroComplete={() => ScrollTrigger.refresh()} />
+
+        {/* 2. Hero Section (Commanding Masthead & Double-Bezel Directory) */}
         <Hero onOpenConsultation={handleOpenConsultation} />
 
-        {/* 2. HR Services Split Curtain Reveal */}
+        {/* 3. HR Services Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-hr"
           badge="PRACTICE VERTICAL 01 // TRISECURE"
@@ -75,10 +79,10 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 3. HR Services Detailed Information Section */}
+        {/* 4. HR Services Detailed Information Section */}
         <HRServicesSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 4. Insurance & Loans Split Curtain Reveal */}
+        {/* 5. Insurance & Loans Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-insurance"
           badge="PRACTICE VERTICAL 02 // TRISECURE"
@@ -90,10 +94,10 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 5. Insurance & Loans Detailed Information Section */}
+        {/* 6. Insurance & Loans Detailed Information Section */}
         <InsuranceServicesSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 6. Food Compliance Split Curtain Reveal */}
+        {/* 7. Food Compliance Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-food"
           badge="PRACTICE VERTICAL 03 // TRISECURE"
@@ -105,10 +109,10 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 7. Food Compliance Detailed Information Section */}
+        {/* 8. Food Compliance Detailed Information Section */}
         <FoodComplianceSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 8. Digital Marketing Split Curtain Reveal */}
+        {/* 9. Digital Marketing Split Curtain Reveal */}
         <SplitCurtainSection
           id="split-reveal-marketing"
           badge="PRACTICE VERTICAL 04 // TRISECURE"
@@ -120,19 +124,19 @@ export function App() {
           onOpenConsultation={handleOpenConsultation}
         />
 
-        {/* 9. Digital Marketing Detailed Information Section */}
+        {/* 10. Digital Marketing Detailed Information Section */}
         <DigitalMarketingSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 10. Interactive Business Readiness Evaluator */}
+        {/* 11. Interactive Business Readiness Evaluator */}
         <ComplianceReadinessTool onOpenConsultation={handleOpenConsultation} />
 
-        {/* 11. 4-Stage Engagement Process */}
+        {/* 12. 4-Stage Engagement Process */}
         <HowWeHelp onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 12. Why TriSecure Credibility Pillars */}
+        {/* 13. Why TriSecure Credibility Pillars */}
         <WhyTriSecure onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 13. High-Value FAQ Accordion Section */}
+        {/* 14. High-Value FAQ Accordion Section */}
         <FAQSection onOpenConsultation={() => handleOpenConsultation()} />
       </main>
 
