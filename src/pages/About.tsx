@@ -150,47 +150,47 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
 
             {/* Right Column: Executive Mandate Card */}
             <div className="lg:col-span-5">
-              <div className="p-7 sm:p-8 rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-xl space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-[#1A1A16]/10">
-                  <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-wider font-semibold">
-                    <ShieldCheck className="w-4 h-4" />
+              <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-xl space-y-4 sm:space-y-6">
+                <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#1A1A16]/10">
+                  <div className="flex items-center gap-1.5 sm:gap-2 font-mono text-[11px] sm:text-xs text-[#7C8B6F] uppercase tracking-wider font-semibold">
+                    <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>Corporate Mandate</span>
                   </div>
-                  <span className="font-mono text-[10px] text-[#7A7A70]">PAN-INDIA ADVISORY</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#7A7A70] tracking-wider">PAN-INDIA ADVISORY</span>
                 </div>
 
-                <p className="font-serif text-lg text-[#1A1A16] leading-snug">
+                <p className="font-serif text-sm sm:text-lg text-[#1A1A16] leading-snug italic border-l-2 border-[#7C8B6F] pl-3 py-0.5">
                   "Our mission is simple: To provide enterprises with unyielding compliance safety, agile talent infrastructure, and financial resilience so they can scale without regulatory roadblocks."
                 </p>
 
-                <div className="space-y-3 pt-2">
-                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
-                      <Users className="w-4 h-4" />
+                <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2">
+                  <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-2.5 sm:gap-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
+                      <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
                     <div>
-                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Workforce Strategy & HR</h4>
-                      <p className="font-sans text-[11px] text-[#7A7A70]">End-to-end payroll, EPFO/ESIC compliance & labor code governance</p>
+                      <h4 className="font-serif text-xs sm:text-sm font-bold text-[#1A1A16] leading-tight">Workforce Strategy & HR</h4>
+                      <p className="font-sans text-[10px] sm:text-[11px] text-[#7A7A70] leading-tight mt-0.5">End-to-end payroll, EPFO/ESIC compliance & labor code governance</p>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
-                      <ShieldCheck className="w-4 h-4 text-[#C9AF6B]" />
+                  <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-2.5 sm:gap-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#1A1A16] text-[#C9AF6B] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9AF6B]" />
                     </div>
                     <div>
-                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Risk Shield & Capital Debt</h4>
-                      <p className="font-sans text-[11px] text-[#7A7A70]">Corporate insurance underwriting, liability coverage & credit advisory</p>
+                      <h4 className="font-serif text-xs sm:text-sm font-bold text-[#1A1A16] leading-tight">Risk Shield & Capital Debt</h4>
+                      <p className="font-sans text-[10px] sm:text-[11px] text-[#7A7A70] leading-tight mt-0.5">Corporate insurance underwriting, liability coverage & credit advisory</p>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-[#7C8B6F] text-[#F5F0E6] flex items-center justify-center shrink-0">
-                      <FileCheck className="w-4 h-4" />
+                  <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-2.5 sm:gap-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#7C8B6F] text-[#F5F0E6] flex items-center justify-center shrink-0">
+                      <FileCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
                     <div>
-                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Food & Environmental Clearances</h4>
-                      <p className="font-sans text-[11px] text-[#7A7A70]">FSSAI State/Central, MCD Health Trade & DPCC statutory permits</p>
+                      <h4 className="font-serif text-xs sm:text-sm font-bold text-[#1A1A16] leading-tight">Food & Environmental Clearances</h4>
+                      <p className="font-sans text-[10px] sm:text-[11px] text-[#7A7A70] leading-tight mt-0.5">FSSAI State/Central, MCD Health Trade & DPCC statutory permits</p>
                     </div>
                   </div>
                 </div>
