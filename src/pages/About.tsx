@@ -83,61 +83,65 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       {/* =========================================================================
           1. MASTHEAD: Editorial 2-Column Hero Layout
           ========================================================================= */}
-      <section className="relative pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#F5F0E6] overflow-hidden border-b border-[#1A1A16]/10">
+      <section className="relative pt-24 pb-12 sm:pt-36 sm:pb-20 bg-[#F5F0E6] overflow-hidden border-b border-[#1A1A16]/10">
         <div className="editorial-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             {/* Left Column: Heading, Narrative & Action Buttons */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-mono text-[11px] uppercase tracking-widest shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#C9AF6B] animate-pulse" />
+            <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-mono text-[10px] sm:text-[11px] uppercase tracking-widest shadow-xs">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#C9AF6B] animate-pulse" />
                 <span>WHO WE ARE // ABOUT TRISECURE</span>
               </div>
 
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1A1A16] leading-[1.08]">
+              <h1 className="font-serif text-2xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-[#1A1A16] leading-tight sm:leading-[1.08]">
                 Empowering modern businesses with clarity, compliance & strategic scale.
               </h1>
 
-              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light max-w-xl">
+              <p className="font-sans text-xs sm:text-base lg:text-lg text-[#7A7A70] leading-relaxed font-light max-w-xl">
                 At <strong className="font-semibold text-[#1A1A16]">Trisecure Solutions</strong>, we eliminate corporate operational friction by delivering institutional HR strategy, comprehensive insurance & loan advisory, statutory food compliance, and digital growth acceleration under a unified partner desk.
               </p>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              {/* Action Buttons: Responsive Full-Width on Mobile, Inline on Desktop */}
+              <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
                 <button
                   onClick={() => onOpenConsultation()}
-                  className="btn-editorial-primary text-xs"
+                  className="w-full sm:w-auto py-3 px-5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#7C8B6F] transition-colors shadow-md cursor-pointer"
                 >
                   <span>Schedule Consultation</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <Link to="/services" className="btn-editorial-secondary text-xs">
+                <Link
+                  to="/services"
+                  className="w-full sm:w-auto py-3 px-5 rounded-full bg-transparent border border-[#1A1A16]/20 text-[#1A1A16] font-mono text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#1A1A16]/5 transition-colors"
+                >
                   <span>Explore Practice Verticals</span>
                 </Link>
               </div>
 
-              {/* Bottom Quick Metrics Strip */}
-              <div className="pt-6 grid grid-cols-3 gap-4 border-t border-[#1A1A16]/10 max-w-lg">
+              {/* Bottom Quick Metrics Strip: Compact & Balanced on Mobile */}
+              <div className="pt-4 sm:pt-6 grid grid-cols-3 gap-2 sm:gap-4 border-t border-[#1A1A16]/10 max-w-lg">
                 <div>
-                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                  <span className="font-serif text-xl sm:text-3xl font-bold text-[#1A1A16] block">
                     12+
                   </span>
-                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                  <p className="font-mono text-[8px] sm:text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
                     Years Experience
                   </p>
                 </div>
                 <div>
-                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#7C8B6F] block">
+                  <span className="font-serif text-xl sm:text-3xl font-bold text-[#7C8B6F] block">
                     100%
                   </span>
-                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                  <p className="font-mono text-[8px] sm:text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
                     Audit Readiness
                   </p>
                 </div>
                 <div>
-                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                  <span className="font-serif text-xl sm:text-3xl font-bold text-[#1A1A16] block">
                     Pan-India
                   </span>
-                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                  <p className="font-mono text-[8px] sm:text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
                     Central & State
                   </p>
                 </div>
