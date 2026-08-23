@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, CircleDollarSign, Car, Home as HomeIcon, Briefcase } from 'lucide-react';
@@ -118,6 +119,13 @@ export const InsuranceLoansServices: React.FC<InsuranceLoansServicesProps> = ({
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Insurance & Loan Services | Trisecure Solutions</title>
+        <meta name="description" content="Comprehensive insurance and loan services including life, health, auto, home, business insurance, and personal or business loans." />
+        <meta property="og:title" content="Insurance & Loan Services | Trisecure Solutions" />
+        <meta property="og:description" content="Comprehensive insurance and loan services including life, health, auto, home, business insurance, and personal or business loans." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* 1. HERO: Split Curtain Reveal with Editorial Hero Image */}
       <SplitRevealSection
         id="insurance-hero"

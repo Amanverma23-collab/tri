@@ -28,7 +28,8 @@ export default defineConfig({
             if (
               id.includes('react') ||
               id.includes('react-dom') ||
-              id.includes('react-router-dom')
+              id.includes('react-router-dom') ||
+              id.includes('react-helmet-async')
             ) {
               return 'vendor-react';
             }
@@ -43,7 +44,6 @@ export default defineConfig({
             if (id.includes('lucide-react')) {
               return 'vendor-icons';
             }
-            return 'vendor-utils';
           }
         },
       },

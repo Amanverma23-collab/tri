@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ShieldCheck, Home, Compass, Phone, Sparkles } from 'lucide-react';
@@ -19,6 +20,13 @@ export const NotFound: React.FC<NotFoundProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>404 - Page Not Found | Trisecure Solutions</title>
+        <meta name="description" content="The requested advisory page could not be located. Explore our corporate directory or contact our direct practice desk." />
+        <meta property="og:title" content="404 - Page Not Found | Trisecure Solutions" />
+        <meta property="og:description" content="The requested advisory page could not be located. Explore our corporate directory or contact our direct practice desk." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <section className="relative min-h-[85vh] flex flex-col justify-center items-center py-32 sm:py-36 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
         {/* Ambient Radial Highlights */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#7C8B6F]/10 rounded-full blur-3xl pointer-events-none" />

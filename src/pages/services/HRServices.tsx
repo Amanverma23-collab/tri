@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Briefcase, FileSpreadsheet, Scale, ShieldCheck, CheckCircle2, Calculator, Users, FileText, PieChart, Landmark, HeartHandshake, ChevronDown, ChevronUp } from 'lucide-react';
@@ -171,6 +172,13 @@ export const HRServices: React.FC<HRServicesProps> = ({ onOpenConsultation }) =>
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>HR Services for Businesses | Trisecure Solutions</title>
+        <meta name="description" content="End-to-end HR solutions including recruitment, payroll, compliance, training & development, and employee relations for your team." />
+        <meta property="og:title" content="HR Services for Businesses | Trisecure Solutions" />
+        <meta property="og:description" content="End-to-end HR solutions including recruitment, payroll, compliance, training & development, and employee relations for your team." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* 1. EDITORIAL SPLIT REVEAL HERO: HR Focus */}
       <SplitRevealSection
         id="hr-hero"

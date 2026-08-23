@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, ClipboardCheck, Award, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -80,6 +81,13 @@ export const FoodComplianceServices: React.FC<FoodComplianceServicesProps> = ({
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Food Compliance & FSSAI Services | Trisecure</title>
+        <meta name="description" content="Regulatory compliance, quality assurance, audits, training, and documentation support to keep your food business fully compliant." />
+        <meta property="og:title" content="Food Compliance & FSSAI Services | Trisecure" />
+        <meta property="og:description" content="Regulatory compliance, quality assurance, audits, training, and documentation support to keep your food business fully compliant." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* 1. HERO: Split Curtain Reveal for FOOD COMPLIANCE with Editorial Hero Image */}
       <SplitRevealSection
         id="food-hero"

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, ShieldCheck, CheckCircle2, Receipt, FileText, Sparkles, CreditCard } from 'lucide-react';
@@ -70,6 +71,13 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>License Consultation Charges | Trisecure Solutions</title>
+        <meta name="description" content="View transparent consultation charges for FSSAI, MCD Trade, Factory, and Shop & Establishment licenses across Delhi NCR locations." />
+        <meta property="og:title" content="License Consultation Charges | Trisecure Solutions" />
+        <meta property="og:description" content="View transparent consultation charges for FSSAI, MCD Trade, Factory, and Shop & Establishment licenses across Delhi NCR locations." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* =========================================================================
           1. REDESIGNED MASTHEAD: Editorial 2-Column Hero with Pricing Assurance Bento
           ========================================================================= */}

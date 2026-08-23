@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Sparkles, Award } from 'lucide-react';
@@ -56,6 +57,13 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Trisecure Solutions | HR, Insurance & Licensing Hub</title>
+        <meta name="description" content="Single-window advisory for HR & payroll, PF/ESIC compliance, FSSAI licensing, insurance, business loans, and digital marketing." />
+        <meta property="og:title" content="Trisecure Solutions | HR, Insurance & Licensing Hub" />
+        <meta property="og:description" content="Single-window advisory for HR & payroll, PF/ESIC compliance, FSSAI licensing, insurance, business loans, and digital marketing." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* 1. HERO SECTION: 2-Column High-Impact Split Hero matching User Mockup */}
       <EditorialHero onOpenConsultation={onOpenConsultation} />
 

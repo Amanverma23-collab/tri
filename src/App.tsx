@@ -1,4 +1,5 @@
 ﻿import React, { useState, lazy, Suspense } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
@@ -98,6 +99,7 @@ export function App() {
   };
 
   return (
+    <HelmetProvider>
     <Router>
       {/* Dynamic Per-Page SEO Titles, Descriptions & Meta Tags */}
       <SEO />
@@ -136,6 +138,7 @@ export function App() {
         </div>
       </SmoothScrollProvider>
     </Router>
+    </HelmetProvider>
   );
 }
 

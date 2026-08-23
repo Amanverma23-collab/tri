@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
 import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, MessageSquare, Sparkles, Building2, Loader2 } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
@@ -51,6 +52,13 @@ export const Contact: React.FC = () => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Contact Trisecure Solutions | Get a Free Consultation</title>
+        <meta name="description" content="Get in touch with Trisecure Solutions for HR, insurance, licensing, and digital marketing consultation. Call, email, or message us." />
+        <meta property="og:title" content="Contact Trisecure Solutions | Get a Free Consultation" />
+        <meta property="og:description" content="Get in touch with Trisecure Solutions for HR, insurance, licensing, and digital marketing consultation. Call, email, or message us." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* =========================================================================
           1. REDESIGNED MASTHEAD: Editorial 2-Column Hero with Direct Desk Bento
           ========================================================================= */}

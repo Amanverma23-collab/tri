@@ -9,63 +9,63 @@ interface MetaConfig {
 
 const routeMetaMap: Record<string, MetaConfig> = {
   '/': {
-    title: 'Trisecure F&B Solutions | Business Solutions, Simplified | HR, Licensing & Advisory',
-    description: 'Single-window corporate advisory across HR payroll infrastructure, PF/ESIC compliance, FSSAI licensing, corporate insurance, debt capital financing, and digital growth.',
-    keywords: 'Trisecure F&B Solutions, Business Solutions, Corporate Advisory, HR Services, FSSAI Licensing, Delhi NCR',
+    title: 'Trisecure Solutions | HR, Insurance & Licensing Hub',
+    description: 'Single-window advisory for HR & payroll, PF/ESIC compliance, FSSAI licensing, insurance, business loans, and digital marketing.',
+    keywords: 'Trisecure Solutions, Business Solutions, Corporate Advisory, HR Services, FSSAI Licensing, Delhi NCR',
   },
   '/about': {
-    title: 'About Us | Founder Anurag Sharma & Institutional Pedigree | Trisecure F&B Solutions',
-    description: 'Learn about Trisecure F&B Solutions, led by Founder Anurag Sharma. Discover our 12+ years pedigree in F&B corporate governance, statutory compliance, and workforce strategy.',
+    title: 'About Trisecure Solutions | HR & Business Advisory',
+    description: 'Learn how Trisecure Solutions delivers end-to-end HR, insurance, licensing, and digital marketing support for growing businesses.',
     keywords: 'About Trisecure, Anurag Sharma, Corporate Advisory Delhi, F&B Consultancy, Enterprise Pedigree',
   },
   '/services': {
-    title: 'Practice Verticals & Advisory Hub | Trisecure F&B Solutions',
-    description: 'Explore our 4 core institutional practices: Human Capital & Payroll, Corporate Insurance & Debt Advisory, Food Compliance & FSSAI Licensing, and Digital Brand Scaling.',
+    title: 'Our Services | HR, Insurance & Licensing Advisory',
+    description: 'Explore Trisecure Solutions\' full range of services: HR, insurance & loans, food compliance, and digital marketing under one roof.',
     keywords: 'Trisecure Services, Corporate Advisory Verticals, Business Practice Areas, Compliance Hub',
   },
   '/services/hr': {
-    title: 'HR & Payroll Solutions | PF, ESIC, Labor Law Compliance | Trisecure F&B Solutions',
-    description: 'Zero-error payroll processing, PF/EPFO compliance, ESIC registrations, PT/LWF filings, TDS deduction, and New Labour Code appointment letters across India.',
+    title: 'HR Services for Businesses | Trisecure Solutions',
+    description: 'End-to-end HR solutions including recruitment, payroll, compliance, training & development, and employee relations for your team.',
     keywords: 'HR Services, Payroll Processing, PF ESIC Consultant, Labour Law Compliance, CTC Structuring, HR Administration India',
   },
   '/services/insurance-loans': {
-    title: 'Corporate Insurance & Debt Financing Advisory | Trisecure F&B Solutions',
-    description: 'Enterprise risk mitigation through commercial liability, asset underwriting, group health insurance, working capital loans, and structured debt advisory.',
+    title: 'Insurance & Loan Services | Trisecure Solutions',
+    description: 'Comprehensive insurance and loan services including life, health, auto, home, business insurance, and personal or business loans.',
     keywords: 'Corporate Insurance, Business Loans India, Debt Advisory, Commercial Liability, Group Health Policy',
   },
   '/services/food-compliance': {
-    title: 'Food Compliance, FSSAI Licensing, DPCC & MCD Permits | Trisecure F&B Solutions',
-    description: 'End-to-end statutory clearances for restaurants, dark kitchens, and FMCG brands: FSSAI State & Central Licenses, DPCC CTE/CTO, MCD Health Trade, and Fire NOC.',
+    title: 'Food Compliance & FSSAI Services | Trisecure',
+    description: 'Regulatory compliance, quality assurance, audits, training, and documentation support to keep your food business fully compliant.',
     keywords: 'FSSAI License Consultant, DPCC Pollution Consent, MCD Health Trade License, Eating House Permit, Fire Safety NOC Delhi',
   },
   '/services/digital-marketing': {
-    title: 'Digital Marketing & Performance Brand Scaling | Trisecure F&B Solutions',
-    description: 'High-ROI digital growth strategies: SEO, high-conversion Meta and Google ad campaigns, visual branding, and reputational positioning for modern enterprises.',
+    title: 'Digital Marketing Services | Trisecure Solutions',
+    description: 'Grow your brand with website development, SEO, social media management, ad campaigns, branding, and professional content creation.',
     keywords: 'Digital Marketing Delhi NCR, Performance Marketing, SEO Agency, Brand Scaling, Google Ads Consultant',
   },
   '/licenses': {
-    title: 'Statutory License Matrix & Government Permits | Trisecure F&B Solutions',
-    description: 'Comprehensive statutory licensing roadmap: FSSAI Central/State, DPCC Green/Orange consent, MCD Health Trade, Shop & Establishment, and Fire NOC clearances.',
+    title: 'Business Licenses We Handle | Trisecure Solutions',
+    description: 'We handle FSSAI, Shop & Establishment, MCD Trade, and DPCC licenses end-to-end, from application to approval and renewal support.',
     keywords: 'Statutory License Matrix, Government Clearances, Business Permits India, FSSAI Shop Establishment',
   },
   '/pricing': {
-    title: 'Transparent Advisory Pricing & Practice Retainers | Trisecure F&B Solutions',
-    description: 'Transparent, value-driven pricing structures for business licensing, full-stack HR retainers, corporate insurance advisory, and customized enterprise proposals.',
+    title: 'License Consultation Charges | Trisecure Solutions',
+    description: 'View transparent consultation charges for FSSAI, MCD Trade, Factory, and Shop & Establishment licenses across Delhi NCR locations.',
     keywords: 'Trisecure Pricing, Advisory Retainer Fees, FSSAI Cost, HR Service Packages, Corporate Retainer India',
   },
   '/contact': {
-    title: 'Contact Advisory Desk | Senior Partner Direct Access | Trisecure F&B Solutions',
-    description: 'Connect with senior practice leads and Founder Anurag Sharma. Guaranteed response within 2 business hours for business compliance, HR, financing, and licensing.',
+    title: 'Contact Trisecure Solutions | Get a Free Consultation',
+    description: 'Get in touch with Trisecure Solutions for HR, insurance, licensing, and digital marketing consultation. Call, email, or message us.',
     keywords: 'Contact Trisecure, Anurag Sharma Contact, Direct Advisory Desk, Business Consultation Delhi NCR',
   },
   '/privacy': {
-    title: 'Privacy Policy & Data Protection Governance | Trisecure F&B Solutions',
+    title: 'Privacy Policy & Data Protection | Trisecure Solutions',
     description: 'Our data protection protocols, Digital Personal Data Protection Act compliance, non-disclosure commitments, and secure enterprise information governance.',
     keywords: 'Trisecure Privacy Policy, Data Protection, DPDP Act India, Confidentiality Standards',
   },
   '/terms': {
-    title: 'Terms & Conditions of Advisory Engagement | Trisecure F&B Solutions',
-    description: 'Terms of service, advisory engagement scope, client responsibilities, statutory filing disclaimers, and legal jurisdiction for Trisecure F&B Solutions.',
+    title: 'Terms & Conditions of Advisory Engagement | Trisecure Solutions',
+    description: 'Terms of service, advisory engagement scope, client responsibilities, statutory filing disclaimers, and legal jurisdiction for Trisecure Solutions.',
     keywords: 'Trisecure Terms of Engagement, Legal Terms, Consulting Agreement, Delhi NCR Jurisdiction',
   },
 };
@@ -75,7 +75,7 @@ export const SEO: React.FC = () => {
 
   useEffect(() => {
     const currentMeta = routeMetaMap[location.pathname] || {
-      title: '404 - Page Not Found | Trisecure F&B Solutions',
+      title: '404 - Page Not Found | Trisecure Solutions',
       description: 'The requested advisory page could not be located. Explore our corporate directory or contact our direct practice desk.',
       keywords: 'Trisecure, Error 404, Page Not Found',
     };
@@ -104,6 +104,7 @@ export const SEO: React.FC = () => {
     // 4. Update OpenGraph Meta Tags
     setMetaTag('property', 'og:title', currentMeta.title);
     setMetaTag('property', 'og:description', currentMeta.description);
+    setMetaTag('property', 'og:type', 'website');
     setMetaTag('property', 'og:url', `https://trisecure.in${location.pathname}`);
 
     // 5. Update Twitter Meta Tags

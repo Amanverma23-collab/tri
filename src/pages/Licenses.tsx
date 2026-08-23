@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, FileCheck, Clock, MapPin, AlertCircle, Sparkles, Building2, Store, Factory, Utensils } from 'lucide-react';
@@ -92,6 +93,13 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Business Licenses We Handle | Trisecure Solutions</title>
+        <meta name="description" content="We handle FSSAI, Shop & Establishment, MCD Trade, and DPCC licenses end-to-end, from application to approval and renewal support." />
+        <meta property="og:title" content="Business Licenses We Handle | Trisecure Solutions" />
+        <meta property="og:description" content="We handle FSSAI, Shop & Establishment, MCD Trade, and DPCC licenses end-to-end, from application to approval and renewal support." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* =========================================================================
           1. REDESIGNED MASTHEAD: Editorial 2-Column Hero with License Directory Card
           ========================================================================= */}

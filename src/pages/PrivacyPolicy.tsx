@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Lock, Eye, FileText, CheckCircle2, ArrowRight, Phone, Mail } from 'lucide-react';
@@ -60,6 +61,13 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onOpenConsultation
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Privacy Policy & Data Protection | Trisecure Solutions</title>
+        <meta name="description" content="Our data protection protocols, Digital Personal Data Protection Act compliance, non-disclosure commitments, and secure enterprise information governance." />
+        <meta property="og:title" content="Privacy Policy & Data Protection | Trisecure Solutions" />
+        <meta property="og:description" content="Our data protection protocols, Digital Personal Data Protection Act compliance, non-disclosure commitments, and secure enterprise information governance." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <section className="relative pt-32 pb-24 sm:pt-36 sm:pb-32 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container max-w-4xl">
           

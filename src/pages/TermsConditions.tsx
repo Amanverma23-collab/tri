@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Scale, FileText, CheckCircle2, ArrowRight, Phone, Mail } from 'lucide-react';
@@ -55,6 +56,13 @@ export const TermsConditions: React.FC<TermsConditionsProps> = ({ onOpenConsulta
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Terms & Conditions of Advisory Engagement | Trisecure Solutions</title>
+        <meta name="description" content="Terms of service, advisory engagement scope, client responsibilities, statutory filing disclaimers, and legal jurisdiction for Trisecure Solutions." />
+        <meta property="og:title" content="Terms & Conditions of Advisory Engagement | Trisecure Solutions" />
+        <meta property="og:description" content="Terms of service, advisory engagement scope, client responsibilities, statutory filing disclaimers, and legal jurisdiction for Trisecure Solutions." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <section className="relative pt-32 pb-24 sm:pt-36 sm:pb-32 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container max-w-4xl">
           

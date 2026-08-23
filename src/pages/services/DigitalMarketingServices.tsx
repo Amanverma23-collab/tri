@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -62,6 +63,13 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Digital Marketing Services | Trisecure Solutions</title>
+        <meta name="description" content="Grow your brand with website development, SEO, social media management, ad campaigns, branding, and professional content creation." />
+        <meta property="og:title" content="Digital Marketing Services | Trisecure Solutions" />
+        <meta property="og:description" content="Grow your brand with website development, SEO, social media management, ad campaigns, branding, and professional content creation." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* 1. HERO: Split Curtain Reveal for DIGITAL MARKETING with Editorial Hero Image */}
       <SplitRevealSection
         id="marketing-hero"

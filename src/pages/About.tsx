@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Award, Users, FileCheck, CheckCircle2, Phone, Mail, Sparkles, HeartHandshake, Rocket, Scale, UserCheck, Calculator, Store, Handshake } from 'lucide-react';
@@ -98,6 +99,13 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>About Trisecure Solutions | HR & Business Advisory</title>
+        <meta name="description" content="Learn how Trisecure Solutions delivers end-to-end HR, insurance, licensing, and digital marketing support for growing businesses." />
+        <meta property="og:title" content="About Trisecure Solutions | HR & Business Advisory" />
+        <meta property="og:description" content="Learn how Trisecure Solutions delivers end-to-end HR, insurance, licensing, and digital marketing support for growing businesses." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* =========================================================================
           1. REDESIGNED MASTHEAD: Editorial 2-Column Hero Layout with Corporate Bento
           ========================================================================= */}

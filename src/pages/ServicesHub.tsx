@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight, Users, Landmark, Utensils, Megaphone, Sparkles, ShieldCheck } from 'lucide-react';
@@ -70,6 +71,13 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Our Services | HR, Insurance & Licensing Advisory</title>
+        <meta name="description" content="Explore Trisecure Solutions' full range of services: HR, insurance & loans, food compliance, and digital marketing under one roof." />
+        <meta property="og:title" content="Our Services | HR, Insurance & Licensing Advisory" />
+        <meta property="og:description" content="Explore Trisecure Solutions' full range of services: HR, insurance & loans, food compliance, and digital marketing under one roof." />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* 1. MASTHEAD: Editorial Hero Section */}
       <section className="relative pt-32 pb-14 sm:pt-36 sm:pb-18 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
         <div className="editorial-container">
