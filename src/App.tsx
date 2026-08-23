@@ -31,7 +31,7 @@ const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m
 // Navigation & Global UI Components
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { FloatingContactWidget } from './components/FloatingContactWidget';
+
 import { ConsultationModal } from './components/ConsultationModal';
 
 import { SmoothScrollProvider } from './components/SmoothScrollProvider';
@@ -121,7 +121,7 @@ export function App() {
           </main>
 
           {/* Persistent Floating Consultation Pill */}
-          <FloatingContactWidget onOpenConsultation={() => handleOpenConsultation()} />
+          
 
           {/* Minimal Glassmorphic Cookie Consent Banner */}
           <CookieBanner />
