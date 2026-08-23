@@ -203,50 +203,50 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       {/* =========================================================================
           2. LEADERSHIP SPOTLIGHT: ANURAG SHARMA (Clean & Essential Details Only)
           ========================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6] relative overflow-hidden bg-charcoal-textured border-b border-white/10">
+      <section className="py-14 sm:py-28 bg-[#1A1A16] text-[#F5F0E6] relative overflow-hidden bg-charcoal-textured border-b border-white/10">
         <div className="editorial-container relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/10 pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 sm:gap-6 border-b border-white/10 pb-5 sm:pb-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C9AF6B]/15 text-[#C9AF6B] font-mono text-xs uppercase tracking-widest mb-3 border border-[#C9AF6B]/30">
-                <ShieldCheck className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-[#C9AF6B]/15 text-[#C9AF6B] font-mono text-[10px] sm:text-xs uppercase tracking-widest mb-2 sm:mb-3 border border-[#C9AF6B]/30">
+                <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 <span>Executive Leadership</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+              <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
                 Leadership & Vision
               </h2>
             </div>
-            <p className="font-sans text-xs sm:text-sm text-white/70 max-w-md font-light">
+            <p className="font-sans text-xs sm:text-sm text-white/70 max-w-md font-light leading-relaxed">
               12+ years of specialized corporate expertise across statutory governance, human capital management, and enterprise advisory.
             </p>
           </div>
 
           {/* Founder Editorial Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-start">
             {/* Left: Portrait & Direct Contact Desk */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 group bg-[#22221D]">
+            <div className="lg:col-span-5 space-y-4 sm:space-y-6">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 group bg-[#22221D]">
                 <img
                   src="/images/anurag_sharma.jpg"
                   alt="Anurag Sharma - Founder & Managing Director"
-                  className="w-full aspect-[4/5] object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                  className="w-full aspect-[4/4.8] sm:aspect-[4/5] object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A16] via-[#1A1A16]/20 to-transparent opacity-90" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                  <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block mb-1 font-semibold">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A16] via-[#1A1A16]/30 to-transparent opacity-95" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
+                  <span className="font-mono text-[10px] sm:text-xs text-[#C9AF6B] uppercase tracking-widest block mb-0.5 sm:mb-1 font-semibold">
                     Founder & Managing Director
                   </span>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-bold text-white tracking-tight leading-snug">
                     Anurag Sharma
                   </h3>
-                  <p className="font-sans text-xs sm:text-sm text-white/80 mt-1 font-light">
+                  <p className="font-sans text-[11px] sm:text-sm text-white/80 mt-0.5 sm:mt-1 font-light leading-snug">
                     Human Capital Strategist & Corporate Growth Advisor
                   </p>
                 </div>
               </div>
 
               {/* Direct Executive Desk Contact Card */}
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3 font-mono text-xs">
-                <div className="text-white/60 uppercase tracking-widest text-[11px] font-semibold border-b border-white/10 pb-2">
+              <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 space-y-2.5 sm:space-y-3 font-mono text-[11px] sm:text-xs">
+                <div className="text-white/60 uppercase tracking-widest text-[10px] sm:text-[11px] font-semibold border-b border-white/10 pb-1.5 sm:pb-2">
                   Direct Executive Desk
                 </div>
                 <div className="flex items-center justify-between text-white/90">
@@ -280,7 +280,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                   </span>
                   <a
                     href="mailto:anuragsharma0120@gmail.com"
-                    className="text-[#C9AF6B] hover:underline truncate max-w-[200px]"
+                    className="text-[#C9AF6B] hover:underline truncate max-w-[170px] sm:max-w-[200px]"
                   >
                     anuragsharma0120@gmail.com
                   </a>
