@@ -1,10 +1,12 @@
 ﻿import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Check } from 'lucide-react';
+import { ChevronDown, Check, Users, ShieldCheck, Utensils, TrendingUp, FileText, Sparkles } from 'lucide-react';
 
 export interface ServiceOption {
   value: string;
   label: string;
   code: string;
+  tag: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export const SERVICE_OPTIONS: ServiceOption[] = [
@@ -12,31 +14,43 @@ export const SERVICE_OPTIONS: ServiceOption[] = [
     value: 'HR Services',
     label: 'HR Services & Payroll Management',
     code: '01',
+    tag: 'Workforce & Statutory',
+    icon: Users,
   },
   {
     value: 'Insurance & Loans',
-    label: 'Insurance Underwriting & Business Loans',
+    label: 'Insurance Underwriting & Business Debt',
     code: '02',
+    tag: 'Capital & Risk Advisory',
+    icon: ShieldCheck,
   },
   {
     value: 'Food Compliance',
     label: 'Food Compliance (FSSAI, DPCC, MCD)',
     code: '03',
+    tag: 'Statutory Safety & Licensing',
+    icon: Utensils,
   },
   {
     value: 'Digital Marketing',
-    label: 'Digital Marketing & Performance SEO',
+    label: 'Digital Marketing & Performance Brand Scale',
     code: '04',
+    tag: 'Digital Scale & Media',
+    icon: TrendingUp,
   },
   {
     value: 'Statutory Licensing',
-    label: 'Statutory Trade Licenses & Fire NOC',
+    label: 'Government Trade Permits & Fire NOC',
     code: '05',
+    tag: 'Government Regulatory Desk',
+    icon: FileText,
   },
   {
     value: 'General Advisory',
-    label: 'General Corporate Strategy & Advisory',
+    label: 'General Corporate Strategy & Consultation',
     code: '06',
+    tag: 'Executive Strategic Desk',
+    icon: Sparkles,
   },
 ];
 
@@ -50,7 +64,7 @@ interface CustomServiceSelectProps {
 export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
   value = '',
   onChange,
-  label = 'Select Practice Vertical *',
+  label = 'Select Practice Focus *',
   darkTheme = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,6 +91,8 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const SelectedIcon = selectedOption.icon;
+
   return (
     <div className="relative w-full" ref={dropdownRef}>
       {label && (
@@ -89,23 +105,34 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         </label>
       )}
 
-      {/* Selected Value Trigger Card (Clean, No Icon, Full Text Display) */}
+      {/* Selected Value Trigger Card (Rich Editorial Badge & Icon) */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full py-3 px-4 rounded-xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
+        className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
           darkTheme
             ? 'bg-[#1A1A16] border-white/20 text-white hover:border-[#C9AF6B]'
-            : 'bg-white border-[#1A1A16]/20 text-[#1A1A16] hover:border-[#0072EF]'
-        } ${isOpen ? (darkTheme ? 'border-[#C9AF6B] ring-2 ring-[#C9AF6B]/20' : 'border-[#0072EF] ring-2 ring-[#0072EF]/20') : ''}`}
+            : 'bg-white border-[#1A1A16]/15 text-[#1A1A16] hover:border-[#7C8B6F]'
+        } ${isOpen ? (darkTheme ? 'border-[#C9AF6B] ring-1 ring-[#C9AF6B]/30' : 'border-[#0072EF] ring-1 ring-[#0072EF]/30') : ''}`}
       >
-        <div className="flex items-center gap-2.5 overflow-hidden">
-          <span className="font-mono text-xs font-bold text-[#0072EF] shrink-0">
-            {selectedOption.code}.
-          </span>
-          <span className="font-sans text-xs sm:text-sm font-semibold truncate text-[#1A1A16]">
-            {selectedOption.label}
-          </span>
+        <div className="flex items-center gap-3 overflow-hidden">
+          <div
+            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+              darkTheme ? 'bg-white/10 text-[#C9AF6B]' : 'bg-[#0072EF]/10 text-[#0072EF]'
+            }`}
+          >
+            <SelectedIcon className="w-4 h-4" />
+          </div>
+          <div className="truncate">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[11px] font-bold text-[#0072EF]">
+                {selectedOption.code}.
+              </span>
+              <span className="font-sans text-xs sm:text-sm font-semibold truncate text-[#1A1A16]">
+                {selectedOption.label}
+              </span>
+            </div>
+          </div>
         </div>
 
         <ChevronDown
@@ -115,17 +142,18 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         />
       </button>
 
-      {/* Dropdown Options List: Clean Full-Width Rows, No Icons, 100% Readable */}
+      {/* Dropdown Options: Rich Editorial Luxury Cards with Icons & Category Badges */}
       {isOpen && (
         <div
-          className={`absolute top-full left-0 right-0 mt-1.5 z-50 rounded-xl border shadow-xl p-1.5 space-y-1 animate-in fade-in zoom-in-95 duration-150 ${
+          className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl overflow-y-auto max-h-72 p-2 space-y-1.5 animate-in fade-in zoom-in-95 duration-150 ${
             darkTheme
               ? 'bg-[#1A1A16] border-white/20 text-white'
-              : 'bg-[#FAF6EE] border-[#1A1A16]/20 text-[#1A1A16]'
+              : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16]'
           }`}
         >
           {SERVICE_OPTIONS.map((option) => {
             const isSelected = selectedOption.value === option.value;
+            const OptionIcon = option.icon;
 
             return (
               <button
@@ -135,29 +163,40 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`w-full py-2.5 px-3 rounded-lg text-left transition-all duration-150 flex items-center justify-between ${
+                className={`w-full p-2.5 sm:p-3 rounded-xl text-left transition-all duration-150 flex items-center justify-between ${
                   isSelected
                     ? darkTheme
-                      ? 'bg-white/15 text-[#C9AF6B] font-bold'
-                      : 'bg-[#1A1A16] text-[#F5F0E6] font-bold'
+                      ? 'bg-white/15 text-[#C9AF6B] border border-white/20'
+                      : 'bg-[#1A1A16] text-[#F5F0E6] shadow-sm'
                     : darkTheme
-                    ? 'hover:bg-white/5 text-white/85'
+                    ? 'hover:bg-white/5 text-white/80'
                     : 'hover:bg-[#ECE5D8] text-[#1A1A16]'
                 }`}
               >
-                <div className="flex items-center gap-2.5">
-                  <span
-                    className={`font-mono text-xs font-bold ${
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div
+                    className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                       isSelected
-                        ? 'text-[#0072EF]'
-                        : 'text-[#7C8B6F]'
+                        ? 'bg-[#0072EF] text-white'
+                        : darkTheme
+                        ? 'bg-white/10 text-[#C9AF6B]'
+                        : 'bg-[#1A1A16]/5 text-[#7C8B6F]'
                     }`}
                   >
-                    {option.code}.
-                  </span>
-                  <span className="font-sans text-xs sm:text-sm font-medium">
-                    {option.label}
-                  </span>
+                    <OptionIcon className="w-4 h-4" />
+                  </div>
+                  <div className="truncate">
+                    <span
+                      className={`font-mono text-[9px] uppercase tracking-wider block font-semibold ${
+                        isSelected ? 'text-[#C9AF6B]' : 'text-[#7C8B6F]'
+                      }`}
+                    >
+                      {option.code} // {option.tag}
+                    </span>
+                    <span className="font-sans text-xs sm:text-sm font-semibold block mt-0.5 truncate">
+                      {option.label}
+                    </span>
+                  </div>
                 </div>
 
                 {isSelected && (
