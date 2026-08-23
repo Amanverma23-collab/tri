@@ -13,7 +13,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
       <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#C9AF6B]/60 to-transparent" />
 
       {/* 1. Top Callout Strip */}
-      <div className="border-b border-white/10 bg-[#161B16]/80 py-10 sm:py-12">
+      <div className="hidden md:block border-b border-white/10 bg-[#161B16]/80 py-10 sm:py-12">
         <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
             <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block font-semibold">
