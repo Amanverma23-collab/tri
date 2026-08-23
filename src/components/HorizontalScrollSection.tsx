@@ -1,8 +1,8 @@
-﻿import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,48 +13,67 @@ export interface HorizontalCardItem {
   description: string;
   link?: string;
   tag?: string;
-  theme?: 'charcoal' | 'olive' | 'cream' | 'mustard';
+  theme?: 'cream' | 'charcoal' | 'olive' | 'mustard';
 }
 
-interface HorizontalScrollSectionProps {
+export type CardData = HorizontalCardItem;
+
+export interface HorizontalScrollSectionProps {
   id?: string;
-  marker?: string;
-  heading: string;
+  heading?: string;
   subheading?: string;
+  marker?: string;
   cards: HorizontalCardItem[];
 }
 
 export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = ({
-  id,
+  id = 'services-scroll',
+  heading = 'What We Do',
+  subheading = 'Scroll to navigate through our four core corporate verticals designed to safeguard and scale your enterprise.',
   marker = '02',
-  heading,
-  subheading,
   cards,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const percentRef = useRef<HTMLDivElement>(null);
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+
+  // Track active slide on mobile horizontal swipe
+  const handleMobileScroll = () => {
+    if (!mobileScrollRef.current) return;
+    const scrollLeft = mobileScrollRef.current.scrollLeft;
+    const cardWidth = mobileScrollRef.current.offsetWidth * 0.85;
+    const index = Math.round(scrollLeft / cardWidth);
+    setActiveMobileIndex(Math.min(Math.max(index, 0), cards.length - 1));
+  };
+
+  const scrollToMobileCard = (index: number) => {
+    if (!mobileScrollRef.current) return;
+    const cardWidth = mobileScrollRef.current.offsetWidth * 0.85;
+    mobileScrollRef.current.scrollTo({
+      left: index * cardWidth,
+      behavior: 'smooth',
+    });
+    setActiveMobileIndex(index);
+  };
 
   useEffect(() => {
-    if (!containerRef.current || !trackRef.current) return;
+    const container = containerRef.current;
+    const track = trackRef.current;
+    if (!container || !track) return;
 
     let tween: gsap.core.Tween | null = null;
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // Enable pinned horizontal scroll on viewports 768px and wider
+      // Only enable GSAP pinned scrub on Desktop (>= 768px)
       mm.add('(min-width: 768px)', () => {
-        const track = trackRef.current;
-        const container = containerRef.current;
-        if (!track || !container) return;
-
         const getScrollDistance = () => {
-          const trackWidth = track.scrollWidth;
-          const viewportWidth = window.innerWidth;
-          return Math.max(0, trackWidth - viewportWidth + (viewportWidth > 1200 ? 180 : 100));
+          return track.scrollWidth - window.innerWidth + 120;
         };
 
         tween = gsap.to(track, {
@@ -124,7 +143,7 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
     <section
       id={id}
       ref={containerRef}
-      className="relative w-full min-h-screen md:h-screen md:min-h-[640px] md:max-h-[960px] py-12 md:py-6 flex flex-col justify-between overflow-hidden bg-[#F5F0E6] border-y border-[#1A1A16]/10 select-none"
+      className="relative w-full py-10 md:py-6 md:min-h-screen md:h-screen md:max-h-[960px] flex flex-col justify-between overflow-hidden bg-[#F5F0E6] border-y border-[#1A1A16]/10 select-none"
     >
       {/* 1. Header Information Bar */}
       <div className="editorial-container pt-2 md:pt-4 pb-2 md:pb-3 w-full">
@@ -145,6 +164,8 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
                 {subheading}
               </p>
             )}
+            
+            {/* Desktop Traverse Indicator */}
             <div className="hidden md:flex items-center gap-3 font-mono text-xs text-[#1A1A16]">
               <span
                 ref={counterRef}
@@ -157,21 +178,109 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
                 <ArrowRight className="w-3 h-3 text-[#7C8B6F] animate-pulse" />
               </span>
             </div>
+
+            {/* Mobile Swipe Navigation Indicator & Controls */}
+            <div className="flex md:hidden items-center justify-between w-full pt-2">
+              <span className="font-mono text-[11px] text-[#7C8B6F] font-semibold tracking-wider">
+                SWIPE 0{activeMobileIndex + 1} / 0{cards.length}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => scrollToMobileCard(Math.max(0, activeMobileIndex - 1))}
+                  disabled={activeMobileIndex === 0}
+                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] disabled:opacity-30 disabled:cursor-not-allowed shadow-xs"
+                  aria-label="Previous service"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => scrollToMobileCard(Math.min(cards.length - 1, activeMobileIndex + 1))}
+                  disabled={activeMobileIndex === cards.length - 1}
+                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] disabled:opacity-30 disabled:cursor-not-allowed shadow-xs"
+                  aria-label="Next service"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Horizontal Scroll Track */}
-      <div className="w-full flex-1 flex items-center overflow-x-auto md:overflow-visible py-2 md:py-3 no-scrollbar">
+      {/* =========================================================================
+          2. MAIN TRACK: HORIZONTAL SWIPE ON MOBILE & GSAP PIN TRACK ON DESKTOP
+          ========================================================================= */}
+      
+      {/* Mobile Touch-Friendly Horizontal Slidebar */}
+      <div
+        ref={mobileScrollRef}
+        onScroll={handleMobileScroll}
+        className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-5 py-3 w-full no-scrollbar"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
+        {cards.map((card, idx) => (
+          <div
+            key={idx}
+            className={`w-[85vw] max-w-[340px] shrink-0 snap-center rounded-3xl p-6 border flex flex-col justify-between transition-all duration-300 ${getCardStyle(
+              card.theme
+            )}`}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-current/15">
+                <span className="font-serif text-3xl font-light">
+                  {card.number}
+                </span>
+                {card.tag && (
+                  <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-current/10 font-semibold tracking-wider flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>{card.tag}</span>
+                  </span>
+                )}
+              </div>
+
+              <h3 className="font-serif text-2xl font-bold tracking-tight mb-1.5 leading-snug">
+                {card.title}
+              </h3>
+
+              {card.subtitle && (
+                <p className="font-serif text-sm italic opacity-85 mb-2.5">
+                  {card.subtitle}
+                </p>
+              )}
+
+              <p className="font-sans text-xs opacity-80 leading-relaxed font-light line-clamp-3">
+                {card.description}
+              </p>
+            </div>
+
+            {card.link && (
+              <div className="pt-4 mt-3 border-t border-current/15">
+                <Link
+                  to={card.link}
+                  className="inline-flex items-center justify-between w-full font-mono text-[11px] uppercase tracking-wider font-semibold group"
+                >
+                  <span className="group-hover:underline underline-offset-4">Explore Vertical</span>
+                  <div className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center">
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </div>
+                </Link>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop GSAP Pinned Track */}
+      <div className="hidden md:flex w-full flex-1 items-center overflow-visible py-3">
         <div
           ref={trackRef}
-          className="flex flex-col md:flex-row items-stretch gap-5 md:gap-6 px-6 sm:px-12 md:pl-16 md:pr-32 w-full md:w-max will-change-transform"
+          className="flex flex-row items-stretch gap-6 pl-16 pr-32 w-max will-change-transform"
           style={{ transform: 'translate3d(0, 0, 0)' }}
         >
           {cards.map((card, idx) => (
             <div
               key={idx}
-              className={`w-full md:w-[420px] lg:w-[460px] max-h-[460px] rounded-3xl p-6 sm:p-8 md:p-9 border flex flex-col justify-between transition-transform duration-500 hover:-translate-y-2 shrink-0 ${getCardStyle(
+              className={`w-[420px] lg:w-[460px] max-h-[460px] rounded-3xl p-8 md:p-9 border flex flex-col justify-between transition-transform duration-500 hover:-translate-y-2 shrink-0 ${getCardStyle(
                 card.theme
               )}`}
               data-cursor="Explore"
@@ -224,15 +333,30 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
         </div>
       </div>
 
-      {/* 3. Bottom Progress Bar & Track Indicators */}
+      {/* 3. Mobile Indicator Dots */}
+      <div className="md:hidden flex items-center justify-center gap-2 pt-1 pb-1">
+        {cards.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollToMobileCard(idx)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              activeMobileIndex === idx
+                ? 'w-6 bg-[#1A1A16]'
+                : 'w-2 bg-[#1A1A16]/20'
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* 4. Desktop Bottom Progress Bar & Track Indicators */}
       <div className="editorial-container pb-2 md:pb-4 hidden md:block w-full">
         <div className="flex items-center justify-between gap-6">
-          <div className="flex items-center gap-2 font-mono text-[11px] text-[#7A7A70]">
+          <div className="flex items-center gap-2 font-mono text-[11px] text-[#7C8B6F]">
             <span className="w-2 h-2 rounded-full bg-[#7C8B6F]" />
             <span>HORIZONTAL TRAVERSAL</span>
           </div>
 
-          {/* Progress track line (GPU Scaled) */}
           <div className="flex-1 max-w-xs h-1 bg-[#1A1A16]/10 rounded-full overflow-hidden">
             <div
               ref={progressBarRef}
