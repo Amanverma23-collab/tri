@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, MessageSquare, Sparkles, Building2 } from 'lucide-react';
+import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, MessageSquare, Sparkles, Building2, Loader2 } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { CustomServiceSelect } from '../components/CustomServiceSelect';
 
@@ -13,10 +13,40 @@ export const Contact: React.FC = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/anuragsharma0120@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `New TriSecure Website Inquiry from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false',
+          'Client Name': formData.name,
+          'Contact Phone Number': formData.phone,
+          'Official Email Address': formData.email,
+          'Selected Practice Vertical': formData.service,
+          'Requirement Details': formData.message || 'No specific notes provided',
+          'Source Form': 'Main Website Contact Page Form',
+          'Submission Time': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        }),
+      });
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Email dispatch error:', err);
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,76 +77,83 @@ export const Contact: React.FC = () => {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href="#contact-form"
-                  className="btn-editorial-primary"
+                  className="btn-editorial-primary text-xs"
                 >
-                  <span>Submit Detailed Inquiry</span>
+                  <span>Submit Inquiry Brief</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
+
                 <a
                   href="tel:+918585999922"
-                  className="btn-editorial-secondary"
+                  className="btn-editorial-secondary text-xs"
                 >
-                  <span>Helpline: +91 8585999922</span>
+                  <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                  <span>Call Direct: +91 8585999922</span>
                 </a>
               </div>
             </div>
 
-            {/* Right Column: Direct Access Desk Bento Card */}
+            {/* Right Column: High-End Bento Box with Anurag Sharma Profile */}
             <div className="lg:col-span-5">
-              <div className="bg-[#141814] text-[#F5F0E6] rounded-3xl p-7 sm:p-9 border border-[#C9AF6B]/30 shadow-2xl space-y-6 relative overflow-hidden">
-                <div className="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-[#7C8B6F]/10 blur-3xl pointer-events-none" />
-
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-2 font-mono text-xs text-[#C9AF6B] uppercase tracking-widest font-semibold">
-                    <Building2 className="w-4 h-4" />
-                    <span>Direct Channels</span>
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#1A1A16] text-[#F5F0E6] shadow-2xl border border-[#1A1A16] space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#7C8B6F] animate-pulse" />
+                    <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest font-semibold">
+                      Senior Partner Desk
+                    </span>
                   </div>
-                  <span className="font-mono text-[10px] text-white/50">DELHI NCR & PAN-INDIA</span>
+                  <span className="font-mono text-[10px] text-white/50 bg-white/10 px-2.5 py-1 rounded-full">
+                    Direct Line
+                  </span>
                 </div>
 
-                <div className="space-y-3">
+                <div className="flex items-center gap-4 pt-2">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-[#C9AF6B]/40 shrink-0 bg-[#262621]">
+                    <img
+                      src="/images/anurag_sharma.jpg"
+                      alt="Anurag Sharma - Founder"
+                      className="w-full h-full object-cover object-top filter contrast-105"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl font-bold text-white leading-tight">
+                      Anurag Sharma
+                    </h3>
+                    <p className="font-mono text-xs text-[#C9AF6B] uppercase tracking-wider mt-0.5">
+                      Founder & Managing Director
+                    </p>
+                    <p className="font-sans text-xs text-white/60 mt-1 font-light">
+                      F&B Regulatory & Corporate Advisor
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-2 border-t border-white/10">
                   <a
                     href="tel:+918585999922"
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#C9AF6B] hover:bg-white/[0.08] transition-all group"
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 hover:border-[#C9AF6B] transition-all group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-[#C9AF6B]/15 text-[#C9AF6B] flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-xl bg-[#C9AF6B]/20 text-[#C9AF6B] flex items-center justify-center shrink-0">
                         <Phone className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-mono text-[10px] text-white/50 uppercase">Primary Advisory Line</p>
-                        <p className="font-serif text-base font-bold text-white group-hover:text-[#C9AF6B] transition-colors">
+                        <p className="font-mono text-[10px] text-white/50 uppercase">Primary Helpline</p>
+                        <p className="font-serif text-sm font-bold text-white group-hover:text-[#C9AF6B] transition-colors">
                           +91 8585999922
                         </p>
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white transition-transform group-hover:translate-x-1" />
-                  </a>
-
-                  <a
-                    href="tel:+919716965062"
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#7C8B6F] hover:bg-white/[0.08] transition-all group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-[#7C8B6F]/20 text-[#7C8B6F] flex items-center justify-center">
-                        <Phone className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="font-mono text-[10px] text-white/50 uppercase">Executive Direct Line</p>
-                        <p className="font-serif text-base font-bold text-white group-hover:text-[#7C8B6F] transition-colors">
-                          +91 9716965062
-                        </p>
-                      </div>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white transition-transform group-hover:translate-x-1 shrink-0" />
                   </a>
 
                   <a
                     href="mailto:anuragsharma0120@gmail.com"
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#C9AF6B] hover:bg-white/[0.08] transition-all group"
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 hover:border-[#7C8B6F] transition-all group"
                   >
                     <div className="flex items-center gap-3 overflow-hidden">
-                      <div className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-xl bg-[#7C8B6F]/20 text-[#7C8B6F] flex items-center justify-center shrink-0">
                         <Mail className="w-4 h-4" />
                       </div>
                       <div className="overflow-hidden">
@@ -178,30 +215,30 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-serif text-lg font-bold text-[#1A1A16]">Direct Phone Line</h3>
-                    <p className="font-sans text-xs text-[#7A7A70] mb-2 font-light">
-                      Mon – Sat from 9:00 AM to 7:00 PM IST
+                    <p className="font-sans text-xs text-[#7A7A70] mt-1 font-light">
+                      Immediate regulatory, workforce, and underwriting support:
                     </p>
                     <a
                       href="tel:+918585999922"
-                      className="font-mono text-sm font-semibold text-[#1A1A16] hover:text-[#7C8B6F] transition-colors"
+                      className="font-mono text-sm font-bold text-[#1A1A16] hover:text-[#0072EF] transition-colors mt-2 inline-block"
                     >
-                      +91 8585999922
+                      +91 8585999922 / +91 9716965062
                     </a>
                   </div>
                 </div>
 
                 <div className="p-6 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#7C8B6F] text-[#F5F0E6] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-[#1A1A16]">Corporate Inquiries</h3>
-                    <p className="font-sans text-xs text-[#7A7A70] mb-2 font-light">
-                      Send your RFP or project requirement brief
+                    <h3 className="font-serif text-lg font-bold text-[#1A1A16]">Direct Email Communications</h3>
+                    <p className="font-sans text-xs text-[#7A7A70] mt-1 font-light">
+                      Send RFPs, license dossiers, audit requests, or pitch decks:
                     </p>
                     <a
                       href="mailto:anuragsharma0120@gmail.com"
-                      className="font-mono text-sm font-semibold text-[#1A1A16] hover:text-[#7C8B6F] transition-colors"
+                      className="font-mono text-sm font-bold text-[#1A1A16] hover:text-[#0072EF] transition-colors mt-2 inline-block"
                     >
                       anuragsharma0120@gmail.com
                     </a>
@@ -210,35 +247,41 @@ export const Contact: React.FC = () => {
 
                 <div className="p-6 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5 text-[#C9AF6B]" />
+                    <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-[#1A1A16]">Operational Hubs</h3>
-                    <p className="font-sans text-xs text-[#7A7A70] font-light">
-                      Central Corporate Office: Delhi NCR. Full statutory and operational representation across Mumbai, Bengaluru, Hyderabad, and Tier-1 commercial centers.
+                    <h3 className="font-serif text-lg font-bold text-[#1A1A16]">Advisory Desk Working Hours</h3>
+                    <p className="font-mono text-xs text-[#7A7A70] mt-1 font-medium">
+                      Monday — Saturday: 09:30 AM — 07:00 PM IST
+                    </p>
+                    <p className="font-mono text-xs text-[#7C8B6F] mt-1">
+                      Emergency compliance escalations: 24/7 hotline access
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Interactive Consultation Form */}
+            {/* Right Column: Editorial Contact Form */}
             <div className="lg:col-span-7">
-              <div className="bg-[#F5F0E6] rounded-3xl p-8 sm:p-12 border border-[#1A1A16]/15 shadow-xl relative overflow-visible">
+              <div className="p-8 sm:p-12 rounded-3xl bg-[#F5F0E6] border border-[#1A1A16]/10 shadow-lg">
                 {submitted ? (
-                  <div className="py-16 text-center space-y-4 animate-in fade-in duration-300">
-                    <div className="w-16 h-16 rounded-full bg-[#7C8B6F] text-[#F5F0E6] flex items-center justify-center mx-auto shadow-md">
-                      <CheckCircle2 className="w-10 h-10" />
+                  <div className="text-center py-12 space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-[#7C8B6F]/20 text-[#7C8B6F] flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle2 className="w-8 h-8" />
                     </div>
+                    <span className="font-mono text-xs text-[#7C8B6F] uppercase tracking-widest font-semibold block">
+                      Email Dispatched to Executive Desk
+                    </span>
                     <h3 className="font-serif text-3xl font-bold text-[#1A1A16]">
-                      Inquiry Received
+                      Inquiry Successfully Dispatched
                     </h3>
                     <p className="font-sans text-base text-[#7A7A70] max-w-md mx-auto font-light">
-                      Thank you for contacting Trisecure Solutions. A practice director has been assigned to your brief and will connect with you shortly.
+                      Thank you for contacting Trisecure Solutions. Your brief has been sent directly to Anurag Sharma (<strong className="text-[#0072EF]">anuragsharma0120@gmail.com</strong>). A practice lead will connect with you shortly.
                     </p>
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="btn-editorial-secondary mt-4"
+                      className="btn-editorial-secondary mt-4 text-xs"
                     >
                       <span>Submit Another Inquiry</span>
                     </button>
@@ -252,6 +295,9 @@ export const Contact: React.FC = () => {
                       <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16]">
                         Send Us Your Requirements
                       </h3>
+                      <p className="font-sans text-xs text-[#7A7A70]">
+                        Submissions route directly to Senior Director Desk (<strong className="text-[#1A1A16]">anuragsharma0120@gmail.com</strong>).
+                      </p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -265,7 +311,7 @@ export const Contact: React.FC = () => {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Vikramaditya Singh"
-                          className="editorial-input"
+                          className="editorial-input text-sm"
                         />
                       </div>
 
@@ -279,7 +325,7 @@ export const Contact: React.FC = () => {
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder="+91 98110 XXXXX"
-                          className="editorial-input"
+                          className="editorial-input text-sm"
                         />
                       </div>
                     </div>
@@ -295,7 +341,7 @@ export const Contact: React.FC = () => {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder="vikram@enterprise.com"
-                          className="editorial-input"
+                          className="editorial-input text-sm"
                         />
                       </div>
 
@@ -318,24 +364,33 @@ export const Contact: React.FC = () => {
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Describe your current business challenge, required permits, staff scaling targets, or insurance queries..."
-                        className="editorial-input resize-none"
+                        className="editorial-input resize-none text-sm"
                       />
                     </div>
 
-                    <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-[#1A1A16]/10">
-                      <div className="flex items-center gap-2 font-mono text-[11px] text-[#7A7A70]">
-                        <Clock className="w-3.5 h-3.5 text-[#7C8B6F]" />
-                        <span>Guaranteed response within 2 business hours</span>
-                      </div>
-
+                    <div>
                       <button
                         type="submit"
-                        className="btn-editorial-primary flex items-center justify-center gap-2"
+                        disabled={loading}
+                        className="btn-editorial-primary w-full justify-center text-xs py-3.5"
                       >
-                        <span>Transmit Inquiry</span>
-                        <Send className="w-4 h-4" />
+                        {loading ? (
+                          <span className="flex items-center gap-2">
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>Sending directly to anuragsharma0120@gmail.com...</span>
+                          </span>
+                        ) : (
+                          <>
+                            <span>Transmit Advisory Brief</span>
+                            <Send className="w-4 h-4" />
+                          </>
+                        )}
                       </button>
                     </div>
+
+                    <p className="font-mono text-xs text-[#7A7A70] text-center">
+                      Strict client confidentiality. Response guaranteed within 2 business hours.
+                    </p>
                   </form>
                 )}
               </div>

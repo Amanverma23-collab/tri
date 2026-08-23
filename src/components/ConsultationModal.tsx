@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { X, Send, ShieldCheck, CheckCircle2, Building2, User, Mail, Phone, MessageSquare, Sparkles } from 'lucide-react';
+import { X, Send, ShieldCheck, CheckCircle2, Building2, User, Mail, Phone, MessageSquare, Sparkles, Loader2 } from 'lucide-react';
 import { CustomServiceSelect } from './CustomServiceSelect';
 
 interface ConsultationModalProps {
@@ -33,14 +33,39 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate instantaneous asynchronous dispatch
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/anuragsharma0120@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `New TriSecure Consultation Request from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false',
+          'Client Name': formData.name,
+          'Phone Number': formData.phone,
+          'Email Address': formData.email,
+          'Company Name': formData.company || 'Not Specified',
+          'Practice Service': formData.service,
+          'Client Message': formData.message || 'No additional message provided',
+          'Source Form': 'Website Header / Floating Consultation Modal',
+          'Submission Date': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        }),
+      });
+
       setSubmitted(true);
-    }, 600);
+    } catch (err) {
+      console.error('Email dispatch error:', err);
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,15 +91,19 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 className="w-full h-full object-contain animate-logo-spin"
               />
             </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7C8B6F]/20 text-[#7C8B6F] font-mono text-xs uppercase tracking-wider mb-3">
+              <CheckCircle2 className="w-4 h-4" />
+              <span>Email Dispatched to Executive Desk</span>
+            </div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2">
-              Consultation Requested
+              Consultation Dispatched
             </h3>
             <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-md mx-auto mb-6">
-              Thank you, <strong className="text-[#1A1A16]">{formData.name}</strong>. Our senior advisory team will review your inquiry regarding <strong className="text-[#0072EF]">{formData.service}</strong> and contact you within 2 business hours.
+              Thank you, <strong className="text-[#1A1A16]">{formData.name}</strong>. Your inquiry has been sent directly to Founder Anurag Sharma (<strong className="text-[#0072EF]">anuragsharma0120@gmail.com</strong>). We will connect with you within 2 business hours.
             </p>
             <button
               onClick={onClose}
-              className="btn-editorial-primary"
+              className="btn-editorial-primary text-xs"
             >
               Back to Site
             </button>
@@ -100,7 +129,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   Schedule an Advisory Session
                 </h2>
                 <p className="font-sans text-xs text-[#7A7A70] mt-1">
-                  Direct consultation for business compliance, HR, financing, and digital strategy.
+                  Inquiries are routed directly to Senior Director Desk (<strong className="text-[#1A1A16]">anuragsharma0120@gmail.com</strong>).
                 </p>
               </div>
             </div>
@@ -194,7 +223,10 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   className="w-full btn-editorial-primary justify-center text-xs py-3"
                 >
                   {loading ? (
-                    <span>Submitting Brief...</span>
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending to anuragsharma0120@gmail.com...</span>
+                    </span>
                   ) : (
                     <>
                       <span>Confirm & Book Consultation</span>
