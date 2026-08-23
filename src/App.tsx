@@ -1,9 +1,20 @@
-﻿import React, { useState, Suspense, lazy } from 'react';
+﻿import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ShieldCheck } from 'lucide-react';
+
+// Direct Page Imports (Zero loading screen, instant page paint)
+import { Home } from './pages/Home';
+import { About } from './pages/About';
+import { ServicesHub } from './pages/ServicesHub';
+import { HRServices } from './pages/services/HRServices';
+import { InsuranceLoansServices } from './pages/services/InsuranceLoansServices';
+import { FoodComplianceServices } from './pages/services/FoodComplianceServices';
+import { DigitalMarketingServices } from './pages/services/DigitalMarketingServices';
+import { Licenses } from './pages/Licenses';
+import { Pricing } from './pages/Pricing';
+import { Contact } from './pages/Contact';
 
 // Navigation & Global UI Components
 import { Navbar } from './components/Navbar';
@@ -13,37 +24,7 @@ import { ConsultationModal } from './components/ConsultationModal';
 import { CustomCursor } from './components/CustomCursor';
 import { SmoothScrollProvider } from './components/SmoothScrollProvider';
 
-// Lazy-loaded routes for optimal performance
-const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })));
-const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
-const ServicesHub = lazy(() => import('./pages/ServicesHub').then((m) => ({ default: m.ServicesHub })));
-const HRServices = lazy(() => import('./pages/services/HRServices').then((m) => ({ default: m.HRServices })));
-const InsuranceLoansServices = lazy(() =>
-  import('./pages/services/InsuranceLoansServices').then((m) => ({ default: m.InsuranceLoansServices }))
-);
-const FoodComplianceServices = lazy(() =>
-  import('./pages/services/FoodComplianceServices').then((m) => ({ default: m.FoodComplianceServices }))
-);
-const DigitalMarketingServices = lazy(() =>
-  import('./pages/services/DigitalMarketingServices').then((m) => ({ default: m.DigitalMarketingServices }))
-);
-const Licenses = lazy(() => import('./pages/Licenses').then((m) => ({ default: m.Licenses })));
-const Pricing = lazy(() => import('./pages/Pricing').then((m) => ({ default: m.Pricing })));
-const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })));
-
 gsap.registerPlugin(ScrollTrigger);
-
-// Minimal Branded Route Loading Fallback
-const PageLoadingFallback = () => (
-  <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 text-[#1A1A16]">
-    <div className="w-12 h-12 rounded-xl bg-[#7C8B6F] flex items-center justify-center mb-4 animate-pulse">
-      <ShieldCheck className="w-6 h-6 text-[#1A1A16]" />
-    </div>
-    <span className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F]">
-      TRISECURE // Loading Page
-    </span>
-  </div>
-);
 
 function AnimatedRoutes({
   onOpenConsultation,
@@ -54,30 +35,28 @@ function AnimatedRoutes({
 
   return (
     <AnimatePresence mode="wait">
-      <Suspense fallback={<PageLoadingFallback />}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home onOpenConsultation={onOpenConsultation} />} />
-          <Route path="/about" element={<About onOpenConsultation={onOpenConsultation} />} />
-          <Route path="/services" element={<ServicesHub onOpenConsultation={onOpenConsultation} />} />
-          <Route path="/services/hr" element={<HRServices onOpenConsultation={onOpenConsultation} />} />
-          <Route
-            path="/services/insurance-loans"
-            element={<InsuranceLoansServices onOpenConsultation={onOpenConsultation} />}
-          />
-          <Route
-            path="/services/food-compliance"
-            element={<FoodComplianceServices onOpenConsultation={onOpenConsultation} />}
-          />
-          <Route
-            path="/services/digital-marketing"
-            element={<DigitalMarketingServices onOpenConsultation={onOpenConsultation} />}
-          />
-          <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
-          <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Home onOpenConsultation={onOpenConsultation} />} />
-        </Routes>
-      </Suspense>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home onOpenConsultation={onOpenConsultation} />} />
+        <Route path="/about" element={<About onOpenConsultation={onOpenConsultation} />} />
+        <Route path="/services" element={<ServicesHub onOpenConsultation={onOpenConsultation} />} />
+        <Route path="/services/hr" element={<HRServices onOpenConsultation={onOpenConsultation} />} />
+        <Route
+          path="/services/insurance-loans"
+          element={<InsuranceLoansServices onOpenConsultation={onOpenConsultation} />}
+        />
+        <Route
+          path="/services/food-compliance"
+          element={<FoodComplianceServices onOpenConsultation={onOpenConsultation} />}
+        />
+        <Route
+          path="/services/digital-marketing"
+          element={<DigitalMarketingServices onOpenConsultation={onOpenConsultation} />}
+        />
+        <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
+        <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Home onOpenConsultation={onOpenConsultation} />} />
+      </Routes>
     </AnimatePresence>
   );
 }
