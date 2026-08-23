@@ -352,6 +352,7 @@ export const Contact: React.FC = () => {
                           onChange={(val) => setFormData({ ...formData, service: val })}
                           label="Practice Vertical *"
                           hideTags={true}
+                          hideIcons={true}
                         />
                       </div>
                     </div>

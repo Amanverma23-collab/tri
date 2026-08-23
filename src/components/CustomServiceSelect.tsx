@@ -60,6 +60,7 @@ interface CustomServiceSelectProps {
   label?: string;
   darkTheme?: boolean;
   hideTags?: boolean;
+  hideIcons?: boolean;
 }
 
 export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
@@ -68,6 +69,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
   label = 'Select Practice Focus *',
   darkTheme = false,
   hideTags = false,
+  hideIcons = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -118,13 +120,15 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         } ${isOpen ? (darkTheme ? 'border-[#C9AF6B] ring-1 ring-[#C9AF6B]/30' : 'border-[#0072EF] ring-1 ring-[#0072EF]/30') : ''}`}
       >
         <div className="flex items-center gap-3 overflow-hidden">
-          <div
-            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-              darkTheme ? 'bg-white/10 text-[#C9AF6B]' : 'bg-[#0072EF]/10 text-[#0072EF]'
-            }`}
-          >
-            <SelectedIcon className="w-4 h-4" />
-          </div>
+          {!hideIcons && (
+            <div
+              className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                darkTheme ? 'bg-white/10 text-[#C9AF6B]' : 'bg-[#0072EF]/10 text-[#0072EF]'
+              }`}
+            >
+              <SelectedIcon className="w-4 h-4" />
+            </div>
+          )}
           <div className="truncate">
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs font-bold text-[#0072EF]">
@@ -144,7 +148,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         />
       </button>
 
-      {/* 2 SERVICES PER ROW (2-COLUMN GRID) */}
+      {/* Dropdown Options */}
       {isOpen && (
         <div
           className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl p-2 animate-in fade-in zoom-in-95 duration-150 ${
@@ -153,7 +157,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
               : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16]'
           }`}
         >
-          <div className="grid grid-cols-2 gap-2">
+          <div className={hideIcons ? "grid grid-cols-1 sm:grid-cols-2 gap-1.5" : "grid grid-cols-2 gap-2"}>
             {SERVICE_OPTIONS.map((option) => {
               const isSelected = selectedOption.value === option.value;
               const OptionIcon = option.icon;
@@ -177,17 +181,21 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0 overflow-hidden">
-                    <div
-                      className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                        isSelected
-                          ? 'bg-[#0072EF] text-white'
-                          : darkTheme
-                          ? 'bg-white/10 text-[#C9AF6B]'
-                          : 'bg-[#1A1A16]/5 text-[#7C8B6F]'
-                      }`}
-                    >
-                      <OptionIcon className="w-3.5 h-3.5" />
-                    </div>
+                    {/* Render Icon only if hideIcons is false */}
+                    {!hideIcons && (
+                      <div
+                        className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                          isSelected
+                            ? 'bg-[#0072EF] text-white'
+                            : darkTheme
+                            ? 'bg-white/10 text-[#C9AF6B]'
+                            : 'bg-[#1A1A16]/5 text-[#7C8B6F]'
+                        }`}
+                      >
+                        <OptionIcon className="w-3.5 h-3.5" />
+                      </div>
+                    )}
+
                     <div className="min-w-0 overflow-hidden">
                       {/* Render tag only if hideTags is false */}
                       {!hideTags && (
@@ -201,8 +209,8 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                           {option.code} // {option.tag}
                         </span>
                       )}
-                      <span className={`font-sans text-xs font-semibold block truncate leading-snug ${!hideTags ? 'mt-0.5' : ''}`}>
-                        {option.label}
+                      <span className={`font-sans text-xs font-semibold block leading-snug ${!hideTags ? 'mt-0.5' : ''}`}>
+                        {hideIcons ? `${option.code}. ${option.label}` : option.label}
                       </span>
                     </div>
                   </div>
