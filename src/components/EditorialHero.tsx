@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, Phone } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface EditorialHeroProps {
   onOpenConsultation: () => void;
@@ -84,7 +84,7 @@ export const EditorialHero: React.FC<EditorialHeroProps> = ({ onOpenConsultation
           </div>
 
           {/* =========================================================================
-              RIGHT COLUMN: Pure Framed Editorial Photography with Minimal Floating Pill (5 cols)
+              RIGHT COLUMN: Pure Framed Editorial Photography (5 cols)
               ========================================================================= */}
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#1A1A16]/15 group aspect-[4/5] bg-[#1A1A16]">
@@ -95,31 +95,6 @@ export const EditorialHero: React.FC<EditorialHeroProps> = ({ onOpenConsultation
                 className="w-full h-full object-cover object-center filter contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="eager"
               />
-
-              {/* Minimalist Floating Executive Status Badge */}
-              <div className="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-[#1A1A16]/85 backdrop-blur-md border border-white/15 text-[#F5F0E6] flex items-center justify-between shadow-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#0072EF]/20 text-[#0072EF] flex items-center justify-center shrink-0 border border-[#0072EF]/30">
-                    <ShieldCheck className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[10px] text-[#C9AF6B] uppercase tracking-wider block font-semibold">
-                      Direct Executive Desk
-                    </span>
-                    <a href="tel:+918585999922" className="font-sans text-xs text-white font-medium hover:text-[#0072EF] transition-colors">
-                      +91 8585999922
-                    </a>
-                  </div>
-                </div>
-
-                <button
-                  onClick={onOpenConsultation}
-                  className="inline-flex items-center gap-1.5 font-mono text-[11px] text-[#0072EF] font-semibold hover:underline"
-                >
-                  <span>Connect</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
             </div>
           </div>
 
