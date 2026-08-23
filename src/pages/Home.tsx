@@ -5,7 +5,6 @@ import { EditorialHero } from '../components/EditorialHero';
 import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
-import { TextEffect } from '../components/core/text-effect';
 
 interface HomeProps {
   onOpenConsultation: (service?: string) => void;
@@ -74,7 +73,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         <div className="editorial-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
-              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-3 block">
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-3 block font-semibold">
                 // Regulatory Desk
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] leading-tight">
@@ -107,189 +106,109 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
-      {/* 4. WHY CHOOSE US: Asymmetric Editorial Bento Grid with Scroll Reveal */}
+      {/* 4. WHY CHOOSE US: Asymmetric Editorial Bento Grid with Perfect Baseline Alignment */}
       <section className="py-24 sm:py-32 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-3 block">
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-3 block font-semibold">
                 // Institutional Advantage
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
                 Why Choose TriSecure
               </h2>
             </div>
-            <p className="font-sans text-base text-[#7A7A70] max-w-md">
+            <p className="font-sans text-base text-[#7A7A70] max-w-md font-light">
               We combine deep sector knowledge with institutional rigor to provide holistic business advisory.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
             {/* Card 1: Large Span (7 cols) - Dark Charcoal Theme */}
-            <div className="md:col-span-7 bg-[#1A1A16] text-[#F5F0E6] rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/10 flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs text-[#C9AF6B] tracking-widest font-semibold">
+            <div className="md:col-span-7 bg-[#1A1A16] text-[#F5F0E6] rounded-3xl p-8 sm:p-10 shadow-2xl border border-white/10 flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
+              <div className="h-10 flex items-center justify-between mb-6">
+                <span className="font-mono text-xs text-[#C9AF6B] tracking-widest font-semibold uppercase">
                   01 // DOMAIN DEPTH
                 </span>
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Award className="w-5 h-5 text-[#C9AF6B]" />
                 </div>
               </div>
-              <div>
-                <TextEffect
-                  per="char"
-                  delay={0.1}
-                  className="font-serif text-3xl sm:text-4xl font-bold mb-4 text-white"
-                  variants={{
-                    container: {
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: { staggerChildren: 0.03 },
-                      },
-                    },
-                    item: {
-                      hidden: { opacity: 0, rotateX: 90, y: 10 },
-                      visible: { opacity: 1, rotateX: 0, y: 0, transition: { duration: 0.25 } },
-                    },
-                  }}
-                >
-                  Expertise
-                </TextEffect>
-                <TextEffect
-                  per="word"
-                  delay={0.25}
-                  preset="fade"
-                  className="font-sans text-base sm:text-lg text-[#F5F0E6]/85 leading-relaxed font-light block"
-                >
+              <div className="flex-1 flex flex-col justify-start">
+                <div className="min-h-[3.6rem] sm:min-h-[4.2rem] flex items-start mb-3">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight break-normal">
+                    Expertise & Domain Mastery
+                  </h3>
+                </div>
+                <p className="font-sans text-base sm:text-lg text-[#F5F0E6]/85 leading-relaxed font-light">
                   Decades of combined experience in HR, Insurance, Food Compliance and Digital Marketing services. Our seasoned specialists anticipate regulatory shifts before they impact your operations.
-                </TextEffect>
+                </p>
               </div>
             </div>
 
             {/* Card 2: Small Span (5 cols) - Cream Theme */}
-            <div className="md:col-span-5 bg-[#EFE9DC] text-[#1A1A16] rounded-3xl p-8 sm:p-12 border border-[#1A1A16]/10 shadow-xl flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs text-[#7C8B6F] tracking-widest font-semibold">
+            <div className="md:col-span-5 bg-[#EFE9DC] text-[#1A1A16] rounded-3xl p-8 sm:p-10 border border-[#1A1A16]/10 shadow-xl flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
+              <div className="h-10 flex items-center justify-between mb-6">
+                <span className="font-mono text-xs text-[#7C8B6F] tracking-widest font-semibold uppercase">
                   02 // ALL-IN-ONE
                 </span>
                 <div className="w-10 h-10 rounded-full bg-[#1A1A16]/10 flex items-center justify-center">
                   <ShieldCheck className="w-5 h-5 text-[#7C8B6F]" />
                 </div>
               </div>
-              <div>
-                <TextEffect
-                  per="char"
-                  delay={0.15}
-                  className="font-serif text-3xl sm:text-4xl font-bold mb-4 text-[#1A1A16]"
-                  variants={{
-                    container: {
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: { staggerChildren: 0.03 },
-                      },
-                    },
-                    item: {
-                      hidden: { opacity: 0, rotateX: 90, y: 10 },
-                      visible: { opacity: 1, rotateX: 0, y: 0, transition: { duration: 0.25 } },
-                    },
-                  }}
-                >
-                  Comprehensive Services
-                </TextEffect>
-                <TextEffect
-                  per="word"
-                  delay={0.3}
-                  preset="fade"
-                  className="font-sans text-sm sm:text-base text-[#7A7A70] leading-relaxed font-light block"
-                >
+              <div className="flex-1 flex flex-col justify-start">
+                <div className="min-h-[3.6rem] sm:min-h-[4.2rem] flex items-start mb-3">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1A1A16] leading-tight break-normal">
+                    Comprehensive Services
+                  </h3>
+                </div>
+                <p className="font-sans text-sm sm:text-base text-[#7A7A70] leading-relaxed font-light">
                   A one-stop solution for all your business needs. Eliminate fragmented vendor management with an integrated partner.
-                </TextEffect>
+                </p>
               </div>
             </div>
 
             {/* Card 3: Small Span (5 cols) - Olive Green Theme */}
-            <div className="md:col-span-5 bg-[#7C8B6F] text-[#F5F0E6] rounded-3xl p-8 sm:p-12 shadow-xl border border-[#637157] flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs text-[#F5F0E6]/90 tracking-widest font-semibold">
+            <div className="md:col-span-5 bg-[#7C8B6F] text-[#F5F0E6] rounded-3xl p-8 sm:p-10 shadow-xl border border-[#637157] flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
+              <div className="h-10 flex items-center justify-between mb-6">
+                <span className="font-mono text-xs text-[#F5F0E6]/90 tracking-widest font-semibold uppercase">
                   03 // TAILORED STRATEGY
                 </span>
                 <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-[#F5F0E6]" />
                 </div>
               </div>
-              <div>
-                <TextEffect
-                  per="char"
-                  delay={0.2}
-                  className="font-serif text-3xl sm:text-4xl font-bold mb-4 text-white"
-                  variants={{
-                    container: {
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: { staggerChildren: 0.03 },
-                      },
-                    },
-                    item: {
-                      hidden: { opacity: 0, rotateX: 90, y: 10 },
-                      visible: { opacity: 1, rotateX: 0, y: 0, transition: { duration: 0.25 } },
-                    },
-                  }}
-                >
-                  Client-Centric Approach
-                </TextEffect>
-                <TextEffect
-                  per="word"
-                  delay={0.35}
-                  preset="fade"
-                  className="font-sans text-sm sm:text-base text-[#F5F0E6]/90 leading-relaxed font-light block"
-                >
+              <div className="flex-1 flex flex-col justify-start">
+                <div className="min-h-[3.6rem] sm:min-h-[4.2rem] flex items-start mb-3">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight break-normal">
+                    Client-Centric Approach
+                  </h3>
+                </div>
+                <p className="font-sans text-sm sm:text-base text-[#F5F0E6]/90 leading-relaxed font-light">
                   Personalized service tailored to your unique requirements. We mold our solutions around your enterprise DNA.
-                </TextEffect>
+                </p>
               </div>
             </div>
 
             {/* Card 4: Large Span (7 cols) - Alabaster Theme */}
-            <div className="md:col-span-7 bg-[#FAF6EE] text-[#1A1A16] rounded-3xl p-8 sm:p-12 border border-[#1A1A16]/15 shadow-2xl flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
-              <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs text-[#1A1A16]/75 tracking-widest font-semibold">
+            <div className="md:col-span-7 bg-[#FAF6EE] text-[#1A1A16] rounded-3xl p-8 sm:p-10 border border-[#1A1A16]/15 shadow-2xl flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
+              <div className="h-10 flex items-center justify-between mb-6">
+                <span className="font-mono text-xs text-[#1A1A16]/75 tracking-widest font-semibold uppercase">
                   04 // PROVEN TRUST
                 </span>
                 <div className="w-10 h-10 rounded-full bg-[#7C8B6F]/15 flex items-center justify-center">
                   <CheckCircle2 className="w-5 h-5 text-[#7C8B6F]" />
                 </div>
               </div>
-              <div>
-                <TextEffect
-                  per="char"
-                  delay={0.25}
-                  className="font-serif text-3xl sm:text-4xl font-bold mb-4 text-[#1A1A16]"
-                  variants={{
-                    container: {
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: { staggerChildren: 0.03 },
-                      },
-                    },
-                    item: {
-                      hidden: { opacity: 0, rotateX: 90, y: 10 },
-                      visible: { opacity: 1, rotateX: 0, y: 0, transition: { duration: 0.25 } },
-                    },
-                  }}
-                >
-                  Reliability
-                </TextEffect>
-                <TextEffect
-                  per="word"
-                  delay={0.4}
-                  preset="fade"
-                  className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light block"
-                >
+              <div className="flex-1 flex flex-col justify-start">
+                <div className="min-h-[3.6rem] sm:min-h-[4.2rem] flex items-start mb-3">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1A1A16] leading-tight break-normal">
+                    Reliability & Execution
+                  </h3>
+                </div>
+                <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light">
                   Trusted by businesses across various industries for our integrity and excellence. Zero missed renewal deadlines and verified compliance audits.
-                </TextEffect>
+                </p>
               </div>
             </div>
           </div>
