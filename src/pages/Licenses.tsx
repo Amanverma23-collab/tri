@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, FileCheck, Clock, MapPin, AlertCircle, Sparkles, Building2, Store, Factory, Utensils } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, FileCheck, Clock, MapPin, AlertCircle, Building2, Store, Factory, Utensils } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 

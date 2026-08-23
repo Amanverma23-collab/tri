@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, ShieldCheck, Mail, Phone, MapPin, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ShieldCheck, Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
 
 interface FooterProps {
   onOpenConsultation: (service?: string) => void;

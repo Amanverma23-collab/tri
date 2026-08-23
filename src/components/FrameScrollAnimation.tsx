@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { ArrowUpRight, ArrowDown, ShieldCheck, Sparkles, Building2, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, ArrowDown, ShieldCheck, Building2, CheckCircle2 } from 'lucide-react';
 
 interface FrameScrollAnimationProps {
   onOpenConsultation: (service?: string) => void;

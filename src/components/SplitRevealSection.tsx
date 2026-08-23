@@ -1,6 +1,6 @@
 ﻿import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -216,7 +216,7 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
       <div className="relative z-10 w-full editorial-container flex flex-col justify-center py-6">
         <div className="max-w-5xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#7C8B6F]/15 text-[#7C8B6F] font-mono text-xs uppercase tracking-widest mb-4 border border-[#7C8B6F]/30">
-            <Sparkles className="w-3.5 h-3.5" />
+            <ShieldCheck className="w-3.5 h-3.5" />
             <span>{badge}</span>
           </div>
 

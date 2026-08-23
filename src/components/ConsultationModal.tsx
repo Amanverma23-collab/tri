@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { X, Send, ShieldCheck, CheckCircle2, Building2, User, Mail, Phone, MessageSquare, Sparkles, Loader2 } from 'lucide-react';
+import { X, Send, ShieldCheck, CheckCircle2, Building2, User, Mail, Phone, MessageSquare, Loader2 } from 'lucide-react';
 import { CustomServiceSelect } from './CustomServiceSelect';
 
 interface ConsultationModalProps {

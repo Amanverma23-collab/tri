@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { serviceVerticals, ServiceItem } from '../data/servicesData';
-import { ArrowUpRight, Check, Clock, FileCheck2, ArrowRight, TrendingUp, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Check, Clock, FileCheck2, ArrowRight, TrendingUp } from 'lucide-react';
 
 interface DigitalMarketingSectionProps {
   onOpenConsultation: (service?: string) => void;

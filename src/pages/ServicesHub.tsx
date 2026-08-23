@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, Users, Landmark, Utensils, Megaphone, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Users, Landmark, Utensils, Megaphone, ShieldCheck } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Sparkles, Award } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Award } from 'lucide-react';
 import { EditorialHero } from '../components/EditorialHero';
 import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
@@ -183,7 +183,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
                   03 // TAILORED STRATEGY
                 </span>
                 <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-[#F5F0E6]" />
+                  <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
               </div>
               <div className="flex-1 flex flex-col justify-start">

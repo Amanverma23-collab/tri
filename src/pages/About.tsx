@@ -11,7 +11,6 @@ import {
   Phone,
   Mail,
   ArrowRight,
-  Sparkles,
   CheckCircle2,
   Lock,
   Briefcase,
@@ -205,7 +204,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/10 pb-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C9AF6B]/15 text-[#C9AF6B] font-mono text-xs uppercase tracking-widest mb-3 border border-[#C9AF6B]/30">
-                <Sparkles className="w-3.5 h-3.5" />
+                <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Executive Leadership</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">

@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, Clock, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
 
 interface EditorialCtaBannerProps {
   tagline?: string;
@@ -35,7 +35,7 @@ export const EditorialCtaBanner: React.FC<EditorialCtaBannerProps> = ({
             {/* Left Column: Heading, Pitch & Action Buttons (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#C9AF6B] font-mono text-xs uppercase tracking-widest border border-white/10">
-                <Sparkles className="w-3.5 h-3.5" />
+                <ShieldCheck className="w-3.5 h-3.5" />
                 <span>{tagline}</span>
               </div>
 

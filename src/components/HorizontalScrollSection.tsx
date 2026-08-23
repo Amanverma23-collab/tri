@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ShieldCheck } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -184,7 +184,7 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
                   </span>
                   {card.tag && (
                     <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-current/10 font-semibold tracking-wider flex items-center gap-1">
-                      <Sparkles className="w-2.5 h-2.5 text-[#C9AF6B]" />
+                      <ShieldCheck className="w-3.5 h-3.5" />
                       <span>{card.tag}</span>
                     </span>
                   )}

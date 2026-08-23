@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
-import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, MessageSquare, Sparkles, Building2, Loader2 } from 'lucide-react';
+import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, MessageSquare, Building2, Loader2 } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { CustomServiceSelect } from '../components/CustomServiceSelect';
 
