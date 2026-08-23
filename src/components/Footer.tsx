@@ -35,9 +35,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
       </div>
 
       {/* =========================================================================
-          MOBILE-ONLY VIEW (< md): Clean Compact 1-Row Matrix
+          MOBILE-ONLY VIEW (< md): Clean Compact 1-Row Matrix & Giant TRISECURE Banner
           ========================================================================= */}
-      <div className="md:hidden editorial-container pt-10 pb-8 space-y-7">
+      <div className="md:hidden editorial-container pt-10 pb-8 space-y-6">
         {/* Mobile Brand Wordmark */}
         <div className="space-y-3">
           <Link to="/" className="inline-flex items-center gap-3">
@@ -130,23 +130,22 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
           </div>
         </div>
 
-        {/* Mobile Contact Bar */}
-        <div className="pt-2 border-t border-white/10 space-y-2">
-          <a
-            href="tel:+918585999922"
-            className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs font-mono"
+        {/* Large Typographic Masthead Banner on Mobile */}
+        <div className="py-6 border-t border-b border-white/10 text-center select-none overflow-hidden group">
+          <Link
+            to="/"
+            className="inline-block"
+            data-cursor="Home"
           >
-            <span className="text-white/60 flex items-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
-              <span>Direct Helpline:</span>
-            </span>
-            <span className="text-[#C9AF6B] font-bold">+91 8585999922</span>
-          </a>
+            <h2 className="font-serif text-5xl sm:text-6xl font-bold text-white/90 group-hover:text-[#0072EF] tracking-tight leading-none transition-colors duration-300 ease-out cursor-pointer">
+              TRISECURE
+            </h2>
+          </Link>
         </div>
 
         {/* Mobile Legal Bar */}
-        <div className="pt-4 border-t border-white/10 flex flex-col items-center gap-3 font-mono text-[10px] text-white/40 text-center">
-          <p>© {new Date().getFullYear()} Trisecure Solution. All rights reserved.</p>
+        <div className="pt-2 flex flex-col items-center gap-3 font-mono text-[10px] text-white/40 text-center">
+          <p>© {new Date().getFullYear()} Trisecure Solutions. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white">Terms</Link>
@@ -196,7 +195,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
             <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block font-semibold">
               // Practice Verticals
             </span>
-            <ul className="space-y-2.5 font-sans text-xs sm:text-sm">
+            <ul className="space-y-2.5 font-sans text-sm">
               <li>
                 <Link
                   to="/services/hr"
