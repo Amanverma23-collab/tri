@@ -84,7 +84,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
           </Link>
 
           {/* Desktop Navigation Links with Dynamic Contrast Aware AnimatedBackground */}
-          <nav className="hidden lg:flex items-center rounded-full p-1.5 bg-[#FAF6EE]/90 backdrop-blur-md border border-[#1A1A16]/10 shadow-xs">
+          <nav
+            onMouseLeave={() => setHighlightedTab(currentActiveTab)}
+            className="hidden lg:flex items-center rounded-full p-1.5 bg-[#FAF6EE]/90 backdrop-blur-md border border-[#1A1A16]/10 shadow-xs"
+          >
             <AnimatedBackground
               value={currentActiveTab}
               onValueChange={(val) => setHighlightedTab(val ?? currentActiveTab)}
@@ -97,10 +100,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
               enableHover
             >
               {navLinks.map((link) => {
-                const isCurrent = link.name === currentActiveTab;
-                const isHovered = link.name === highlightedTab;
-                // High contrast state: when hovered or active, text is high-contrast ivory
-                const isContrastActive = isHovered || isCurrent;
+                // Exactly whichever item is currently covered by the black pill gets white text; all others get clear visible dark text
+                const isUnderPill = (highlightedTab || currentActiveTab) === link.name;
 
                 return (
                   <Link
@@ -109,9 +110,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
                     data-id={link.name}
                     data-cursor={link.name}
                     className={`relative z-10 px-4 py-2 font-mono text-xs tracking-wider uppercase transition-colors duration-200 ${
-                      isContrastActive
+                      isUnderPill
                         ? 'text-[#F5F0E6] font-semibold'
-                        : 'text-[#1A1A16]/80 hover:text-[#1A1A16]'
+                        : 'text-[#1A1A16] font-medium hover:text-[#0072EF]'
                     }`}
                   >
                     {link.name}
