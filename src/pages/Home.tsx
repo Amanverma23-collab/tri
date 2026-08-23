@@ -150,40 +150,40 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
 
             {/* Right: 4-License Bento Grid Showcase */}
             <div className="lg:col-span-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
                 {licenseHighlights.map((lic, idx) => {
                   const LicIcon = lic.icon;
                   return (
                     <div
                       key={idx}
-                      className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#F5F0E6] border border-[#1A1A16]/10 hover:border-[#7C8B6F] transition-all duration-300 hover:shadow-md flex flex-col justify-between group"
+                      className="p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#F5F0E6] border border-[#1A1A16]/10 hover:border-[#7C8B6F] transition-all duration-300 hover:shadow-md flex flex-col justify-between group"
                     >
                       <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#1A1A16] text-[#F5F0E6] uppercase tracking-wider">
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <span className="font-mono text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#1A1A16] text-[#F5F0E6] uppercase tracking-wider">
                             {lic.code}
                           </span>
-                          <div className="w-8 h-8 rounded-xl bg-[#1A1A16]/5 flex items-center justify-center text-[#7C8B6F] group-hover:bg-[#7C8B6F] group-hover:text-white transition-colors">
-                            <LicIcon className="w-4 h-4" />
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#1A1A16]/5 flex items-center justify-center text-[#7C8B6F] group-hover:bg-[#7C8B6F] group-hover:text-white transition-colors">
+                            <LicIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </div>
                         </div>
 
-                        <h3 className="font-serif text-lg sm:text-xl font-bold text-[#1A1A16] leading-snug mb-1">
+                        <h3 className="font-serif text-sm sm:text-lg lg:text-xl font-bold text-[#1A1A16] leading-snug mb-0.5 sm:mb-1">
                           {lic.title}
                         </h3>
 
-                        <p className="font-mono text-[10px] text-[#7C8B6F] uppercase tracking-wider mb-2 font-semibold">
+                        <p className="font-mono text-[8px] sm:text-[10px] text-[#7C8B6F] uppercase tracking-wider mb-1.5 sm:mb-2 font-semibold line-clamp-1">
                           {lic.category}
                         </p>
 
-                        <p className="font-sans text-xs text-[#7A7A70] leading-relaxed font-light">
+                        <p className="font-sans text-[10px] sm:text-xs text-[#7A7A70] leading-relaxed font-light line-clamp-2 sm:line-clamp-3">
                           {lic.desc}
                         </p>
                       </div>
 
-                      <div className="pt-3 mt-3 border-t border-[#1A1A16]/10 flex items-center justify-between text-xs font-mono text-[#1A1A16] group-hover:text-[#7C8B6F] transition-colors font-semibold">
-                        <span>End-to-End Filing</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <div className="pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-[#1A1A16]/10 flex items-center justify-between text-[9px] sm:text-xs font-mono text-[#1A1A16] group-hover:text-[#7C8B6F] transition-colors font-semibold">
+                        <span>End-to-End</span>
+                        <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
                     </div>
                   );
