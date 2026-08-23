@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
               <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shrink-0">
                 <img
                   src="/images/trisecure_logo.png"
-                  alt="Trisecure Solutions Logo"
+                  alt="Trisecure F&B Solutions Logo"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -51,8 +51,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
                 <span className="font-serif text-2xl tracking-tight font-bold text-white group-hover:text-[#0072EF] transition-colors leading-none">
                   TRISECURE
                 </span>
-                <span className="font-mono text-[9px] tracking-[0.25em] text-[#C9AF6B] uppercase font-semibold mt-1">
-                  SOLUTIONS
+                <span className="font-mono text-[9px] tracking-[0.2em] text-[#C9AF6B] uppercase font-semibold mt-1">
+                  F&B SOLUTIONS
                 </span>
               </div>
             </Link>
@@ -76,115 +76,89 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
               <li>
                 <Link
                   to="/services/hr"
-                  className="text-white/70 hover:text-[#C9AF6B] transition-colors flex items-center justify-between group"
+                  className="text-white/70 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
+                  <ArrowRight className="w-3.5 h-3.5 text-[#7C8B6F]" />
                   <span>HR & Workforce Solutions</span>
-                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#C9AF6B]" />
                 </Link>
               </li>
               <li>
                 <Link
                   to="/services/insurance-loans"
-                  className="text-white/70 hover:text-[#C9AF6B] transition-colors flex items-center justify-between group"
+                  className="text-white/70 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
-                  <span>Insurance & Loan Advisory</span>
-                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#C9AF6B]" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                  <span>Insurance & Debt Advisory</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/services/food-compliance"
-                  className="text-white/70 hover:text-[#C9AF6B] transition-colors flex items-center justify-between group"
+                  className="text-white/70 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
-                  <span>Food Compliance & Licensing</span>
-                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#C9AF6B]" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                  <span>Food Compliance & FSSAI</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/services/digital-marketing"
-                  className="text-white/70 hover:text-[#C9AF6B] transition-colors flex items-center justify-between group"
+                  className="text-white/70 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
+                  <ArrowRight className="w-3.5 h-3.5 text-[#7C8B6F]" />
                   <span>Digital Marketing & Branding</span>
-                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#C9AF6B]" />
                 </Link>
               </li>
               <li>
                 <Link
                   to="/licenses"
-                  className="text-white/70 hover:text-[#C9AF6B] transition-colors flex items-center justify-between group"
+                  className="text-white/70 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
-                  <span>Statutory License Directory</span>
-                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#C9AF6B]" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/pricing"
-                  className="text-white/70 hover:text-[#C9AF6B] transition-colors flex items-center justify-between group"
-                >
-                  <span>Consultation Fee Schedule</span>
-                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#C9AF6B]" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#C9AF6B]" />
+                  <span>Statutory License Matrix</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Company Navigation (2 cols) */}
+          {/* Col 3: Statutory Licensing (2 cols) */}
           <div className="md:col-span-6 lg:col-span-2 space-y-4">
             <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block font-semibold">
-              // Navigation
+              // Regulatory Matrix
             </span>
-            <ul className="space-y-2.5 font-sans text-xs sm:text-sm">
-              <li>
-                <Link to="/" className="text-white/70 hover:text-white transition-colors">
-                  Home
-                </Link>
+            <ul className="space-y-2 font-mono text-xs text-white/60">
+              <li className="hover:text-white transition-colors cursor-pointer" onClick={() => onOpenConsultation('FSSAI Central & State License')}>
+                • FSSAI State & Central
               </li>
-              <li>
-                <Link to="/about" className="text-white/70 hover:text-white transition-colors">
-                  About Us
-                </Link>
+              <li className="hover:text-white transition-colors cursor-pointer" onClick={() => onOpenConsultation('Shop & Commercial Establishment')}>
+                • Shop & Establishment
               </li>
-              <li>
-                <Link to="/about" className="text-white/70 hover:text-white transition-colors">
-                  Founder Profile
-                </Link>
+              <li className="hover:text-white transition-colors cursor-pointer" onClick={() => onOpenConsultation('DPCC Environmental Consent')}>
+                • DPCC Clearances (CTE/CTO)
               </li>
-              <li>
-                <Link to="/services" className="text-white/70 hover:text-white transition-colors">
-                  All Services
-                </Link>
+              <li className="hover:text-white transition-colors cursor-pointer" onClick={() => onOpenConsultation('MCD Health & Trade License')}>
+                • MCD Health Trade Permit
               </li>
-              <li>
-                <Link to="/licenses" className="text-white/70 hover:text-white transition-colors">
-                  Licenses
-                </Link>
+              <li className="hover:text-white transition-colors cursor-pointer" onClick={() => onOpenConsultation('Fire Safety & NOC')}>
+                • Fire Safety Sanctions
               </li>
-              <li>
-                <Link to="/pricing" className="text-white/70 hover:text-white transition-colors">
-                  Fee Schedules
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-white/70 hover:text-white transition-colors">
-                  Contact Desk
-                </Link>
+              <li className="hover:text-white transition-colors cursor-pointer" onClick={() => onOpenConsultation('Statutory Labor Compliance (PF/ESIC)')}>
+                • PF / ESIC Registrations
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Direct Advisory Desk (3 cols) */}
-          <div className="md:col-span-12 lg:col-span-3 space-y-3">
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block mb-4 font-semibold">
-              // Direct Advisory Desk
+          {/* Col 4: Direct Leadership Contacts (3 cols) */}
+          <div className="md:col-span-12 lg:col-span-3 space-y-4">
+            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block font-semibold">
+              // Direct Engagement Desk
             </span>
 
             <a
               href="tel:+918585999922"
               className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#C9AF6B] hover:bg-white/[0.08] transition-all group"
             >
-              <div className="w-9 h-9 rounded-xl bg-[#C9AF6B]/15 text-[#C9AF6B] flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-[#C9AF6B]/20 text-[#C9AF6B] flex items-center justify-center shrink-0">
                 <Phone className="w-4 h-4" />
               </div>
               <div>
@@ -234,7 +208,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
 
         {/* Bottom Legal & Meta Bar */}
         <div className="py-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-white/50">
-          <p>© 2026 Trisecure Solutions. All rights reserved.</p>
+          <p>© 2026 Trisecure F&B Solutions. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link to="/about" className="hover:text-white transition-colors">About</Link>
             <Link to="/services" className="hover:text-white transition-colors">Services</Link>
