@@ -12,44 +12,44 @@ export interface ServiceOption {
 export const SERVICE_OPTIONS: ServiceOption[] = [
   {
     value: 'HR Services',
-    label: 'HR Services & Payroll Management',
+    label: 'HR & Payroll Services',
     code: '01',
-    tag: 'Workforce & Statutory',
+    tag: 'Workforce',
     icon: Users,
   },
   {
     value: 'Insurance & Loans',
-    label: 'Insurance Underwriting & Business Debt',
+    label: 'Insurance & Business Debt',
     code: '02',
-    tag: 'Capital & Risk Advisory',
+    tag: 'Capital & Risk',
     icon: ShieldCheck,
   },
   {
     value: 'Food Compliance',
-    label: 'Food Compliance (FSSAI, DPCC, MCD)',
+    label: 'Food Compliance (FSSAI)',
     code: '03',
-    tag: 'Statutory Safety & Licensing',
+    tag: 'Statutory Safety',
     icon: Utensils,
   },
   {
     value: 'Digital Marketing',
-    label: 'Digital Marketing & Performance Brand Scale',
+    label: 'Digital Marketing & Scale',
     code: '04',
-    tag: 'Digital Scale & Media',
+    tag: 'Digital Scale',
     icon: TrendingUp,
   },
   {
     value: 'Statutory Licensing',
-    label: 'Government Trade Permits & Fire NOC',
+    label: 'Trade Licenses & NOC',
     code: '05',
-    tag: 'Government Regulatory Desk',
+    tag: 'Clearances',
     icon: FileText,
   },
   {
     value: 'General Advisory',
-    label: 'General Corporate Strategy & Consultation',
+    label: 'Corporate Strategy Desk',
     code: '06',
-    tag: 'Executive Strategic Desk',
+    tag: 'Executive Desk',
     icon: Sparkles,
   },
 ];
@@ -105,11 +105,11 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         </label>
       )}
 
-      {/* Selected Value Trigger Card (Rich Editorial Badge & Icon) */}
+      {/* Trigger Bar */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
+        className={`w-full p-3 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
           darkTheme
             ? 'bg-[#1A1A16] border-white/20 text-white hover:border-[#C9AF6B]'
             : 'bg-white border-[#1A1A16]/15 text-[#1A1A16] hover:border-[#7C8B6F]'
@@ -125,7 +125,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
           </div>
           <div className="truncate">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[11px] font-bold text-[#0072EF]">
+              <span className="font-mono text-xs font-bold text-[#0072EF]">
                 {selectedOption.code}.
               </span>
               <span className="font-sans text-xs sm:text-sm font-semibold truncate text-[#1A1A16]">
@@ -142,69 +142,73 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         />
       </button>
 
-      {/* Dropdown Options: Rich Editorial Luxury Cards with Icons & Category Badges */}
+      {/* 2 SERVICES PER ROW (2-COLUMN GRID) */}
       {isOpen && (
         <div
-          className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl overflow-y-auto max-h-72 p-2 space-y-1.5 animate-in fade-in zoom-in-95 duration-150 ${
+          className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl p-2 animate-in fade-in zoom-in-95 duration-150 ${
             darkTheme
               ? 'bg-[#1A1A16] border-white/20 text-white'
               : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16]'
           }`}
         >
-          {SERVICE_OPTIONS.map((option) => {
-            const isSelected = selectedOption.value === option.value;
-            const OptionIcon = option.icon;
+          <div className="grid grid-cols-2 gap-2">
+            {SERVICE_OPTIONS.map((option) => {
+              const isSelected = selectedOption.value === option.value;
+              const OptionIcon = option.icon;
 
-            return (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => {
-                  onChange(option.value);
-                  setIsOpen(false);
-                }}
-                className={`w-full p-2.5 sm:p-3 rounded-xl text-left transition-all duration-150 flex items-center justify-between ${
-                  isSelected
-                    ? darkTheme
-                      ? 'bg-white/15 text-[#C9AF6B] border border-white/20'
-                      : 'bg-[#1A1A16] text-[#F5F0E6] shadow-sm'
-                    : darkTheme
-                    ? 'hover:bg-white/5 text-white/80'
-                    : 'hover:bg-[#ECE5D8] text-[#1A1A16]'
-                }`}
-              >
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div
-                    className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                      isSelected
-                        ? 'bg-[#0072EF] text-white'
-                        : darkTheme
-                        ? 'bg-white/10 text-[#C9AF6B]'
-                        : 'bg-[#1A1A16]/5 text-[#7C8B6F]'
-                    }`}
-                  >
-                    <OptionIcon className="w-4 h-4" />
-                  </div>
-                  <div className="truncate">
-                    <span
-                      className={`font-mono text-[9px] uppercase tracking-wider block font-semibold ${
-                        isSelected ? 'text-[#C9AF6B]' : 'text-[#7C8B6F]'
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => {
+                    onChange(option.value);
+                    setIsOpen(false);
+                  }}
+                  className={`p-2.5 rounded-xl text-left transition-all duration-150 flex items-center justify-between border ${
+                    isSelected
+                      ? darkTheme
+                        ? 'bg-white/15 border-white/30 text-[#C9AF6B] shadow-sm'
+                        : 'bg-[#1A1A16] border-[#1A1A16] text-[#F5F0E6] shadow-sm'
+                      : darkTheme
+                      ? 'bg-white/5 border-white/10 hover:bg-white/10 text-white/90 hover:border-white/20'
+                      : 'bg-white/80 border-[#1A1A16]/10 hover:bg-white hover:border-[#0072EF]/50 text-[#1A1A16]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0 overflow-hidden">
+                    <div
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                        isSelected
+                          ? 'bg-[#0072EF] text-white'
+                          : darkTheme
+                          ? 'bg-white/10 text-[#C9AF6B]'
+                          : 'bg-[#1A1A16]/5 text-[#7C8B6F]'
                       }`}
                     >
-                      {option.code} // {option.tag}
-                    </span>
-                    <span className="font-sans text-xs sm:text-sm font-semibold block mt-0.5 truncate">
-                      {option.label}
-                    </span>
+                      <OptionIcon className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="min-w-0 overflow-hidden">
+                      <span
+                        className={`font-mono text-[9px] uppercase tracking-wider block font-semibold leading-tight ${
+                          isSelected
+                            ? 'text-[#C9AF6B]'
+                            : 'text-[#7C8B6F]'
+                        }`}
+                      >
+                        {option.code} // {option.tag}
+                      </span>
+                      <span className="font-sans text-xs font-semibold block truncate leading-snug mt-0.5">
+                        {option.label}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                {isSelected && (
-                  <Check className="w-4 h-4 text-[#0072EF] shrink-0 ml-2" />
-                )}
-              </button>
-            );
-          })}
+                  {isSelected && (
+                    <Check className="w-3.5 h-3.5 text-[#0072EF] shrink-0 ml-1" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
