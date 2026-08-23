@@ -114,9 +114,10 @@ export const EditorialHero: React.FC<EditorialHeroProps> = ({ onOpenConsultation
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#1A1A16]/15 group aspect-[4/5] bg-[#1A1A16]">
               {/* Premium Light-Filled Editorial Team Photography */}
               <img
-                src="/images/trisecure_hero.jpg"
-                alt="Trisecure F&B Solutions Corporate Analytics & Team"
+                src="/images/home_hero.jpg"
+                alt="Trisecure F&B Solutions Corporate Team"
                 className="w-full h-full object-cover object-center filter contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="eager"
               />
 
               {/* Subtle Gradient Vignette to keep text readable */}
