@@ -54,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
                 TRISECURE
               </span>
               <span className="font-mono text-[9px] tracking-[0.2em] text-[#C9AF6B] uppercase font-semibold mt-0.5">
-                SOLUTIONS
+                F&B SOLUTIONS
               </span>
             </div>
           </Link>
@@ -109,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
                   TRISECURE
                 </span>
                 <span className="font-mono text-[9px] tracking-[0.2em] text-[#C9AF6B] uppercase font-semibold mt-1">
-                  SOLUTIONS
+                  F&B SOLUTIONS
                 </span>
               </div>
             </Link>

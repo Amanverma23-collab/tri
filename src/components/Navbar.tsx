@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
               TRISECURE
             </span>
             <span className="font-mono text-[9px] tracking-[0.2em] text-[#7C8B6F] uppercase font-semibold mt-0.5">
-              SOLUTIONS
+              F&B SOLUTIONS
             </span>
           </div>
         </Link>
