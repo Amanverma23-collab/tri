@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
           {/* Direct CTA Action Button */}
           <div className="hidden lg:flex items-center gap-3">
             <button
-              onClick={onOpenConsultation}
+              onClick={() => onOpenConsultation()}
               className="btn-editorial-primary text-xs py-2.5 px-5"
               data-cursor="Book"
             >

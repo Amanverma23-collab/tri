@@ -13,11 +13,13 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   onClose,
   initialService = '',
 }) => {
+  const safeInitial = typeof initialService === 'string' && initialService.trim() ? initialService : 'General Advisory';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    service: initialService,
+    service: safeInitial,
     company: '',
     message: '',
   });
@@ -26,10 +28,12 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (initialService) {
+    if (typeof initialService === 'string' && initialService.trim()) {
       setFormData((prev) => ({ ...prev, service: initialService }));
+    } else {
+      setFormData((prev) => ({ ...prev, service: 'General Advisory' }));
     }
-  }, [initialService]);
+  }, [initialService, isOpen]);
 
   if (!isOpen) return null;
 

@@ -83,8 +83,8 @@ export function App() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [prefilledService, setPrefilledService] = useState<string>('');
 
-  const handleOpenConsultation = (serviceName?: string) => {
-    if (serviceName) {
+  const handleOpenConsultation = (serviceName?: any) => {
+    if (typeof serviceName === 'string' && serviceName.trim()) {
       setPrefilledService(serviceName);
     } else {
       setPrefilledService('');

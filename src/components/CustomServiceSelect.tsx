@@ -55,24 +55,29 @@ export const SERVICE_OPTIONS: ServiceOption[] = [
 ];
 
 interface CustomServiceSelectProps {
-  value: string;
+  value?: string;
   onChange: (value: string) => void;
   label?: string;
   darkTheme?: boolean;
 }
 
 export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
-  value,
+  value = '',
   onChange,
-  label = 'Select Practice Vertical *',
+  label = 'Select Practice Focus *',
   darkTheme = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const safeValue = typeof value === 'string' ? value.toLowerCase().trim() : '';
+
   const selectedOption =
     SERVICE_OPTIONS.find(
-      (opt) => opt.value.toLowerCase() === value.toLowerCase() || opt.label.toLowerCase() === value.toLowerCase()
+      (opt) =>
+        opt.value.toLowerCase() === safeValue ||
+        opt.label.toLowerCase() === safeValue ||
+        safeValue.includes(opt.value.toLowerCase())
     ) || SERVICE_OPTIONS[0];
 
   // Close dropdown on outside click
@@ -89,121 +94,111 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
   const SelectedIcon = selectedOption.icon;
 
   return (
-    <div className="relative w-full select-none" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef}>
       {label && (
-        <label className="block font-mono text-[10px] text-[#7A7A70] uppercase mb-1 font-semibold tracking-wider">
+        <label
+          className={`block font-mono text-[10px] uppercase mb-1.5 font-semibold tracking-wider ${
+            darkTheme ? 'text-white/60' : 'text-[#7A7A70]'
+          }`}
+        >
           {label}
         </label>
       )}
 
-      {/* Trigger Button */}
+      {/* Selected Value Trigger Card */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-4 py-2.5 rounded-xl border text-left flex items-center justify-between transition-all duration-200 ${
+        className={`w-full p-3.5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
           darkTheme
-            ? 'bg-[#141814] border-white/15 text-white hover:border-[#0072EF]'
-            : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16] hover:border-[#0072EF]'
-        } ${isOpen ? 'ring-2 ring-[#0072EF]/30 border-[#0072EF]' : ''}`}
+            ? 'bg-[#1A1A16] border-white/15 text-white hover:border-[#C9AF6B]'
+            : 'bg-white border-[#1A1A16]/15 text-[#1A1A16] hover:border-[#7C8B6F]'
+        }`}
       >
-        <div className="flex items-center gap-2.5 overflow-hidden">
+        <div className="flex items-center gap-3">
           <div
-            className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 ${
-              darkTheme ? 'bg-white/10 text-[#38BDF8]' : 'bg-[#0072EF]/10 text-[#0072EF]'
+            className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+              darkTheme ? 'bg-white/10 text-[#C9AF6B]' : 'bg-[#0072EF]/10 text-[#0072EF]'
             }`}
           >
-            <SelectedIcon className="w-3.5 h-3.5" />
+            <SelectedIcon className="w-4 h-4" />
           </div>
-          <span className="font-mono text-[11px] font-bold text-[#0072EF] shrink-0">
-            {selectedOption.code}.
-          </span>
-          <span className="font-sans text-xs font-medium truncate">
-            {selectedOption.label}
-          </span>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[10px] font-bold text-[#0072EF]">
+                {selectedOption.code}.
+              </span>
+              <span className="font-sans text-xs sm:text-sm font-semibold">
+                {selectedOption.label}
+              </span>
+            </div>
+          </div>
         </div>
 
         <ChevronDown
-          className={`w-4 h-4 shrink-0 transition-transform duration-300 text-[#7A7A70] ${
-            isOpen ? 'rotate-180 text-[#0072EF]' : ''
+          className={`w-4 h-4 transition-transform duration-300 ${
+            isOpen ? 'rotate-180 text-[#0072EF]' : 'text-[#7A7A70]'
           }`}
         />
       </button>
 
-      {/* Custom Animated Dropdown Menu (No scrollbar, full clean display) */}
+      {/* Dropdown Options List */}
       {isOpen && (
         <div
-          className={`absolute left-0 right-0 top-full mt-1.5 z-50 rounded-2xl p-1.5 shadow-2xl border backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150 overflow-hidden ${
+          className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl overflow-hidden p-2 space-y-1 animate-in fade-in zoom-in-95 duration-200 ${
             darkTheme
-              ? 'bg-[#141814]/98 border-white/15 text-[#F5F0E6]'
-              : 'bg-[#FAF6EE]/98 border-[#1A1A16]/15 text-[#1A1A16]'
+              ? 'bg-[#1A1A16] border-white/20 text-white'
+              : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16]'
           }`}
         >
-          <div className="space-y-1 p-0.5">
-            {SERVICE_OPTIONS.map((opt) => {
-              const isSelected = selectedOption.value === opt.value;
-              const IconComp = opt.icon;
+          {SERVICE_OPTIONS.map((option) => {
+            const isSelected = selectedOption.value === option.value;
+            const OptionIcon = option.icon;
 
-              return (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() => {
-                    onChange(opt.value);
-                    setIsOpen(false);
-                  }}
-                  className={`w-full px-3 py-2 rounded-xl text-left flex items-center justify-between transition-all duration-150 group ${
-                    isSelected
-                      ? 'bg-[#0072EF] text-white shadow-sm'
-                      : darkTheme
-                      ? 'hover:bg-white/10 text-white/85'
-                      : 'hover:bg-[#1A1A16]/5 text-[#1A1A16]'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 overflow-hidden">
-                    <div
-                      className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                        isSelected
-                          ? 'bg-white/20 text-white'
-                          : darkTheme
-                          ? 'bg-white/5 text-[#38BDF8] group-hover:bg-white/10'
-                          : 'bg-[#0072EF]/10 text-[#0072EF] group-hover:bg-[#0072EF]/20'
-                      }`}
-                    >
-                      <IconComp className="w-3.5 h-3.5" />
-                    </div>
-
-                    <div className="flex flex-col text-left">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`font-mono text-[10px] font-bold ${
-                            isSelected
-                              ? 'text-white/90'
-                              : 'text-[#0072EF]'
-                          }`}
-                        >
-                          {opt.code}.
-                        </span>
-                        <span className="font-sans text-xs font-semibold truncate">
-                          {opt.label}
-                        </span>
-                      </div>
-                      <span
-                        className={`font-mono text-[9px] uppercase tracking-wider ${
-                          isSelected
-                            ? 'text-white/80'
-                            : 'text-[#7A7A70]'
-                        }`}
-                      >
-                        {opt.tag}
-                      </span>
-                    </div>
+            return (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                className={`w-full p-2.5 rounded-xl text-left transition-all duration-150 flex items-center justify-between ${
+                  isSelected
+                    ? darkTheme
+                      ? 'bg-white/15 text-[#C9AF6B]'
+                      : 'bg-[#1A1A16] text-[#F5F0E6]'
+                    : darkTheme
+                    ? 'hover:bg-white/5 text-white/80'
+                    : 'hover:bg-[#EFE9DC] text-[#1A1A16]'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                      isSelected
+                        ? 'bg-[#0072EF] text-white'
+                        : darkTheme
+                        ? 'bg-white/5 text-white/60'
+                        : 'bg-[#1A1A16]/5 text-[#7C8B6F]'
+                    }`}
+                  >
+                    <OptionIcon className="w-3.5 h-3.5" />
                   </div>
+                  <div>
+                    <span className="font-mono text-[10px] text-[#7C8B6F] block font-semibold">
+                      {option.code} // {option.tag}
+                    </span>
+                    <span className="font-serif text-xs font-bold block mt-0.5">
+                      {option.label}
+                    </span>
+                  </div>
+                </div>
 
-                  {isSelected && <Check className="w-4 h-4 shrink-0 text-white ml-2" />}
-                </button>
-              );
-            })}
-          </div>
+                {isSelected && <Check className="w-4 h-4 text-[#0072EF] shrink-0 ml-2" />}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
