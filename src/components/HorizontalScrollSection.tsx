@@ -1,8 +1,8 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,25 +39,94 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
   const progressBarRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const percentRef = useRef<HTMLDivElement>(null);
+  
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Scroll to target card index on mobile
+  const scrollToMobileCard = useCallback((index: number) => {
+    if (!mobileScrollRef.current) return;
+    const container = mobileScrollRef.current;
+    const cardElements = container.querySelectorAll('.mobile-service-card');
+    if (cardElements[index]) {
+      const card = cardElements[index] as HTMLElement;
+      container.scrollTo({
+        left: card.offsetLeft - 20,
+        behavior: 'smooth',
+      });
+      setActiveMobileIndex(index);
+    }
+  }, []);
+
+  // Next Slide (Infinite Loop)
+  const nextSlide = useCallback(() => {
+    setActiveMobileIndex((prev) => {
+      const next = (prev + 1) % cards.length;
+      scrollToMobileCard(next);
+      return next;
+    });
+  }, [cards.length, scrollToMobileCard]);
+
+  // Previous Slide (Infinite Loop)
+  const prevSlide = useCallback(() => {
+    setActiveMobileIndex((prev) => {
+      const prevIdx = (prev - 1 + cards.length) % cards.length;
+      scrollToMobileCard(prevIdx);
+      return prevIdx;
+    });
+  }, [cards.length, scrollToMobileCard]);
+
+  // Auto-scroll ticker on mobile
+  useEffect(() => {
+    if (isPaused) {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+      return;
+    }
+
+    autoPlayTimerRef.current = setInterval(() => {
+      nextSlide();
+    }, 3500);
+
+    return () => {
+      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
+    };
+  }, [isPaused, nextSlide]);
+
+  // User Interaction: Pause momentarily on touch / hover, then auto-resume
+  const handleUserInteractionStart = () => {
+    setIsPaused(true);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+  };
+
+  const handleUserInteractionEnd = () => {
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 4000);
+  };
 
   // Track active slide on mobile horizontal swipe
   const handleMobileScroll = () => {
     if (!mobileScrollRef.current) return;
-    const scrollLeft = mobileScrollRef.current.scrollLeft;
-    const cardWidth = mobileScrollRef.current.offsetWidth * 0.85;
-    const index = Math.round(scrollLeft / cardWidth);
-    setActiveMobileIndex(Math.min(Math.max(index, 0), cards.length - 1));
-  };
+    const container = mobileScrollRef.current;
+    const scrollLeft = container.scrollLeft;
+    const cardElements = container.querySelectorAll('.mobile-service-card');
+    
+    let closestIndex = 0;
+    let minDistance = Infinity;
 
-  const scrollToMobileCard = (index: number) => {
-    if (!mobileScrollRef.current) return;
-    const cardWidth = mobileScrollRef.current.offsetWidth * 0.85;
-    mobileScrollRef.current.scrollTo({
-      left: index * cardWidth,
-      behavior: 'smooth',
+    cardElements.forEach((card, idx) => {
+      const el = card as HTMLElement;
+      const distance = Math.abs(el.offsetLeft - 20 - scrollLeft);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = idx;
+      }
     });
-    setActiveMobileIndex(index);
+
+    setActiveMobileIndex(closestIndex);
   };
 
   useEffect(() => {
@@ -179,24 +248,40 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
               </span>
             </div>
 
-            {/* Mobile Swipe Navigation Indicator & Controls */}
+            {/* Mobile Auto-Scroll Controls & Indicators */}
             <div className="flex md:hidden items-center justify-between w-full pt-2">
-              <span className="font-mono text-[11px] text-[#7C8B6F] font-semibold tracking-wider">
-                SWIPE 0{activeMobileIndex + 1} / 0{cards.length}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[11px] text-[#7C8B6F] font-semibold tracking-wider">
+                  0{activeMobileIndex + 1} / 0{cards.length}
+                </span>
+                <button
+                  onClick={() => setIsPaused(!isPaused)}
+                  className="px-2 py-0.5 rounded-full bg-[#1A1A16]/5 border border-[#1A1A16]/10 font-mono text-[9px] uppercase tracking-wider text-[#1A1A16] flex items-center gap-1"
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${isPaused ? 'bg-amber-500' : 'bg-emerald-500 animate-pulse'}`} />
+                  <span>{isPaused ? 'PAUSED' : 'AUTO'}</span>
+                </button>
+              </div>
+
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => scrollToMobileCard(Math.max(0, activeMobileIndex - 1))}
-                  disabled={activeMobileIndex === 0}
-                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] disabled:opacity-30 disabled:cursor-not-allowed shadow-xs"
+                  onClick={() => {
+                    handleUserInteractionStart();
+                    prevSlide();
+                    handleUserInteractionEnd();
+                  }}
+                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] shadow-xs active:scale-95 transition-transform"
                   aria-label="Previous service"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
-                  onClick={() => scrollToMobileCard(Math.min(cards.length - 1, activeMobileIndex + 1))}
-                  disabled={activeMobileIndex === cards.length - 1}
-                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] disabled:opacity-30 disabled:cursor-not-allowed shadow-xs"
+                  onClick={() => {
+                    handleUserInteractionStart();
+                    nextSlide();
+                    handleUserInteractionEnd();
+                  }}
+                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] shadow-xs active:scale-95 transition-transform"
                   aria-label="Next service"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -208,20 +293,24 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
       </div>
 
       {/* =========================================================================
-          2. MAIN TRACK: HORIZONTAL SWIPE ON MOBILE & GSAP PIN TRACK ON DESKTOP
+          2. MAIN TRACK: AUTO INFINITE SWIPABLE CAROUSEL ON MOBILE & GSAP PIN TRACK ON DESKTOP
           ========================================================================= */}
       
-      {/* Mobile Touch-Friendly Horizontal Slidebar */}
+      {/* Mobile Touch-Friendly Infinite Auto Slidebar */}
       <div
         ref={mobileScrollRef}
         onScroll={handleMobileScroll}
+        onTouchStart={handleUserInteractionStart}
+        onTouchEnd={handleUserInteractionEnd}
+        onMouseEnter={handleUserInteractionStart}
+        onMouseLeave={handleUserInteractionEnd}
         className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-5 py-3 w-full no-scrollbar"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {cards.map((card, idx) => (
           <div
             key={idx}
-            className={`w-[85vw] max-w-[340px] shrink-0 snap-center rounded-3xl p-6 border flex flex-col justify-between transition-all duration-300 ${getCardStyle(
+            className={`mobile-service-card w-[85vw] max-w-[340px] shrink-0 snap-center rounded-3xl p-6 border flex flex-col justify-between transition-all duration-300 ${getCardStyle(
               card.theme
             )}`}
           >
@@ -333,12 +422,16 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
         </div>
       </div>
 
-      {/* 3. Mobile Indicator Dots */}
+      {/* 3. Mobile Interactive Indicator Dots */}
       <div className="md:hidden flex items-center justify-center gap-2 pt-1 pb-1">
         {cards.map((_, idx) => (
           <button
             key={idx}
-            onClick={() => scrollToMobileCard(idx)}
+            onClick={() => {
+              handleUserInteractionStart();
+              scrollToMobileCard(idx);
+              handleUserInteractionEnd();
+            }}
             className={`h-2 rounded-full transition-all duration-300 ${
               activeMobileIndex === idx
                 ? 'w-6 bg-[#1A1A16]'
