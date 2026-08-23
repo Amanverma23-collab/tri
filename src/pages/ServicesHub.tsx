@@ -210,75 +210,59 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
         </div>
       </section>
 
-      {/* 2. FOUR VERTICAL PANELS: InfiniteSlider on Mobile & Asymmetric Stack on Desktop */}
-      <section className="py-14 sm:py-32 bg-[#FAF6EE] border-b border-[#1A1A16]/10 overflow-hidden">
+      {/* 2. FOUR VERTICAL PANELS: Horizontal Split Cards on Mobile & Asymmetric Stack on Desktop */}
+      <section className="py-10 sm:py-32 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           
-          {/* Mobile Continuous Horizontal InfiniteSlider with Touch Pause */}
-          <div className="md:hidden w-full py-2 overflow-hidden">
-            <InfiniteSlider gap={16} speed={25} speedOnHover={0}>
-              {servicePanels.map((panel) => {
-                const Icon = panel.icon;
-                return (
-                  <Link
-                    key={panel.num}
-                    to={panel.link}
-                    className={`w-[82vw] max-w-[320px] shrink-0 block relative rounded-3xl overflow-hidden border ${panel.borderClass} shadow-xl flex flex-col justify-between min-h-[460px] ${panel.bgClass}`}
-                  >
-                    <div>
-                      {/* Image Thumbnail Header */}
-                      <div className="relative w-full aspect-[16/10] overflow-hidden">
-                        <img
-                          src={panel.imageUrl}
-                          alt={panel.title}
-                          className="w-full h-full object-cover filter contrast-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                        <div className="absolute top-3 left-3 flex items-center gap-2">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                            panel.theme === 'cream' ? 'bg-[#1A1A16] text-white' : 'bg-[#C9AF6B] text-[#1A1A16]'
-                          }`}>
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <span className="font-mono text-[10px] tracking-widest font-bold px-2 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-xs">
-                            0${panel.num}
-                          </span>
-                        </div>
+          {/* Mobile View: 1 Card Per Row with Horizontal Layout */}
+          <div className="md:hidden space-y-3.5">
+            {servicePanels.map((panel) => {
+              const Icon = panel.icon;
+              return (
+                <Link
+                  key={panel.num}
+                  to={panel.link}
+                  className={`block rounded-2xl overflow-hidden border ${panel.borderClass} shadow-md hover:shadow-lg transition-all p-3.5 ${panel.bgClass} group`}
+                >
+                  <div className="flex gap-3.5 items-start">
+                    {/* Left Thumbnail Image */}
+                    <div className="relative w-28 h-28 shrink-0 rounded-xl overflow-hidden shadow-sm bg-black/10">
+                      <img
+                        src={panel.imageUrl}
+                        alt={panel.title}
+                        className="w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-1.5 left-1.5 w-6 h-6 rounded-md bg-black/70 flex items-center justify-center text-white backdrop-blur-xs">
+                        <Icon className="w-3.5 h-3.5" />
                       </div>
+                      <div className="absolute bottom-1.5 right-1.5 font-mono text-[9px] font-bold px-1.5 py-0.5 rounded bg-black/70 text-white backdrop-blur-xs">
+                        0${panel.num}
+                      </div>
+                    </div>
 
-                      {/* Content Body */}
-                      <div className="p-5">
-                        <span className="font-mono text-[10px] tracking-widest font-semibold uppercase text-[#7C8B6F] block mb-1">
-                          // Practice Vertical
+                    {/* Right Content */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-between h-28 py-0.5">
+                      <div>
+                        <span className="font-mono text-[9px] text-[#7C8B6F] uppercase tracking-wider font-semibold block leading-none mb-1">
+                          // Practice 0${panel.num}
                         </span>
-
-                        <h2 className="font-serif text-xl font-bold mb-1.5 tracking-tight leading-snug">
+                        <h3 className="font-serif text-sm font-bold leading-tight mb-1 truncate text-current">
                           {panel.title}
-                        </h2>
-
-                        <p className="font-serif text-xs opacity-90 mb-2.5 leading-snug line-clamp-2">
-                          {panel.subtitle}
-                        </p>
-
-                        <p className="font-sans text-[11px] opacity-75 leading-relaxed font-light line-clamp-3">
+                        </h3>
+                        <p className="font-sans text-[10px] opacity-75 line-clamp-2 leading-snug">
                           {panel.description}
                         </p>
                       </div>
-                    </div>
 
-                    {/* Bottom Action Footer */}
-                    <div className="p-5 pt-0">
-                      <div className="pt-3 border-t border-current/10 flex items-center justify-between font-mono text-[10px] uppercase font-semibold">
-                        <span>Inspect Practice Scope</span>
-                        <div className="w-7 h-7 rounded-full flex items-center justify-center bg-current/10">
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </div>
+                      <div className="pt-1.5 border-t border-current/10 flex items-center justify-between font-mono text-[9px] font-semibold text-[#7C8B6F] group-hover:text-current transition-colors">
+                        <span>Inspect Scope</span>
+                        <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
                     </div>
-                  </Link>
-                );
-              })}
-            </InfiniteSlider>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop Full Stacked Asymmetric Editorial Panels (100% Untouched) */}
