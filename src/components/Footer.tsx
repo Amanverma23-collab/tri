@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
       </div>
 
       {/* 2. Main 4-Column Directory Grid */}
-      <div className="editorial-container py-16 sm:py-20">
+      <div className="editorial-container pt-16 sm:pt-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10">
           {/* Col 1: Brand Wordmark & Mission (4 cols) */}
           <div className="md:col-span-12 lg:col-span-4 space-y-6">
@@ -229,15 +229,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
           </div>
         </div>
 
-        {/* Subtle Elegant Watermark Banner */}
-        <div className="py-8 text-center overflow-hidden">
-          <span className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white/[0.04] select-none block">
-            TRISECURE SOLUTIONS
-          </span>
+        {/* Large Typographic Masthead Banner in High Contrast White/Ivory */}
+        <div className="py-12 sm:py-16 border-b border-white/10 text-center select-none overflow-hidden">
+          <h2 className="font-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-bold text-white/90 tracking-tight leading-none">
+            TRISECURE
+          </h2>
         </div>
 
         {/* Bottom Legal & Meta Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-white/50 border-t border-white/10">
+        <div className="py-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-white/50">
           <p>© 2026 Trisecure Solutions. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link to="/about" className="hover:text-white transition-colors">About</Link>
