@@ -73,15 +73,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
             data-cursor="Home"
           >
             {/* Transparent Trisecure Brand Logo */}
-            <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+            <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/images/trisecure_logo.png"
                 alt="Trisecure Solutions Logo"
-                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(56,189,248,0.35)]"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-xl tracking-tight font-bold text-[#1A1A16] leading-none group-hover:text-[#7C8B6F] transition-colors">
+              <span className="font-serif text-xl tracking-tight font-bold text-[#1A1A16] leading-none group-hover:text-[#0072EF] transition-colors">
                 TRISECURE
               </span>
               <span className="font-mono text-[9px] tracking-[0.25em] text-[#7A7A70] uppercase font-semibold mt-0.5">
@@ -161,7 +161,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
               <img
                 src="/images/trisecure_logo.png"
                 alt="Trisecure Solutions Logo"
-                className="w-10 h-10 object-contain filter drop-shadow-[0_2px_8px_rgba(56,189,248,0.4)]"
+                className="w-10 h-10 object-contain"
               />
               <div className="flex flex-col">
                 <span className="font-serif text-2xl tracking-tight font-bold text-white leading-none">
@@ -190,7 +190,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
                     <span className="font-mono text-xs text-[#7C8B6F] mr-3">0{idx + 1}</span>
                     <span
                       className={`font-serif text-3xl sm:text-4xl tracking-tight transition-colors ${
-                        isActive ? 'text-[#C9AF6B] italic' : 'text-white group-hover:text-[#7C8B6F]'
+                        isActive ? 'text-[#0072EF] italic' : 'text-white group-hover:text-[#0072EF]'
                       }`}
                     >
                       {link.name}
@@ -207,7 +207,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
               <p className="font-mono text-xs text-white/50">Direct Advisory Line</p>
               <a
                 href="tel:+918585999922"
-                className="font-serif text-lg text-[#F5F0E6] hover:text-[#C9AF6B] transition-colors"
+                className="font-serif text-lg text-[#F5F0E6] hover:text-[#0072EF] transition-colors"
               >
                 +91 8585999922
               </a>
@@ -217,7 +217,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
                 setMobileMenuOpen(false);
                 onOpenConsultation();
               }}
-              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#7C8B6F] text-[#F5F0E6] font-semibold text-xs uppercase tracking-wider hover:bg-[#C9AF6B] hover:text-[#1A1A16] transition-colors flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#7C8B6F] text-[#F5F0E6] font-semibold text-xs uppercase tracking-wider hover:bg-[#0072EF] hover:text-white transition-colors flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4" />
               <span>Book Consultation</span>

@@ -40,15 +40,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
           {/* Col 1: Brand Wordmark & Mission (4 cols) */}
           <div className="md:col-span-12 lg:col-span-4 space-y-6">
             <Link to="/" className="inline-flex items-center gap-3.5 group">
-              <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0">
+              <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shrink-0">
                 <img
                   src="/images/trisecure_logo.png"
                   alt="Trisecure Solutions Logo"
-                  className="w-full h-full object-contain filter drop-shadow-[0_2px_10px_rgba(56,189,248,0.4)]"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-2xl tracking-tight font-bold text-white group-hover:text-[#38BDF8] transition-colors leading-none">
+                <span className="font-serif text-2xl tracking-tight font-bold text-white group-hover:text-[#0072EF] transition-colors leading-none">
                   TRISECURE
                 </span>
                 <span className="font-mono text-[9px] tracking-[0.25em] text-[#C9AF6B] uppercase font-semibold mt-1">
@@ -219,14 +219,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
           </div>
         </div>
 
-        {/* Large Typographic Masthead Banner with Vibrant Blue Hover State */}
+        {/* Large Typographic Masthead Banner with Exact Logo Blue Color & Clean No-Rays Hover State */}
         <div className="py-12 sm:py-16 border-b border-white/10 text-center select-none overflow-hidden group">
           <Link
             to="/"
             className="inline-block"
             data-cursor="Home"
           >
-            <h2 className="font-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-bold text-white/90 group-hover:text-[#38BDF8] tracking-tight leading-none transition-all duration-500 ease-out cursor-pointer hover:scale-[1.02] active:scale-[0.99] filter group-hover:drop-shadow-[0_0_50px_rgba(56,189,248,0.6)]">
+            <h2 className="font-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-bold text-white/90 group-hover:text-[#0072EF] tracking-tight leading-none transition-colors duration-300 ease-out cursor-pointer">
               TRISECURE
             </h2>
           </Link>
