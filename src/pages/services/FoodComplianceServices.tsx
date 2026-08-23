@@ -97,7 +97,7 @@ export const FoodComplianceServices: React.FC<FoodComplianceServicesProps> = ({
       <section className="py-24 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="mb-16">
-            <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3">
+            <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3 font-semibold">
               // Regulatory Practice Disciplines
             </span>
             <h2 className="font-serif text-display-sub font-bold text-[#1A1A16] tracking-tight">

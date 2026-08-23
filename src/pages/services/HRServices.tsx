@@ -75,7 +75,7 @@ export const HRServices: React.FC<HRServicesProps> = ({ onOpenConsultation }) =>
       <section className="py-24 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3">
+            <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3 font-semibold">
               // Core Methodology
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16]">

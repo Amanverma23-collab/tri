@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, CheckCircle2, ArrowUpRight, Sparkles, Building2, Store, Factory, Utensils } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, FileCheck, Clock, MapPin, AlertCircle, Sparkles, Building2, Store, Factory, Utensils } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 
@@ -15,20 +15,20 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
     {
       id: 'fssai',
       title: 'FSSAI License',
-      subtitle: 'Food Safety and Standards Authority of India',
-      category: 'Food Safety & Hygiene',
+      subtitle: 'Food Safety & Standards Authority of India',
+      category: 'Statutory Food & Safety',
       color: '#7C8B6F',
       bgClass: 'bg-[#7C8B6F] text-[#F5F0E6]',
-      jurisdiction: 'Pan-India (Basic, State, Central)',
-      validity: '1 to 5 Years with Auto-Renewal Alert',
+      jurisdiction: 'Pan-India (State & Central Authorities)',
+      validity: '1 to 5 Years (Renewable)',
       timeline: '15 to 60 Business Days',
       summary:
-        'Mandatory statutory registration & licensing for any entity dealing with manufacturing, processing, storage, distribution, packaging, or sale of food products.',
+        'Mandatory 14-digit registration or license required for all Food Business Operators (FBOs) in India including manufacturers, traders, restaurants, cloud kitchens, and grocery retailers.',
       keyPoints: [
-        'Basic Registration: For turnover up to ₹12 Lakhs/year',
-        'State License: For turnover ₹12 Lakhs to ₹20 Crores/year',
-        'Central License: For turnover > ₹20 Crores, 100% EOU, or multi-state ops',
-        'Mandatory Food Recall Plan & FoSTaC certified supervisor documentation',
+        'Basic Registration: Annual turnover up to ₹12 Lakhs',
+        'State License: Annual turnover between ₹12 Lakhs and ₹20 Crores',
+        'Central License: Annual turnover exceeding ₹20 Crores, importers, and multi-state chains',
+        'Mandatory FoSTaC certified supervisor compliance advisory',
       ],
     },
     {
@@ -115,10 +115,10 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
 
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <button
-                  onClick={() => onOpenConsultation('Licenses')}
+                  onClick={() => onOpenConsultation('Statutory Licenses')}
                   className="btn-editorial-primary text-xs"
                 >
-                  <span>Schedule Licensing Review</span>
+                  <span>Fast-Track License Application</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -126,18 +126,18 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
                   to="/pricing"
                   className="btn-editorial-secondary text-xs"
                 >
-                  <span>View Fee Schedules</span>
+                  <span>View Licensing Fee Schedule</span>
                 </Link>
               </div>
 
-              {/* Bottom Metrics Bar */}
+              {/* Bottom Quick Metrics Strip */}
               <div className="pt-6 grid grid-cols-3 gap-4 border-t border-[#1A1A16]/10 max-w-lg">
                 <div>
                   <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
-                    04
+                    100%
                   </span>
                   <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
-                    Core Permit Desks
+                    Approval Success
                   </p>
                 </div>
                 <div>
@@ -210,11 +210,11 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
                         <Factory className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="font-serif text-sm font-bold text-[#1A1A16]">DPCC License</h4>
-                        <p className="font-sans text-[11px] text-[#7A7A70]">CTE / CTO Pollution Clearances</p>
+                        <h4 className="font-serif text-sm font-bold text-[#1A1A16]">DPCC Consent</h4>
+                        <p className="font-sans text-[11px] text-[#7A7A70]">CTE & CTO Pollution Control Permits</p>
                       </div>
                     </div>
-                    <span className="font-mono text-[10px] text-[#1A1A16] font-bold">20-45 Days</span>
+                    <span className="font-mono text-[10px] text-white/70 font-bold">20-45 Days</span>
                   </div>
 
                   <div className="flex items-center justify-between p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
@@ -243,14 +243,14 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
-              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-2">
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-2 font-semibold">
                 // Interactive Matrix
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
                 Statutory License Matrix
               </h2>
             </div>
-            <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-sm">
+            <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-sm font-light">
               Click or select any license node in the cluster below to inspect technical requirements, jurisdiction, and timelines.
             </p>
           </div>
@@ -264,7 +264,7 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
                   <button
                     key={lic.id}
                     onClick={() => setActiveLicense(idx)}
-                    className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between ${
+                    className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between group ${
                       isActive
                         ? 'bg-[#1A1A16] text-[#F5F0E6] border-[#1A1A16] shadow-xl translate-x-2'
                         : 'bg-[#F5F0E6] text-[#1A1A16] border-[#1A1A16]/10 hover:bg-[#EFE9DC]'
@@ -282,7 +282,7 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
                         {lic.title}
                       </h3>
                       <p
-                        className={`font-sans text-xs mt-0.5 ${
+                        className={`font-sans text-xs mt-0.5 font-light ${
                           isActive ? 'text-white/70' : 'text-[#7A7A70]'
                         }`}
                       >
@@ -291,7 +291,7 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
                     </div>
 
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-3 ${
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-3 transition-colors ${
                         isActive ? 'bg-white/20 text-white' : 'bg-[#1A1A16]/5 text-[#1A1A16]'
                       }`}
                     >
@@ -302,85 +302,88 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
               })}
             </div>
 
-            {/* Right Col: Deep-Dive License Inspector Card */}
+            {/* Right Col: Expanded License Detail View */}
             <div className="lg:col-span-7">
-              {licenseData[activeLicense] && (
-                <div
-                  className="rounded-3xl p-8 sm:p-10 border shadow-2xl transition-all duration-500 bg-[#FAF6EE] text-[#1A1A16] border-[#1A1A16]/15"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#1A1A16]/10 mb-6">
-                    <div>
-                      <span className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F] font-semibold block mb-1">
-                        {licenseData[activeLicense].category}
-                      </span>
-                      <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16]">
-                        {licenseData[activeLicense].title}
-                      </h3>
-                    </div>
-                    <button
-                      onClick={() => onOpenConsultation(licenseData[activeLicense].title)}
-                      className="btn-editorial-primary text-xs"
-                    >
-                      <span>Apply for Permit</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+              <div className="bg-[#FAF6EE] rounded-3xl p-8 sm:p-12 border border-[#1A1A16]/15 shadow-2xl space-y-8 relative overflow-hidden transition-all duration-500">
+                {/* Header Strip */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#1A1A16]/10 gap-4">
+                  <div>
+                    <span className="font-mono text-xs text-[#7C8B6F] font-semibold uppercase tracking-wider block mb-1">
+                      {licenseData[activeLicense].category}
+                    </span>
+                    <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16]">
+                      {licenseData[activeLicense].title}
+                    </h3>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10">
-                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">
-                        Jurisdiction / Territory
+                  <span className="font-mono text-xs px-3 py-1.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold tracking-wider self-start sm:self-auto">
+                    {licenseData[activeLicense].validity}
+                  </span>
+                </div>
+
+                {/* Narrative Summary */}
+                <p className="font-sans text-base text-[#7A7A70] leading-relaxed font-light">
+                  {licenseData[activeLicense].summary}
+                </p>
+
+                {/* Metadata Bento Bar */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-[#7C8B6F] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block font-semibold">
+                        Operating Jurisdiction
                       </span>
-                      <p className="font-serif text-sm font-bold text-[#1A1A16] mt-1">
+                      <span className="font-sans text-xs font-semibold text-[#1A1A16]">
                         {licenseData[activeLicense].jurisdiction}
-                      </p>
-                    </div>
-
-                    <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10">
-                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">
-                        Statutory Validity
                       </span>
-                      <p className="font-serif text-sm font-bold text-[#1A1A16] mt-1">
-                        {licenseData[activeLicense].validity}
-                      </p>
                     </div>
+                  </div>
 
-                    <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 sm:col-span-2">
-                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">
+                  <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
+                    <Clock className="w-5 h-5 text-[#7C8B6F] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block font-semibold">
                         Standard Approval Timeline
                       </span>
-                      <p className="font-serif text-sm font-bold text-[#7C8B6F] mt-1">
+                      <span className="font-sans text-xs font-semibold text-[#1A1A16]">
                         {licenseData[activeLicense].timeline}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F] font-semibold mb-2">
-                        // Statutory Overview
-                      </h4>
-                      <p className="font-sans text-sm text-[#7A7A70] leading-relaxed font-light">
-                        {licenseData[activeLicense].summary}
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F] font-semibold mb-3">
-                        // Key Mandates & Coverage
-                      </h4>
-                      <ul className="space-y-2.5">
-                        {licenseData[activeLicense].keyPoints.map((pt, pIdx) => (
-                          <li key={pIdx} className="flex items-start gap-3 font-sans text-xs sm:text-sm text-[#1A1A16]">
-                            <CheckCircle2 className="w-4 h-4 text-[#7C8B6F] shrink-0 mt-0.5" />
-                            <span>{pt}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      </span>
                     </div>
                   </div>
                 </div>
-              )}
+
+                {/* Technical Mandates Checklist */}
+                <div>
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-[#1A1A16] font-bold mb-4">
+                    // Core Statutory Prerequisites
+                  </h4>
+                  <ul className="space-y-3">
+                    {licenseData[activeLicense].keyPoints.map((point, pIdx) => (
+                      <li key={pIdx} className="flex items-start gap-3 text-sm text-[#7A7A70]">
+                        <CheckCircle2 className="w-4 h-4 text-[#7C8B6F] shrink-0 mt-0.5" />
+                        <span className="font-light">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Bottom Action Strip */}
+                <div className="pt-6 border-t border-[#1A1A16]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#7A7A70]">
+                    <ShieldCheck className="w-4 h-4 text-[#7C8B6F]" />
+                    <span>Zero Penalty & Legal Guarantee</span>
+                  </div>
+
+                  <button
+                    onClick={() => onOpenConsultation(licenseData[activeLicense].title)}
+                    className="w-full sm:w-auto btn-editorial-primary text-xs"
+                  >
+                    <span>Apply for {licenseData[activeLicense].title}</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -390,13 +393,13 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
           3. REDESIGNED CTA STRIP: High-Converting Executive Bento Box
           ========================================================================= */}
       <EditorialCtaBanner
-        tagline="// REGULATORY LICENSING DESK"
-        title="Need urgent statutory license clearances for your business?"
-        description="Contact our senior regulatory advisory desk for end-to-end document preparation, municipal inspection audits, and government portal filings with zero delays."
-        primaryBtnText="Consult Regulatory Desk"
-        secondaryBtnText="Inspect Fee Schedules"
+        tagline="// STATUTORY COMPLIANCE PRACTICE"
+        title="Need assistance filing or renewing your trade licenses?"
+        description="Connect directly with our regulatory liaison desk to audit your current permissions, resolve government queries, and fast-track statutory renewals."
+        primaryBtnText="Consult Licensing Lead"
+        secondaryBtnText="Inspect Fee Schedule"
         secondaryBtnLink="/pricing"
-        serviceCategory="Licenses"
+        serviceCategory="Statutory Licenses"
         onOpenConsultation={onOpenConsultation}
       />
     </PageTransition>

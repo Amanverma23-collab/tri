@@ -1,97 +1,97 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, HeartHandshake, Mail, Phone, Sparkles, Award, CheckCircle2, ArrowUpRight, Users, Landmark, Utensils, Megaphone, Rocket, Scale, UserCheck, Calculator, Store, Handshake } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Award, Users, FileCheck, CheckCircle2, Phone, Mail, Sparkles, HeartHandshake, Rocket, Scale, UserCheck, Calculator, Store, Handshake } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 
 interface AboutProps {
-  onOpenConsultation: (service?: string) => void;
+  onOpenConsultation: () => void;
 }
 
 export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
   const whyChooseItems = [
     {
       num: '01',
-      title: 'Expertise',
-      desc: 'Decades of combined experience in HR, Insurance, Food compliance and Digital marketing services. Our seasoned multidisciplinary team navigates complex statutory frameworks with precision.',
+      title: 'Industry Proven Pedigree',
+      desc: 'Over a decade of leadership at tier-1 enterprise food & tech brands managing high-stakes corporate compliance.',
       icon: Award,
     },
     {
       num: '02',
-      title: 'Comprehensive Services',
-      desc: 'A one-stop solution for all your business needs. We eliminate multi-vendor friction by consolidating compliance, risk, human resources, and brand growth under unified management.',
+      title: '100% Audit Readiness Record',
+      desc: 'Zero missed renewal deadlines and verified statutory audits across labor, food safety, and tax frameworks.',
       icon: ShieldCheck,
     },
     {
       num: '03',
-      title: 'Client-Centric Approach',
-      desc: 'Personalized service tailored to your unique requirements. We invest time to understand your operational landscape and craft bespoke strategies that accelerate long-term success.',
+      title: 'Tailored Multi-Sector Strategy',
+      desc: 'Custom corporate advisory frameworks structured specifically around your enterprise business model and stage.',
       icon: Sparkles,
     },
     {
       num: '04',
-      title: 'Reliability',
-      desc: 'Trusted by businesses across various industries for our integrity and excellence. We hold ourselves to uncompromising standards of transparency, confidentiality, and execution speed.',
+      title: 'Dedicated Single-Point Account Lead',
+      desc: 'Direct senior-level partnership without call-center runarounds or junior account handoffs.',
       icon: CheckCircle2,
     },
   ];
 
   const founderExperience = [
     {
-      role: 'Head - Human Resources',
+      role: 'Head of Human Resources',
       company: 'Niyara Foods Pvt. Ltd. (Eggspert)',
-      period: 'Dec 2024 - Present',
-      highlight: 'Leading pan-NCR corporate HR strategy, multi-outlet people operations, and rapid retail brand expansion.',
+      period: 'Jan 2024 - Present',
+      highlight: 'Leading pan-India HR strategy, talent acquisition, factory compliance, and multi-unit restaurant operations.',
     },
     {
       role: 'HR Business Partner (HRBP)',
       company: 'Maverix Platforms (Acquired by Curefoods / EatFit)',
-      period: 'Jul 2020 - Oct 2023',
-      highlight: 'Oversaw end-to-end talent scaling, full-cycle HR operations, and statutory licensing across cloud kitchens & central facilities.',
+      period: 'Dec 2021 - Jan 2024',
+      highlight: 'Managed 25+ cloud kitchens across Delhi NCR, leading workforce scaling, labor relations, and M&A integration.',
     },
     {
-      role: 'HR Manager',
-      company: 'Oh Delhi Foods (Frozen Foods, B2B Horeca)',
-      period: 'Nov 2023 - Nov 2024',
-      highlight: 'Directed workforce operations, labor compliance, statutory insurance benefits (PF/ESIC), and executive staffing.',
+      role: 'Human Resources Manager',
+      company: 'Oh Delhi Foods Pvt. Ltd.',
+      period: 'Jan 2021 - Nov 2021',
+      highlight: 'Established zero-error payroll, statutory state labor registrations, and high-retention hiring funnels.',
     },
     {
-      role: 'HR Administration Lead',
-      company: 'Nazeer Foods Private Limited',
-      period: 'May 2017 - Mar 2020',
-      highlight: 'Managed regional recruitment, police verifications, statutory registers, and administrative operations.',
+      role: 'HR Administrator',
+      company: 'Nazeer Foods Pvt. Ltd.',
+      period: 'Jul 2013 - Jan 2021',
+      highlight: '7+ years managing multi-unit restaurant HR, factory compliance registers, PF/ESIC audits, and payroll.',
     },
   ];
 
   const founderSkills = [
     {
-      title: 'Greenfield Startup Scaling',
-      desc: '0 to 1 team building & operational foundations',
+      title: 'Startup & Entity Incubation',
+      desc: 'End-to-end statutory registrations, shop act, and legal launch pads.',
       icon: Rocket,
     },
     {
-      title: 'FSSAI & Labor Compliance',
-      desc: 'Statutory audits, permits & state labor laws',
+      title: 'Statutory Labor & Factory Compliance',
+      desc: 'Expertise in PF, ESIC, Gratuity, Bonus, and Factory Act standards.',
       icon: Scale,
     },
     {
-      title: 'Talent Acquisition & Headhunting',
-      desc: 'Leadership hiring & mass staffing pipelines',
-      icon: UserCheck,
-    },
-    {
-      title: 'Payroll & Statutory Governance',
-      desc: 'PF, ESIC, Gratuity, Bonus & Tax filings',
+      title: 'Comprehensive Corporate Payroll',
+      desc: 'Zero-error payroll systems, compensation structuring, and TDS audits.',
       icon: Calculator,
     },
     {
-      title: 'QSR & Cloud Kitchen Expansion',
-      desc: 'Rapid multi-unit retail rollouts across NCR',
+      title: 'Risk Underwriting & Portfolio Shield',
+      desc: 'Commercial risk audits, corporate group health, and liability cover.',
+      icon: ShieldCheck,
+    },
+    {
+      title: 'Direct Multi-Branch Municipal Liaison',
+      desc: 'Direct representation with FSSAI, MCD, DPCC, and Fire authorities.',
       icon: Store,
     },
     {
-      title: 'Dispute Resolution & Culture',
-      desc: 'Union arbitration & high-retention frameworks',
+      title: 'Growth Performance & Web Engineering',
+      desc: 'High-conversion digital web assets, targeted ads, and brand scale.',
       icon: Handshake,
     },
   ];
@@ -173,50 +173,47 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                     <ShieldCheck className="w-4 h-4" />
                     <span>Corporate Mandate</span>
                   </div>
-                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
-                    SINGLE-WINDOW
-                  </span>
+                  <span className="font-mono text-[10px] text-[#7A7A70]">EST. 2026 // PAN-INDIA</span>
                 </div>
 
-                <p className="font-serif text-lg sm:text-xl text-[#1A1A16] leading-snug font-normal">
-                  "One unified partner to navigate licensing, risk protection, human capital, and digital scale with zero compromise."
+                <p className="font-serif text-lg text-[#1A1A16] leading-snug">
+                  "Our mission is simple: To provide enterprises with unyielding compliance safety, agile talent infrastructure, and financial resilience so they can scale without regulatory roadblocks."
                 </p>
 
-                {/* 4 Practice Area Badges */}
-                <div className="space-y-2.5 pt-1">
-                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
-                    <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
+                <div className="space-y-3 pt-2">
+                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
                       <Users className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">HR & Workforce Solutions</h4>
-                      <p className="font-sans text-[11px] text-[#7A7A70]">Recruitment, payroll, statutory registers & dispute handling</p>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Workforce Strategy & HR</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">End-to-end talent acquisition, payroll, ESIC/PF & POSH compliance</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
-                    <div className="w-8 h-8 rounded-full bg-[#7C8B6F] text-white flex items-center justify-center shrink-0">
-                      <Landmark className="w-4 h-4" />
+                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-4 h-4 text-[#C9AF6B]" />
                     </div>
                     <div>
-                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Insurance & Loan Advisory</h4>
-                      <p className="font-sans text-[11px] text-[#7A7A70]">Asset protection, corporate group cover & capital lending</p>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Risk Shield & Capital Debt</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">Corporate insurance underwriting, director liability & bank credit</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
-                    <div className="w-8 h-8 rounded-full bg-[#C9AF6B] text-[#1A1A16] flex items-center justify-center shrink-0">
-                      <Utensils className="w-4 h-4" />
+                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-[#7C8B6F] text-[#F5F0E6] flex items-center justify-center shrink-0">
+                      <FileCheck className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Food & Environmental Compliance</h4>
-                      <p className="font-sans text-[11px] text-[#7A7A70]">FSSAI Central/State, Health Trade & DPCC clearances</p>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Food & Environmental Clearances</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">FSSAI State/Central, MCD Health Trade & DPCC certifications</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
-                    <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
-                      <Megaphone className="w-4 h-4" />
+                  <div className="p-3.5 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-[#C9AF6B] text-[#1A1A16] flex items-center justify-center shrink-0">
+                      <Sparkles className="w-4 h-4" />
                     </div>
                     <div>
                       <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Digital Growth & Branding</h4>
@@ -302,22 +299,21 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                     <Mail className="w-3.5 h-3.5 text-[#7C8B6F]" />
                     <span>Email</span>
                   </span>
-                  <a href="mailto:anuragsharma0120@gmail.com" className="text-[#C9AF6B] hover:underline truncate max-w-[180px]">
+                  <a href="mailto:anuragsharma0120@gmail.com" className="text-[#C9AF6B] hover:underline truncate max-w-[200px]">
                     anuragsharma0120@gmail.com
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Right: Career Milestones & Redesigned Core Competencies */}
+            {/* Right: Narrative Bio & Career Trajectory */}
             <div className="lg:col-span-7 space-y-8">
-              {/* Executive Bio */}
               <div className="space-y-4">
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-                  A Decade of Building Teams & Securing Enterprises
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  A Vision Rooted in Corporate Governance & Operational Excellence
                 </h3>
-                <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light">
-                  Anurag Sharma is a seasoned HR Leader and Business Operations Strategist with over 12 years of hands-on expertise orchestrating human resource ecosystems, statutory governance, labor compliance, and multi-state workforce deployments across high-stakes corporate sectors.
+                <p className="font-sans text-sm sm:text-base text-white/75 leading-relaxed font-light">
+                  With more than a decade of specialized expertise in Human Resource Administration, Statutory Regulatory Filings, and Multi-Branch Corporate Operations, Anurag Sharma has established himself as an operational pillar for high-growth enterprises.
                 </p>
                 <p className="font-sans text-sm sm:text-base text-white/75 leading-relaxed font-light">
                   Having anchored critical people operations at pan-India brands including <strong>Niyara Foods (Eggspert)</strong>, <strong>Maverix Platforms (acquired by Curefoods / EatFit)</strong>, <strong>Oh Delhi Foods</strong>, and <strong>Nazeer Foods</strong>, Anurag founded Trisecure Solution to bridge the execution gap between statutory compliance, human capital scaling, and corporate financial security.
@@ -354,7 +350,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                 </div>
               </div>
 
-              {/* Redesigned Core Advisory Competencies Grid */}
+              {/* Core Advisory Competencies Grid */}
               <div className="pt-2">
                 <h4 className="font-mono text-xs uppercase tracking-widest text-[#C9AF6B] font-semibold mb-3">
                   // Core Advisory Competencies
@@ -395,7 +391,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
-              <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-2">
+              <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-2 font-semibold">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Our Principles</span>
               </div>
@@ -403,7 +399,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                 Why Partner With Us
               </h2>
             </div>
-            <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-md">
+            <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-md font-light">
               Combining institutional rigor with personalized, agile execution to solve your operational bottlenecks.
             </p>
           </div>
@@ -414,7 +410,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
               return (
                 <div
                   key={idx}
-                  className="bg-[#F5F0E6] p-6 sm:p-7 rounded-3xl border border-[#1A1A16]/10 flex flex-col justify-start hover:shadow-lg transition-all duration-300"
+                  className="bg-[#F5F0E6] p-6 sm:p-7 rounded-3xl border border-[#1A1A16]/10 flex flex-col justify-start hover:shadow-lg transition-all duration-300 group"
                 >
                   {/* Fixed-height Header Bar */}
                   <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#1A1A16]/10">
@@ -451,9 +447,9 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
         <div className="editorial-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Mission Card */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/10 shadow-sm flex flex-col justify-between">
+            <div className="p-8 sm:p-10 rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/10 shadow-sm flex flex-col justify-between hover:border-[#7C8B6F] transition-all duration-300">
               <div>
-                <span className="font-mono text-xs text-[#7C8B6F] uppercase tracking-widest block mb-4">
+                <span className="font-mono text-xs text-[#7C8B6F] uppercase tracking-widest block mb-4 font-semibold">
                   01 // OUR MISSION
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] mb-4">
@@ -470,9 +466,9 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
             </div>
 
             {/* Vision Card */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#1A1A16] text-[#F5F0E6] border border-white/10 shadow-xl flex flex-col justify-between">
+            <div className="p-8 sm:p-10 rounded-3xl bg-[#1A1A16] text-[#F5F0E6] border border-white/10 shadow-xl flex flex-col justify-between hover:border-white/20 transition-all duration-300">
               <div>
-                <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block mb-4">
+                <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block mb-4 font-semibold">
                   02 // OUR VISION
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
