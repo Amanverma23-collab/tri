@@ -1,17 +1,18 @@
-﻿import React, { useEffect, useRef } from 'react';
+﻿import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ShieldCheck, Sparkles } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export interface SplitSubItem {
   title: string;
   description: string;
-  tag?: string;
+  tag: string;
 }
 
-interface SplitRevealSectionProps {
+export interface SplitRevealSectionProps {
   id?: string;
   badge?: string;
   title: string;
@@ -19,45 +20,41 @@ interface SplitRevealSectionProps {
   subtext?: string;
   imageUrl?: string;
   subItems?: SplitSubItem[];
-  theme?: 'charcoal' | 'olive' | 'cream';
+  theme?: 'charcoal' | 'cream' | 'olive' | 'mustard';
   onOpenConsultation?: (serviceName?: string) => void;
 }
 
 export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
-  id,
-  badge = 'TRISECURE PRACTICE VERTICAL',
+  id = 'split-reveal',
+  badge = 'PRACTICE VERTICAL',
   title,
   subtitle,
   subtext,
   imageUrl,
   subItems = [],
-  theme = 'cream',
+  theme = 'charcoal',
   onOpenConsultation,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const curtainTopRef = useRef<HTMLDivElement>(null);
   const curtainBottomRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-
-    let tl: gsap.core.Timeline | null = null;
-
     const ctx = gsap.context(() => {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const pinDistance = isMobile ? '+=600' : '+=1000';
+
       const mm = gsap.matchMedia();
 
       mm.add(
         {
-          isDesktop: '(min-width: 768px)',
-          isMobile: '(max-width: 767px)',
+          isDesktop: '(min-width: 769px)',
+          isMobile: '(max-width: 768px)',
         },
-        (context) => {
-          const { isDesktop } = context.conditions as { isDesktop: boolean; isMobile: boolean };
-          const pinDistance = isDesktop ? '+=120%' : '+=70%';
-
-          tl = gsap.timeline({
+        () => {
+          const tl = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
               start: 'top top',
@@ -96,7 +93,7 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
           // 2. Revealed heading scales into crisp focus behind the split
           tl.fromTo(
             titleRef.current,
-            { scale: 1.15, opacity: 0.2, y: 30 },
+            { scale: 1.12, opacity: 0.2, y: 25 },
             { scale: 1, opacity: 1, y: 0, ease: 'power2.out', duration: 0.8 },
             0.25
           );
@@ -105,7 +102,7 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
           if (contentRef.current) {
             tl.fromTo(
               contentRef.current,
-              { y: 50, opacity: 0 },
+              { y: 40, opacity: 0 },
               { y: 0, opacity: 1, ease: 'power2.out', duration: 0.8 },
               0.45
             );
@@ -161,21 +158,21 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
               className="absolute top-0 left-0 w-full h-[200%] object-cover object-top filter contrast-105"
             />
             {/* Subtle natural gradient for text readability without white film */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
           </div>
         )}
 
-        {/* Top Curtain Overlay Content */}
-        <div className="editorial-container relative z-10 h-full flex flex-col justify-between pt-24 sm:pt-28 pb-4">
+        {/* Top Curtain Overlay Content with Plenty of Vertical Breathing Room */}
+        <div className="editorial-container relative z-10 h-full flex flex-col justify-between pt-20 sm:pt-24 pb-3">
           <div className="flex items-center justify-between w-full">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A16]/80 text-[#F5F0E6] backdrop-blur-md border border-white/20 font-mono text-xs uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A16]/85 text-[#F5F0E6] backdrop-blur-md border border-white/20 font-mono text-xs uppercase tracking-widest">
               <ShieldCheck className="w-3.5 h-3.5 text-[#C9AF6B]" />
               <span>{badge}</span>
             </div>
           </div>
 
           <div className="w-full">
-            <h3 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#1A1A16] drop-shadow-[0_2px_12px_rgba(255,255,255,0.8)]">
+            <h3 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]">
               {title}
             </h3>
           </div>
@@ -197,15 +194,15 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
               className="absolute -top-full left-0 w-full h-[200%] object-cover object-top filter contrast-105"
             />
             {/* Subtle bottom gradient for subtitle */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
           </div>
         )}
 
         {/* Bottom Curtain Overlay Content */}
-        <div className="editorial-container relative z-10 h-full flex flex-col justify-between pt-4 pb-8 sm:pb-12">
+        <div className="editorial-container relative z-10 h-full flex flex-col justify-between pt-3 pb-8 sm:pb-12">
           <div>
             {subtitle && (
-              <p className="font-serif text-xl sm:text-3xl text-[#1A1A16] font-medium italic drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]">
+              <p className="font-serif text-lg sm:text-2xl lg:text-3xl text-white/95 font-medium italic drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
                 {subtitle}
               </p>
             )}
@@ -225,7 +222,7 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
 
           <h2
             ref={titleRef}
-            className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-none mb-3 text-[#1A1A16]"
+            className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight uppercase leading-[1.08] mb-3 text-[#1A1A16]"
           >
             {title}
           </h2>
@@ -253,18 +250,13 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
                   key={idx}
                   className="p-5 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/10 hover:border-[#7C8B6F] transition-all duration-300 shadow-sm group"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono text-xs text-[#C9AF6B] font-bold">0{idx + 1}</span>
-                    {item.tag && (
-                      <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-[#1A1A16]/5 uppercase text-[#7A7A70]">
-                        {item.tag}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-serif text-lg font-bold mb-1.5 text-[#1A1A16] group-hover:text-[#7C8B6F] transition-colors">
+                  <span className="font-mono text-[10px] text-[#7C8B6F] uppercase tracking-wider block mb-1.5 font-semibold">
+                    {item.tag}
+                  </span>
+                  <h4 className="font-serif text-base font-bold text-[#1A1A16] mb-1.5 group-hover:text-[#7C8B6F] transition-colors">
                     {item.title}
-                  </h3>
-                  <p className="font-sans text-xs text-[#7A7A70] leading-relaxed font-light line-clamp-3">
+                  </h4>
+                  <p className="font-sans text-xs text-[#7A7A70] leading-relaxed font-light">
                     {item.description}
                   </p>
                 </div>
@@ -272,15 +264,15 @@ export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
             </div>
           )}
 
+          {/* Direct CTA Link */}
           {onOpenConsultation && (
-            <div className="mt-6 flex items-center gap-4">
+            <div className="pt-6 flex items-center gap-4">
               <button
                 onClick={() => onOpenConsultation(title)}
                 className="btn-editorial-primary text-xs"
-                data-cursor="Consult"
               >
-                <span>Consult On {title}</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <span>Schedule Consultation</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
