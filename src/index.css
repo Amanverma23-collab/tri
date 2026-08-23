@@ -48,105 +48,100 @@
   --font-mono: 'Space Grotesk', ui-monospace, monospace;
 }
 
-/* Paper Grain Texture Overlay */
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-cream);
-  color: var(--text-charcoal);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(rgba(26, 26, 22, 0.035) 1px, transparent 0);
-  background-size: 24px 24px;
-}
-
-/* Dark mode section grain */
-.bg-charcoal-textured {
-  background-color: var(--bg-charcoal);
-  background-image: radial-gradient(rgba(245, 240, 230, 0.04) 1px, transparent 0);
-  background-size: 24px 24px;
-}
-
-/* Custom Selection */
-::selection {
-  background-color: #1A1A16;
-  color: #F5F0E6;
-}
-
-.dark-section ::selection {
-  background-color: #C9AF6B;
+html {
+  background-color: #F5F0E6;
   color: #1A1A16;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-/* Global Container */
+body {
+  background-color: #F5F0E6;
+  color: #1A1A16;
+  overflow-x: hidden;
+}
+
+/* Texture Overlays */
+.bg-cream-textured {
+  background-color: #F5F0E6;
+  background-image: radial-gradient(rgba(26, 26, 22, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.bg-charcoal-textured {
+  background-color: #1A1A16;
+  background-image: radial-gradient(rgba(245, 240, 230, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Editorial Container System */
 .editorial-container {
   width: 100%;
-  max-width: 1380px;
+  max-width: 1360px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .editorial-container {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .editorial-container {
     padding-left: 4rem;
     padding-right: 4rem;
   }
 }
 
-/* Editorial Typography Helpers */
-.font-display {
+/* High-Fashion Editorial Typography Rules */
+.font-editorial-title {
   font-family: var(--font-serif);
-}
-
-.text-display-giant {
-  font-family: var(--font-serif);
-  font-size: clamp(3.5rem, 11vw, 11rem);
-  line-height: 0.9;
+  font-weight: 700;
   letter-spacing: -0.03em;
-}
-
-.text-display-hero {
-  font-family: var(--font-serif);
-  font-size: clamp(2.75rem, 7.5vw, 7rem);
-  line-height: 0.95;
-  letter-spacing: -0.025em;
-}
-
-.text-display-sub {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 4.5vw, 4.25rem);
   line-height: 1.05;
-  letter-spacing: -0.02em;
 }
 
-/* Editorial Numerals & Markers */
-.editorial-marker {
-  font-family: var(--font-mono);
-  font-size: clamp(1rem, 1.8vw, 1.4rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  opacity: 0.85;
-}
-
-.editorial-numeral-giant {
+.font-editorial-subtitle {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 9vw, 8.5rem);
-  line-height: 0.8;
-  font-weight: 300;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+}
+
+/* Large Display Typographic Scale */
+.text-display-huge {
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 0.95;
   letter-spacing: -0.04em;
 }
 
-/* Diagonal & Angular Section Breaks */
+.text-display-main {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.text-display-sub {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Asymmetric Bento Box Clip Paths */
 .clip-diagonal-top {
   clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
 }
@@ -294,23 +289,25 @@ body {
   background: #1A1A16;
 }
 
-/* 360 Degree Continuous Logo Rotation */
-@keyframes spin-continuous {
-  from {
-    transform: rotate(0deg);
+/* 360 Degree Continuous Horizontal (Left-to-Right) Logo 3D Rotation */
+@keyframes spin-horizontal-left-right {
+  0% {
+    transform: perspective(600px) rotateY(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: perspective(600px) rotateY(-360deg);
   }
 }
 
 .animate-logo-spin {
-  animation: spin-continuous 10s linear infinite;
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: spin-horizontal-left-right 6s linear infinite;
   transform-origin: center center;
   will-change: transform;
 }
 
 .group:hover .animate-logo-spin,
 .animate-logo-spin:hover {
-  animation-duration: 3.5s;
+  animation-duration: 2.2s;
 }
