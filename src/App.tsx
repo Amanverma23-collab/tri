@@ -33,7 +33,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { FloatingContactWidget } from './components/FloatingContactWidget';
 import { ConsultationModal } from './components/ConsultationModal';
-import { CustomCursor } from './components/CustomCursor';
+
 import { SmoothScrollProvider } from './components/SmoothScrollProvider';
 import { SEO } from './components/SEO';
 import { CookieBanner } from './components/CookieBanner';
@@ -110,7 +110,7 @@ export function App() {
       <SmoothScrollProvider>
         <div className="min-h-screen bg-[#F5F0E6] text-[#1A1A16] flex flex-col font-sans relative selection:bg-[#1A1A16] selection:text-[#F5F0E6]">
           {/* Interactive Custom Cursor */}
-          <CustomCursor />
+          
 
           {/* Persistent Editorial Sticky Navbar */}
           <Navbar onOpenConsultation={handleOpenConsultation} />
