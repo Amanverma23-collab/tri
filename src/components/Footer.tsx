@@ -35,12 +35,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
       </div>
 
       {/* =========================================================================
-          MOBILE-ONLY VIEW (< md): Perfectly Balanced Left / Right & Middle Margins
+          MOBILE-ONLY VIEW (< md): Clean Minimalist Footer with Centered Brand & Giant Masthead
           ========================================================================= */}
-      <div className="md:hidden editorial-container px-6 pt-10 pb-8 space-y-7">
+      <div className="md:hidden editorial-container px-6 pt-10 pb-8 space-y-6">
         
-        {/* Mobile Brand Wordmark (Centered with balanced padding) */}
-        <div className="space-y-3 text-center flex flex-col items-center justify-center max-w-xs mx-auto">
+        {/* Mobile Brand Wordmark (Centered) */}
+        <div className="space-y-2.5 text-center flex flex-col items-center justify-center max-w-xs mx-auto">
           <Link to="/" className="inline-flex items-center justify-center gap-3">
             <div className="w-10 h-10 flex items-center justify-center shrink-0">
               <img
@@ -62,112 +62,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
           <p className="font-sans text-xs text-white/70 leading-relaxed font-light text-center">
             Business Solutions, Simplified. End-to-end statutory licensing, workforce architecture, and corporate advisory under a single desk.
           </p>
-        </div>
-
-        {/* Mobile 2-Column Matrix: Equal Widths, Perfectly Balanced Gap & Alignment */}
-        <div className="pt-4 border-t border-white/10">
-          <div className="grid grid-cols-2 gap-6 items-start max-w-sm mx-auto">
-            
-            {/* Left Column: Regulatory Matrix */}
-            <div className="space-y-3">
-              <span className="font-mono text-[11px] text-[#C9AF6B] tracking-widest uppercase block font-semibold">
-                // Regulatory
-              </span>
-              <ul className="space-y-2.5 font-mono text-[11px] text-white/60">
-                <li
-                  onClick={() => onOpenConsultation('FSSAI License')}
-                  className="cursor-pointer hover:text-white transition-colors truncate block"
-                >
-                  • FSSAI Permits
-                </li>
-                <li
-                  onClick={() => onOpenConsultation('Shop Act')}
-                  className="cursor-pointer hover:text-white transition-colors truncate block"
-                >
-                  • Shop Act Reg.
-                </li>
-                <li
-                  onClick={() => onOpenConsultation('DPCC Clearances')}
-                  className="cursor-pointer hover:text-white transition-colors truncate block"
-                >
-                  • DPCC NOC (CTO)
-                </li>
-                <li
-                  onClick={() => onOpenConsultation('MCD Health Trade')}
-                  className="cursor-pointer hover:text-white transition-colors truncate block"
-                >
-                  • MCD Trade License
-                </li>
-                <li
-                  onClick={() => onOpenConsultation('Fire NOC')}
-                  className="cursor-pointer hover:text-white transition-colors truncate block"
-                >
-                  • Fire Safety NOC
-                </li>
-                <li
-                  onClick={() => onOpenConsultation('PF ESIC Setup')}
-                  className="cursor-pointer hover:text-white transition-colors truncate block"
-                >
-                  • PF / ESIC Setup
-                </li>
-              </ul>
-            </div>
-
-            {/* Right Column: Practice Verticals */}
-            <div className="space-y-3 pl-1">
-              <span className="font-mono text-[11px] text-[#C9AF6B] tracking-widest uppercase block font-semibold">
-                // Practice
-              </span>
-              <ul className="space-y-2.5 font-sans text-xs">
-                <li>
-                  <Link
-                    to="/services/hr"
-                    className="text-white/70 hover:text-white inline-flex items-center gap-1.5 transition-colors truncate"
-                  >
-                    <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                    <span>HR & Payroll</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services/insurance-loans"
-                    className="text-white/70 hover:text-white inline-flex items-center gap-1.5 transition-colors truncate"
-                  >
-                    <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                    <span>Insurance & Debt</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services/food-compliance"
-                    className="text-white/70 hover:text-white inline-flex items-center gap-1.5 transition-colors truncate"
-                  >
-                    <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                    <span>Food (FSSAI)</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services/digital-marketing"
-                    className="text-white/70 hover:text-white inline-flex items-center gap-1.5 transition-colors truncate"
-                  >
-                    <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                    <span>Digital Scale</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/licenses"
-                    className="text-white/70 hover:text-white inline-flex items-center gap-1.5 transition-colors truncate"
-                  >
-                    <ArrowRight className="w-3 h-3 text-[#C9AF6B] shrink-0" />
-                    <span>License Matrix</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-          </div>
         </div>
 
         {/* Large Typographic Masthead Banner on Mobile */}
