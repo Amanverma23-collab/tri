@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
+import { InfiniteSlider } from '../components/core/infinite-slider';
 
 interface AboutProps {
   onOpenConsultation: (service?: string) => void;
@@ -350,21 +351,46 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       {/* =========================================================================
           3. CORE VALUES & OPERATIONAL RIGOR
           ========================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
+      <section className="py-14 sm:py-28 bg-[#FAF6EE] border-b border-[#1A1A16]/10 overflow-hidden">
         <div className="editorial-container">
-          <div className="max-w-2xl mb-14 space-y-3">
-            <span className="font-mono text-xs text-[#7C8B6F] uppercase tracking-widest font-semibold block">
+          <div className="max-w-2xl mb-8 sm:mb-14 space-y-2 sm:space-y-3">
+            <span className="font-mono text-[10px] sm:text-xs text-[#7C8B6F] uppercase tracking-widest font-semibold block">
               // Institutional Standards
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight leading-tight">
               Principles that govern our practice.
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#7A7A70] font-light">
+            <p className="font-sans text-xs sm:text-base text-[#7A7A70] font-light leading-relaxed">
               Every client engagement is underpinned by stringent governance, precision execution, and absolute confidentiality.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Mobile Continuous InfiniteSlider with Touch Pause */}
+          <div className="md:hidden w-full py-2 overflow-hidden">
+            <InfiniteSlider gap={16} speed={25} speedOnHover={0}>
+              {values.map((v, i) => (
+                <div
+                  key={i}
+                  className="w-[78vw] max-w-[300px] shrink-0 p-6 rounded-3xl bg-[#F5F0E6] border border-[#1A1A16]/10 shadow-sm flex flex-col justify-between min-h-[220px]"
+                >
+                  <div>
+                    <span className="font-mono text-[11px] text-[#7C8B6F] font-bold block mb-2">
+                      // {v.code}
+                    </span>
+                    <h3 className="font-serif text-xl font-bold text-[#1A1A16] mb-2 leading-snug">
+                      {v.title}
+                    </h3>
+                    <p className="font-sans text-xs text-[#7A7A70] font-light leading-relaxed">
+                      {v.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </InfiniteSlider>
+          </div>
+
+          {/* Desktop Original 3-Column Grid (Untouched) */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
             {values.map((v, i) => (
               <div
                 key={i}
