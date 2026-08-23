@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, HeartHandshake, Mail, Phone, Sparkles, Award, CheckCircle2, ArrowUpRight, Users, Landmark, Utensils, Megaphone } from 'lucide-react';
+import { ArrowRight, ShieldCheck, HeartHandshake, Mail, Phone, Sparkles, Award, CheckCircle2, ArrowUpRight, Users, Landmark, Utensils, Megaphone, Rocket, Scale, UserCheck, Calculator, Store, Handshake } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 
 interface AboutProps {
@@ -59,12 +59,36 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
   ];
 
   const founderSkills = [
-    'Greenfield Startup Scaling',
-    'FSSAI & Labor Compliance',
-    'Talent Acquisition & Headhunting',
-    'Payroll & Statutory Governance',
-    'QSR & Cloud Kitchen Expansion',
-    'Dispute Resolution & Culture',
+    {
+      title: 'Greenfield Startup Scaling',
+      desc: '0 to 1 team building & operational foundations',
+      icon: Rocket,
+    },
+    {
+      title: 'FSSAI & Labor Compliance',
+      desc: 'Statutory audits, permits & state labor laws',
+      icon: Scale,
+    },
+    {
+      title: 'Talent Acquisition & Headhunting',
+      desc: 'Leadership hiring & mass staffing pipelines',
+      icon: UserCheck,
+    },
+    {
+      title: 'Payroll & Statutory Governance',
+      desc: 'PF, ESIC, Gratuity, Bonus & Tax filings',
+      icon: Calculator,
+    },
+    {
+      title: 'QSR & Cloud Kitchen Expansion',
+      desc: 'Rapid multi-unit retail rollouts across NCR',
+      icon: Store,
+    },
+    {
+      title: 'Dispute Resolution & Culture',
+      desc: 'Union arbitration & high-retention frameworks',
+      icon: Handshake,
+    },
   ];
 
   return (
@@ -280,7 +304,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
               </div>
             </div>
 
-            {/* Right: Career Milestones & Leadership Credentials */}
+            {/* Right: Career Milestones & Redesigned Core Competencies */}
             <div className="lg:col-span-7 space-y-8">
               {/* Executive Bio */}
               <div className="space-y-4">
@@ -325,20 +349,33 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                 </div>
               </div>
 
-              {/* Core Competencies Badges */}
+              {/* Redesigned Core Advisory Competencies Grid */}
               <div className="pt-2">
                 <h4 className="font-mono text-xs uppercase tracking-widest text-[#C9AF6B] font-semibold mb-3">
                   // Core Advisory Competencies
                 </h4>
-                <div className="flex flex-wrap gap-2">
-                  {founderSkills.map((skill, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-xs text-white font-mono"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {founderSkills.map((skill, idx) => {
+                    const SkillIcon = skill.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#C9AF6B]/40 transition-all duration-300 flex items-start gap-3 group"
+                      >
+                        <div className="w-8 h-8 rounded-xl bg-[#C9AF6B]/15 text-[#C9AF6B] flex items-center justify-center shrink-0 border border-[#C9AF6B]/25 group-hover:scale-105 transition-transform">
+                          <SkillIcon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h5 className="font-serif text-sm font-bold text-white leading-tight">
+                            {skill.title}
+                          </h5>
+                          <p className="font-sans text-[11px] text-white/60 mt-0.5 font-light">
+                            {skill.desc}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

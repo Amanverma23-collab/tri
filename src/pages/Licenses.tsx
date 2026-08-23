@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, CheckCircle2, ArrowUpRight, Sparkles, Building2, Store, Factory, Utensils } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 
 interface LicensesProps {
@@ -91,237 +91,327 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
-      {/* 1. MASTHEAD: Oversized "Licenses We Handle" */}
-      <section className="relative pt-36 pb-20 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
+      {/* =========================================================================
+          1. REDESIGNED MASTHEAD: Editorial 2-Column Hero with License Directory Card
+          ========================================================================= */}
+      <section className="relative pt-32 pb-14 sm:pt-36 sm:pb-18 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
         <div className="editorial-container">
-          <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-4">
-            <span className="w-8 h-px bg-[#7C8B6F]" />
-            <span>Statutory Licensing Portal // Directory</span>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Left Column: Heading, Narrative & Actions */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-mono text-[11px] uppercase tracking-widest shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#C9AF6B] animate-pulse" />
+                <span>STATUTORY LICENSING PORTAL // DIRECTORY</span>
+              </div>
 
-          <h1 className="font-serif text-display-giant text-[#1A1A16] font-bold tracking-tight">
-            Licenses We Handle
-          </h1>
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1A1A16] leading-[1.08]">
+                Licenses We Handle
+              </h1>
 
-          {/* Intro Narrative */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-12 items-start">
-            <div className="lg:col-span-5">
-              <span className="font-mono text-xs text-[#7A7A70] uppercase tracking-widest block mb-3">
-                // Compliance Mandate
-              </span>
-              <p className="font-serif text-2xl sm:text-3xl text-[#1A1A16] leading-snug">
-                Frictionless approval pathways from initial filing to ongoing renewal support.
+              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light max-w-xl">
+                TriSecure Solutions is your trusted single-window partner for statutory business registrations. We handle FSSAI food safety licenses, municipal Shop & Establishment permits, DPCC environmental clearances, and MCD Health Trade sanctions with end-to-end filing and audit support.
               </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() => onOpenConsultation('Licenses')}
+                  className="btn-editorial-primary text-xs"
+                >
+                  <span>Schedule Licensing Review</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <Link
+                  to="/pricing"
+                  className="btn-editorial-secondary text-xs"
+                >
+                  <span>View Fee Schedules</span>
+                </Link>
+              </div>
+
+              {/* Bottom Metrics Bar */}
+              <div className="pt-6 grid grid-cols-3 gap-4 border-t border-[#1A1A16]/10 max-w-lg">
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                    04
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Core Permit Desks
+                  </p>
+                </div>
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#7C8B6F] block">
+                    100%
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Audit Readiness
+                  </p>
+                </div>
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                    Pan-NCR
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    State & Central Scope
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:col-span-7">
-              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light">
-                TriSecure Solutions is your trusted partner for comprehensive licensing services, specializing in obtaining various essential business licenses. We expertly handle FSSAI licenses for food safety compliance, Shop & Establishment licenses for commercial establishments, MCD Trade licenses for businesses operating in Delhi, and DPCC licenses for environmental regulations. Our dedicated team ensures a seamless process from application to approval, providing ongoing compliance support and timely renewals to keep your business running smoothly and legally.
-              </p>
+            {/* Right Column: Statutory License Directory Bento Card */}
+            <div className="lg:col-span-5">
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-xl space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#1A1A16]/10">
+                  <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-wider font-semibold">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Statutory Clearances</span>
+                  </div>
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
+                    GUARANTEED AUDIT COMPLIANCE
+                  </span>
+                </div>
+
+                <p className="font-serif text-lg sm:text-xl text-[#1A1A16] leading-snug font-normal">
+                  "Frictionless approval pathways from initial document verification to official gazette issuance and annual renewals."
+                </p>
+
+                {/* 4 License Category Tiles */}
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#7C8B6F] text-white flex items-center justify-center shrink-0">
+                        <Utensils className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif text-sm font-bold text-[#1A1A16]">FSSAI License</h4>
+                        <p className="font-sans text-[11px] text-[#7A7A70]">Basic, State & Central Food Permits</p>
+                      </div>
+                    </div>
+                    <span className="font-mono text-[10px] text-[#7C8B6F] font-bold">15-60 Days</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#C9AF6B] text-[#1A1A16] flex items-center justify-center shrink-0">
+                        <Store className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Shop & Establishment</h4>
+                        <p className="font-sans text-[11px] text-[#7A7A70]">Commercial Office & Retail Registration</p>
+                      </div>
+                    </div>
+                    <span className="font-mono text-[10px] text-[#C9AF6B] font-bold">3-7 Days</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
+                        <Factory className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif text-sm font-bold text-[#1A1A16]">DPCC License</h4>
+                        <p className="font-sans text-[11px] text-[#7A7A70]">CTE / CTO Pollution Clearances</p>
+                      </div>
+                    </div>
+                    <span className="font-mono text-[10px] text-[#1A1A16] font-bold">20-45 Days</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#7C8B6F] text-white flex items-center justify-center shrink-0">
+                        <Building2 className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Health & Trade License</h4>
+                        <p className="font-sans text-[11px] text-[#7A7A70]">MCD Public Health & Fire Sanctions</p>
+                      </div>
+                    </div>
+                    <span className="font-mono text-[10px] text-[#7C8B6F] font-bold">15-30 Days</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. INTERACTIVE OVERLAPPING VENN / CLUSTER VISUALIZER */}
-      <section className="py-24 sm:py-32 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
+      {/* =========================================================================
+          2. INTERACTIVE OVERLAPPING VENN / CLUSTER VISUALIZER
+          ========================================================================= */}
+      <section className="py-20 sm:py-28 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
-              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3">
-                // Interactive Cluster
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-2">
+                // Interactive Matrix
               </span>
-              <h2 className="font-serif text-display-sub font-bold text-[#1A1A16] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
                 Statutory License Matrix
               </h2>
             </div>
-            <p className="font-sans text-sm text-[#7A7A70] max-w-sm">
+            <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-sm">
               Click or select any license node in the cluster below to inspect technical requirements, jurisdiction, and timelines.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Col: Overlapping Interactive Cluster Nodes */}
-            <div className="lg:col-span-6 relative min-h-[460px] sm:min-h-[520px] flex items-center justify-center p-4">
-              {/* Central Core Emblem */}
-              <div className="absolute w-28 h-28 rounded-full bg-[#1A1A16] text-[#F5F0E6] flex flex-col items-center justify-center text-center p-2 z-20 shadow-2xl border-2 border-[#C9AF6B]/40 select-none">
-                <ShieldCheck className="w-6 h-6 text-[#C9AF6B] mb-0.5" />
-                <span className="font-mono text-[9px] uppercase tracking-widest font-bold">
-                  TRISECURE
-                </span>
-                <span className="font-serif text-[10px] text-white/75 italic">
-                  Clearance Core
-                </span>
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left Col: License Selector Tabs */}
+            <div className="lg:col-span-5 space-y-3">
+              {licenseData.map((lic, idx) => {
+                const isActive = activeLicense === idx;
+                return (
+                  <button
+                    key={lic.id}
+                    onClick={() => setActiveLicense(idx)}
+                    className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between ${
+                      isActive
+                        ? 'bg-[#1A1A16] text-[#F5F0E6] border-[#1A1A16] shadow-xl translate-x-2'
+                        : 'bg-[#F5F0E6] text-[#1A1A16] border-[#1A1A16]/10 hover:bg-[#EFE9DC]'
+                    }`}
+                  >
+                    <div>
+                      <span
+                        className={`font-mono text-[10px] uppercase tracking-wider block mb-1 font-semibold ${
+                          isActive ? 'text-[#C9AF6B]' : 'text-[#7C8B6F]'
+                        }`}
+                      >
+                        {lic.category}
+                      </span>
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold">
+                        {lic.title}
+                      </h3>
+                      <p
+                        className={`font-sans text-xs mt-0.5 ${
+                          isActive ? 'text-white/70' : 'text-[#7A7A70]'
+                        }`}
+                      >
+                        {lic.subtitle}
+                      </p>
+                    </div>
 
-              {/* Node 1: FSSAI (Top Left) */}
-              <button
-                onClick={() => setActiveLicense(0)}
-                data-cursor="Select"
-                className={`absolute top-4 left-4 sm:left-8 w-44 sm:w-56 h-44 sm:h-56 rounded-full transition-all duration-500 p-6 flex flex-col justify-center items-center text-center border shadow-xl ${
-                  activeLicense === 0
-                    ? 'bg-[#7C8B6F] text-[#F5F0E6] scale-105 z-30 ring-8 ring-[#7C8B6F]/20 border-white'
-                    : 'bg-[#EFE9DC] text-[#1A1A16] hover:scale-100 opacity-90 border-[#1A1A16]/10'
-                }`}
-              >
-                <span className="font-mono text-[10px] uppercase tracking-wider mb-1">01 // FOOD</span>
-                <span className="font-serif text-lg sm:text-2xl font-bold leading-tight">
-                  FSSAI License
-                </span>
-                <span className="text-[11px] opacity-75 mt-1 hidden sm:block">
-                  Basic, State & Central
-                </span>
-              </button>
-
-              {/* Node 2: Shop & Establishment (Top Right) */}
-              <button
-                onClick={() => setActiveLicense(1)}
-                data-cursor="Select"
-                className={`absolute top-4 right-4 sm:right-8 w-44 sm:w-56 h-44 sm:h-56 rounded-full transition-all duration-500 p-6 flex flex-col justify-center items-center text-center border shadow-xl ${
-                  activeLicense === 1
-                    ? 'bg-[#C9AF6B] text-[#1A1A16] scale-105 z-30 ring-8 ring-[#C9AF6B]/20 border-white font-bold'
-                    : 'bg-[#FAF6EE] text-[#1A1A16] hover:scale-100 opacity-90 border-[#1A1A16]/10'
-                }`}
-              >
-                <span className="font-mono text-[10px] uppercase tracking-wider mb-1">02 // LABOR</span>
-                <span className="font-serif text-lg sm:text-2xl font-bold leading-tight">
-                  Shop & Act
-                </span>
-                <span className="text-[11px] opacity-75 mt-1 hidden sm:block">
-                  Commercial Premises
-                </span>
-              </button>
-
-              {/* Node 3: DPCC License (Bottom Left) */}
-              <button
-                onClick={() => setActiveLicense(2)}
-                data-cursor="Select"
-                className={`absolute bottom-4 left-4 sm:left-8 w-44 sm:w-56 h-44 sm:h-56 rounded-full transition-all duration-500 p-6 flex flex-col justify-center items-center text-center border shadow-xl ${
-                  activeLicense === 2
-                    ? 'bg-[#1A1A16] text-[#F5F0E6] scale-105 z-30 ring-8 ring-[#1A1A16]/20 border-[#C9AF6B]'
-                    : 'bg-[#FAF6EE] text-[#1A1A16] hover:scale-100 opacity-90 border-[#1A1A16]/10'
-                }`}
-              >
-                <span className="font-mono text-[10px] uppercase tracking-wider mb-1">03 // ENVIRONMENT</span>
-                <span className="font-serif text-lg sm:text-2xl font-bold leading-tight">
-                  DPCC License
-                </span>
-                <span className="text-[11px] opacity-75 mt-1 hidden sm:block">
-                  Pollution Clearances
-                </span>
-              </button>
-
-              {/* Node 4: Health & Trade (Bottom Right) */}
-              <button
-                onClick={() => setActiveLicense(3)}
-                data-cursor="Select"
-                className={`absolute bottom-4 right-4 sm:right-8 w-44 sm:w-56 h-44 sm:h-56 rounded-full transition-all duration-500 p-6 flex flex-col justify-center items-center text-center border shadow-xl ${
-                  activeLicense === 3
-                    ? 'bg-[#262621] text-[#F5F0E6] scale-105 z-30 ring-8 ring-[#262621]/20 border-white'
-                    : 'bg-[#EFE9DC] text-[#1A1A16] hover:scale-100 opacity-90 border-[#1A1A16]/10'
-                }`}
-              >
-                <span className="font-mono text-[10px] uppercase tracking-wider mb-1">04 // MUNICIPAL</span>
-                <span className="font-serif text-lg sm:text-2xl font-bold leading-tight">
-                  Health & Trade
-                </span>
-                <span className="text-[11px] opacity-75 mt-1 hidden sm:block">
-                  MCD Sanitary Permit
-                </span>
-              </button>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-3 ${
+                        isActive ? 'bg-white/20 text-white' : 'bg-[#1A1A16]/5 text-[#1A1A16]'
+                      }`}
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Right Col: Expanded Active License Details */}
-            <div className="lg:col-span-6">
-              {(() => {
-                const current = licenseData[activeLicense];
-                return (
-                  <div className="bg-[#FAF6EE] rounded-3xl p-8 sm:p-12 border border-[#1A1A16]/15 shadow-xl transition-all duration-500 animate-in fade-in">
-                    <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#1A1A16]/10">
-                      <span className="font-mono text-xs text-[#7C8B6F] uppercase tracking-widest font-semibold">
-                        // {current.category}
+            {/* Right Col: Deep-Dive License Inspector Card */}
+            <div className="lg:col-span-7">
+              {licenseData[activeLicense] && (
+                <div
+                  className="rounded-3xl p-8 sm:p-10 border shadow-2xl transition-all duration-500 bg-[#FAF6EE] text-[#1A1A16] border-[#1A1A16]/15"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#1A1A16]/10 mb-6">
+                    <div>
+                      <span className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F] font-semibold block mb-1">
+                        {licenseData[activeLicense].category}
                       </span>
-                      <span className="font-mono text-xs px-3 py-1 rounded-full bg-[#1A1A16] text-[#F5F0E6]">
-                        {current.timeline}
+                      <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16]">
+                        {licenseData[activeLicense].title}
+                      </h3>
+                    </div>
+                    <button
+                      onClick={() => onOpenConsultation(licenseData[activeLicense].title)}
+                      className="btn-editorial-primary text-xs"
+                    >
+                      <span>Apply for Permit</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10">
+                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">
+                        Jurisdiction / Territory
                       </span>
+                      <p className="font-serif text-sm font-bold text-[#1A1A16] mt-1">
+                        {licenseData[activeLicense].jurisdiction}
+                      </p>
                     </div>
 
-                    <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16] mb-2">
-                      {current.title}
-                    </h3>
-                    <p className="font-serif text-base italic text-[#7C8B6F] mb-6">
-                      {current.subtitle}
-                    </p>
-
-                    <p className="font-sans text-base text-[#7A7A70] leading-relaxed mb-6 font-light">
-                      {current.summary}
-                    </p>
-
-                    {/* Metadata Badges */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 p-4 rounded-2xl bg-[#EFE9DC]">
-                      <div>
-                        <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">Jurisdiction</span>
-                        <span className="font-sans text-sm font-semibold text-[#1A1A16]">{current.jurisdiction}</span>
-                      </div>
-                      <div>
-                        <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">Standard Validity</span>
-                        <span className="font-sans text-sm font-semibold text-[#1A1A16]">{current.validity}</span>
-                      </div>
-                    </div>
-
-                    {/* Key Technical Requirements */}
-                    <div className="space-y-3 mb-8">
-                      <span className="font-mono text-xs uppercase tracking-wider text-[#1A1A16] font-bold block">
-                        Compliance Checklist:
+                    <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10">
+                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">
+                        Statutory Validity
                       </span>
-                      {current.keyPoints.map((pt, i) => (
-                        <div key={i} className="flex items-start gap-3 text-sm text-[#7A7A70]">
-                          <CheckCircle2 className="w-4 h-4 text-[#7C8B6F] shrink-0 mt-0.5" />
-                          <span>{pt}</span>
-                        </div>
-                      ))}
+                      <p className="font-serif text-sm font-bold text-[#1A1A16] mt-1">
+                        {licenseData[activeLicense].validity}
+                      </p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 pt-6 border-t border-[#1A1A16]/10">
-                      <Link to="/pricing" className="btn-editorial-primary" data-cursor="Pricing">
-                        <span>View Consultation Charges</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                      <button
-                        onClick={() => onOpenConsultation(current.title)}
-                        className="btn-editorial-secondary"
-                        data-cursor="Consult"
-                      >
-                        <span>Apply For License</span>
-                      </button>
+                    <div className="p-4 rounded-2xl bg-[#F5F0E6] border border-[#1A1A16]/10 sm:col-span-2">
+                      <span className="font-mono text-[10px] uppercase text-[#7A7A70] block">
+                        Standard Approval Timeline
+                      </span>
+                      <p className="font-serif text-sm font-bold text-[#7C8B6F] mt-1">
+                        {licenseData[activeLicense].timeline}
+                      </p>
                     </div>
                   </div>
-                );
-              })()}
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F] font-semibold mb-2">
+                        // Statutory Overview
+                      </h4>
+                      <p className="font-sans text-sm text-[#7A7A70] leading-relaxed font-light">
+                        {licenseData[activeLicense].summary}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F] font-semibold mb-3">
+                        // Key Mandates & Coverage
+                      </h4>
+                      <ul className="space-y-2.5">
+                        {licenseData[activeLicense].keyPoints.map((pt, pIdx) => (
+                          <li key={pIdx} className="flex items-start gap-3 font-sans text-xs sm:text-sm text-[#1A1A16]">
+                            <CheckCircle2 className="w-4 h-4 text-[#7C8B6F] shrink-0 mt-0.5" />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. BOTTOM CROSS-LINK TO PRICING */}
-      <section className="py-20 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
-        <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block mb-2">
-              Fee Schedules //
-            </span>
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-              Consultation Charges & State Fees
-            </h3>
-            <p className="font-sans text-sm text-white/70 mt-1">
-              Transparent, upfront advisory fees for FSSAI Basic/State/Central, MCD Health Trade, and City Shop Acts.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Link to="/pricing" className="btn-editorial-light" data-cursor="Pricing">
-              <span>View Consultation Charges</span>
+      {/* =========================================================================
+          3. BOTTOM CTA STRIP
+          ========================================================================= */}
+      <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6]">
+        <div className="editorial-container text-center max-w-3xl mx-auto space-y-6">
+          <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block">
+            // Fast-Track Approval
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            Need urgent statutory license clearances for your business?
+          </h2>
+          <p className="font-sans text-sm sm:text-base text-[#F5F0E6]/80 font-light">
+            Contact our senior regulatory advisory desk for end-to-end document preparation, municipal inspection audits, and government filings.
+          </p>
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => onOpenConsultation('Licenses')}
+              className="btn-editorial-light"
+            >
+              <span>Consult Regulatory Desk</span>
               <ArrowRight className="w-4 h-4" />
+            </button>
+            <Link
+              to="/pricing"
+              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10"
+            >
+              <span>Inspect Pricing Breakdown</span>
             </Link>
           </div>
         </div>
