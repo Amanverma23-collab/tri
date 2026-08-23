@@ -289,40 +289,40 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
             </div>
 
             {/* Right: Crisp Executive Narrative & 3 Core Leadership Pillars */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-4">
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <div className="lg:col-span-7 space-y-4 sm:space-y-6 pt-3 lg:pt-0">
+              <div className="space-y-2.5 sm:space-y-4">
+                <h3 className="font-serif text-xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
                   A Vision Rooted in Corporate Governance & Operational Excellence
                 </h3>
-                <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                <p className="font-sans text-xs sm:text-base text-white/80 leading-relaxed font-light">
                   With over a decade of specialized leadership in Human Resource Administration, Statutory Regulatory Clearances, and Enterprise Operations, Anurag Sharma founded Trisecure Solutions to deliver single-window corporate advisory for modern enterprises across India.
                 </p>
-                <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                <p className="font-sans text-xs sm:text-base text-white/80 leading-relaxed font-light">
                   Under his direction, Trisecure Solutions bridges the gap between regulatory compliance, workforce scaling, and commercial risk security, enabling businesses to scale seamlessly with 100% audit readiness.
                 </p>
               </div>
 
               {/* 3 Core Leadership Pillars */}
-              <div className="space-y-3 pt-2">
-                <h4 className="font-mono text-xs uppercase tracking-widest text-[#C9AF6B] font-semibold">
+              <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2">
+                <h4 className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[#C9AF6B] font-semibold">
                   // Core Advisory Focus
                 </h4>
-                <div className="grid grid-cols-1 gap-3">
+                <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
                   {leadershipPillars.map((pillar, idx) => {
                     const PillarIcon = pillar.icon;
                     return (
                       <div
                         key={idx}
-                        className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#7C8B6F]/50 transition-colors flex items-start gap-4"
+                        className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 hover:border-[#7C8B6F]/50 transition-colors flex items-start gap-3 sm:gap-4"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-white/10 text-[#C9AF6B] flex items-center justify-center shrink-0">
-                          <PillarIcon className="w-5 h-5" />
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 text-[#C9AF6B] flex items-center justify-center shrink-0">
+                          <PillarIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
                         <div>
-                          <h5 className="font-serif text-base font-bold text-white">
+                          <h5 className="font-serif text-xs sm:text-base font-bold text-white leading-tight">
                             {pillar.title}
                           </h5>
-                          <p className="font-sans text-xs sm:text-sm text-white/70 mt-1 font-light leading-relaxed">
+                          <p className="font-sans text-[11px] sm:text-sm text-white/70 mt-0.5 sm:mt-1 font-light leading-snug sm:leading-relaxed">
                             {pillar.desc}
                           </p>
                         </div>
@@ -333,10 +333,10 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
               </div>
 
               {/* Direct Booking CTA Button */}
-              <div className="pt-4">
+              <div className="pt-2 sm:pt-4">
                 <button
                   onClick={() => onOpenConsultation('Executive Advisory')}
-                  className="btn-editorial-primary text-xs"
+                  className="w-full sm:w-auto py-3 px-6 rounded-full bg-[#F5F0E6] text-[#1A1A16] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#C9AF6B] transition-colors shadow-md cursor-pointer"
                 >
                   <span>Book Executive Consultation with Founder</span>
                   <ArrowRight className="w-4 h-4" />
