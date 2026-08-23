@@ -1,8 +1,9 @@
-﻿import React, { useEffect, useRef, useState, useCallback } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ShieldCheck } from 'lucide-react';
+import { InfiniteSlider } from './core/infinite-slider';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,99 +36,9 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const mobileScrollRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const percentRef = useRef<HTMLDivElement>(null);
-  
-  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Scroll to target card index on mobile
-  const scrollToMobileCard = useCallback((index: number) => {
-    if (!mobileScrollRef.current) return;
-    const container = mobileScrollRef.current;
-    const cardElements = container.querySelectorAll('.mobile-service-card');
-    if (cardElements[index]) {
-      const card = cardElements[index] as HTMLElement;
-      container.scrollTo({
-        left: card.offsetLeft - 20,
-        behavior: 'smooth',
-      });
-      setActiveMobileIndex(index);
-    }
-  }, []);
-
-  // Next Slide (Infinite Loop)
-  const nextSlide = useCallback(() => {
-    setActiveMobileIndex((prev) => {
-      const next = (prev + 1) % cards.length;
-      scrollToMobileCard(next);
-      return next;
-    });
-  }, [cards.length, scrollToMobileCard]);
-
-  // Previous Slide (Infinite Loop)
-  const prevSlide = useCallback(() => {
-    setActiveMobileIndex((prev) => {
-      const prevIdx = (prev - 1 + cards.length) % cards.length;
-      scrollToMobileCard(prevIdx);
-      return prevIdx;
-    });
-  }, [cards.length, scrollToMobileCard]);
-
-  // Auto-scroll ticker on mobile
-  useEffect(() => {
-    if (isPaused) {
-      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-      return;
-    }
-
-    autoPlayTimerRef.current = setInterval(() => {
-      nextSlide();
-    }, 3500);
-
-    return () => {
-      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-    };
-  }, [isPaused, nextSlide]);
-
-  // User Interaction: Pause momentarily on touch / hover, then auto-resume
-  const handleUserInteractionStart = () => {
-    setIsPaused(true);
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-  };
-
-  const handleUserInteractionEnd = () => {
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-    resumeTimerRef.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 4000);
-  };
-
-  // Track active slide on mobile horizontal swipe
-  const handleMobileScroll = () => {
-    if (!mobileScrollRef.current) return;
-    const container = mobileScrollRef.current;
-    const scrollLeft = container.scrollLeft;
-    const cardElements = container.querySelectorAll('.mobile-service-card');
-    
-    let closestIndex = 0;
-    let minDistance = Infinity;
-
-    cardElements.forEach((card, idx) => {
-      const el = card as HTMLElement;
-      const distance = Math.abs(el.offsetLeft - 20 - scrollLeft);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = idx;
-      }
-    });
-
-    setActiveMobileIndex(closestIndex);
-  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -248,115 +159,75 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
               </span>
             </div>
 
-            {/* Mobile Auto-Scroll Controls & Indicators */}
-            <div className="flex md:hidden items-center justify-between w-full pt-2">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[11px] text-[#7C8B6F] font-semibold tracking-wider">
-                  0{activeMobileIndex + 1} / 0{cards.length}
-                </span>
-                <button
-                  onClick={() => setIsPaused(!isPaused)}
-                  className="px-2 py-0.5 rounded-full bg-[#1A1A16]/5 border border-[#1A1A16]/10 font-mono text-[9px] uppercase tracking-wider text-[#1A1A16] flex items-center gap-1"
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full ${isPaused ? 'bg-amber-500' : 'bg-emerald-500 animate-pulse'}`} />
-                  <span>{isPaused ? 'PAUSED' : 'AUTO'}</span>
-                </button>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    handleUserInteractionStart();
-                    prevSlide();
-                    handleUserInteractionEnd();
-                  }}
-                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] shadow-xs active:scale-95 transition-transform"
-                  aria-label="Previous service"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => {
-                    handleUserInteractionStart();
-                    nextSlide();
-                    handleUserInteractionEnd();
-                  }}
-                  className="w-8 h-8 rounded-full bg-white border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] shadow-xs active:scale-95 transition-transform"
-                  aria-label="Next service"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
+            {/* Mobile Continuous Marquee Badge */}
+            <div className="flex md:hidden items-center gap-2 pt-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#1A1A16]/5 border border-[#1A1A16]/10 font-mono text-[10px] uppercase text-[#7C8B6F] font-semibold tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7C8B6F] animate-pulse" />
+                <span>Continuous Stream • Touch to Hold</span>
+              </span>
             </div>
           </div>
         </div>
       </div>
 
       {/* =========================================================================
-          2. MAIN TRACK: AUTO INFINITE SWIPABLE CAROUSEL ON MOBILE & GSAP PIN TRACK ON DESKTOP
+          2. MAIN TRACK: INFINITE SLIDER ON MOBILE & GSAP PIN TRACK ON DESKTOP
           ========================================================================= */}
       
-      {/* Mobile Touch-Friendly Infinite Auto Slidebar */}
-      <div
-        ref={mobileScrollRef}
-        onScroll={handleMobileScroll}
-        onTouchStart={handleUserInteractionStart}
-        onTouchEnd={handleUserInteractionEnd}
-        onMouseEnter={handleUserInteractionStart}
-        onMouseLeave={handleUserInteractionEnd}
-        className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-5 py-3 w-full no-scrollbar"
-        style={{ WebkitOverflowScrolling: 'touch' }}
-      >
-        {cards.map((card, idx) => (
-          <div
-            key={idx}
-            className={`mobile-service-card w-[85vw] max-w-[340px] shrink-0 snap-center rounded-3xl p-6 border flex flex-col justify-between transition-all duration-300 ${getCardStyle(
-              card.theme
-            )}`}
-          >
-            <div>
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-current/15">
-                <span className="font-serif text-3xl font-light">
-                  {card.number}
-                </span>
-                {card.tag && (
-                  <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-current/10 font-semibold tracking-wider flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>{card.tag}</span>
+      {/* Mobile Infinite Continuous Smooth Slider */}
+      <div className="md:hidden w-full py-4 overflow-hidden">
+        <InfiniteSlider gap={16} speed={25} speedOnHover={0}>
+          {cards.map((card, idx) => (
+            <div
+              key={idx}
+              className={`w-[80vw] max-w-[320px] shrink-0 rounded-3xl p-6 border flex flex-col justify-between transition-all duration-300 ${getCardStyle(
+                card.theme
+              )}`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-current/15">
+                  <span className="font-serif text-3xl font-light">
+                    {card.number}
                   </span>
+                  {card.tag && (
+                    <span className="font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full bg-current/10 font-semibold tracking-wider flex items-center gap-1">
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      <span>{card.tag}</span>
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="font-serif text-2xl font-bold tracking-tight mb-1.5 leading-snug">
+                  {card.title}
+                </h3>
+
+                {card.subtitle && (
+                  <p className="font-serif text-sm italic opacity-85 mb-2.5">
+                    {card.subtitle}
+                  </p>
                 )}
-              </div>
 
-              <h3 className="font-serif text-2xl font-bold tracking-tight mb-1.5 leading-snug">
-                {card.title}
-              </h3>
-
-              {card.subtitle && (
-                <p className="font-serif text-sm italic opacity-85 mb-2.5">
-                  {card.subtitle}
+                <p className="font-sans text-xs opacity-80 leading-relaxed font-light line-clamp-3">
+                  {card.description}
                 </p>
-              )}
-
-              <p className="font-sans text-xs opacity-80 leading-relaxed font-light line-clamp-3">
-                {card.description}
-              </p>
-            </div>
-
-            {card.link && (
-              <div className="pt-4 mt-3 border-t border-current/15">
-                <Link
-                  to={card.link}
-                  className="inline-flex items-center justify-between w-full font-mono text-[11px] uppercase tracking-wider font-semibold group"
-                >
-                  <span className="group-hover:underline underline-offset-4">Explore Vertical</span>
-                  <div className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center">
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </div>
-                </Link>
               </div>
-            )}
-          </div>
-        ))}
+
+              {card.link && (
+                <div className="pt-4 mt-3 border-t border-current/15">
+                  <Link
+                    to={card.link}
+                    className="inline-flex items-center justify-between w-full font-mono text-[11px] uppercase tracking-wider font-semibold group"
+                  >
+                    <span className="group-hover:underline underline-offset-4">Explore Vertical</span>
+                    <div className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center">
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+          ))}
+        </InfiniteSlider>
       </div>
 
       {/* Desktop GSAP Pinned Track */}
@@ -422,27 +293,7 @@ export const HorizontalScrollSection: React.FC<HorizontalScrollSectionProps> = (
         </div>
       </div>
 
-      {/* 3. Mobile Interactive Indicator Dots */}
-      <div className="md:hidden flex items-center justify-center gap-2 pt-1 pb-1">
-        {cards.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => {
-              handleUserInteractionStart();
-              scrollToMobileCard(idx);
-              handleUserInteractionEnd();
-            }}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              activeMobileIndex === idx
-                ? 'w-6 bg-[#1A1A16]'
-                : 'w-2 bg-[#1A1A16]/20'
-            }`}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* 4. Desktop Bottom Progress Bar & Track Indicators */}
+      {/* 3. Desktop Bottom Progress Bar & Track Indicators */}
       <div className="editorial-container pb-2 md:pb-4 hidden md:block w-full">
         <div className="flex items-center justify-between gap-6">
           <div className="flex items-center gap-2 font-mono text-[11px] text-[#7C8B6F]">
