@@ -59,6 +59,7 @@ interface CustomServiceSelectProps {
   onChange: (value: string) => void;
   label?: string;
   darkTheme?: boolean;
+  hideTags?: boolean;
 }
 
 export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
@@ -66,6 +67,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
   onChange,
   label = 'Select Practice Focus *',
   darkTheme = false,
+  hideTags = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -187,16 +189,19 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                       <OptionIcon className="w-3.5 h-3.5" />
                     </div>
                     <div className="min-w-0 overflow-hidden">
-                      <span
-                        className={`font-mono text-[9px] uppercase tracking-wider block font-semibold leading-tight ${
-                          isSelected
-                            ? 'text-[#C9AF6B]'
-                            : 'text-[#7C8B6F]'
-                        }`}
-                      >
-                        {option.code} // {option.tag}
-                      </span>
-                      <span className="font-sans text-xs font-semibold block truncate leading-snug mt-0.5">
+                      {/* Render tag only if hideTags is false */}
+                      {!hideTags && (
+                        <span
+                          className={`font-mono text-[9px] uppercase tracking-wider block font-semibold leading-tight ${
+                            isSelected
+                              ? 'text-[#C9AF6B]'
+                              : 'text-[#7C8B6F]'
+                          }`}
+                        >
+                          {option.code} // {option.tag}
+                        </span>
+                      )}
+                      <span className={`font-sans text-xs font-semibold block truncate leading-snug ${!hideTags ? 'mt-0.5' : ''}`}>
                         {option.label}
                       </span>
                     </div>
