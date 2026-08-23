@@ -12,44 +12,44 @@ export interface ServiceOption {
 export const SERVICE_OPTIONS: ServiceOption[] = [
   {
     value: 'HR Services',
-    label: 'HR Services & Payroll',
+    label: 'HR Services & Payroll Management',
     code: '01',
-    tag: 'Workforce',
+    tag: 'Workforce & Statutory',
     icon: Users,
   },
   {
     value: 'Insurance & Loans',
-    label: 'Insurance & Business Loans',
+    label: 'Insurance Underwriting & Business Debt',
     code: '02',
-    tag: 'Capital & Risk',
+    tag: 'Capital & Risk Advisory',
     icon: ShieldCheck,
   },
   {
     value: 'Food Compliance',
-    label: 'Food Compliance (FSSAI/MCD)',
+    label: 'Food Compliance (FSSAI, DPCC, MCD)',
     code: '03',
-    tag: 'Statutory Safety',
+    tag: 'Statutory Safety & Licensing',
     icon: Utensils,
   },
   {
     value: 'Digital Marketing',
-    label: 'Digital Marketing & Web',
+    label: 'Digital Marketing & Performance Brand Scale',
     code: '04',
-    tag: 'Digital Scale',
+    tag: 'Digital Scale & Media',
     icon: TrendingUp,
   },
   {
     value: 'Statutory Licensing',
-    label: 'Statutory Trade Licenses',
+    label: 'Government Trade Permits & Fire NOC',
     code: '05',
-    tag: 'Government Desk',
+    tag: 'Government Regulatory Desk',
     icon: FileText,
   },
   {
     value: 'General Advisory',
-    label: 'General Corporate Advisory',
+    label: 'General Corporate Strategy & Consultation',
     code: '06',
-    tag: 'Executive Strategy',
+    tag: 'Executive Strategic Desk',
     icon: Sparkles,
   },
 ];
@@ -109,13 +109,13 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full p-3.5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
+        className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between group shadow-xs ${
           darkTheme
-            ? 'bg-[#1A1A16] border-white/15 text-white hover:border-[#C9AF6B]'
+            ? 'bg-[#1A1A16] border-white/20 text-white hover:border-[#C9AF6B]'
             : 'bg-white border-[#1A1A16]/15 text-[#1A1A16] hover:border-[#7C8B6F]'
-        }`}
+        } ${isOpen ? (darkTheme ? 'border-[#C9AF6B] ring-1 ring-[#C9AF6B]/30' : 'border-[#0072EF] ring-1 ring-[#0072EF]/30') : ''}`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 overflow-hidden">
           <div
             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
               darkTheme ? 'bg-white/10 text-[#C9AF6B]' : 'bg-[#0072EF]/10 text-[#0072EF]'
@@ -123,12 +123,12 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
           >
             <SelectedIcon className="w-4 h-4" />
           </div>
-          <div>
+          <div className="truncate">
             <div className="flex items-center gap-2">
               <span className="font-mono text-[10px] font-bold text-[#0072EF]">
                 {selectedOption.code}.
               </span>
-              <span className="font-sans text-xs sm:text-sm font-semibold">
+              <span className="font-sans text-xs sm:text-sm font-semibold truncate text-[#1A1A16]">
                 {selectedOption.label}
               </span>
             </div>
@@ -136,16 +136,16 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         </div>
 
         <ChevronDown
-          className={`w-4 h-4 transition-transform duration-300 ${
+          className={`w-4 h-4 transition-transform duration-300 shrink-0 ml-2 ${
             isOpen ? 'rotate-180 text-[#0072EF]' : 'text-[#7A7A70]'
           }`}
         />
       </button>
 
-      {/* Dropdown Options List */}
+      {/* Dropdown Options List with Smooth Scroll & Zero Cutoff */}
       {isOpen && (
         <div
-          className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl overflow-hidden p-2 space-y-1 animate-in fade-in zoom-in-95 duration-200 ${
+          className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl overflow-y-auto max-h-56 p-1.5 space-y-1 animate-in fade-in zoom-in-95 duration-200 ${
             darkTheme
               ? 'bg-[#1A1A16] border-white/20 text-white'
               : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16]'
@@ -173,7 +173,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                     : 'hover:bg-[#EFE9DC] text-[#1A1A16]'
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 overflow-hidden">
                   <div
                     className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
                       isSelected
@@ -185,11 +185,15 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                   >
                     <OptionIcon className="w-3.5 h-3.5" />
                   </div>
-                  <div>
-                    <span className="font-mono text-[10px] text-[#7C8B6F] block font-semibold">
+                  <div className="truncate">
+                    <span
+                      className={`font-mono text-[9px] uppercase tracking-wider block font-semibold ${
+                        isSelected ? (darkTheme ? 'text-[#C9AF6B]' : 'text-[#C9AF6B]') : 'text-[#7C8B6F]'
+                      }`}
+                    >
                       {option.code} // {option.tag}
                     </span>
-                    <span className="font-serif text-xs font-bold block mt-0.5">
+                    <span className="font-sans text-xs sm:text-sm font-semibold block mt-0.5 truncate">
                       {option.label}
                     </span>
                   </div>

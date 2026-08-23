@@ -13,7 +13,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   onClose,
   initialService = '',
 }) => {
-  const safeInitial = typeof initialService === 'string' && initialService.trim() ? initialService : 'General Advisory';
+  const safeInitial = typeof initialService === 'string' && initialService.trim() ? initialService : 'HR Services';
 
   const [formData, setFormData] = useState({
     name: '',
@@ -31,7 +31,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
     if (typeof initialService === 'string' && initialService.trim()) {
       setFormData((prev) => ({ ...prev, service: initialService }));
     } else {
-      setFormData((prev) => ({ ...prev, service: 'General Advisory' }));
+      setFormData((prev) => ({ ...prev, service: 'HR Services' }));
     }
   }, [initialService, isOpen]);
 
