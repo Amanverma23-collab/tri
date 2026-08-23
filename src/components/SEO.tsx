@@ -58,6 +58,16 @@ const routeMetaMap: Record<string, MetaConfig> = {
     description: 'Connect with senior practice leads and Founder Anurag Sharma. Guaranteed response within 2 business hours for business compliance, HR, financing, and licensing.',
     keywords: 'Contact Trisecure, Anurag Sharma Contact, Direct Advisory Desk, Business Consultation Delhi NCR',
   },
+  '/privacy': {
+    title: 'Privacy Policy & Data Protection Governance | Trisecure F&B Solutions',
+    description: 'Our data protection protocols, Digital Personal Data Protection Act compliance, non-disclosure commitments, and secure enterprise information governance.',
+    keywords: 'Trisecure Privacy Policy, Data Protection, DPDP Act India, Confidentiality Standards',
+  },
+  '/terms': {
+    title: 'Terms & Conditions of Advisory Engagement | Trisecure F&B Solutions',
+    description: 'Terms of service, advisory engagement scope, client responsibilities, statutory filing disclaimers, and legal jurisdiction for Trisecure F&B Solutions.',
+    keywords: 'Trisecure Terms of Engagement, Legal Terms, Consulting Agreement, Delhi NCR Jurisdiction',
+  },
 };
 
 export const SEO: React.FC = () => {

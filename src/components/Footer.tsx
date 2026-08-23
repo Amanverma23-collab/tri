@@ -215,6 +215,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
             <Link to="/licenses" className="hover:text-white transition-colors">Licenses</Link>
             <Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link>
             <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Engagement</Link>
           </div>
         </div>
       </div>

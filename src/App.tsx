@@ -15,6 +15,8 @@ import { DigitalMarketingServices } from './pages/services/DigitalMarketingServi
 import { Licenses } from './pages/Licenses';
 import { Pricing } from './pages/Pricing';
 import { Contact } from './pages/Contact';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsConditions } from './pages/TermsConditions';
 import { NotFound } from './pages/NotFound';
 
 // Navigation & Global UI Components
@@ -57,6 +59,8 @@ function AnimatedRoutes({
         <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
         <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<PrivacyPolicy onOpenConsultation={onOpenConsultation} />} />
+        <Route path="/terms" element={<TermsConditions onOpenConsultation={onOpenConsultation} />} />
         <Route path="*" element={<NotFound onOpenConsultation={onOpenConsultation} />} />
       </Routes>
     </AnimatePresence>
