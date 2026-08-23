@@ -13,21 +13,25 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       num: '01',
       title: 'Expertise',
       desc: 'Decades of combined experience in HR, Insurance, Food compliance and Digital marketing services. Our seasoned multidisciplinary team navigates complex statutory frameworks with precision.',
+      icon: Award,
     },
     {
       num: '02',
       title: 'Comprehensive Services',
       desc: 'A one-stop solution for all your business needs. We eliminate multi-vendor friction by consolidating compliance, risk, human resources, and brand growth under unified management.',
+      icon: ShieldCheck,
     },
     {
       num: '03',
       title: 'Client-Centric Approach',
       desc: 'Personalized service tailored to your unique requirements. We invest time to understand your operational landscape and craft bespoke strategies that accelerate long-term success.',
+      icon: Sparkles,
     },
     {
       num: '04',
       title: 'Reliability',
       desc: 'Trusted by businesses across various industries for our integrity and excellence. We hold ourselves to uncompromising standards of transparency, confidentiality, and execution speed.',
+      icon: CheckCircle2,
     },
   ];
 
@@ -384,7 +388,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       </section>
 
       {/* =========================================================================
-          3. WHY CHOOSE US: 4 Pillar Columns
+          3. WHY CHOOSE US: 4 Pillar Columns with Perfect Baseline Alignment
           ========================================================================= */}
       <section className="py-20 sm:py-28 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
@@ -404,24 +408,37 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyChooseItems.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-[#F5F0E6] p-6 sm:p-7 rounded-3xl border border-[#1A1A16]/10 flex flex-col justify-between hover:shadow-lg transition-all duration-300"
-              >
-                <div>
-                  <span className="font-mono text-xs text-[#7C8B6F] font-bold block mb-4">
-                    {item.num} // PILLAR
-                  </span>
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1A1A16] mb-3">
-                    {item.title}
-                  </h3>
+            {whyChooseItems.map((item, idx) => {
+              const ItemIcon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-[#F5F0E6] p-6 sm:p-7 rounded-3xl border border-[#1A1A16]/10 flex flex-col justify-start hover:shadow-lg transition-all duration-300"
+                >
+                  {/* Fixed-height Header Bar */}
+                  <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#1A1A16]/10">
+                    <span className="font-mono text-xs text-[#7C8B6F] font-bold">
+                      {item.num} // PILLAR
+                    </span>
+                    <div className="w-7 h-7 rounded-full bg-[#1A1A16]/5 flex items-center justify-center text-[#7C8B6F]">
+                      <ItemIcon className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  {/* Fixed-height Title Container for Perfect Baseline Alignment */}
+                  <div className="min-h-[3.8rem] sm:min-h-[4.2rem] flex items-start mb-3">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1A1A16] leading-tight">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  {/* Perfectly Baseline-Aligned Description */}
                   <p className="font-sans text-xs sm:text-sm text-[#7A7A70] leading-relaxed font-light">
                     {item.desc}
                   </p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
