@@ -1,10 +1,10 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Menu, X, PhoneCall } from 'lucide-react';
+import { Menu, X, ArrowUpRight, PhoneCall } from 'lucide-react';
 import { AnimatedBackground } from './core/animated-background';
 
 interface NavbarProps {
-  onOpenConsultation: (service?: string) => void;
+  onOpenConsultation: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
@@ -13,21 +13,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    let currentScrolled = false;
-    let ticking = false;
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Licenses', path: '/licenses' },
+    { name: 'Pricing', path: '/pricing' },
+    { name: 'Contact', path: '/contact' },
+  ];
 
+  useEffect(() => {
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const shouldBeScrolled = window.scrollY > 40;
-          if (shouldBeScrolled !== currentScrolled) {
-            currentScrolled = shouldBeScrolled;
-            setScrolled(shouldBeScrolled);
-          }
-          ticking = false;
-        });
-        ticking = true;
+      if (window.scrollY > 40) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
       }
     };
 
@@ -39,15 +39,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
-
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Licenses', path: '/licenses' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'Contact', path: '/contact' },
-  ];
 
   // Determine current active route tab
   const currentActiveTab =
@@ -81,23 +72,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
             className="group flex items-center gap-3 select-none"
             data-cursor="Home"
           >
-            {/* Geometric Trisecure Shield Emblem */}
-            <div className="w-9 h-9 rounded-lg bg-[#1A1A16] flex items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 shadow-sm">
-              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-                <path
-                  d="M50 15 L80 32 L80 62 L50 85 L20 62 L20 32 Z"
-                  stroke="#C9AF6B"
-                  strokeWidth="6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M50 30 L50 70 M30 45 L70 45"
-                  stroke="#7C8B6F"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                />
-                <circle cx="50" cy="50" r="8" fill="#F5F0E6" />
-              </svg>
+            {/* Transparent Trisecure Brand Logo */}
+            <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <img
+                src="/images/trisecure_logo.png"
+                alt="Trisecure Solutions Logo"
+                className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(56,189,248,0.35)]"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-xl tracking-tight font-bold text-[#1A1A16] leading-none group-hover:text-[#7C8B6F] transition-colors">
@@ -176,9 +157,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[#1A1A16] text-[#F5F0E6] flex flex-col justify-between p-8 pt-28 lg:hidden animate-in fade-in duration-300">
           <div className="flex flex-col gap-6">
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase">
-              // Navigation Index
-            </span>
+            <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+              <img
+                src="/images/trisecure_logo.png"
+                alt="Trisecure Solutions Logo"
+                className="w-10 h-10 object-contain filter drop-shadow-[0_2px_8px_rgba(56,189,248,0.4)]"
+              />
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl tracking-tight font-bold text-white leading-none">
+                  TRISECURE
+                </span>
+                <span className="font-mono text-[9px] tracking-[0.25em] text-[#C9AF6B] uppercase font-semibold mt-0.5">
+                  SOLUTIONS
+                </span>
+              </div>
+            </div>
+
             <nav className="flex flex-col gap-4">
               {navLinks.map((link, idx) => {
                 const isActive =

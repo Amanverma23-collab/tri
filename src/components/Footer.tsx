@@ -39,29 +39,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10">
           {/* Col 1: Brand Wordmark & Mission (4 cols) */}
           <div className="md:col-span-12 lg:col-span-4 space-y-6">
-            <Link to="/" className="inline-flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-[#1A1A16] border border-[#C9AF6B]/40 flex items-center justify-center p-2 shadow-sm group-hover:border-[#7C8B6F] transition-colors">
-                <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-                  <path
-                    d="M50 15 L80 32 L80 62 L50 85 L20 62 L20 32 Z"
-                    stroke="#C9AF6B"
-                    strokeWidth="6"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M50 30 L50 70 M30 45 L70 45"
-                    stroke="#7C8B6F"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="50" cy="50" r="8" fill="#F5F0E6" />
-                </svg>
+            <Link to="/" className="inline-flex items-center gap-3.5 group">
+              <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shrink-0">
+                <img
+                  src="/images/trisecure_logo.png"
+                  alt="Trisecure Solutions Logo"
+                  className="w-full h-full object-contain filter drop-shadow-[0_2px_10px_rgba(56,189,248,0.4)]"
+                />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-xl tracking-tight font-bold text-white group-hover:text-[#C9AF6B] transition-colors">
+                <span className="font-serif text-2xl tracking-tight font-bold text-white group-hover:text-[#38BDF8] transition-colors leading-none">
                   TRISECURE
                 </span>
-                <span className="font-mono text-[9px] tracking-[0.25em] text-[#C9AF6B] uppercase font-semibold">
+                <span className="font-mono text-[9px] tracking-[0.25em] text-[#C9AF6B] uppercase font-semibold mt-1">
                   SOLUTIONS
                 </span>
               </div>
