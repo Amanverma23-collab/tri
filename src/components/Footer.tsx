@@ -229,11 +229,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
           </div>
         </div>
 
-        {/* Large Typographic Masthead Banner in High Contrast White/Ivory */}
-        <div className="py-12 sm:py-16 border-b border-white/10 text-center select-none overflow-hidden">
-          <h2 className="font-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-bold text-white/90 tracking-tight leading-none">
-            TRISECURE
-          </h2>
+        {/* Large Typographic Masthead Banner with Vibrant Blue Hover State */}
+        <div className="py-12 sm:py-16 border-b border-white/10 text-center select-none overflow-hidden group">
+          <Link
+            to="/"
+            className="inline-block"
+            data-cursor="Home"
+          >
+            <h2 className="font-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-bold text-white/90 group-hover:text-[#38BDF8] tracking-tight leading-none transition-all duration-500 ease-out cursor-pointer hover:scale-[1.02] active:scale-[0.99] filter group-hover:drop-shadow-[0_0_50px_rgba(56,189,248,0.6)]">
+              TRISECURE
+            </h2>
+          </Link>
         </div>
 
         {/* Bottom Legal & Meta Bar */}
