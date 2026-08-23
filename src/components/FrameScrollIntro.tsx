@@ -21,7 +21,7 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
   // Helper to get frame path
   const getFrameUrl = useCallback((index: number) => {
     const num = String(index + 1).padStart(3, '0');
-    return `/frames/ezgif-frame-${num}.jpg`;
+    return `/frames/frame_${num}.png`;
   }, []);
 
   // Fast helper to sample edge/corner color of an image
@@ -42,30 +42,34 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
     return '#0a1118';
   }, []);
 
-  // Draw current frame to canvas with dynamic edge-color matching
+  // Draw current frame to canvas with dynamic edge-color matching and true High-DPI (Retina) scaling
   const drawFrame = useCallback(
     (img: HTMLImageElement | undefined, index: number) => {
       const canvas = canvasRef.current;
-      if (!canvas || !img) return;
+      if (!canvas || !img || !img.complete || img.naturalWidth === 0) return;
 
-      const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
-      if (!ctx) return;
-
-      const dpr = Math.min(window.devicePixelRatio || 1, 2.5); // Retina DPR
       const rect = canvas.getBoundingClientRect();
-      const width = Math.round(rect.width);
-      const height = Math.round(rect.height);
+      const cssWidth = Math.round(rect.width);
+      const cssHeight = Math.round(rect.height);
 
-      const physicalWidth = Math.round(width * dpr);
-      const physicalHeight = Math.round(height * dpr);
+      if (cssWidth <= 0 || cssHeight <= 0) return;
 
-      // Synchronize canvas physical dimensions
+      const dpr = window.devicePixelRatio || 1;
+      const physicalWidth = Math.round(cssWidth * dpr);
+      const physicalHeight = Math.round(cssHeight * dpr);
+
+      // Synchronize canvas physical buffer dimensions with display size * DPR
       if (canvas.width !== physicalWidth || canvas.height !== physicalHeight) {
         canvas.width = physicalWidth;
         canvas.height = physicalHeight;
       }
 
+      const ctx = canvas.getContext('2d', { alpha: false });
+      if (!ctx) return;
+
+      // Scale context by DPR so all draw coordinates use CSS pixels without distortion
       ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
 
@@ -81,45 +85,45 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
         viewportRef.current.style.backgroundColor = bgColor;
       }
 
-      // Fill canvas background with the exact same color of the page
+      // Fill canvas background with the exact same color of the frame edge
       ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, physicalWidth, physicalHeight);
+      ctx.fillRect(0, 0, cssWidth, cssHeight);
 
-      // Source image dimensions
-      const imgWidth = img.naturalWidth || 1280;
-      const imgHeight = img.naturalHeight || 720;
-      const imgAspect = imgWidth / imgHeight; // 1.777 (16:9)
-      const canvasAspect = physicalWidth / physicalHeight;
+      // Source image dimensions (1824x1024 native PNG resolution)
+      const imgWidth = img.naturalWidth || 1824;
+      const imgHeight = img.naturalHeight || 1024;
+      const imgAspect = imgWidth / imgHeight;
+      const canvasAspect = cssWidth / cssHeight;
 
-      let drawWidth = physicalWidth;
-      let drawHeight = physicalHeight;
+      let drawWidth = cssWidth;
+      let drawHeight = cssHeight;
       let offsetX = 0;
       let offsetY = 0;
 
-      const isPortrait = canvasAspect < 1.25 || width < 768;
+      const isPortrait = canvasAspect < 1.25 || cssWidth < 768;
 
       if (isPortrait) {
         // MOBILE / PORTRAIT: Fit 100% width so zero text is cropped
-        drawWidth = physicalWidth;
-        drawHeight = Math.round(physicalWidth / imgAspect);
+        drawWidth = cssWidth;
+        drawHeight = Math.round(cssWidth / imgAspect);
         offsetX = 0;
-        offsetY = Math.round((physicalHeight - drawHeight) / 2);
+        offsetY = Math.round((cssHeight - drawHeight) / 2);
       } else {
         // DESKTOP: High precision cover geometry
         if (canvasAspect > imgAspect) {
-          drawWidth = physicalWidth;
-          drawHeight = Math.round(physicalWidth / imgAspect);
+          drawWidth = cssWidth;
+          drawHeight = Math.round(cssWidth / imgAspect);
           offsetX = 0;
-          offsetY = Math.round((physicalHeight - drawHeight) / 2);
+          offsetY = Math.round((cssHeight - drawHeight) / 2);
         } else {
-          drawHeight = physicalHeight;
-          drawWidth = Math.round(physicalHeight * imgAspect);
-          offsetX = Math.round((physicalWidth - drawWidth) / 2);
+          drawHeight = cssHeight;
+          drawWidth = Math.round(cssHeight * imgAspect);
+          offsetX = Math.round((cssWidth - drawWidth) / 2);
           offsetY = 0;
         }
       }
 
-      // Draw active frame centered on canvas
+      // Draw active frame centered on canvas in CSS pixels
       ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     },
     [sampleFrameColor]
@@ -247,12 +251,11 @@ export const FrameScrollIntro: React.FC<FrameScrollIntroProps> = ({ onIntroCompl
       >
         <canvas
           ref={canvasRef}
-          className="w-full h-full block object-contain m-0 p-0 pointer-events-none"
+          className="w-full h-full block m-0 p-0 pointer-events-none"
           style={{
-            filter: 'contrast(1.05) saturate(1.04) brightness(1.01)',
-            transform: 'translateZ(0)',
-            backfaceVisibility: 'hidden',
-            WebkitFontSmoothing: 'antialiased'
+            display: 'block',
+            width: '100%',
+            height: '100%'
           }}
         />
       </div>

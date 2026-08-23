@@ -1,133 +1,236 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+﻿import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowUpRight, Menu, X, PhoneCall } from 'lucide-react';
+import { AnimatedBackground } from './core/animated-background';
 
 interface NavbarProps {
   onOpenConsultation: (service?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let currentScrolled = false;
+    let ticking = false;
+
     const handleScroll = () => {
-      const heroElem = document.getElementById('hero-section');
-      if (heroElem) {
-        const rect = heroElem.getBoundingClientRect();
-        // Show navbar once Hero section enters or approaches the viewport
-        if (rect.top <= window.innerHeight * 0.5) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      } else {
-        setIsVisible(window.scrollY > 300);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const shouldBeScrolled = window.scrollY > 40;
+          if (shouldBeScrolled !== currentScrolled) {
+            currentScrolled = shouldBeScrolled;
+            setScrolled(shouldBeScrolled);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
-    { label: 'SERVICES', href: '#services' },
-    { label: 'CHECKLIST', href: '#readiness' },
-    { label: 'PROCESS', href: '#process' },
-    { label: 'WHY TRISECURE', href: '#why-us' }
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Licenses', path: '/licenses' },
+    { name: 'Pricing', path: '/pricing' },
+    { name: 'Contact', path: '/contact' },
   ];
 
+  // Determine current active route tab
+  const currentActiveTab =
+    navLinks.find((link) =>
+      link.path === '/'
+        ? location.pathname === '/'
+        : location.pathname.startsWith(link.path)
+    )?.name || 'Home';
+
+  const [highlightedTab, setHighlightedTab] = useState<string | null>(currentActiveTab);
+
+  // Sync highlighted tab when route changes
+  useEffect(() => {
+    setHighlightedTab(currentActiveTab);
+  }, [currentActiveTab]);
+
   return (
-    <header
-      className={`fixed top-4 inset-x-0 z-50 px-4 sm:px-6 transition-all duration-500 ${
-        isVisible
-          ? 'opacity-100 translate-y-0 pointer-events-auto'
-          : 'opacity-0 -translate-y-6 pointer-events-none'
-      }`}
-    >
-      <div className="max-w-5xl mx-auto rounded-full bg-white/90 backdrop-blur-xl border border-[#e5e4de] shadow-[0_8px_30px_rgba(10,17,24,0.04)] px-4 sm:px-6 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
-        {/* Brand Mark */}
-        <a href="#hero-section" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-[#0a1118] flex items-center justify-center text-white font-mono font-bold text-xs group-hover:bg-[#047857] transition-colors">
-            TS
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[14px] font-bold tracking-tight text-[#0a1118] uppercase">
-              TRISECURE
-            </span>
-            <span className="text-[9px] font-mono tracking-widest text-[#64748b] uppercase">
-              SOLUTIONS
-            </span>
-          </div>
-        </a>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-[12px] font-semibold tracking-wider text-[#475569] hover:text-[#047857] transition-colors uppercase"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Action Button-in-Button */}
-        <div className="hidden sm:flex items-center gap-3">
-          <button
-            onClick={() => onOpenConsultation()}
-            className="btn-island-primary text-[12px] py-1.5 pl-4 pr-1.5 uppercase font-medium"
+    <>
+      <header
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'py-3 bg-[#F5F0E6]/90 backdrop-blur-md border-b border-[#1A1A16]/10 shadow-xs'
+            : 'py-5 bg-transparent'
+        }`}
+      >
+        <div className="editorial-container flex items-center justify-between">
+          {/* Brand Logo Wordmark */}
+          <Link
+            to="/"
+            className="group flex items-center gap-3 select-none"
+            data-cursor="Home"
           >
-            <span>FREE CONSULTATION</span>
-            <div className="btn-island-icon w-6 h-6">
-              <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+            {/* Geometric Trisecure Shield Emblem */}
+            <div className="w-9 h-9 rounded-lg bg-[#1A1A16] flex items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 shadow-sm">
+              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+                <path
+                  d="M50 15 L80 32 L80 62 L50 85 L20 62 L20 32 Z"
+                  stroke="#C9AF6B"
+                  strokeWidth="6"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M50 30 L50 70 M30 45 L70 45"
+                  stroke="#7C8B6F"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                />
+                <circle cx="50" cy="50" r="8" fill="#F5F0E6" />
+              </svg>
             </div>
-          </button>
+            <div className="flex flex-col">
+              <span className="font-serif text-xl tracking-tight font-bold text-[#1A1A16] leading-none group-hover:text-[#7C8B6F] transition-colors">
+                TRISECURE
+              </span>
+              <span className="font-mono text-[9px] tracking-[0.25em] text-[#7A7A70] uppercase font-semibold mt-0.5">
+                SOLUTIONS
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation Links with Dynamic Contrast Aware AnimatedBackground */}
+          <nav className="hidden lg:flex items-center rounded-full p-1.5 bg-[#FAF6EE]/90 backdrop-blur-md border border-[#1A1A16]/10 shadow-xs">
+            <AnimatedBackground
+              value={currentActiveTab}
+              onValueChange={(val) => setHighlightedTab(val ?? currentActiveTab)}
+              className="rounded-full bg-[#1A1A16] shadow-sm"
+              transition={{
+                type: 'spring',
+                bounce: 0.2,
+                duration: 0.35,
+              }}
+              enableHover
+            >
+              {navLinks.map((link) => {
+                const isUnderPill = (highlightedTab || currentActiveTab) === link.name;
+                const isRouteActive = currentActiveTab === link.name;
+
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    data-id={link.name}
+                    data-cursor="View"
+                    className={`relative px-4 py-1.5 rounded-full text-xs uppercase tracking-wider font-semibold transition-colors duration-200 inline-block select-none ${
+                      isUnderPill
+                        ? 'text-[#F5F0E6]'
+                        : isRouteActive
+                        ? 'text-[#1A1A16] font-bold'
+                        : 'text-[#1A1A16]/70 hover:text-[#1A1A16]'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </AnimatedBackground>
+          </nav>
+
+          {/* Desktop Consultation Pill CTA & Mobile Hamburger */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => onOpenConsultation()}
+              data-cursor="Consult"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#1A1A16] text-[#F5F0E6] text-xs font-semibold uppercase tracking-wider hover:bg-[#7C8B6F] transition-all duration-300 shadow-sm group"
+            >
+              <span>Consult</span>
+              <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <ArrowUpRight className="w-3 h-3 text-[#F5F0E6]" />
+              </span>
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Navigation Menu"
+              className="lg:hidden w-10 h-10 rounded-full border border-[#1A1A16]/15 flex items-center justify-center text-[#1A1A16] hover:bg-[#1A1A16]/5 transition-colors"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
+      </header>
 
-        {/* Mobile Menu Trigger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-[#0a1118] hover:bg-[#f4f3ee] rounded-full"
-          aria-label="Toggle Navigation"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Dropdown */}
+      {/* Full-Screen Editorial Mobile Overlay Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 max-w-sm mx-auto rounded-2xl bg-white/95 backdrop-blur-2xl border border-[#e5e4de] shadow-2xl p-5 pointer-events-auto animate-fadeIn">
-          <div className="flex flex-col gap-3">
-            {navLinks.map((link) => (
+        <div className="fixed inset-0 z-40 bg-[#1A1A16] text-[#F5F0E6] flex flex-col justify-between p-8 pt-28 lg:hidden animate-in fade-in duration-300">
+          <div className="flex flex-col gap-6">
+            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase">
+              // Navigation Index
+            </span>
+            <nav className="flex flex-col gap-4">
+              {navLinks.map((link, idx) => {
+                const isActive =
+                  link.path === '/'
+                    ? location.pathname === '/'
+                    : location.pathname.startsWith(link.path);
+
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-baseline justify-between py-2 border-b border-white/10 group"
+                  >
+                    <span className="font-mono text-xs text-[#7C8B6F] mr-3">0{idx + 1}</span>
+                    <span
+                      className={`font-serif text-3xl sm:text-4xl tracking-tight transition-colors ${
+                        isActive ? 'text-[#C9AF6B] italic' : 'text-white group-hover:text-[#7C8B6F]'
+                      }`}
+                    >
+                      {link.name}
+                    </span>
+                    <ArrowUpRight className="w-5 h-5 text-white/40 group-hover:text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p className="font-mono text-xs text-white/50">Direct Advisory Line</p>
               <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-[13px] font-semibold tracking-wider text-[#0a1118] uppercase py-2 border-b border-[#f1f0ea] flex items-center justify-between"
+                href="tel:+918585999922"
+                className="font-serif text-lg text-[#F5F0E6] hover:text-[#C9AF6B] transition-colors"
               >
-                <span>{link.label}</span>
-                <span className="text-[#64748b]">→</span>
+                +91 8585999922
               </a>
-            ))}
+            </div>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenConsultation();
               }}
-              className="btn-island-primary w-full justify-between mt-2 py-2 px-4"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#7C8B6F] text-[#F5F0E6] font-semibold text-xs uppercase tracking-wider hover:bg-[#C9AF6B] hover:text-[#1A1A16] transition-colors flex items-center justify-center gap-2"
             >
-              <span className="text-xs uppercase">Get Free Consultation</span>
-              <div className="btn-island-icon w-6 h-6">
-                <ArrowUpRight className="w-3.5 h-3.5 text-white" />
-              </div>
+              <PhoneCall className="w-4 h-4" />
+              <span>Book Consultation</span>
             </button>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };

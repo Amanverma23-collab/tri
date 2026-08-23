@@ -1,185 +1,291 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck, Sparkles } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface SplitRevealSectionProps {
-  onOpenConsultation?: (service?: string) => void;
+export interface SplitSubItem {
+  title: string;
+  description: string;
+  tag?: string;
 }
 
-export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({ onOpenConsultation }) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const topCurtainRef = useRef<HTMLDivElement>(null);
-  const bottomCurtainRef = useRef<HTMLDivElement>(null);
-  const textContainerRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const subtextRef = useRef<HTMLParagraphElement>(null);
-  const actionButtonRef = useRef<HTMLDivElement>(null);
+interface SplitRevealSectionProps {
+  id?: string;
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  subtext?: string;
+  imageUrl?: string;
+  subItems?: SplitSubItem[];
+  theme?: 'charcoal' | 'olive' | 'cream';
+  onOpenConsultation?: (serviceName?: string) => void;
+}
+
+export const SplitRevealSection: React.FC<SplitRevealSectionProps> = ({
+  id,
+  badge = 'TRISECURE PRACTICE VERTICAL',
+  title,
+  subtitle,
+  subtext,
+  imageUrl,
+  subItems = [],
+  theme = 'cream',
+  onOpenConsultation,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const curtainTopRef = useRef<HTMLDivElement>(null);
+  const curtainBottomRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!containerRef.current) return;
+
+    let tl: gsap.core.Timeline | null = null;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=1200',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1
-        }
-      });
+      const mm = gsap.matchMedia();
 
-      // Split Curtain: Top half slides UP, Bottom half slides DOWN
-      tl.to(
-        topCurtainRef.current,
+      mm.add(
         {
-          yPercent: -100,
-          ease: 'power2.inOut'
+          isDesktop: '(min-width: 768px)',
+          isMobile: '(max-width: 767px)',
         },
-        0
-      )
-        .to(
-          bottomCurtainRef.current,
-          {
-            yPercent: 100,
-            ease: 'power2.inOut'
-          },
-          0
-        )
-        // Background Text Layer: Scales from 0.92 to 1.05 for rich cinematic depth
-        .fromTo(
-          headingRef.current,
-          {
-            scale: 0.92,
-            opacity: 0.85
-          },
-          {
-            scale: 1.05,
-            opacity: 1,
-            ease: 'power2.out'
-          },
-          0
-        )
-        // Subtext reveal
-        .fromTo(
-          subtextRef.current,
-          {
-            opacity: 0,
-            y: 35
-          },
-          {
-            opacity: 1,
-            y: 0,
-            ease: 'power2.out'
-          },
-          0.15
-        )
-        // Action Button reveal
-        .fromTo(
-          actionButtonRef.current,
-          {
-            opacity: 0,
-            y: 20
-          },
-          {
-            opacity: 1,
-            y: 0,
-            ease: 'power2.out'
-          },
-          0.3
-        );
-    }, sectionRef);
+        (context) => {
+          const { isDesktop } = context.conditions as { isDesktop: boolean; isMobile: boolean };
+          const pinDistance = isDesktop ? '+=120%' : '+=70%';
 
-    return () => ctx.revert();
+          tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top top',
+              end: pinDistance,
+              pin: true,
+              pinSpacing: true,
+              scrub: 0.6,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // 1. Symmetric split from the exact 50% middle line (No center button)
+          // Top half moves straight UP (-100%)
+          tl.to(
+            curtainTopRef.current,
+            {
+              yPercent: -100,
+              ease: 'power2.inOut',
+              duration: 1,
+            },
+            0
+          );
+
+          // Bottom half moves straight DOWN (+100%)
+          tl.to(
+            curtainBottomRef.current,
+            {
+              yPercent: 100,
+              ease: 'power2.inOut',
+              duration: 1,
+            },
+            0
+          );
+
+          // 2. Revealed heading scales into crisp focus behind the split
+          tl.fromTo(
+            titleRef.current,
+            { scale: 1.15, opacity: 0.2, y: 30 },
+            { scale: 1, opacity: 1, y: 0, ease: 'power2.out', duration: 0.8 },
+            0.25
+          );
+
+          // 3. Stagger in practice sub-items
+          if (contentRef.current) {
+            tl.fromTo(
+              contentRef.current,
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, ease: 'power2.out', duration: 0.8 },
+              0.45
+            );
+          }
+        }
+      );
+
+      return () => {
+        mm.revert();
+      };
+    }, containerRef);
+
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 300);
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
   }, []);
 
   return (
     <section
-      ref={sectionRef}
-      id="split-reveal-hr"
-      className="relative w-full h-screen h-[100dvh] overflow-hidden bg-[#0a1118] text-[#fafaf7] flex items-center justify-center select-none"
+      id={id}
+      ref={containerRef}
+      className="relative w-full h-screen min-h-[640px] max-h-[1080px] overflow-hidden flex flex-col justify-center bg-[#F5F0E6] text-[#1A1A16] select-none border-b border-[#1A1A16]/10"
     >
-      {/* 1. Revealed Background Text Layer (Underneath the Curtains) */}
-      <div
-        ref={textContainerRef}
-        className="relative z-10 w-full px-4 sm:px-8 text-center flex flex-col items-center justify-center"
-      >
-        {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/5 text-[#a7f3d0] text-[11px] font-mono font-bold tracking-widest uppercase mb-4 shadow-lg">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
-          <span>HUMAN CAPITAL & WORKFORCE ADVISORY</span>
+      {/* =========================================================================
+          BACKGROUND LAYER (Revealed when curtains open)
+          ========================================================================= */}
+      {imageUrl && (
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-full object-cover opacity-20 filter contrast-110 saturate-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F5F0E6]/95 via-[#F5F0E6]/85 to-[#F5F0E6]/95" />
         </div>
+      )}
 
-        {/* Large Bold Heading (8-12rem scalable clamp) */}
-        <h2
-          ref={headingRef}
-          className="text-[13vw] sm:text-[12vw] lg:text-[10vw] font-black uppercase tracking-tight leading-[0.88] text-[#fafaf7] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] font-sans"
-        >
-          HR SERVICES
-        </h2>
+      {/* =========================================================================
+          CURTAIN TOP HALF (0% to 50% height - 100% Crisp Image, No Whitish Overlay)
+          ========================================================================= */}
+      <div
+        ref={curtainTopRef}
+        className="absolute top-0 left-0 right-0 w-full h-1/2 z-30 overflow-hidden bg-[#1A1A16] will-change-transform"
+      >
+        {imageUrl && (
+          <div className="absolute inset-0 pointer-events-none">
+            <img
+              src={imageUrl}
+              alt=""
+              className="absolute top-0 left-0 w-full h-[200%] object-cover object-top filter contrast-105"
+            />
+            {/* Subtle natural gradient for text readability without white film */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+          </div>
+        )}
 
-        {/* Subtext Below Heading */}
-        <p
-          ref={subtextRef}
-          className="mt-6 text-[12px] sm:text-[15px] md:text-[17px] font-mono tracking-widest text-[#a7f3d0] uppercase max-w-4xl text-center font-medium"
-        >
-          Recruitment • Payroll • Training • Compliance • Employee Relations
-        </p>
-
-        {/* Direct Action Button */}
-        <div ref={actionButtonRef} className="mt-8">
-          <button
-            onClick={() => onOpenConsultation?.('HR & Workforce Solutions')}
-            className="btn-island-primary bg-[#fafaf7] text-[#0a1118] hover:bg-white hover:text-black py-2.5 pl-5 pr-2 font-mono text-[12px] uppercase font-bold shadow-2xl cursor-pointer"
-          >
-            <span>EXPLORE HR CAPABILITIES</span>
-            <div className="btn-island-icon bg-[#0a1118] text-white">
-              <ArrowUpRight className="w-3.5 h-3.5" />
+        {/* Top Curtain Overlay Content */}
+        <div className="editorial-container relative z-10 h-full flex flex-col justify-between pt-24 sm:pt-28 pb-4">
+          <div className="flex items-center justify-between w-full">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A16]/80 text-[#F5F0E6] backdrop-blur-md border border-white/20 font-mono text-xs uppercase tracking-widest">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C9AF6B]" />
+              <span>{badge}</span>
             </div>
-          </button>
-        </div>
-      </div>
+          </div>
 
-      {/* 2. Top Half Curtain (0% to 50% height) */}
-      <div
-        ref={topCurtainRef}
-        className="absolute top-0 left-0 w-full h-[50.5vh] overflow-hidden z-20 pointer-events-none border-b border-white/10 shadow-2xl"
-      >
-        <div className="absolute top-0 left-0 w-full h-[100dvh] bg-[#111827] bg-alabaster-grid flex items-start justify-center">
-          {/* Subtle texture/gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#182234] via-[#0f172a] to-[#0b0f19] opacity-95" />
-          
-          {/* Top Decorative Watermark / Accent */}
-          <div className="relative z-10 pt-12 flex flex-col items-center opacity-60">
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-[#94a3b8] uppercase">
-              TRISECURE SOLUTIONS // EXECUTIVE REVEAL
-            </span>
+          <div className="w-full">
+            <h3 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#1A1A16] drop-shadow-[0_2px_12px_rgba(255,255,255,0.8)]">
+              {title}
+            </h3>
           </div>
         </div>
       </div>
 
-      {/* 3. Bottom Half Curtain (50% to 100% height) */}
+      {/* =========================================================================
+          CURTAIN BOTTOM HALF (50% to 100% height - 100% Crisp Image, No Whitish Overlay)
+          ========================================================================= */}
       <div
-        ref={bottomCurtainRef}
-        className="absolute bottom-0 left-0 w-full h-[50.5vh] overflow-hidden z-20 pointer-events-none border-t border-white/10 shadow-2xl"
+        ref={curtainBottomRef}
+        className="absolute top-1/2 left-0 right-0 w-full h-1/2 z-30 overflow-hidden bg-[#1A1A16] will-change-transform"
       >
-        <div className="absolute bottom-0 left-0 w-full h-[100dvh] bg-[#111827] bg-alabaster-grid flex items-end justify-center">
-          {/* Subtle texture/gradient background matching top */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#182234] via-[#0f172a] to-[#0b0f19] opacity-95" />
-          
-          {/* Bottom Decorative Prompt */}
-          <div className="relative z-10 pb-12 flex flex-col items-center opacity-60">
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-[#94a3b8] uppercase">
-              SCROLL DOWN TO SPLIT & REVEAL ↓
-            </span>
+        {imageUrl && (
+          <div className="absolute inset-0 pointer-events-none">
+            <img
+              src={imageUrl}
+              alt=""
+              className="absolute -top-full left-0 w-full h-[200%] object-cover object-top filter contrast-105"
+            />
+            {/* Subtle bottom gradient for subtitle */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          </div>
+        )}
+
+        {/* Bottom Curtain Overlay Content */}
+        <div className="editorial-container relative z-10 h-full flex flex-col justify-between pt-4 pb-8 sm:pb-12">
+          <div>
+            {subtitle && (
+              <p className="font-serif text-xl sm:text-3xl text-[#1A1A16] font-medium italic drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]">
+                {subtitle}
+              </p>
+            )}
           </div>
         </div>
       </div>
 
+      {/* =========================================================================
+          REVEALED CONTENT INNER LAYER (Revealed cleanly in the center)
+          ========================================================================= */}
+      <div className="relative z-10 w-full editorial-container flex flex-col justify-center py-6">
+        <div className="max-w-5xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#7C8B6F]/15 text-[#7C8B6F] font-mono text-xs uppercase tracking-widest mb-4 border border-[#7C8B6F]/30">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{badge}</span>
+          </div>
+
+          <h2
+            ref={titleRef}
+            className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-none mb-3 text-[#1A1A16]"
+          >
+            {title}
+          </h2>
+
+          {subtitle && (
+            <p className="font-serif text-xl sm:text-2xl text-[#7C8B6F] font-medium italic mb-3">
+              {subtitle}
+            </p>
+          )}
+
+          {subtext && (
+            <p className="font-sans text-sm sm:text-base text-[#7A7A70] max-w-3xl leading-relaxed mb-6 font-light">
+              {subtext}
+            </p>
+          )}
+
+          {/* Staggered Sub-Items Grid */}
+          {subItems.length > 0 && (
+            <div
+              ref={contentRef}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-[#1A1A16]/10"
+            >
+              {subItems.slice(0, 3).map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/10 hover:border-[#7C8B6F] transition-all duration-300 shadow-sm group"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-xs text-[#C9AF6B] font-bold">0{idx + 1}</span>
+                    {item.tag && (
+                      <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-[#1A1A16]/5 uppercase text-[#7A7A70]">
+                        {item.tag}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-serif text-lg font-bold mb-1.5 text-[#1A1A16] group-hover:text-[#7C8B6F] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="font-sans text-xs text-[#7A7A70] leading-relaxed font-light line-clamp-3">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {onOpenConsultation && (
+            <div className="mt-6 flex items-center gap-4">
+              <button
+                onClick={() => onOpenConsultation(title)}
+                className="btn-editorial-primary text-xs"
+                data-cursor="Consult"
+              >
+                <span>Consult On {title}</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </section>
   );
 };

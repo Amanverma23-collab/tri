@@ -1,23 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { Navbar } from './components/Navbar';
-import { FrameScrollIntro } from './components/FrameScrollIntro';
-import { Hero } from './components/Hero';
-import { SplitCurtainSection } from './components/SplitCurtainSection';
-import { HRServicesSection } from './components/HRServicesSection';
-import { InsuranceServicesSection } from './components/InsuranceServicesSection';
-import { FoodComplianceSection } from './components/FoodComplianceSection';
-import { DigitalMarketingSection } from './components/DigitalMarketingSection';
-import { ComplianceReadinessTool } from './components/ComplianceReadinessTool';
-import { HowWeHelp } from './components/HowWeHelp';
-import { WhyTriSecure } from './components/WhyTriSecure';
-import { FAQSection } from './components/FAQSection';
-import { FloatingContactWidget } from './components/FloatingContactWidget';
-import { Footer } from './components/Footer';
-import { ConsultationModal } from './components/ConsultationModal';
+﻿import React, { useState, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ShieldCheck } from 'lucide-react';
+
+// Navigation & Global UI Components
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { FloatingContactWidget } from './components/FloatingContactWidget';
+import { ConsultationModal } from './components/ConsultationModal';
+import { CustomCursor } from './components/CustomCursor';
+import { SmoothScrollProvider } from './components/SmoothScrollProvider';
+
+// Lazy-loaded routes for optimal performance
+const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })));
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
+const ServicesHub = lazy(() => import('./pages/ServicesHub').then((m) => ({ default: m.ServicesHub })));
+const HRServices = lazy(() => import('./pages/services/HRServices').then((m) => ({ default: m.HRServices })));
+const InsuranceLoansServices = lazy(() =>
+  import('./pages/services/InsuranceLoansServices').then((m) => ({ default: m.InsuranceLoansServices }))
+);
+const FoodComplianceServices = lazy(() =>
+  import('./pages/services/FoodComplianceServices').then((m) => ({ default: m.FoodComplianceServices }))
+);
+const DigitalMarketingServices = lazy(() =>
+  import('./pages/services/DigitalMarketingServices').then((m) => ({ default: m.DigitalMarketingServices }))
+);
+const Licenses = lazy(() => import('./pages/Licenses').then((m) => ({ default: m.Licenses })));
+const Pricing = lazy(() => import('./pages/Pricing').then((m) => ({ default: m.Pricing })));
+const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })));
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Minimal Branded Route Loading Fallback
+const PageLoadingFallback = () => (
+  <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 text-[#1A1A16]">
+    <div className="w-12 h-12 rounded-xl bg-[#7C8B6F] flex items-center justify-center mb-4 animate-pulse">
+      <ShieldCheck className="w-6 h-6 text-[#1A1A16]" />
+    </div>
+    <span className="font-mono text-xs uppercase tracking-widest text-[#7C8B6F]">
+      TRISECURE // Loading Page
+    </span>
+  </div>
+);
+
+function AnimatedRoutes({
+  onOpenConsultation,
+}: {
+  onOpenConsultation: (service?: string) => void;
+}) {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Suspense fallback={<PageLoadingFallback />}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/about" element={<About onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/services" element={<ServicesHub onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/services/hr" element={<HRServices onOpenConsultation={onOpenConsultation} />} />
+          <Route
+            path="/services/insurance-loans"
+            element={<InsuranceLoansServices onOpenConsultation={onOpenConsultation} />}
+          />
+          <Route
+            path="/services/food-compliance"
+            element={<FoodComplianceServices onOpenConsultation={onOpenConsultation} />}
+          />
+          <Route
+            path="/services/digital-marketing"
+            element={<DigitalMarketingServices onOpenConsultation={onOpenConsultation} />}
+          />
+          <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Home onOpenConsultation={onOpenConsultation} />} />
+        </Routes>
+      </Suspense>
+    </AnimatePresence>
+  );
+}
 
 export function App() {
   const [consultationOpen, setConsultationOpen] = useState(false);
@@ -37,122 +100,36 @@ export function App() {
     setPrefilledService('');
   };
 
-  // Recalculate all ScrollTrigger pin boundaries cleanly
-  useEffect(() => {
-    const refreshTriggers = () => {
-      ScrollTrigger.refresh();
-    };
-
-    window.addEventListener('load', refreshTriggers);
-    const timer1 = setTimeout(refreshTriggers, 200);
-    const timer2 = setTimeout(refreshTriggers, 800);
-
-    return () => {
-      window.removeEventListener('load', refreshTriggers);
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
-
   return (
-    <div className="min-h-screen bg-[#fafaf7] text-[#0a1118] flex flex-col font-sans selection:bg-[#0a1118] selection:text-white relative">
-      {/* Floating Fluid Island Navbar */}
-      <Navbar onOpenConsultation={handleOpenConsultation} />
+    <Router>
+      <SmoothScrollProvider>
+        <div className="min-h-screen bg-[#F5F0E6] text-[#1A1A16] flex flex-col font-sans relative selection:bg-[#1A1A16] selection:text-[#F5F0E6]">
+          {/* Interactive Custom Cursor */}
+          <CustomCursor />
 
-      {/* Main Content Flow */}
-      <main className="flex-1 w-full m-0 p-0">
-        {/* 1. Full-Screen 100vw x 100vh Pinned Scroll Intro (300 Frames with Dynamic Color Matching) */}
-        <FrameScrollIntro onIntroComplete={() => ScrollTrigger.refresh()} />
+          {/* Persistent Editorial Sticky Navbar */}
+          <Navbar onOpenConsultation={handleOpenConsultation} />
 
-        {/* 2. Hero Section (Commanding Masthead & Double-Bezel Directory) */}
-        <Hero onOpenConsultation={handleOpenConsultation} />
+          {/* Main Routed Content Area */}
+          <main className="flex-1 w-full flex flex-col">
+            <AnimatedRoutes onOpenConsultation={handleOpenConsultation} />
+          </main>
 
-        {/* 3. HR Services Split Curtain Reveal */}
-        <SplitCurtainSection
-          id="split-reveal-hr"
-          badge="PRACTICE VERTICAL 01 // TRISECURE"
-          title="HR SERVICES"
-          subtext="Recruitment • Payroll • Training • Compliance • Employee Relations"
-          buttonText="EXPLORE HR SERVICES"
-          serviceName="HR & Workforce Solutions"
-          targetDetailsId="hr-details"
-          onOpenConsultation={handleOpenConsultation}
-        />
+          {/* Persistent Floating Consultation Pill */}
+          <FloatingContactWidget onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 4. HR Services Detailed Information Section */}
-        <HRServicesSection onOpenConsultation={handleOpenConsultation} />
+          {/* Persistent Editorial Footer */}
+          <Footer onOpenConsultation={handleOpenConsultation} />
 
-        {/* 5. Insurance & Loans Split Curtain Reveal */}
-        <SplitCurtainSection
-          id="split-reveal-insurance"
-          badge="PRACTICE VERTICAL 02 // TRISECURE"
-          title="INSURANCE & LOANS"
-          subtext="Working Capital Limits • MSME Term Loans • Home Finance • Corporate Group Insurance"
-          buttonText="EXPLORE LOAN & INSURANCE DESK"
-          serviceName="Insurance & Loan Advisory"
-          targetDetailsId="insurance-details"
-          onOpenConsultation={handleOpenConsultation}
-        />
-
-        {/* 6. Insurance & Loans Detailed Information Section */}
-        <InsuranceServicesSection onOpenConsultation={handleOpenConsultation} />
-
-        {/* 7. Food Compliance Split Curtain Reveal */}
-        <SplitCurtainSection
-          id="split-reveal-food"
-          badge="PRACTICE VERTICAL 03 // TRISECURE"
-          title="FOOD COMPLIANCE"
-          subtext="FSSAI Basic, State & Central • Health Trade License • DPCC Clearances • Shop Act Registration"
-          buttonText="EXPLORE FOOD COMPLIANCE"
-          serviceName="Food Compliance & Licensing"
-          targetDetailsId="food-details"
-          onOpenConsultation={handleOpenConsultation}
-        />
-
-        {/* 8. Food Compliance Detailed Information Section */}
-        <FoodComplianceSection onOpenConsultation={handleOpenConsultation} />
-
-        {/* 9. Digital Marketing Split Curtain Reveal */}
-        <SplitCurtainSection
-          id="split-reveal-marketing"
-          badge="PRACTICE VERTICAL 04 // TRISECURE"
-          title="DIGITAL MARKETING"
-          subtext="High-Intent Google Ads • Technical SEO Authority • Corporate Branding • CRO Funnels"
-          buttonText="EXPLORE DIGITAL MARKETING"
-          serviceName="Digital Marketing & Growth"
-          targetDetailsId="marketing-details"
-          onOpenConsultation={handleOpenConsultation}
-        />
-
-        {/* 10. Digital Marketing Detailed Information Section */}
-        <DigitalMarketingSection onOpenConsultation={handleOpenConsultation} />
-
-        {/* 11. Interactive Business Readiness Evaluator */}
-        <ComplianceReadinessTool onOpenConsultation={handleOpenConsultation} />
-
-        {/* 12. 4-Stage Engagement Process */}
-        <HowWeHelp onOpenConsultation={() => handleOpenConsultation()} />
-
-        {/* 13. Why TriSecure Credibility Pillars */}
-        <WhyTriSecure onOpenConsultation={() => handleOpenConsultation()} />
-
-        {/* 14. High-Value FAQ Accordion Section */}
-        <FAQSection onOpenConsultation={() => handleOpenConsultation()} />
-      </main>
-
-      {/* Floating Quick Contact Widget */}
-      <FloatingContactWidget onOpenConsultation={() => handleOpenConsultation()} />
-
-      {/* Clean Light-Theme Footer */}
-      <Footer onOpenConsultation={handleOpenConsultation} />
-
-      {/* Lead Generation & Consultation Modal */}
-      <ConsultationModal
-        isOpen={consultationOpen}
-        onClose={handleCloseConsultation}
-        initialService={prefilledService}
-      />
-    </div>
+          {/* Central Consultation Lead Modal */}
+          <ConsultationModal
+            isOpen={consultationOpen}
+            onClose={handleCloseConsultation}
+            initialService={prefilledService}
+          />
+        </div>
+      </SmoothScrollProvider>
+    </Router>
   );
 }
 

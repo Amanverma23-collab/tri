@@ -30,7 +30,7 @@ export const FrameScrollAnimation: React.FC<FrameScrollAnimationProps> = ({ onOp
 
     const getFrameUrl = (idx: number) => {
       const num = String(idx + 1).padStart(3, '0');
-      return `/frames/ezgif-frame-${num}.jpg`;
+      return `/frames/frame_${num}.png`;
     };
 
     // Load initial essential batch first (0 to 30) for instant rendering
@@ -93,6 +93,8 @@ export const FrameScrollAnimation: React.FC<FrameScrollAnimationProps> = ({ onOp
 
     ctx.save();
     ctx.scale(dpr, dpr);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     ctx.clearRect(0, 0, rect.width, rect.height);
 
     // Calculate aspect ratio containment
