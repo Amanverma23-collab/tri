@@ -35,12 +35,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
       </div>
 
       {/* =========================================================================
-          MOBILE-ONLY VIEW (< md): Clean Compact 1-Row Matrix & Giant TRISECURE Banner
+          MOBILE-ONLY VIEW (< md): Centered Top + Left Regulatory + Right Practice
           ========================================================================= */}
       <div className="md:hidden editorial-container pt-10 pb-8 space-y-6">
-        {/* Mobile Brand Wordmark */}
-        <div className="space-y-3">
-          <Link to="/" className="inline-flex items-center gap-3">
+        
+        {/* Mobile Brand Wordmark (Centered) */}
+        <div className="space-y-2.5 text-center flex flex-col items-center justify-center">
+          <Link to="/" className="inline-flex items-center justify-center gap-3">
             <div className="w-10 h-10 flex items-center justify-center shrink-0">
               <img
                 src="/images/trisecure_logo.png"
@@ -48,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
                 className="w-full h-full object-contain animate-logo-spin"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col text-left">
               <span className="font-serif text-xl tracking-tight font-bold text-white leading-none">
                 TRISECURE
               </span>
@@ -58,51 +59,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
             </div>
           </Link>
 
-          <p className="font-sans text-xs text-white/70 leading-relaxed font-light">
+          <p className="font-sans text-xs text-white/70 leading-relaxed font-light text-center max-w-xs mx-auto">
             Business Solutions, Simplified. End-to-end statutory licensing, workforce architecture, and corporate advisory under a single desk.
           </p>
         </div>
 
-        {/* Mobile 2-in-1 Row: Practice Verticals & Regulatory Matrix */}
-        <div className="grid grid-cols-2 gap-4 pt-2 border-t border-white/10">
-          <div className="space-y-2.5">
-            <span className="font-mono text-[11px] text-[#C9AF6B] tracking-widest uppercase block font-semibold">
-              // Practice
-            </span>
-            <ul className="space-y-2 font-sans text-xs">
-              <li>
-                <Link to="/services/hr" className="text-white/70 hover:text-white inline-flex items-center gap-1">
-                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                  <span>HR & Payroll</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/insurance-loans" className="text-white/70 hover:text-white inline-flex items-center gap-1">
-                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                  <span>Insurance & Loans</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/food-compliance" className="text-white/70 hover:text-white inline-flex items-center gap-1">
-                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                  <span>Food (FSSAI)</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/digital-marketing" className="text-white/70 hover:text-white inline-flex items-center gap-1">
-                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
-                  <span>Digital Scale</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/licenses" className="text-white/70 hover:text-white inline-flex items-center gap-1">
-                  <ArrowRight className="w-3 h-3 text-[#C9AF6B] shrink-0" />
-                  <span>License Matrix</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
+        {/* Mobile 2-in-1 Row: Left Regulatory & Right Practice */}
+        <div className="grid grid-cols-2 gap-4 pt-3 border-t border-white/10">
+          
+          {/* Left Column: Regulatory Matrix */}
           <div className="space-y-2.5">
             <span className="font-mono text-[11px] text-[#C9AF6B] tracking-widest uppercase block font-semibold">
               // Regulatory
@@ -128,6 +93,46 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
               </li>
             </ul>
           </div>
+
+          {/* Right Column: Practice Verticals */}
+          <div className="space-y-2.5">
+            <span className="font-mono text-[11px] text-[#C9AF6B] tracking-widest uppercase block font-semibold">
+              // Practice
+            </span>
+            <ul className="space-y-2 font-sans text-xs">
+              <li>
+                <Link to="/services/hr" className="text-white/70 hover:text-white inline-flex items-center gap-1">
+                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
+                  <span>HR & Payroll</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/insurance-loans" className="text-white/70 hover:text-white inline-flex items-center gap-1">
+                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
+                  <span>Insurance & Loans</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/food-compliance" className="text-white/70 hover:text-white inline-flex items-center gap-1">
+                  <ArrowRight className="w-3 h-3 text-[#7C8B6F]" />
+                  <span>Food (FSSAI)</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/digital-marketing" className="text-white/70 hover:text-white inline-flex items-center gap-1">
+                  <ArrowRight className="w-3 h-3 text-[#7C8B6F] shrink-0" />
+                  <span>Digital Scale</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/licenses" className="text-white/70 hover:text-white inline-flex items-center gap-1">
+                  <ArrowRight className="w-3 h-3 text-[#C9AF6B] shrink-0" />
+                  <span>License Matrix</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
         {/* Large Typographic Masthead Banner on Mobile */}
