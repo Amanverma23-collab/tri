@@ -163,7 +163,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
               </div>
               <div>
                 <p className="font-mono text-[10px] text-white/50 uppercase">Direct Helpline</p>
-                <p className="font-serif text-base font-bold text-white group-hover:text-[#C9AF6B] transition-colors">
+                <p className="font-mono text-sm sm:text-base font-bold text-white tracking-wider group-hover:text-[#C9AF6B] transition-colors">
                   +91 8585999922
                 </p>
               </div>

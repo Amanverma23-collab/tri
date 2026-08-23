@@ -140,7 +140,7 @@ export const Contact: React.FC = () => {
                       </div>
                       <div>
                         <p className="font-mono text-[10px] text-white/50 uppercase">Primary Helpline</p>
-                        <p className="font-serif text-sm font-bold text-white group-hover:text-[#C9AF6B] transition-colors">
+                        <p className="font-mono text-sm font-bold text-white tracking-wider group-hover:text-[#C9AF6B] transition-colors">
                           +91 8585999922
                         </p>
                       </div>

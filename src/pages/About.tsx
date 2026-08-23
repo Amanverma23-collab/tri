@@ -281,7 +281,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                     <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
                     <span>Mobile (Direct)</span>
                   </span>
-                  <a href="tel:+918585999922" className="text-[#C9AF6B] hover:underline">
+                  <a href="tel:+918585999922" className="text-[#C9AF6B] hover:underline font-mono font-semibold tracking-wider">
                     +91 8585999922
                   </a>
                 </div>
@@ -290,7 +290,7 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                     <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
                     <span>Alternate Line</span>
                   </span>
-                  <a href="tel:+919716965062" className="text-[#C9AF6B] hover:underline">
+                  <a href="tel:+919716965062" className="text-[#C9AF6B] hover:underline font-mono font-semibold tracking-wider">
                     +91 9716965062
                   </a>
                 </div>
