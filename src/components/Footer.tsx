@@ -37,14 +37,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation }) => {
       {/* 2. Main 4-Column Directory Grid */}
       <div className="editorial-container pt-16 sm:pt-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10">
-          {/* Col 1: Brand Wordmark & Mission (4 cols) */}
+          {/* Col 1: Brand Wordmark & Mission with 360 Rotating Logo (4 cols) */}
           <div className="md:col-span-12 lg:col-span-4 space-y-6">
             <Link to="/" className="inline-flex items-center gap-3.5 group">
               <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shrink-0">
                 <img
                   src="/images/trisecure_logo.png"
                   alt="Trisecure F&B Solutions Logo"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain animate-logo-spin"
                 />
               </div>
               <div className="flex flex-col">

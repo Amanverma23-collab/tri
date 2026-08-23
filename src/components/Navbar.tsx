@@ -59,18 +59,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
         }`}
       >
         <div className="editorial-container flex items-center justify-between">
-          {/* Brand Logo Wordmark: Trisecure F&B Solutions */}
+          {/* Brand Logo Wordmark: Trisecure F&B Solutions with 360 Rotating Logo */}
           <Link
             to="/"
             className="group flex items-center gap-3 select-none"
             data-cursor="Home"
           >
-            {/* Transparent Trisecure Brand Logo */}
-            <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            {/* 360 Continuous Rotating Trisecure Brand Emblem */}
+            <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shrink-0">
               <img
                 src="/images/trisecure_logo.png"
                 alt="Trisecure F&B Solutions Logo"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain animate-logo-spin"
               />
             </div>
             <div className="flex flex-col">
@@ -100,7 +100,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
               enableHover
             >
               {navLinks.map((link) => {
-                // Exactly whichever item is currently covered by the black pill gets white text; all others get clear visible dark text
                 const isUnderPill = (highlightedTab || currentActiveTab) === link.name;
 
                 return (
@@ -153,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
               <img
                 src="/images/trisecure_logo.png"
                 alt="Trisecure F&B Solutions Logo"
-                className="w-10 h-10 object-contain"
+                className="w-10 h-10 object-contain animate-logo-spin"
               />
               <div className="flex flex-col">
                 <span className="font-serif text-2xl tracking-tight font-bold text-white leading-none">

@@ -293,3 +293,24 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #1A1A16;
 }
+
+/* 360 Degree Continuous Logo Rotation */
+@keyframes spin-continuous {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-logo-spin {
+  animation: spin-continuous 10s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.group:hover .animate-logo-spin,
+.animate-logo-spin:hover {
+  animation-duration: 3.5s;
+}
