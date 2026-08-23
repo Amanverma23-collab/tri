@@ -28,6 +28,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { SmoothScrollProvider } from './components/SmoothScrollProvider';
 import { SEO } from './components/SEO';
 import { CookieBanner } from './components/CookieBanner';
+import { GoogleAnalyticsTracker } from './components/GoogleAnalyticsTracker';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,6 +91,9 @@ export function App() {
     <Router>
       {/* Dynamic Per-Page SEO Titles, Descriptions & Meta Tags */}
       <SEO />
+
+      {/* Real-time Google Analytics & Route Pageview Tracker */}
+      <GoogleAnalyticsTracker />
 
       <SmoothScrollProvider>
         <div className="min-h-screen bg-[#F5F0E6] text-[#1A1A16] flex flex-col font-sans relative selection:bg-[#1A1A16] selection:text-[#F5F0E6]">
