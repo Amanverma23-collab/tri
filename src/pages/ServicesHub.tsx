@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight, Users, Landmark, Utensils, Megaphone, ShieldCheck } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
+import { InfiniteSlider } from '../components/core/infinite-slider';
 
 interface ServicesHubProps {
   onOpenConsultation: (service?: string) => void;
@@ -209,71 +210,143 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
         </div>
       </section>
 
-      {/* 2. FOUR VERTICAL PANELS: Asymmetric Editorial Cards */}
-      <section className="py-24 sm:py-32 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
-        <div className="editorial-container space-y-12">
-          {servicePanels.map((panel) => {
-            const Icon = panel.icon;
-            return (
-              <Link
-                key={panel.num}
-                to={panel.link}
-                className={`block relative rounded-3xl overflow-hidden border ${panel.borderClass} shadow-xl hover:shadow-2xl transition-all duration-500 group`}
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
-                  {/* Left Column: Narrative Content */}
-                  <div className={`lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-between z-10 ${panel.bgClass}`}>
+      {/* 2. FOUR VERTICAL PANELS: InfiniteSlider on Mobile & Asymmetric Stack on Desktop */}
+      <section className="py-14 sm:py-32 bg-[#FAF6EE] border-b border-[#1A1A16]/10 overflow-hidden">
+        <div className="editorial-container">
+          
+          {/* Mobile Continuous Horizontal InfiniteSlider with Touch Pause */}
+          <div className="md:hidden w-full py-2 overflow-hidden">
+            <InfiniteSlider gap={16} speed={25} speedOnHover={0}>
+              {servicePanels.map((panel) => {
+                const Icon = panel.icon;
+                return (
+                  <Link
+                    key={panel.num}
+                    to={panel.link}
+                    className={`w-[82vw] max-w-[320px] shrink-0 block relative rounded-3xl overflow-hidden border ${panel.borderClass} shadow-xl flex flex-col justify-between min-h-[460px] ${panel.bgClass}`}
+                  >
                     <div>
-                      <div className="flex items-center justify-between mb-8">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                      {/* Image Thumbnail Header */}
+                      <div className="relative w-full aspect-[16/10] overflow-hidden">
+                        <img
+                          src={panel.imageUrl}
+                          alt={panel.title}
+                          className="w-full h-full object-cover filter contrast-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                        <div className="absolute top-3 left-3 flex items-center gap-2">
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                             panel.theme === 'cream' ? 'bg-[#1A1A16] text-white' : 'bg-[#C9AF6B] text-[#1A1A16]'
                           }`}>
-                            <Icon className="w-5 h-5" />
+                            <Icon className="w-4 h-4" />
                           </div>
-                          <span className="font-mono text-xs tracking-widest font-semibold uppercase text-[#7C8B6F]">
-                            // Practice 0{panel.num}
+                          <span className="font-mono text-[10px] tracking-widest font-bold px-2 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-xs">
+                            0${panel.num}
                           </span>
                         </div>
-                        <span className="font-mono text-xs opacity-50">EXPLORE VERTICAL</span>
                       </div>
 
-                      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 tracking-tight group-hover:translate-x-1 transition-transform">
-                        {panel.title}
-                      </h2>
+                      {/* Content Body */}
+                      <div className="p-5">
+                        <span className="font-mono text-[10px] tracking-widest font-semibold uppercase text-[#7C8B6F] block mb-1">
+                          // Practice Vertical
+                        </span>
 
-                      <p className="font-serif text-lg sm:text-xl font-normal opacity-90 mb-6 leading-snug">
-                        {panel.subtitle}
-                      </p>
+                        <h2 className="font-serif text-xl font-bold mb-1.5 tracking-tight leading-snug">
+                          {panel.title}
+                        </h2>
 
-                      <p className="font-sans text-sm sm:text-base opacity-75 leading-relaxed font-light max-w-xl">
-                        {panel.description}
-                      </p>
-                    </div>
+                        <p className="font-serif text-xs opacity-90 mb-2.5 leading-snug line-clamp-2">
+                          {panel.subtitle}
+                        </p>
 
-                    <div className="pt-8 mt-8 border-t border-current/10 flex items-center justify-between">
-                      <span className="font-mono text-xs uppercase tracking-wider font-semibold">
-                        Inspect Detailed Scope & Case Studies
-                      </span>
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-current/10 group-hover:bg-current group-hover:text-white transition-colors">
-                        <ArrowUpRight className="w-5 h-5" />
+                        <p className="font-sans text-[11px] opacity-75 leading-relaxed font-light line-clamp-3">
+                          {panel.description}
+                        </p>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Right Column: Imagery with Editorial Framing */}
-                  <div className="lg:col-span-5 relative min-h-[260px] lg:min-h-full overflow-hidden">
-                    <img
-                      src={panel.imageUrl}
-                      alt={panel.title}
-                      className="absolute inset-0 w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:hidden" />
+                    {/* Bottom Action Footer */}
+                    <div className="p-5 pt-0">
+                      <div className="pt-3 border-t border-current/10 flex items-center justify-between font-mono text-[10px] uppercase font-semibold">
+                        <span>Inspect Practice Scope</span>
+                        <div className="w-7 h-7 rounded-full flex items-center justify-center bg-current/10">
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </InfiniteSlider>
+          </div>
+
+          {/* Desktop Full Stacked Asymmetric Editorial Panels (100% Untouched) */}
+          <div className="hidden md:block space-y-12">
+            {servicePanels.map((panel) => {
+              const Icon = panel.icon;
+              return (
+                <Link
+                  key={panel.num}
+                  to={panel.link}
+                  className={`block relative rounded-3xl overflow-hidden border ${panel.borderClass} shadow-xl hover:shadow-2xl transition-all duration-500 group`}
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
+                    {/* Left Column: Narrative Content */}
+                    <div className={`lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-between z-10 ${panel.bgClass}`}>
+                      <div>
+                        <div className="flex items-center justify-between mb-8">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                              panel.theme === 'cream' ? 'bg-[#1A1A16] text-white' : 'bg-[#C9AF6B] text-[#1A1A16]'
+                            }`}>
+                              <Icon className="w-5 h-5" />
+                            </div>
+                            <span className="font-mono text-xs tracking-widest font-semibold uppercase text-[#7C8B6F]">
+                              // Practice 0${panel.num}
+                            </span>
+                          </div>
+                          <span className="font-mono text-xs opacity-50">EXPLORE VERTICAL</span>
+                        </div>
+
+                        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 tracking-tight group-hover:translate-x-1 transition-transform">
+                          {panel.title}
+                        </h2>
+
+                        <p className="font-serif text-lg sm:text-xl font-normal opacity-90 mb-6 leading-snug">
+                          {panel.subtitle}
+                        </p>
+
+                        <p className="font-sans text-sm sm:text-base opacity-75 leading-relaxed font-light max-w-xl">
+                          {panel.description}
+                        </p>
+                      </div>
+
+                      <div className="pt-8 mt-8 border-t border-current/10 flex items-center justify-between">
+                        <span className="font-mono text-xs uppercase tracking-wider font-semibold">
+                          Inspect Detailed Scope & Case Studies
+                        </span>
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-current/10 group-hover:bg-current group-hover:text-white transition-colors">
+                          <ArrowUpRight className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Imagery with Editorial Framing */}
+                    <div className="lg:col-span-5 relative min-h-[260px] lg:min-h-full overflow-hidden">
+                      <img
+                        src={panel.imageUrl}
+                        alt={panel.title}
+                        className="absolute inset-0 w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className={`absolute inset-0 ${panel.gradientOverlay} hidden lg:block`} />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
+          </div>
+
         </div>
       </section>
 
