@@ -1,5 +1,5 @@
 ﻿import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Check, Users, ShieldCheck, Utensils, TrendingUp, FileText, Sparkles } from 'lucide-react';
+import { ChevronDown, Check, Users, ShieldCheck, Utensils, TrendingUp } from 'lucide-react';
 
 export interface ServiceOption {
   value: string;
@@ -37,20 +37,6 @@ export const SERVICE_OPTIONS: ServiceOption[] = [
     code: '04',
     tag: 'Digital Scale',
     icon: TrendingUp,
-  },
-  {
-    value: 'Statutory Licensing',
-    label: 'Trade Licenses & NOC',
-    code: '05',
-    tag: 'Clearances',
-    icon: FileText,
-  },
-  {
-    value: 'General Advisory',
-    label: 'Corporate Strategy Desk',
-    code: '06',
-    tag: 'Executive Desk',
-    icon: Sparkles,
   },
 ];
 
@@ -148,7 +134,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         />
       </button>
 
-      {/* Dropdown Options */}
+      {/* 4 Core Practice Options: Balanced 2x2 Grid */}
       {isOpen && (
         <div
           className={`absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border shadow-2xl p-2 animate-in fade-in zoom-in-95 duration-150 ${
