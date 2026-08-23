@@ -41,7 +41,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         'FSSAI licensing, hygiene audits, compliance filing, and quality certifications to guarantee statutory standards.',
       link: '/services/food-compliance',
       tag: 'Statutory Safety',
-      theme: 'cream' as const,
+      theme: 'olive' as const,
     },
     {
       number: '04',
@@ -51,7 +51,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         'Social media strategy, SEO optimization, high-converting digital platforms, and brand development to drive real revenue.',
       link: '/services/digital-marketing',
       tag: 'Digital Scale',
-      theme: 'charcoal' as const,
+      theme: 'mustard' as const,
     },
   ];
 
