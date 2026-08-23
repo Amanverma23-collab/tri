@@ -334,7 +334,8 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenConsultation }) => {
         title="Need customized pricing for DPCC, MCD, HR, or Marketing?"
         description="Due to varying premises dimensions, pollution categories, workforce sizes, and media spend scales, our advisory leads provide itemized custom proposals within 2 business hours."
         primaryBtnText="Request Itemized Proposal"
-        secondaryBtnText="Direct Line: +91 8585999922"
+        secondaryBtnText="Contact Advisory Desk"
+        secondaryBtnLink="/contact"
         serviceCategory="Custom Pricing"
         onOpenConsultation={onOpenConsultation}
       />

@@ -221,7 +221,8 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         title="Ready to simplify and scale your enterprise operations?"
         description="Connect with our senior advisory desk today to streamline your statutory licenses, workforce compliance, risk protection, and digital growth under a single cohesive roof."
         primaryBtnText="Schedule Discovery Call"
-        secondaryBtnText="Direct Line: +91 8585999922"
+        secondaryBtnText="Explore Practice Verticals"
+        secondaryBtnLink="/services"
         onOpenConsultation={onOpenConsultation}
       />
     </PageTransition>

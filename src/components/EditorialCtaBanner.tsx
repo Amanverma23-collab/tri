@@ -1,46 +1,45 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Phone, ShieldCheck, Sparkles, Clock, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles, Clock, CheckCircle2 } from 'lucide-react';
 
 interface EditorialCtaBannerProps {
   tagline?: string;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   primaryBtnText?: string;
   secondaryBtnText?: string;
   secondaryBtnLink?: string;
-  onOpenConsultation: (service?: string) => void;
   serviceCategory?: string;
+  onOpenConsultation: (service?: string) => void;
 }
 
 export const EditorialCtaBanner: React.FC<EditorialCtaBannerProps> = ({
-  tagline = '// READY TO SCALE & SECURE?',
-  title = 'Ready to simplify and scale your enterprise operations?',
-  description = 'Connect with our executive advisory desk today to streamline your statutory licenses, workforce compliance, risk protection, and digital growth under a unified corporate roof.',
+  tagline = '// STRATEGIC PARTNERSHIP',
+  title,
+  description,
   primaryBtnText = 'Schedule Consultation',
-  secondaryBtnText = 'Direct Line: +91 8585999922',
-  secondaryBtnLink,
+  secondaryBtnText = 'Explore Practice Verticals',
+  secondaryBtnLink = '/services',
+  serviceCategory = 'General Advisory',
   onOpenConsultation,
-  serviceCategory,
 }) => {
   return (
-    <section className="py-20 sm:py-28 bg-[#FAF6EE] border-t border-[#1A1A16]/10 relative overflow-hidden">
+    <section className="py-20 sm:py-24 bg-[#1A1A16] text-[#F5F0E6] overflow-hidden border-t border-b border-white/10 select-none">
       <div className="editorial-container">
-        {/* Bento Container with Deep Forest Charcoal & Gold Accents */}
-        <div className="relative rounded-3xl bg-[#141814] text-[#F5F0E6] p-8 sm:p-12 lg:p-14 border border-[#C9AF6B]/30 shadow-2xl overflow-hidden">
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#C9AF6B]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#7C8B6F]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
+        <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-[#262621]/90 border border-white/10 shadow-2xl relative overflow-hidden">
+          {/* Subtle Accent Glow */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#7C8B6F]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#C9AF6B]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left Column: Heading, Narrative & Action Buttons (7 cols) */}
+            {/* Left Column: Heading, Pitch & Action Buttons (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[#C9AF6B]/15 text-[#C9AF6B] font-mono text-[11px] uppercase tracking-widest border border-[#C9AF6B]/30">
-                <span className="w-2 h-2 rounded-full bg-[#C9AF6B] animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#C9AF6B] font-mono text-xs uppercase tracking-widest border border-white/10">
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>{tagline}</span>
               </div>
 
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.12]">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.08]">
                 {title}
               </h2>
 
@@ -57,7 +56,7 @@ export const EditorialCtaBanner: React.FC<EditorialCtaBannerProps> = ({
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                {secondaryBtnLink ? (
+                {secondaryBtnLink && (
                   <Link
                     to={secondaryBtnLink}
                     className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 text-xs"
@@ -65,14 +64,6 @@ export const EditorialCtaBanner: React.FC<EditorialCtaBannerProps> = ({
                     <span>{secondaryBtnText}</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
-                ) : (
-                  <a
-                    href="tel:+918585999922"
-                    className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 text-xs flex items-center gap-2"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-[#C9AF6B]" />
-                    <span>{secondaryBtnText}</span>
-                  </a>
                 )}
               </div>
             </div>
@@ -88,35 +79,35 @@ export const EditorialCtaBanner: React.FC<EditorialCtaBannerProps> = ({
                     Rapid 2-Hour Response
                   </h4>
                   <p className="font-sans text-xs text-white/60 mt-0.5 font-light">
-                    Direct assignment to a dedicated senior practice lead with zero call center wait times.
+                    Direct callback from senior partners for urgent licensing, audit or payroll needs.
                   </p>
                 </div>
               </div>
 
               <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#7C8B6F]/40 transition-colors flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#7C8B6F]/20 text-[#7C8B6F] flex items-center justify-center shrink-0 border border-[#7C8B6F]/30">
+                <div className="w-10 h-10 rounded-xl bg-[#7C8B6F]/15 text-[#7C8B6F] flex items-center justify-center shrink-0 border border-[#7C8B6F]/25">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-serif text-base font-bold text-white">
-                    100% Audit Readiness
+                    100% Institutional Discretion
                   </h4>
                   <p className="font-sans text-xs text-white/60 mt-0.5 font-light">
-                    Guaranteed statutory accuracy across labor, environmental, municipal and food safety laws.
+                    Protected under non-disclosure agreements with complete data governance.
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#C9AF6B]/40 transition-colors flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#C9AF6B]/15 text-[#C9AF6B] flex items-center justify-center shrink-0 border border-[#C9AF6B]/25">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#0072EF]/40 transition-colors flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-[#0072EF]/15 text-[#0072EF] flex items-center justify-center shrink-0 border border-[#0072EF]/25">
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-legacy text-base font-bold text-white">
-                    Pan-India Execution Desk
+                  <h4 className="font-serif text-base font-bold text-white">
+                    Full Compliance Warranty
                   </h4>
                   <p className="font-sans text-xs text-white/60 mt-0.5 font-light">
-                    Direct central authority and state-level liaison across Delhi NCR, Haryana, UP and pan-India.
+                    Zero-error statutory filings backed by verified regulatory audit documentation.
                   </p>
                 </div>
               </div>
