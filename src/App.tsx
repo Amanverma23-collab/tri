@@ -15,6 +15,7 @@ import { DigitalMarketingServices } from './pages/services/DigitalMarketingServi
 import { Licenses } from './pages/Licenses';
 import { Pricing } from './pages/Pricing';
 import { Contact } from './pages/Contact';
+import { NotFound } from './pages/NotFound';
 
 // Navigation & Global UI Components
 import { Navbar } from './components/Navbar';
@@ -55,7 +56,7 @@ function AnimatedRoutes({
         <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
         <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<Home onOpenConsultation={onOpenConsultation} />} />
+        <Route path="*" element={<NotFound onOpenConsultation={onOpenConsultation} />} />
       </Routes>
     </AnimatePresence>
   );
