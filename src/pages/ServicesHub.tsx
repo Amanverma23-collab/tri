@@ -69,32 +69,32 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
 
   return (
     <PageTransition>
-      {/* 1. MASTHEAD: Oversized "Services" with "04" page marker */}
-      <section className="relative pt-36 pb-16 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      {/* 1. MASTHEAD: Elegant, Well-Proportioned Header */}
+      <section className="relative pt-28 pb-12 sm:pt-32 sm:pb-14 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest">
-              <span className="w-8 h-px bg-[#7C8B6F]" />
+              <span className="w-6 h-px bg-[#7C8B6F]" />
               <span>Practice Portfolio // Overview</span>
             </div>
-            <div className="font-mono text-xs px-3.5 py-1 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
+            <div className="font-mono text-xs px-3 py-0.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
               04 VERTICALS
             </div>
           </div>
 
-          <h1 className="font-serif text-display-giant text-[#1A1A16] font-bold tracking-tight">
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#1A1A16] font-bold tracking-tight">
             Services
           </h1>
 
-          <p className="font-sans text-lg sm:text-2xl text-[#7A7A70] max-w-3xl font-light mt-4">
+          <p className="font-sans text-base sm:text-lg text-[#7A7A70] max-w-2xl font-light mt-3">
             Integrated multi-disciplinary advisory built to solve regulatory bottlenecks, optimize human capital, protect balance sheets, and drive growth.
           </p>
         </div>
       </section>
 
       {/* 2. FOUR STACKED CLICKABLE PANELS WITH BACKGROUND IMAGES */}
-      <section className="bg-[#F5F0E6] py-14">
-        <div className="editorial-container space-y-8">
+      <section className="bg-[#F5F0E6] py-10 sm:py-12">
+        <div className="editorial-container space-y-6">
           {servicePanels.map((panel, idx) => {
             const IconComp = panel.icon;
             return (
@@ -102,7 +102,7 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
                 key={idx}
                 to={panel.link}
                 data-cursor="Explore"
-                className={`relative block rounded-3xl p-8 sm:p-12 md:p-16 border overflow-hidden shadow-xl transition-transform duration-500 hover:-translate-y-1.5 group ${panel.bgClass} ${panel.borderClass}`}
+                className={`relative block rounded-3xl p-6 sm:p-10 md:p-12 border overflow-hidden shadow-xl transition-transform duration-500 hover:-translate-y-1.5 group ${panel.bgClass} ${panel.borderClass}`}
               >
                 {/* Background Image with Gradient Overlay */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -115,36 +115,36 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
                 </div>
 
                 {/* Content Area */}
-                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   {/* Left Column: Number + Content */}
-                  <div className="space-y-4 max-w-3xl">
-                    <div className="flex items-center gap-4">
-                      <span className="font-mono text-sm tracking-widest uppercase font-semibold text-[#C9AF6B] flex items-center gap-1.5">
+                  <div className="space-y-3 max-w-3xl">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs tracking-widest uppercase font-semibold text-[#C9AF6B] flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>Vertical {panel.num}</span>
                       </span>
-                      <div className="w-8 h-8 rounded-full bg-current/10 flex items-center justify-center">
-                        <IconComp className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center">
+                        <IconComp className="w-3.5 h-3.5" />
                       </div>
                     </div>
 
-                    <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight group-hover:underline decoration-current underline-offset-8">
+                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight group-hover:underline decoration-current underline-offset-8">
                       {panel.title}
                     </h2>
 
-                    <p className="font-serif text-lg sm:text-xl italic opacity-85">
+                    <p className="font-serif text-base sm:text-lg italic opacity-85">
                       {panel.subtitle}
                     </p>
 
-                    <p className="font-sans text-sm sm:text-base opacity-75 leading-relaxed font-light">
+                    <p className="font-sans text-xs sm:text-sm opacity-75 leading-relaxed font-light">
                       {panel.description}
                     </p>
                   </div>
 
                   {/* Right Column: Interactive Arrow Pill */}
                   <div className="flex items-center justify-end">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-current/20 flex items-center justify-center group-hover:bg-current/15 group-hover:scale-110 transition-all duration-300">
-                      <ArrowUpRight className="w-8 h-8 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-current/20 flex items-center justify-center group-hover:bg-current/15 group-hover:scale-110 transition-all duration-300">
+                      <ArrowUpRight className="w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
       </section>
 
       {/* 3. BOTTOM CROSS-LINK STRIP */}
-      <section className="py-20 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
+      <section className="py-16 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
         <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-2">
