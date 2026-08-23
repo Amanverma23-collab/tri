@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Phone, ArrowRight, ShieldCheck } from 'lucide-react';
+import { CustomServiceSelect } from './CustomServiceSelect';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -50,7 +51,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-[#1A1A16]/80 backdrop-blur-md animate-in fade-in duration-200 select-none">
-      <div className="relative w-full max-w-xl bg-[#F5F0E6] text-[#1A1A16] rounded-3xl p-6 sm:p-8 md:p-9 shadow-2xl border border-[#1A1A16]/15 overflow-hidden">
+      <div className="relative w-full max-w-xl bg-[#F5F0E6] text-[#1A1A16] rounded-3xl p-6 sm:p-8 md:p-9 shadow-2xl border border-[#1A1A16]/15 overflow-visible">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -66,14 +67,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               <img
                 src="/images/trisecure_logo.png"
                 alt="Trisecure Solutions"
-                className="w-full h-full object-contain filter drop-shadow-[0_2px_10px_rgba(56,189,248,0.4)]"
+                className="w-full h-full object-contain"
               />
             </div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2">
               Consultation Requested
             </h3>
             <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-md mx-auto mb-6">
-              Thank you, <strong className="text-[#1A1A16]">{formData.name}</strong>. Our senior advisory team will review your inquiry regarding <strong className="text-[#7C8B6F]">{formData.service}</strong> and contact you within 2 business hours.
+              Thank you, <strong className="text-[#1A1A16]">{formData.name}</strong>. Our senior advisory team will review your inquiry regarding <strong className="text-[#0072EF]">{formData.service}</strong> and contact you within 2 business hours.
             </p>
             <button
               onClick={onClose}
@@ -90,7 +91,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 <img
                   src="/images/trisecure_logo.png"
                   alt="Trisecure Solutions"
-                  className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(56,189,248,0.35)]"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
@@ -119,7 +120,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Enter full name"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#7C8B6F]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#0072EF]"
                   />
                 </div>
                 <div>
@@ -132,12 +133,12 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+91 98765 43210"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#7C8B6F]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#0072EF]"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                 <div>
                   <label className="block font-mono text-[10px] text-[#7A7A70] uppercase mb-1 font-semibold tracking-wider">
                     Email Address *
@@ -148,25 +149,17 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="corporate@company.com"
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#7C8B6F]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#0072EF]"
                   />
                 </div>
+
+                {/* Custom Redesigned Service Dropdown */}
                 <div>
-                  <label className="block font-mono text-[10px] text-[#7A7A70] uppercase mb-1 font-semibold tracking-wider">
-                    Select Practice Vertical *
-                  </label>
-                  <select
+                  <CustomServiceSelect
                     value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#7C8B6F]"
-                  >
-                    <option value="HR Services">01. HR Services & Payroll</option>
-                    <option value="Insurance & Loans">02. Insurance & Business Loans</option>
-                    <option value="Food Compliance">03. Food Compliance (FSSAI/MCD)</option>
-                    <option value="Digital Marketing">04. Digital Marketing & Web</option>
-                    <option value="Statutory Licensing">05. Statutory Trade Licenses</option>
-                    <option value="General Advisory">06. General Corporate Advisory</option>
-                  </select>
+                    onChange={(val) => setFormData({ ...formData, service: val })}
+                    label="Select Practice Vertical *"
+                  />
                 </div>
               </div>
 
@@ -179,18 +172,18 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Share details regarding your licensing, workforce, or growth goals..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#7C8B6F] resize-none"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6EE] border border-[#1A1A16]/15 text-[#1A1A16] text-xs focus:outline-none focus:border-[#0072EF] resize-none"
                 />
               </div>
 
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-2 text-xs text-[#7A7A70]">
-                  <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                  <Phone className="w-3.5 h-3.5 text-[#0072EF]" />
                   <span>Immediate priority callback guarantee</span>
                 </div>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold text-xs uppercase tracking-wider hover:bg-[#7C8B6F] transition-all flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold text-xs uppercase tracking-wider hover:bg-[#0072EF] transition-all flex items-center justify-center gap-2 group"
                 >
                   <span>Submit Inquiry</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
