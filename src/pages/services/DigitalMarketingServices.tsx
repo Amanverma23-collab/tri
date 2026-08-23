@@ -1,8 +1,9 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { PageTransition } from '../../components/PageTransition';
+import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';
 
 interface DigitalMarketingServicesProps {
   onOpenConsultation: (service?: string) => void;
@@ -42,7 +43,7 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
   const columnA = [
     { title: 'Informative Business Website', desc: 'Bespoke responsive corporate websites tailored to establish industry credibility and capture qualified inbound leads.' },
     { title: 'E-Commerce Website', desc: 'Scalable digital storefronts with secure payment gateways, inventory management, and frictionless checkout flows.' },
-    { title: 'Logo Design', desc: 'Distinctive, memorable emblem and typography logo marks designed to embody your company’s core values.' },
+    { title: 'Logo Design', desc: 'Distinctive, memorable emblem and typography logo marks designed to embody your company\'s core values.' },
     { title: 'Visiting Card & Letter Head Design', desc: 'Premium executive corporate stationery, business cards, and official digital documentation kits.' },
     { title: 'Google Business Listing & Review', desc: 'Local search optimization, map ranking dominance, and structured review management to boost customer trust.' },
     { title: 'Digital & Social Media Handling', desc: 'Consistent, curated feed content and active community management across Instagram, LinkedIn, and Facebook.' },
@@ -75,7 +76,7 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
       />
 
       {/* 2. TWO-COLUMN EDITORIAL SERVICE BREAKDOWN */}
-      <section className="py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      <section className="py-24 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
@@ -83,7 +84,7 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
                 <span className="w-8 h-px bg-[#7C8B6F]" />
                 <span>Scope of Capabilities // 04.A</span>
               </div>
-              <h2 className="font-serif text-display-sub font-bold text-[#1A1A16] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
                 Digital & Creative Directory
               </h2>
             </div>
@@ -158,39 +159,17 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
         </div>
       </section>
 
-      {/* 3. SEQUENTIAL PAGE NAVIGATION */}
-      <section className="py-20 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
-        <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block mb-2">
-              Navigation Index //
-            </span>
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-              Explore More Practices
-            </h3>
-            <p className="font-sans text-sm text-white/70 mt-1">
-              Return to our central Services Directory or consult our growth marketing team.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Link
-              to="/services"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 flex items-center gap-2"
-              data-cursor="Hub"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back to Services</span>
-            </Link>
-            <button
-              onClick={() => onOpenConsultation('Digital Marketing')}
-              className="btn-editorial-light"
-            >
-              <span>Consult Growth Team</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* 3. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      <EditorialCtaBanner
+        tagline="// DIGITAL GROWTH & BRAND INFRASTRUCTURE"
+        title="Ready to transform your brand into an industry authority?"
+        description="Connect with our creative technologists and performance ad strategists to develop high-converting websites, launch targeted ad funnels, and capture top organic search rankings."
+        primaryBtnText="Consult Growth Team"
+        secondaryBtnText="All Practice Verticals"
+        secondaryBtnLink="/services"
+        serviceCategory="Digital Marketing"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

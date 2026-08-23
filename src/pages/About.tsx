@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, HeartHandshake, Mail, Phone, Sparkles, Award, CheckCircle2, ArrowUpRight, Users, Landmark, Utensils, Megaphone, Rocket, Scale, UserCheck, Calculator, Store, Handshake } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
+import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 
 interface AboutProps {
   onOpenConsultation: (service?: string) => void;
@@ -491,36 +492,17 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       </section>
 
       {/* =========================================================================
-          5. CTA STRIP
+          5. REDESIGNED CTA STRIP: High-Converting Executive Bento Box
           ========================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6]">
-        <div className="editorial-container text-center max-w-3xl mx-auto space-y-6">
-          <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block">
-            // Start Today
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Ready to partner with an experienced advisory team?
-          </h2>
-          <p className="font-sans text-sm sm:text-base text-[#F5F0E6]/80 font-light">
-            Book a complimentary discovery call to evaluate your compliance status, workforce needs, or insurance portfolio.
-          </p>
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={() => onOpenConsultation()}
-              className="btn-editorial-light"
-            >
-              <span>Schedule Advisory Call</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <Link
-              to="/services"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10"
-            >
-              <span>Explore Services</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <EditorialCtaBanner
+        tagline="// EXECUTIVE ADVISORY DESK"
+        title="Ready to partner with an experienced advisory team?"
+        description="Book a complimentary discovery call with our managing leadership to evaluate your compliance status, human resources infrastructure, and corporate risk protection."
+        primaryBtnText="Schedule Advisory Call"
+        secondaryBtnText="Explore Practice Verticals"
+        secondaryBtnLink="/services"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

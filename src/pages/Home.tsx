@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Sparkles, Award } from 'lucide-react';
 import { EditorialHero } from '../components/EditorialHero';
 import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
+import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
 import { TextEffect } from '../components/core/text-effect';
 
@@ -25,95 +26,41 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
     {
       number: '02',
       title: 'Insurance & Loans',
-      subtitle: 'Risk Management & Capital Growth',
+      subtitle: 'Capital & Risk Advisory',
       description:
-        'Customized corporate and personal insurance coverage paired with competitive business, mortgage, and auto loans.',
+        'Comprehensive business insurance, commercial asset coverage, and tailored financing advisory solutions to secure and scale your enterprise.',
       link: '/services/insurance-loans',
-      tag: 'Finance & Risk',
+      tag: 'Financial Security',
       theme: 'charcoal' as const,
     },
     {
       number: '03',
       title: 'Food Compliance',
-      subtitle: 'Licensing & Quality Assurance',
+      subtitle: 'Regulatory Assurance',
       description:
-        'FSSAI registrations, MCD health trade permits, DPCC environmental clearances, and audit readiness for F&B businesses.',
+        'FSSAI licensing, hygiene audits, compliance filing, and quality certifications to guarantee statutory standards.',
       link: '/services/food-compliance',
-      tag: 'Regulatory Desk',
-      theme: 'olive' as const,
+      tag: 'Statutory Safety',
+      theme: 'cream' as const,
     },
     {
       number: '04',
       title: 'Digital Marketing',
-      subtitle: 'Branding & Growth Acceleration',
+      subtitle: 'Growth & Brand Authority',
       description:
-        'Full-funnel digital dominance: Custom high-conversion websites, SEO authority, targeted advertising, and multimedia production.',
+        'Social media strategy, SEO optimization, high-converting digital platforms, and brand development to drive real revenue.',
       link: '/services/digital-marketing',
-      tag: 'Growth & Creative',
-      theme: 'mustard' as const,
+      tag: 'Digital Scale',
+      theme: 'charcoal' as const,
     },
   ];
 
   return (
     <PageTransition>
-      {/* 1. HERO: Fast-Loading Instant Editorial Hero */}
+      {/* 1. HERO SECTION: 2-Column High-Impact Split Hero matching User Mockup */}
       <EditorialHero onOpenConsultation={onOpenConsultation} />
 
-      {/* 2. INTRO STRIP: Section 01 - Asymmetric Editorial Layout */}
-      <section className="relative py-28 sm:py-36 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
-        <div className="editorial-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left Col: Giant Number Marker & Eyebrow */}
-            <div className="lg:col-span-4 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-4">
-                  <span className="w-6 h-px bg-[#7C8B6F]" />
-                  <span>Section 01 // Overview</span>
-                </div>
-                <h2 className="font-serif text-5xl sm:text-6xl font-bold tracking-tight text-[#1A1A16]">
-                  About Us
-                </h2>
-              </div>
-              <div className="mt-12 hidden lg:block">
-                <span className="editorial-numeral-giant text-[#1A1A16]/15 font-light">
-                  01
-                </span>
-              </div>
-            </div>
-
-            {/* Right Col: Editorial Narrative & CTA */}
-            <div className="lg:col-span-8 space-y-8">
-              <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#1A1A16] leading-snug font-normal">
-                At <strong className="font-semibold text-[#7C8B6F]">Trisecure Solution</strong>, we specialize in providing comprehensive insurance, digital marketing solutions, and loan solutions tailored to meet the unique needs of individuals and businesses.
-              </p>
-              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light max-w-2xl">
-                Our expertise ensures that our clients receive the best advice and support, helping them make informed decisions for their financial well-being. From startup licensing to enterprise workforce management, we bridge operational hurdles with clarity and speed.
-              </p>
-
-              <div className="pt-4 flex flex-wrap items-center gap-6">
-                <Link
-                  to="/about"
-                  className="btn-editorial-primary"
-                  data-cursor="Read"
-                >
-                  <span>More about us</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-
-                <button
-                  onClick={() => onOpenConsultation()}
-                  className="btn-editorial-secondary"
-                  data-cursor="Consult"
-                >
-                  <span>Schedule Advisory Call</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. SERVICES PREVIEW: Section 02 - Horizontal Pinned Scroll */}
+      {/* 2. SERVICES SECTION: Horizontal Scroll with Enhanced Scrub Distance & Smooth Transitions */}
       <HorizontalScrollSection
         id="services-preview"
         marker="02"
@@ -122,31 +69,67 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         cards={serviceCards}
       />
 
-      {/* 4. WHY CHOOSE US: Section 03 - Asymmetric 4-Card Grid with TextEffect */}
-      <section className="relative py-28 sm:py-36 bg-[#FAF6EE] border-b border-[#1A1A16]/10 overflow-hidden">
+      {/* 3. LICENSES SHOWCASE STRIP: Editorial Callout */}
+      <section className="py-24 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+        <div className="editorial-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-5">
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-3 block">
+                // Regulatory Desk
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] leading-tight">
+                Government & Trade Licenses Handled
+              </h2>
+            </div>
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed mb-8 font-light">
+                From FSSAI food licensing to MCD trade permits, DPCC pollution control clearances, and Shop & Establishment registrations across Delhi NCR and pan-India.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  to="/licenses"
+                  className="btn-editorial-primary"
+                  data-cursor="Directory"
+                >
+                  <span>Explore License Matrix</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/pricing"
+                  className="btn-editorial-secondary"
+                  data-cursor="Pricing"
+                >
+                  <span>View Fee Schedule</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. WHY CHOOSE US: Asymmetric Editorial Bento Grid with Scroll Reveal */}
+      <section className="py-24 sm:py-32 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <div className="flex items-center gap-3 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-3">
-                <span className="w-8 h-px bg-[#7C8B6F]" />
-                <span>Section 03 // Credibility</span>
-              </div>
-              <h2 className="font-serif text-display-sub font-bold text-[#1A1A16] tracking-tight">
-                Why Choose Us?
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-3 block">
+                // Institutional Advantage
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
+                Why Choose TriSecure
               </h2>
             </div>
-            <p className="font-sans text-sm sm:text-base text-[#7A7A70] max-w-md">
-              A bespoke partner combining institutional rigor with personalized, hands-on execution.
+            <p className="font-sans text-base text-[#7A7A70] max-w-md">
+              We combine deep sector knowledge with institutional rigor to provide holistic business advisory.
             </p>
           </div>
 
-          {/* Asymmetric 4-Card Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            {/* Card 1: Large Span (7 cols) - Charcoal Theme */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            {/* Card 1: Large Span (7 cols) - Dark Charcoal Theme */}
             <div className="md:col-span-7 bg-[#1A1A16] text-[#F5F0E6] rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/10 flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-2">
               <div className="flex items-center justify-between mb-6">
                 <span className="font-mono text-xs text-[#C9AF6B] tracking-widest font-semibold">
-                  01 // DOMAIN MASTERY
+                  01 // DOMAIN DEPTH
                 </span>
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Award className="w-5 h-5 text-[#C9AF6B]" />
@@ -313,37 +296,15 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
-      {/* 5. CTA STRIP: Full-Bleed Dark Charcoal Contrast Break */}
-      <section className="py-28 sm:py-36 bg-[#1A1A16] text-[#F5F0E6] relative overflow-hidden bg-charcoal-textured">
-        <div className="editorial-container relative z-10 text-center max-w-4xl mx-auto">
-          <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase mb-4 block">
-            // Ready To Partner?
-          </span>
-          <h2 className="font-serif text-display-sub font-bold text-white tracking-tight mb-8">
-            Ready to simplify your business?
-          </h2>
-          <p className="font-sans text-base sm:text-xl text-[#F5F0E6]/80 max-w-2xl mx-auto mb-10 font-light">
-            Connect with our advisory consultants today to streamline your licenses, finance, HR, and marketing under a single cohesive roof.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/contact"
-              className="btn-editorial-light"
-              data-cursor="Contact"
-            >
-              <span>Get in Touch</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <button
-              onClick={() => onOpenConsultation()}
-              className="btn-editorial-secondary border-white/30 text-[#F5F0E6] hover:bg-white/10"
-              data-cursor="Consult"
-            >
-              <span>Book Discovery Session</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* 5. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      <EditorialCtaBanner
+        tagline="// READY TO PARTNER?"
+        title="Ready to simplify and scale your enterprise operations?"
+        description="Connect with our senior advisory desk today to streamline your statutory licenses, workforce compliance, risk protection, and digital growth under a single cohesive roof."
+        primaryBtnText="Schedule Discovery Call"
+        secondaryBtnText="Direct Line: +91 8585999922"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

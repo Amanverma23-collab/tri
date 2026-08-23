@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, ShieldCheck, CheckCircle2, Receipt, FileText, Sparkles, CreditCard } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
+import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 
 interface PricingProps {
   onOpenConsultation: (service?: string) => void;
@@ -326,37 +327,17 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenConsultation }) => {
       </section>
 
       {/* =========================================================================
-          4. CUSTOM RETAINER CTA STRIP
+          4. REDESIGNED CTA STRIP: High-Converting Executive Bento Box
           ========================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6]">
-        <div className="editorial-container text-center max-w-3xl mx-auto space-y-6">
-          <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block">
-            // Bespoke Enterprise Retainers
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Need customized pricing for DPCC, MCD, HR, or Marketing?
-          </h2>
-          <p className="font-sans text-sm sm:text-base text-[#F5F0E6]/80 font-light">
-            Due to varying premises dimensions, pollution categories, workforce sizes, and media spend scales, we provide itemized custom quotes within 2 business hours.
-          </p>
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={() => onOpenConsultation('Custom Pricing')}
-              className="btn-editorial-light"
-            >
-              <span>Get Custom Quote</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <a
-              href="tel:+918585999922"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 flex items-center gap-2"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Call +91 8585999922</span>
-            </a>
-          </div>
-        </div>
-      </section>
+      <EditorialCtaBanner
+        tagline="// BESPOKE ENTERPRISE RETAINERS"
+        title="Need customized pricing for DPCC, MCD, HR, or Marketing?"
+        description="Due to varying premises dimensions, pollution categories, workforce sizes, and media spend scales, our advisory leads provide itemized custom proposals within 2 business hours."
+        primaryBtnText="Request Itemized Proposal"
+        secondaryBtnText="Direct Line: +91 8585999922"
+        serviceCategory="Custom Pricing"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

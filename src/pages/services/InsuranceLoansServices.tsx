@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, CircleDollarSign, Car, Home as HomeIcon, Brie
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { HorizontalScrollSection, HorizontalCardItem } from '../../components/HorizontalScrollSection';
 import { PageTransition } from '../../components/PageTransition';
+import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';
 
 interface InsuranceLoansServicesProps {
   onOpenConsultation: (service?: string) => void;
@@ -140,7 +141,7 @@ export const InsuranceLoansServices: React.FC<InsuranceLoansServicesProps> = ({
       />
 
       {/* 3. TERTIARY SECTION: Loan Types Editorial Grid */}
-      <section className="py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      <section className="py-24 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
@@ -148,7 +149,7 @@ export const InsuranceLoansServices: React.FC<InsuranceLoansServicesProps> = ({
                 <span className="w-8 h-px bg-[#7C8B6F]" />
                 <span>Practice Desk // 02.B</span>
               </div>
-              <h2 className="font-serif text-display-sub font-bold text-[#1A1A16] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
                 Financing & Loan Solutions
               </h2>
             </div>
@@ -199,39 +200,17 @@ export const InsuranceLoansServices: React.FC<InsuranceLoansServicesProps> = ({
         </div>
       </section>
 
-      {/* 4. SEQUENTIAL PAGE NAVIGATION */}
-      <section className="py-20 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
-        <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block mb-2">
-              Next Practice Vertical //
-            </span>
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-              Food Compliance & Licensing
-            </h3>
-            <p className="font-sans text-sm text-white/70 mt-1">
-              Statutory FSSAI licenses, MCD health trade permits, hygiene audits, and DPCC clearances.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => onOpenConsultation('Insurance & Loans')}
-              className="btn-editorial-light"
-            >
-              <span>Consult Finance Desk</span>
-            </button>
-            <Link
-              to="/services/food-compliance"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 flex items-center gap-2"
-              data-cursor="Next"
-            >
-              <span>Next: Food Compliance</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 4. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      <EditorialCtaBanner
+        tagline="// RISK PROTECTION & CAPITAL LENDING"
+        title="Ready to safeguard your enterprise assets & secure capital funding?"
+        description="Speak directly with our senior insurance underwriters and loan advisors to optimize policy premiums, structure business credit lines, and protect executive liabilities."
+        primaryBtnText="Consult Risk Advisor"
+        secondaryBtnText="Next: Food Compliance"
+        secondaryBtnLink="/services/food-compliance"
+        serviceCategory="Insurance & Loans"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

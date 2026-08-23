@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, ClipboardCheck, Award, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { PageTransition } from '../../components/PageTransition';
+import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';
 
 interface FoodComplianceServicesProps {
   onOpenConsultation: (service?: string) => void;
@@ -93,7 +94,7 @@ export const FoodComplianceServices: React.FC<FoodComplianceServicesProps> = ({
       />
 
       {/* 2. DETAILED SERVICE PILLARS */}
-      <section className="py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      <section className="py-24 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="mb-16">
             <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3">
@@ -147,7 +148,7 @@ export const FoodComplianceServices: React.FC<FoodComplianceServicesProps> = ({
       {/* 3. CROSS-LINK BANNER: Link to /licenses */}
       <section className="py-20 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
-          <div className="bg-[#1A1A16] text-[#F5F0E6] rounded-3xl p-8 sm:p-14 border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="bg-[#141814] text-[#F5F0E6] rounded-3xl p-8 sm:p-14 border border-[#C9AF6B]/30 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-3">
               <div className="flex items-center gap-2 font-mono text-xs text-[#C9AF6B] uppercase tracking-widest">
                 <AlertCircle className="w-4 h-4" />
@@ -163,7 +164,7 @@ export const FoodComplianceServices: React.FC<FoodComplianceServicesProps> = ({
 
             <div className="flex items-center gap-4 shrink-0">
               <Link to="/licenses" className="btn-editorial-light" data-cursor="Licenses">
-                <span>See License Types</span>
+                <span>See License Matrix</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -171,39 +172,17 @@ export const FoodComplianceServices: React.FC<FoodComplianceServicesProps> = ({
         </div>
       </section>
 
-      {/* 4. SEQUENTIAL PAGE NAVIGATION */}
-      <section className="py-20 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
-        <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block mb-2">
-              Next Practice Vertical //
-            </span>
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-              Digital Marketing & Media
-            </h3>
-            <p className="font-sans text-sm text-white/70 mt-1">
-              Custom websites, high-intent Google & Social advertising, technical SEO, and corporate video production.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => onOpenConsultation('Food Compliance')}
-              className="btn-editorial-light"
-            >
-              <span>Consult Food Officer</span>
-            </button>
-            <Link
-              to="/services/digital-marketing"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 flex items-center gap-2"
-              data-cursor="Next"
-            >
-              <span>Next: Digital Marketing</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 4. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      <EditorialCtaBanner
+        tagline="// FOOD SAFETY & STATUTORY LICENSING"
+        title="Ready to secure your food business licenses & hygiene standards?"
+        description="Book a technical discovery session with our senior food safety compliance officers for FSSAI State/Central filings, MCD health trade permits, and FoSTaC hygiene audits."
+        primaryBtnText="Consult Food Officer"
+        secondaryBtnText="Next: Digital Marketing"
+        secondaryBtnLink="/services/digital-marketing"
+        serviceCategory="Food Compliance"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

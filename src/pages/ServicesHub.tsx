@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, Users, Landmark, Utensils, Megaphone, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Users, Landmark, Utensils, Megaphone, Sparkles, ShieldCheck } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
+import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 
 interface ServicesHubProps {
   onOpenConsultation: (service?: string) => void;
@@ -39,29 +40,29 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
     },
     {
       num: '03',
-      title: 'Food Compliance',
-      subtitle: 'FSSAI Licensing, Health Trade Sanctions & Environmental Clearances',
+      title: 'Food Compliance Services',
+      subtitle: 'FSSAI Licensing, Hygiene Audits & Regulatory Governance',
       description:
-        'End-to-end statutory food licensing, QA framework deployment, hygiene audit readiness, staff certifications, and transparent compliance logging.',
+        'FSSAI registration & state/central licensing, laboratory analysis protocols, statutory hygiene inspections, and ongoing regulatory compliance.',
       link: '/services/food-compliance',
       imageUrl: '/images/food_hero.jpg',
-      theme: 'olive',
-      bgClass: 'bg-[#7C8B6F] text-[#F5F0E6]',
-      gradientOverlay: 'bg-gradient-to-r from-[#7C8B6F] via-[#7C8B6F]/92 to-[#7C8B6F]/80',
-      borderClass: 'border-[#637157]',
+      theme: 'cream',
+      bgClass: 'bg-[#FAF6EE] text-[#1A1A16]',
+      gradientOverlay: 'bg-gradient-to-r from-[#FAF6EE] via-[#FAF6EE]/92 to-[#FAF6EE]/75',
+      borderClass: 'border-[#1A1A16]/10',
       icon: Utensils,
     },
     {
       num: '04',
-      title: 'Digital Marketing',
-      subtitle: 'Digital Brand Building, Multi-Platform Ads & Visual Production',
+      title: 'Digital Marketing Services',
+      subtitle: 'Brand Positioning, SEO & Performance Digital Infrastructure',
       description:
-        'High-intent web development, Google Business Optimization, full-funnel social advertising, technical SEO, and professional photo/video production.',
+        'Targeted performance advertising, enterprise SEO, conversion-focused digital platforms, and strategic brand positioning.',
       link: '/services/digital-marketing',
       imageUrl: '/images/marketing_hero.jpg',
-      theme: 'charcoal-alt',
-      bgClass: 'bg-[#22221D] text-[#F5F0E6]',
-      gradientOverlay: 'bg-gradient-to-r from-[#22221D] via-[#22221D]/92 to-[#22221D]/75',
+      theme: 'charcoal',
+      bgClass: 'bg-[#1A1A16] text-[#F5F0E6]',
+      gradientOverlay: 'bg-gradient-to-r from-[#1A1A16] via-[#1A1A16]/92 to-[#1A1A16]/75',
       borderClass: 'border-white/10',
       icon: Megaphone,
     },
@@ -69,83 +70,196 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
 
   return (
     <PageTransition>
-      {/* 1. MASTHEAD: Elegant, Well-Proportioned Header */}
-      <section className="relative pt-28 pb-12 sm:pt-32 sm:pb-14 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      {/* 1. MASTHEAD: Editorial Hero Section */}
+      <section className="relative pt-32 pb-14 sm:pt-36 sm:pb-18 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
         <div className="editorial-container">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest">
-              <span className="w-6 h-px bg-[#7C8B6F]" />
-              <span>Practice Portfolio // Overview</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Left Column: Heading, Narrative & Actions */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-mono text-[11px] uppercase tracking-widest shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#C9AF6B] animate-pulse" />
+                <span>PRACTICE VERTICALS // CORE ADVISORY</span>
+              </div>
+
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1A1A16] leading-[1.08]">
+                Enterprise Practice Verticals
+              </h1>
+
+              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light max-w-xl">
+                Institutional-grade advisory spanning human capital, asset insurance, loan financing, food regulatory compliance, and performance digital growth under a unified partner desk.
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() => onOpenConsultation()}
+                  className="btn-editorial-primary text-xs"
+                >
+                  <span>Schedule Discovery Session</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <Link
+                  to="/licenses"
+                  className="btn-editorial-secondary text-xs"
+                >
+                  <span>Statutory License Matrix</span>
+                </Link>
+              </div>
+
+              {/* Bottom Quick Metrics Bar */}
+              <div className="pt-6 grid grid-cols-3 gap-4 border-t border-[#1A1A16]/10 max-w-lg">
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                    04
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Core Practices
+                  </p>
+                </div>
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#7C8B6F] block">
+                    100%
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Integrated Desk
+                  </p>
+                </div>
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                    Pan-India
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Operational Scope
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="font-mono text-xs px-3 py-0.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
-              04 VERTICALS
+
+            {/* Right Column: Executive Practice Overview Bento Card */}
+            <div className="lg:col-span-5">
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-xl space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#1A1A16]/10">
+                  <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-wider font-semibold">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Single-Window Advantage</span>
+                  </div>
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
+                    ZERO VENDOR FRICTION
+                  </span>
+                </div>
+
+                <p className="font-serif text-lg sm:text-xl text-[#1A1A16] leading-snug font-normal">
+                  "Consolidate four critical business departments under senior corporate leadership to accelerate operational efficiency."
+                </p>
+
+                {/* 4 Practice Area Micro-Tiles */}
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
+                      <Users className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">HR & Workforce Architecture</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">Hiring, payroll, statutory registers & dispute handling</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#7C8B6F] text-white flex items-center justify-center shrink-0">
+                      <Landmark className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Insurance & Capital Lending</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">Asset protection, corporate group cover & credit facilities</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#C9AF6B] text-[#1A1A16] flex items-center justify-center shrink-0">
+                      <Utensils className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Food & Environmental Compliance</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">FSSAI Central/State, Health Trade & DPCC clearances</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
+                      <Megaphone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Digital Marketing & Brand Authority</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">High-converting web platforms, targeted ads & organic SEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#1A1A16] font-bold tracking-tight">
-            Services
-          </h1>
-
-          <p className="font-sans text-base sm:text-lg text-[#7A7A70] max-w-2xl font-light mt-3">
-            Integrated multi-disciplinary advisory built to solve regulatory bottlenecks, optimize human capital, protect balance sheets, and drive growth.
-          </p>
         </div>
       </section>
 
-      {/* 2. FOUR STACKED CLICKABLE PANELS WITH BACKGROUND IMAGES */}
-      <section className="bg-[#F5F0E6] py-10 sm:py-12">
-        <div className="editorial-container space-y-6">
-          {servicePanels.map((panel, idx) => {
-            const IconComp = panel.icon;
+      {/* 2. FOUR VERTICAL PANELS: Asymmetric Editorial Cards */}
+      <section className="py-24 sm:py-32 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
+        <div className="editorial-container space-y-12">
+          {servicePanels.map((panel) => {
+            const Icon = panel.icon;
             return (
               <Link
-                key={idx}
+                key={panel.num}
                 to={panel.link}
-                data-cursor="Explore"
-                className={`relative block rounded-3xl p-6 sm:p-10 md:p-12 border overflow-hidden shadow-xl transition-transform duration-500 hover:-translate-y-1.5 group ${panel.bgClass} ${panel.borderClass}`}
+                className={`block relative rounded-3xl overflow-hidden border ${panel.borderClass} shadow-xl hover:shadow-2xl transition-all duration-500 group`}
               >
-                {/* Background Image with Gradient Overlay */}
-                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                  <img
-                    src={panel.imageUrl}
-                    alt={panel.title}
-                    className="w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-700 opacity-25 sm:opacity-30"
-                  />
-                  <div className={`absolute inset-0 ${panel.gradientOverlay}`} />
-                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
+                  {/* Left Column: Narrative Content */}
+                  <div className={`lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-between z-10 ${panel.bgClass}`}>
+                    <div>
+                      <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                            panel.theme === 'cream' ? 'bg-[#1A1A16] text-white' : 'bg-[#C9AF6B] text-[#1A1A16]'
+                          }`}>
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <span className="font-mono text-xs tracking-widest font-semibold uppercase text-[#7C8B6F]">
+                            // Practice 0{panel.num}
+                          </span>
+                        </div>
+                        <span className="font-mono text-xs opacity-50">EXPLORE VERTICAL</span>
+                      </div>
 
-                {/* Content Area */}
-                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                  {/* Left Column: Number + Content */}
-                  <div className="space-y-3 max-w-3xl">
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs tracking-widest uppercase font-semibold text-[#C9AF6B] flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>Vertical {panel.num}</span>
+                      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 tracking-tight group-hover:translate-x-1 transition-transform">
+                        {panel.title}
+                      </h2>
+
+                      <p className="font-serif text-lg sm:text-xl font-normal opacity-90 mb-6 leading-snug">
+                        {panel.subtitle}
+                      </p>
+
+                      <p className="font-sans text-sm sm:text-base opacity-75 leading-relaxed font-light max-w-xl">
+                        {panel.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-8 mt-8 border-t border-current/10 flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-wider font-semibold">
+                        Inspect Detailed Scope & Case Studies
                       </span>
-                      <div className="w-7 h-7 rounded-full bg-current/10 flex items-center justify-center">
-                        <IconComp className="w-3.5 h-3.5" />
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-current/10 group-hover:bg-current group-hover:text-white transition-colors">
+                        <ArrowUpRight className="w-5 h-5" />
                       </div>
                     </div>
-
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight group-hover:underline decoration-current underline-offset-8">
-                      {panel.title}
-                    </h2>
-
-                    <p className="font-serif text-base sm:text-lg italic opacity-85">
-                      {panel.subtitle}
-                    </p>
-
-                    <p className="font-sans text-xs sm:text-sm opacity-75 leading-relaxed font-light">
-                      {panel.description}
-                    </p>
                   </div>
 
-                  {/* Right Column: Interactive Arrow Pill */}
-                  <div className="flex items-center justify-end">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-current/20 flex items-center justify-center group-hover:bg-current/15 group-hover:scale-110 transition-all duration-300">
-                      <ArrowUpRight className="w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                    </div>
+                  {/* Right Column: Imagery with Editorial Framing */}
+                  <div className="lg:col-span-5 relative min-h-[260px] lg:min-h-full overflow-hidden">
+                    <img
+                      src={panel.imageUrl}
+                      alt={panel.title}
+                      className="absolute inset-0 w-full h-full object-cover filter contrast-105 group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:hidden" />
                   </div>
                 </div>
               </Link>
@@ -154,28 +268,16 @@ export const ServicesHub: React.FC<ServicesHubProps> = ({ onOpenConsultation }) 
         </div>
       </section>
 
-      {/* 3. BOTTOM CROSS-LINK STRIP */}
-      <section className="py-16 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
-        <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-2">
-              Looking for statutory license charges?
-            </h3>
-            <p className="font-sans text-sm text-white/70">
-              Inspect our comprehensive FSSAI, MCD, Factory, and Shop & Establishment fee schedules.
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link to="/licenses" className="btn-editorial-light">
-              <span>View Licenses</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link to="/pricing" className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10">
-              <span>Pricing Desk</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 3. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      <EditorialCtaBanner
+        tagline="// COMPLETE PRACTICE ADVISORY"
+        title="Ready to consolidate your business advisory under one desk?"
+        description="Connect with our practice directors to streamline your statutory compliance, talent operations, insurance coverage, and digital customer acquisition."
+        primaryBtnText="Schedule Advisory Call"
+        secondaryBtnText="Inspect License Matrix"
+        secondaryBtnLink="/licenses"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

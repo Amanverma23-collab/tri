@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, CheckCircle2, ArrowUpRight, Sparkles, Building2, Store, Factory, Utensils } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
+import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 
 interface LicensesProps {
   onOpenConsultation: (service?: string) => void;
@@ -386,36 +387,18 @@ export const Licenses: React.FC<LicensesProps> = ({ onOpenConsultation }) => {
       </section>
 
       {/* =========================================================================
-          3. BOTTOM CTA STRIP
+          3. REDESIGNED CTA STRIP: High-Converting Executive Bento Box
           ========================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6]">
-        <div className="editorial-container text-center max-w-3xl mx-auto space-y-6">
-          <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block">
-            // Fast-Track Approval
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Need urgent statutory license clearances for your business?
-          </h2>
-          <p className="font-sans text-sm sm:text-base text-[#F5F0E6]/80 font-light">
-            Contact our senior regulatory advisory desk for end-to-end document preparation, municipal inspection audits, and government filings.
-          </p>
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={() => onOpenConsultation('Licenses')}
-              className="btn-editorial-light"
-            >
-              <span>Consult Regulatory Desk</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <Link
-              to="/pricing"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10"
-            >
-              <span>Inspect Pricing Breakdown</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <EditorialCtaBanner
+        tagline="// REGULATORY LICENSING DESK"
+        title="Need urgent statutory license clearances for your business?"
+        description="Contact our senior regulatory advisory desk for end-to-end document preparation, municipal inspection audits, and government portal filings with zero delays."
+        primaryBtnText="Consult Regulatory Desk"
+        secondaryBtnText="Inspect Fee Schedules"
+        secondaryBtnLink="/pricing"
+        serviceCategory="Licenses"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };

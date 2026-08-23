@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Briefcase, FileSpreadsheet, GraduationCap, Scale, Heart } from 'lucide-react';
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { PageTransition } from '../../components/PageTransition';
+import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';
 
 interface HRServicesProps {
   onOpenConsultation: (service?: string) => void;
@@ -40,100 +41,66 @@ export const HRServices: React.FC<HRServicesProps> = ({ onOpenConsultation }) =>
   const hrPillars = [
     {
       icon: Briefcase,
-      title: 'Recruitment & Staffing',
-      summary: 'Finding the right talent to meet your business needs.',
-      details:
-        'We deploy targeted executive search and rigorous multi-stage candidate screening to source top-tier talent. Whether filling specialized technical posts, field operatives, or senior leadership, our pipeline ensures swift placements with high retention index.',
+      title: 'Strategic Talent Sourcing',
+      description: 'Leveraging data-driven candidate evaluation pipelines for high-retention executive and operational placements.',
     },
     {
       icon: FileSpreadsheet,
-      title: 'Payroll Management',
-      summary: 'Ensuring timely and accurate payroll processing.',
-      details:
-        'Zero-error monthly payroll execution with automated statutory computations (Provident Fund, ESI, Professional Tax, TDS). We provide employee self-service pay-slips, leave & attendance integrations, and seamless compliance filings.',
-    },
-    {
-      icon: GraduationCap,
-      title: 'Employee Training & Development',
-      summary: 'Empowering your workforce with the skills they need.',
-      details:
-        'Customized corporate training modules designed to bridge skill gaps, enhance operational efficiency, and build management depth. We deliver interactive workshops in customer relations, leadership, safety, and modern tool adoption.',
+      title: 'Zero-Error Payroll',
+      description: 'Automated wage calculation, PF/ESIC reconciliation, TDS computation, and confidential direct transfers.',
     },
     {
       icon: Scale,
-      title: 'Compliance & Regulatory Affairs',
-      summary: 'Keeping your business compliant with labor laws and regulations.',
-      details:
-        'Navigating complex Indian labor statutes: Minimum Wages Act, Payment of Gratuity, Maternity Benefits, POSH statutory committees, and annual register maintenance. We protect your company against legal liability and regulatory penalties.',
-    },
-    {
-      icon: Heart,
-      title: 'Employee Relations',
-      summary: 'Enhancing workplace harmony and productivity.',
-      details:
-        'Fostering a transparent, compliant, and motivated work culture. We design performance appraisal systems, resolve workplace grievances, and develop employee engagement policies that reduce turnover and maximize team output.',
+      title: 'Statutory Labor Audits',
+      description: 'Proactive mitigation of non-compliance risks under Factory Act, Minimum Wages, Gratuity, and State Shop Acts.',
     },
   ];
 
   return (
     <PageTransition>
-      {/* 1. HERO: Split Curtain Reveal for HR SERVICES with Editorial Hero Image */}
+      {/* 1. EDITORIAL SPLIT REVEAL HERO: HR Focus */}
       <SplitRevealSection
         id="hr-hero"
         badge="VERTICAL 01 // HUMAN CAPITAL"
-        title="HR SERVICES"
-        subtitle="Workforce Architecture, Payroll & Labor Compliance"
-        subtext="Empowering organizations with full-lifecycle human resource solutions designed to acquire premier talent, ensure bulletproof labor compliance, and foster high-performance teams."
+        title="HR & WORKFORCE SOLUTIONS"
+        subtitle="Workforce Acquisition, Payroll Infrastructure & Labor Law Governance"
+        subtext="Our human resources consultancy delivers comprehensive people operations support designed to empower growing enterprises. From targeted talent acquisition and frictionless payroll disbursement to proactive statutory compliance and cultural arbitration, we build resilient organizational foundations."
         imageUrl="/images/hr_hero.jpg"
+        theme="cream"
         subItems={hrSubItems}
-        theme="charcoal"
         onOpenConsultation={onOpenConsultation}
       />
 
-      {/* 2. DETAILED SERVICE PILLARS */}
-      <section className="py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      {/* 2. THREE PILLARS OF EXCELLENCE */}
+      <section className="py-24 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
-          <div className="mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase block mb-3">
-              // Core HR Practice Areas
+              // Core Methodology
             </span>
-            <h2 className="font-serif text-display-sub font-bold text-[#1A1A16] tracking-tight">
-              Comprehensive Workforce Solutions
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16]">
+              Engineered for People & Performance
             </h2>
           </div>
 
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {hrPillars.map((pillar, idx) => {
-              const IconComp = pillar.icon;
+              const Icon = pillar.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-[#FAF6EE] rounded-3xl p-8 sm:p-12 border border-[#1A1A16]/10 shadow-sm hover:border-[#7C8B6F] transition-all duration-300"
+                  className="bg-[#F5F0E6] p-8 sm:p-10 rounded-3xl border border-[#1A1A16]/10 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div className="lg:col-span-1 flex items-center">
-                      <div className="w-12 h-12 rounded-2xl bg-[#7C8B6F]/15 text-[#7C8B6F] flex items-center justify-center font-mono font-bold">
-                        0{idx + 1}
-                      </div>
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-[#1A1A16] text-[#F5F0E6] flex items-center justify-center mb-6">
+                      <Icon className="w-6 h-6" />
                     </div>
-
-                    <div className="lg:col-span-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <IconComp className="w-5 h-5 text-[#7C8B6F]" />
-                        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16]">
-                          {pillar.title}
-                        </h3>
-                      </div>
-                      <p className="font-serif text-base italic text-[#7C8B6F]">
-                        {pillar.summary}
-                      </p>
-                    </div>
-
-                    <div className="lg:col-span-7">
-                      <p className="font-sans text-base text-[#7A7A70] leading-relaxed font-light">
-                        {pillar.details}
-                      </p>
-                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-[#1A1A16] mb-3">
+                      {pillar.title}
+                    </h3>
+                    <p className="font-sans text-sm text-[#7A7A70] leading-relaxed font-light">
+                      {pillar.description}
+                    </p>
                   </div>
                 </div>
               );
@@ -142,39 +109,17 @@ export const HRServices: React.FC<HRServicesProps> = ({ onOpenConsultation }) =>
         </div>
       </section>
 
-      {/* 3. SEQUENTIAL PAGE NAVIGATION */}
-      <section className="py-20 bg-[#1A1A16] text-[#F5F0E6] border-t border-white/10">
-        <div className="editorial-container flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase block mb-2">
-              Next Practice Vertical //
-            </span>
-            <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-              Insurance & Loans Services
-            </h3>
-            <p className="font-sans text-sm text-white/70 mt-1">
-              Explore corporate risk management, business financing, and customized personal underwriting.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => onOpenConsultation('HR Services')}
-              className="btn-editorial-light"
-            >
-              <span>Consult HR Specialist</span>
-            </button>
-            <Link
-              to="/services/insurance-loans"
-              className="btn-editorial-secondary text-white border-white/30 hover:bg-white/10 flex items-center gap-2"
-              data-cursor="Next"
-            >
-              <span>Next: Insurance & Loans</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 3. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      <EditorialCtaBanner
+        tagline="// HUMAN CAPITAL & STATUTORY PRACTICE"
+        title="Ready to optimize your workforce operations & statutory compliance?"
+        description="Schedule a private briefing with our senior HR directors to evaluate your staffing models, payroll compliance, POSH framework, and state labor registers."
+        primaryBtnText="Consult HR Specialist"
+        secondaryBtnText="Next: Insurance & Loans"
+        secondaryBtnLink="/services/insurance-loans"
+        serviceCategory="HR Services"
+        onOpenConsultation={onOpenConsultation}
+      />
     </PageTransition>
   );
 };
