@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, HeartHandshake, Mail, Phone, Sparkles } from 'lucide-react';
+import { ArrowRight, ShieldCheck, HeartHandshake, Mail, Phone, Sparkles, Award, CheckCircle2, ArrowUpRight, Users, Landmark, Utensils, Megaphone } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 
 interface AboutProps {
@@ -69,44 +69,141 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
 
   return (
     <PageTransition>
-      {/* 1. MASTHEAD: Elegant, Well-Proportioned "About" Header */}
-      <section className="relative pt-28 pb-12 sm:pt-32 sm:pb-16 bg-[#F5F0E6] overflow-hidden border-b border-[#1A1A16]/10">
+      {/* =========================================================================
+          1. REDESIGNED MASTHEAD: Editorial 2-Column Hero Layout with Corporate Bento
+          ========================================================================= */}
+      <section className="relative pt-32 pb-16 sm:pt-36 sm:pb-20 bg-[#F5F0E6] overflow-hidden border-b border-[#1A1A16]/10">
         <div className="editorial-container">
-          <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-2">
-            <span className="w-6 h-px bg-[#7C8B6F]" />
-            <span>WHO WE ARE // ABOUT TRISECURE</span>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Left Column: Heading, Narrative & Action Buttons */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-mono text-[11px] uppercase tracking-widest shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#C9AF6B] animate-pulse" />
+                <span>WHO WE ARE // ABOUT TRISECURE</span>
+              </div>
 
-          <div>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1A1A16]">
-              About Us
-            </h1>
-          </div>
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1A1A16] leading-[1.08]">
+                Empowering modern businesses with clarity, compliance & strategic scale.
+              </h1>
 
-          {/* Subheader & Core Narrative */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-8 items-start">
-            <div className="lg:col-span-5">
-              <span className="font-mono text-[11px] text-[#7A7A70] uppercase tracking-widest block mb-2 font-semibold">
-                // Company Overview
-              </span>
-              <p className="font-serif text-2xl sm:text-3xl text-[#1A1A16] font-normal leading-snug">
-                Empowering modern businesses with clarity, compliance, and strategic capital.
+              <p className="font-sans text-base sm:text-lg text-[#7A7A70] leading-relaxed font-light max-w-xl">
+                At <strong className="font-semibold text-[#1A1A16]">Trisecure Solution</strong>, we eliminate corporate operational friction by delivering institutional HR strategy, comprehensive insurance & loan advisory, statutory food compliance, and digital growth acceleration under a unified partner desk.
               </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() => onOpenConsultation()}
+                  className="btn-editorial-primary text-xs"
+                >
+                  <span>Schedule Consultation</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <Link
+                  to="/services"
+                  className="btn-editorial-secondary text-xs"
+                >
+                  <span>Explore Practice Verticals</span>
+                </Link>
+              </div>
+
+              {/* Bottom Quick Metrics Strip */}
+              <div className="pt-6 grid grid-cols-3 gap-4 border-t border-[#1A1A16]/10 max-w-lg">
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                    12+
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Years Leadership
+                  </p>
+                </div>
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#7C8B6F] block">
+                    100%
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Audit Readiness
+                  </p>
+                </div>
+                <div>
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16] block">
+                    Pan-India
+                  </span>
+                  <p className="font-mono text-[10px] uppercase text-[#7A7A70] tracking-wider mt-0.5">
+                    Central & State
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:col-span-7 space-y-4">
-              <p className="font-serif text-lg sm:text-xl text-[#1A1A16]/90 leading-relaxed font-light">
-                At <strong className="font-semibold text-[#7C8B6F]">Trisecure Solution</strong>, we specialize in providing comprehensive insurance, digital marketing solutions, and loan solutions tailored to meet the unique needs of individuals and businesses.
-              </p>
-              <p className="font-sans text-sm sm:text-base text-[#7A7A70] leading-relaxed font-light">
-                Our expertise ensures that our clients receive the best advice and support, helping them make informed decisions for their financial well-being. Whether you are launching a new enterprise requiring MCD and FSSAI clearances, structuring corporate group insurance, or expanding your workforce, Trisecure delivers end-to-end peace of mind.
-              </p>
+            {/* Right Column: Executive Mandate Card */}
+            <div className="lg:col-span-5">
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-xl space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-[#1A1A16]/10">
+                  <div className="flex items-center gap-2 font-mono text-xs text-[#7C8B6F] uppercase tracking-wider font-semibold">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Corporate Mandate</span>
+                  </div>
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold">
+                    SINGLE-WINDOW
+                  </span>
+                </div>
+
+                <p className="font-serif text-lg sm:text-xl text-[#1A1A16] leading-snug font-normal">
+                  "One unified partner to navigate licensing, risk protection, human capital, and digital scale with zero compromise."
+                </p>
+
+                {/* 4 Practice Area Badges */}
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
+                      <Users className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">HR & Workforce Solutions</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">Recruitment, payroll, statutory registers & dispute handling</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#7C8B6F] text-white flex items-center justify-center shrink-0">
+                      <Landmark className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Insurance & Loan Advisory</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">Asset protection, corporate group cover & capital lending</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#C9AF6B] text-[#1A1A16] flex items-center justify-center shrink-0">
+                      <Utensils className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Food & Environmental Compliance</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">FSSAI Central/State, Health Trade & DPCC clearances</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 border border-[#1A1A16]/5">
+                    <div className="w-8 h-8 rounded-full bg-[#1A1A16] text-white flex items-center justify-center shrink-0">
+                      <Megaphone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-sm font-bold text-[#1A1A16]">Digital Growth & Branding</h4>
+                      <p className="font-sans text-[11px] text-[#7A7A70]">High-conversion web platforms, targeted ads & authority SEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. FOUNDER & LEADERSHIP SPOTLIGHT: ANURAG SHARMA */}
+      {/* =========================================================================
+          2. FOUNDER & LEADERSHIP SPOTLIGHT: ANURAG SHARMA
+          ========================================================================= */}
       <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6] relative overflow-hidden bg-charcoal-textured border-b border-white/10">
         <div className="editorial-container relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/10 pb-6">
@@ -249,7 +346,9 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
-      {/* 3. WHY CHOOSE US: 4 Pillar Columns */}
+      {/* =========================================================================
+          3. WHY CHOOSE US: 4 Pillar Columns
+          ========================================================================= */}
       <section className="py-20 sm:py-28 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -290,7 +389,9 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
-      {/* 4. MISSION & VISION: 2 Split Cards */}
+      {/* =========================================================================
+          4. MISSION & VISION: 2 Split Cards
+          ========================================================================= */}
       <section className="py-20 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
         <div className="editorial-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -335,7 +436,9 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
-      {/* 5. CTA STRIP */}
+      {/* =========================================================================
+          5. CTA STRIP
+          ========================================================================= */}
       <section className="py-20 sm:py-28 bg-[#1A1A16] text-[#F5F0E6]">
         <div className="editorial-container text-center max-w-3xl mx-auto space-y-6">
           <span className="font-mono text-xs text-[#C9AF6B] uppercase tracking-widest block">
