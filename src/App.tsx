@@ -27,6 +27,7 @@ import { ConsultationModal } from './components/ConsultationModal';
 import { CustomCursor } from './components/CustomCursor';
 import { SmoothScrollProvider } from './components/SmoothScrollProvider';
 import { SEO } from './components/SEO';
+import { CookieBanner } from './components/CookieBanner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,6 +106,9 @@ export function App() {
 
           {/* Persistent Floating Consultation Pill */}
           <FloatingContactWidget onOpenConsultation={() => handleOpenConsultation()} />
+
+          {/* Minimal Glassmorphic Cookie Consent Banner */}
+          <CookieBanner />
 
           {/* Persistent Editorial Footer */}
           <Footer onOpenConsultation={handleOpenConsultation} />
