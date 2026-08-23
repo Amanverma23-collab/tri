@@ -1,11 +1,12 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Award, FileCheck, Store, Building2, Factory, Sparkles, Phone } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Award, FileCheck, Store, Building2, Factory } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { EditorialHero } from '../components/EditorialHero';
 import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
+import { InfiniteSlider } from '../components/core/infinite-slider';
 
 interface HomeProps {
   onOpenConsultation: (service?: string) => void;
@@ -85,6 +86,67 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
       desc: 'Consent to Establish (CTE) & Consent to Operate (CTO) clearances.',
     },
   ];
+
+  const advantages = [
+    {
+      code: '01 // DOMAIN DEPTH',
+      title: 'Expertise & Domain Mastery',
+      desc: 'Decades of combined experience in HR, Insurance, Food Compliance and Digital Marketing services. Our seasoned specialists anticipate regulatory shifts before they impact your operations.',
+      theme: 'charcoal',
+      span: 'md:col-span-7',
+      icon: Award,
+    },
+    {
+      code: '02 // ALL-IN-ONE',
+      title: 'Comprehensive Services',
+      desc: 'A one-stop solution for all your business needs. Eliminate fragmented vendor management with an integrated partner.',
+      theme: 'cream',
+      span: 'md:col-span-5',
+      icon: ShieldCheck,
+    },
+    {
+      code: '03 // TAILORED STRATEGY',
+      title: 'Client-Centric Approach',
+      desc: 'Personalized service tailored to your unique requirements. We mold our solutions around your enterprise DNA.',
+      theme: 'olive',
+      span: 'md:col-span-5',
+      icon: ShieldCheck,
+    },
+    {
+      code: '04 // PROVEN TRUST',
+      title: 'Reliability & Execution',
+      desc: 'Trusted by businesses across various industries for our integrity and excellence. Zero missed renewal deadlines and verified compliance audits.',
+      theme: 'alabaster',
+      span: 'md:col-span-7',
+      icon: CheckCircle2,
+    },
+  ];
+
+  const getAdvantageStyle = (theme: string) => {
+    switch (theme) {
+      case 'charcoal':
+        return 'bg-[#1A1A16] text-[#F5F0E6] border-white/10 shadow-2xl';
+      case 'olive':
+        return 'bg-[#7C8B6F] text-[#F5F0E6] border-[#637157] shadow-xl';
+      case 'cream':
+        return 'bg-[#EFE9DC] text-[#1A1A16] border-[#1A1A16]/10 shadow-xl';
+      default:
+        return 'bg-[#FAF6EE] text-[#1A1A16] border-[#1A1A16]/15 shadow-2xl';
+    }
+  };
+
+  const getBadgeStyle = (theme: string) => {
+    switch (theme) {
+      case 'charcoal':
+        return 'text-[#C9AF6B]';
+      case 'olive':
+        return 'text-[#F5F0E6]/90';
+      case 'cream':
+        return 'text-[#7C8B6F]';
+      default:
+        return 'text-[#1A1A16]/75';
+    }
+  };
 
   return (
     <PageTransition>
@@ -195,103 +257,89 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
-      {/* 4. WHY CHOOSE US: Asymmetric Editorial Bento Grid */}
-      <section className="py-16 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10">
+      {/* 4. WHY CHOOSE US: InfiniteSlider on Mobile & Asymmetric Bento Grid on Desktop */}
+      <section className="py-14 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
         <div className="editorial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-14 gap-3 sm:gap-4">
             <div>
-              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-2 block font-semibold">
+              <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-1.5 sm:mb-2 block font-semibold">
                 // Institutional Advantage
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
                 Why Choose Trisecure
               </h2>
             </div>
-            <p className="font-sans text-sm sm:text-base text-[#7A7A70] max-w-md font-light">
+            <p className="font-sans text-xs sm:text-base text-[#7A7A70] max-w-md font-light">
               We combine deep sector knowledge with institutional rigor to provide holistic business advisory.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-stretch">
-            {/* Card 1: Large Span (7 cols) - Dark Charcoal Theme */}
-            <div className="md:col-span-7 bg-[#1A1A16] text-[#F5F0E6] rounded-3xl p-7 sm:p-10 shadow-2xl border border-white/10 flex flex-col justify-between min-h-[300px] sm:min-h-[340px] group transition-transform duration-500 hover:-translate-y-1">
-              <div className="h-10 flex items-center justify-between mb-4 sm:mb-6">
-                <span className="font-mono text-xs text-[#C9AF6B] tracking-widest font-semibold uppercase">
-                  01 // DOMAIN DEPTH
-                </span>
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Award className="w-5 h-5 text-[#C9AF6B]" />
-                </div>
-              </div>
-              <div className="flex-1 flex flex-col justify-start">
-                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-2 sm:mb-3">
-                  Expertise & Domain Mastery
-                </h3>
-                <p className="font-sans text-sm sm:text-base lg:text-lg text-[#F5F0E6]/85 leading-relaxed font-light">
-                  Decades of combined experience in HR, Insurance, Food Compliance and Digital Marketing services. Our seasoned specialists anticipate regulatory shifts before they impact your operations.
-                </p>
-              </div>
-            </div>
+          {/* Mobile Continuous InfiniteSlider */}
+          <div className="md:hidden w-full py-2 overflow-hidden">
+            <InfiniteSlider gap={16} speed={25} speedOnHover={0}>
+              {advantages.map((adv, idx) => {
+                const AdvIcon = adv.icon;
+                return (
+                  <div
+                    key={idx}
+                    className={`w-[80vw] max-w-[310px] shrink-0 rounded-3xl p-6 border flex flex-col justify-between min-h-[280px] ${getAdvantageStyle(
+                      adv.theme
+                    )}`}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className={`font-mono text-[11px] tracking-widest font-semibold uppercase ${getBadgeStyle(adv.theme)}`}>
+                        {adv.code}
+                      </span>
+                      <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
+                        <AdvIcon className="w-4 h-4" />
+                      </div>
+                    </div>
 
-            {/* Card 2: Small Span (5 cols) - Cream Theme */}
-            <div className="md:col-span-5 bg-[#EFE9DC] text-[#1A1A16] rounded-3xl p-7 sm:p-10 border border-[#1A1A16]/10 shadow-xl flex flex-col justify-between min-h-[300px] sm:min-h-[340px] group transition-transform duration-500 hover:-translate-y-1">
-              <div className="h-10 flex items-center justify-between mb-4 sm:mb-6">
-                <span className="font-mono text-xs text-[#7C8B6F] tracking-widest font-semibold uppercase">
-                  02 // ALL-IN-ONE
-                </span>
-                <div className="w-10 h-10 rounded-full bg-[#1A1A16]/10 flex items-center justify-center">
-                  <ShieldCheck className="w-5 h-5 text-[#7C8B6F]" />
-                </div>
-              </div>
-              <div className="flex-1 flex flex-col justify-start">
-                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1A1A16] leading-tight mb-2 sm:mb-3">
-                  Comprehensive Services
-                </h3>
-                <p className="font-sans text-xs sm:text-sm sm:text-base text-[#7A7A70] leading-relaxed font-light">
-                  A one-stop solution for all your business needs. Eliminate fragmented vendor management with an integrated partner.
-                </p>
-              </div>
-            </div>
+                    <div className="flex-1 flex flex-col justify-start">
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold leading-tight mb-2">
+                        {adv.title}
+                      </h3>
+                      <p className="font-sans text-xs sm:text-sm leading-relaxed font-light opacity-85 line-clamp-4">
+                        {adv.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </InfiniteSlider>
+          </div>
 
-            {/* Card 3: Small Span (5 cols) - Olive Green Theme */}
-            <div className="md:col-span-5 bg-[#7C8B6F] text-[#F5F0E6] rounded-3xl p-7 sm:p-10 shadow-xl border border-[#637157] flex flex-col justify-between min-h-[300px] sm:min-h-[340px] group transition-transform duration-500 hover:-translate-y-1">
-              <div className="h-10 flex items-center justify-between mb-4 sm:mb-6">
-                <span className="font-mono text-xs text-[#F5F0E6]/90 tracking-widest font-semibold uppercase">
-                  03 // TAILORED STRATEGY
-                </span>
-                <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-              </div>
-              <div className="flex-1 flex flex-col justify-start">
-                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-2 sm:mb-3">
-                  Client-Centric Approach
-                </h3>
-                <p className="font-sans text-xs sm:text-sm sm:text-base text-[#F5F0E6]/90 leading-relaxed font-light">
-                  Personalized service tailored to your unique requirements. We mold our solutions around your enterprise DNA.
-                </p>
-              </div>
-            </div>
+          {/* Desktop Asymmetric Bento Grid */}
+          <div className="hidden md:grid grid-cols-12 gap-8 items-stretch">
+            {advantages.map((adv, idx) => {
+              const AdvIcon = adv.icon;
+              return (
+                <div
+                  key={idx}
+                  className={`${adv.span} ${getAdvantageStyle(
+                    adv.theme
+                  )} rounded-3xl p-8 sm:p-10 border shadow-xl flex flex-col justify-between min-h-[340px] group transition-transform duration-500 hover:-translate-y-1`}
+                >
+                  <div className="h-10 flex items-center justify-between mb-6">
+                    <span className={`font-mono text-xs tracking-widest font-semibold uppercase ${getBadgeStyle(adv.theme)}`}>
+                      {adv.code}
+                    </span>
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                      <AdvIcon className="w-5 h-5" />
+                    </div>
+                  </div>
 
-            {/* Card 4: Large Span (7 cols) - Alabaster Theme */}
-            <div className="md:col-span-7 bg-[#FAF6EE] text-[#1A1A16] rounded-3xl p-7 sm:p-10 border border-[#1A1A16]/15 shadow-2xl flex flex-col justify-between min-h-[300px] sm:min-h-[340px] group transition-transform duration-500 hover:-translate-y-1">
-              <div className="h-10 flex items-center justify-between mb-4 sm:mb-6">
-                <span className="font-mono text-xs text-[#1A1A16]/75 tracking-widest font-semibold uppercase">
-                  04 // PROVEN TRUST
-                </span>
-                <div className="w-10 h-10 rounded-full bg-[#7C8B6F]/15 flex items-center justify-center">
-                  <CheckCircle2 className="w-5 h-5 text-[#7C8B6F]" />
+                  <div className="flex-1 flex flex-col justify-start">
+                    <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight mb-3">
+                      {adv.title}
+                    </h3>
+                    <p className="font-sans text-sm sm:text-base lg:text-lg leading-relaxed font-light opacity-85">
+                      {adv.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex-1 flex flex-col justify-start">
-                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1A1A16] leading-tight mb-2 sm:mb-3">
-                  Reliability & Execution
-                </h3>
-                <p className="font-sans text-sm sm:text-base lg:text-lg text-[#7A7A70] leading-relaxed font-light">
-                  Trusted by businesses across various industries for our integrity and excellence. Zero missed renewal deadlines and verified compliance audits.
-                </p>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
