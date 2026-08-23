@@ -104,7 +104,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
           darkTheme
             ? 'bg-[#141814] border-white/15 text-white hover:border-[#0072EF]'
             : 'bg-[#FAF6EE] border-[#1A1A16]/15 text-[#1A1A16] hover:border-[#0072EF]'
-        } ${isOpen ? (darkTheme ? 'ring-2 ring-[#0072EF]/30 border-[#0072EF]' : 'ring-2 ring-[#0072EF]/30 border-[#0072EF]') : ''}`}
+        } ${isOpen ? 'ring-2 ring-[#0072EF]/30 border-[#0072EF]' : ''}`}
       >
         <div className="flex items-center gap-2.5 overflow-hidden">
           <div
@@ -129,16 +129,16 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
         />
       </button>
 
-      {/* Custom Animated Dropdown Menu */}
+      {/* Custom Animated Dropdown Menu (No scrollbar, full clean display) */}
       {isOpen && (
         <div
-          className={`absolute left-0 right-0 top-full mt-1.5 z-50 rounded-2xl p-1.5 shadow-2xl border backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150 ${
+          className={`absolute left-0 right-0 top-full mt-1.5 z-50 rounded-2xl p-1.5 shadow-2xl border backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150 overflow-hidden ${
             darkTheme
-              ? 'bg-[#141814]/95 border-white/15 text-[#F5F0E6]'
-              : 'bg-[#FAF6EE]/95 border-[#1A1A16]/15 text-[#1A1A16]'
+              ? 'bg-[#141814]/98 border-white/15 text-[#F5F0E6]'
+              : 'bg-[#FAF6EE]/98 border-[#1A1A16]/15 text-[#1A1A16]'
           }`}
         >
-          <div className="space-y-1 max-h-60 overflow-y-auto custom-scrollbar p-0.5">
+          <div className="space-y-1 p-0.5">
             {SERVICE_OPTIONS.map((opt) => {
               const isSelected = selectedOption.value === opt.value;
               const IconComp = opt.icon;
@@ -153,9 +153,7 @@ export const CustomServiceSelect: React.FC<CustomServiceSelectProps> = ({
                   }}
                   className={`w-full px-3 py-2 rounded-xl text-left flex items-center justify-between transition-all duration-150 group ${
                     isSelected
-                      ? darkTheme
-                        ? 'bg-[#0072EF] text-white shadow-sm'
-                        : 'bg-[#0072EF] text-white shadow-sm'
+                      ? 'bg-[#0072EF] text-white shadow-sm'
                       : darkTheme
                       ? 'hover:bg-white/10 text-white/85'
                       : 'hover:bg-[#1A1A16]/5 text-[#1A1A16]'
