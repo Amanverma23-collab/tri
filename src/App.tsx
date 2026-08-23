@@ -1,23 +1,31 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Direct Page Imports (Zero loading screen, instant page paint)
+// Eagerly loaded for Instant Home Page Paint (Zero FCP latency)
 import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { ServicesHub } from './pages/ServicesHub';
-import { HRServices } from './pages/services/HRServices';
-import { InsuranceLoansServices } from './pages/services/InsuranceLoansServices';
-import { FoodComplianceServices } from './pages/services/FoodComplianceServices';
-import { DigitalMarketingServices } from './pages/services/DigitalMarketingServices';
-import { Licenses } from './pages/Licenses';
-import { Pricing } from './pages/Pricing';
-import { Contact } from './pages/Contact';
-import { PrivacyPolicy } from './pages/PrivacyPolicy';
-import { TermsConditions } from './pages/TermsConditions';
-import { NotFound } from './pages/NotFound';
+
+// Route-Based Code-Split Dynamic Imports (Eliminates main bundle render blocking)
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
+const ServicesHub = lazy(() => import('./pages/ServicesHub').then((m) => ({ default: m.ServicesHub })));
+const HRServices = lazy(() => import('./pages/services/HRServices').then((m) => ({ default: m.HRServices })));
+const InsuranceLoansServices = lazy(() =>
+  import('./pages/services/InsuranceLoansServices').then((m) => ({ default: m.InsuranceLoansServices }))
+);
+const FoodComplianceServices = lazy(() =>
+  import('./pages/services/FoodComplianceServices').then((m) => ({ default: m.FoodComplianceServices }))
+);
+const DigitalMarketingServices = lazy(() =>
+  import('./pages/services/DigitalMarketingServices').then((m) => ({ default: m.DigitalMarketingServices }))
+);
+const Licenses = lazy(() => import('./pages/Licenses').then((m) => ({ default: m.Licenses })));
+const Pricing = lazy(() => import('./pages/Pricing').then((m) => ({ default: m.Pricing })));
+const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then((m) => ({ default: m.PrivacyPolicy })));
+const TermsConditions = lazy(() => import('./pages/TermsConditions').then((m) => ({ default: m.TermsConditions })));
+const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
 
 // Navigation & Global UI Components
 import { Navbar } from './components/Navbar';
@@ -41,30 +49,32 @@ function AnimatedRoutes({
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home onOpenConsultation={onOpenConsultation} />} />
-        <Route path="/about" element={<About onOpenConsultation={onOpenConsultation} />} />
-        <Route path="/services" element={<ServicesHub onOpenConsultation={onOpenConsultation} />} />
-        <Route path="/services/hr" element={<HRServices onOpenConsultation={onOpenConsultation} />} />
-        <Route
-          path="/services/insurance-loans"
-          element={<InsuranceLoansServices onOpenConsultation={onOpenConsultation} />}
-        />
-        <Route
-          path="/services/food-compliance"
-          element={<FoodComplianceServices onOpenConsultation={onOpenConsultation} />}
-        />
-        <Route
-          path="/services/digital-marketing"
-          element={<DigitalMarketingServices onOpenConsultation={onOpenConsultation} />}
-        />
-        <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
-        <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy" element={<PrivacyPolicy onOpenConsultation={onOpenConsultation} />} />
-        <Route path="/terms" element={<TermsConditions onOpenConsultation={onOpenConsultation} />} />
-        <Route path="*" element={<NotFound onOpenConsultation={onOpenConsultation} />} />
-      </Routes>
+      <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/about" element={<About onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/services" element={<ServicesHub onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/services/hr" element={<HRServices onOpenConsultation={onOpenConsultation} />} />
+          <Route
+            path="/services/insurance-loans"
+            element={<InsuranceLoansServices onOpenConsultation={onOpenConsultation} />}
+          />
+          <Route
+            path="/services/food-compliance"
+            element={<FoodComplianceServices onOpenConsultation={onOpenConsultation} />}
+          />
+          <Route
+            path="/services/digital-marketing"
+            element={<DigitalMarketingServices onOpenConsultation={onOpenConsultation} />}
+          />
+          <Route path="/licenses" element={<Licenses onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/pricing" element={<Pricing onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<PrivacyPolicy onOpenConsultation={onOpenConsultation} />} />
+          <Route path="/terms" element={<TermsConditions onOpenConsultation={onOpenConsultation} />} />
+          <Route path="*" element={<NotFound onOpenConsultation={onOpenConsultation} />} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }
