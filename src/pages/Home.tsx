@@ -260,7 +260,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
       {/* 4. WHY CHOOSE US: InfiniteSlider on Mobile & Asymmetric Bento Grid on Desktop */}
       <section className="py-14 sm:py-28 bg-[#F5F0E6] border-b border-[#1A1A16]/10 overflow-hidden">
         <div className="editorial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-14 gap-3 sm:gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 sm:mb-7 gap-3 sm:gap-4">
             <div>
               <span className="font-mono text-xs text-[#7C8B6F] tracking-widest uppercase mb-1.5 sm:mb-2 block font-semibold">
                 // Institutional Advantage
