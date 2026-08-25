@@ -80,6 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
         {/* Brand Logo Wordmark with 360 Rotating Logo */}
         <Link
           to="/"
+          id="navbar-brand-logo"
           className="group flex items-center gap-3 select-none"
           data-cursor="Home"
         >
@@ -162,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
             COMPACT PROFESSIONAL MOBILE DROPDOWN POPOVER CARD
             ========================================================================= */}
         {mobileMenuOpen && (
-          <div className="absolute top-full right-4 sm:right-6 mt-3 w-64 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-2xl p-2.5 space-y-1 animate-in fade-in slide-in-from-top-3 duration-200 lg:hidden">
+          <div className="absolute top-full right-4 sm:right-6 mt-3 w-56 sm:w-60 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/15 shadow-2xl p-3 space-y-1.5 animate-in fade-in slide-in-from-top-3 duration-200 lg:hidden text-center">
             {navLinks.map((link) => {
               const isActive =
                 link.path === '/'
@@ -170,32 +171,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
                   : location.pathname.startsWith(link.path);
 
               return (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`py-2 px-3 rounded-xl transition-all flex items-center justify-between text-xs sm:text-sm font-medium ${
-                    isActive
-                      ? 'bg-[#1A1A16] text-[#F5F0E6] font-semibold shadow-xs'
-                      : 'text-[#1A1A16] hover:bg-[#EFE9DC]'
-                  }`}
-                >
-                  <span>{link.name}</span>
-                  {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#0072EF]" />
-                  )}
-                </Link>
+                <div key={link.name} className="flex justify-center">
+                  <Link
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`transition-all flex items-center justify-center gap-1.5 text-xs sm:text-sm font-medium ${
+                      isActive
+                        ? 'py-1.5 px-4 rounded-full bg-[#1A1A16] text-[#F5F0E6] font-semibold shadow-xs'
+                        : 'py-1.5 px-4 rounded-full text-[#1A1A16] hover:bg-[#1A1A16]/5'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0072EF]" />
+                    )}
+                  </Link>
+                </div>
               );
             })}
 
             {/* Compact CTA Button inside dropdown */}
-            <div className="pt-2 border-t border-[#1A1A16]/10 mt-1">
+            <div className="pt-2.5 border-t border-[#1A1A16]/10 mt-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenConsultation();
                 }}
-                className="w-full py-2.5 px-3.5 rounded-xl bg-[#1A1A16] text-[#F5F0E6] text-xs font-semibold hover:bg-[#0072EF] transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                className="w-full py-2.5 px-4 rounded-full bg-[#1A1A16] text-[#F5F0E6] text-xs font-semibold hover:bg-[#0072EF] transition-colors flex items-center justify-center gap-1.5 shadow-sm"
               >
                 <span>Consult Now</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
