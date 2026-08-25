@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Briefcase, FileSpreadsheet, Scale, ShieldCheck, CheckCircle2, Calculator, Users, FileText, PieChart, Landmark, HeartHandshake, ChevronDown, ChevronUp } from 'lucide-react';
+
+import { ArrowRight, ArrowUpRight, Briefcase, FileSpreadsheet, Scale, ShieldCheck, CheckCircle2, Calculator, Users, FileText, PieChart, Landmark, HeartHandshake } from 'lucide-react';
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { PageTransition } from '../../components/PageTransition';
 import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';

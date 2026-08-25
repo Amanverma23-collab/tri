@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Cookie, X, Check } from 'lucide-react';
+import { Cookie, X, Check } from 'lucide-react';
 
 export const CookieBanner: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);

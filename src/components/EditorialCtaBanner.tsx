@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, Clock } from 'lucide-react';
 
 interface EditorialCtaBannerProps {
   tagline?: string;

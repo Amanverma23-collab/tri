@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { PageTransition } from '../../components/PageTransition';
 import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';

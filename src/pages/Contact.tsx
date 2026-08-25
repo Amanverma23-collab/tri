@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React, { useState } from 'react';
-import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, MessageSquare, Building2, Loader2 } from 'lucide-react';
+import { Phone, Mail, Send, CheckCircle2, ShieldCheck, Clock, ArrowRight, Loader2, Lock } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { CustomServiceSelect } from '../components/CustomServiceSelect';
 
@@ -274,25 +274,83 @@ export const Contact: React.FC = () => {
             <div className="lg:col-span-7">
               <div className="p-8 sm:p-12 rounded-3xl bg-[#F5F0E6] border border-[#1A1A16]/10 shadow-lg">
                 {submitted ? (
-                  <div className="text-center py-12 space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-[#7C8B6F]/20 text-[#7C8B6F] flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="w-8 h-8" />
+                  <div className="text-center py-8 sm:py-10 space-y-6 animate-fadeIn">
+                    {/* Animated High-End Confirmation Seal */}
+                    <div className="relative inline-flex items-center justify-center">
+                      <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#7C8B6F]/20 to-[#C9AF6B]/20 text-[#7C8B6F] flex items-center justify-center relative z-10 border border-[#7C8B6F]/30 shadow-md">
+                        <CheckCircle2 className="w-10 h-10 stroke-[2.2]" />
+                      </div>
+                      <div className="absolute -inset-1.5 rounded-2xl bg-[#7C8B6F]/10 animate-pulse" />
                     </div>
-                    <span className="font-mono text-xs text-[#7C8B6F] uppercase tracking-widest font-semibold block">
-                      Email Dispatched to Executive Desk
-                    </span>
-                    <h3 className="font-serif text-3xl font-bold text-[#1A1A16]">
-                      Inquiry Successfully Dispatched
-                    </h3>
-                    <p className="font-sans text-base text-[#7A7A70] max-w-md mx-auto font-light">
-                      Thank you for contacting Trisecure Solutions. Your brief has been sent directly to Anurag Sharma (<strong className="text-[#0072EF]">anuragsharma0120@gmail.com</strong>). A practice lead will connect with you shortly.
-                    </p>
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="btn-editorial-secondary mt-4 text-xs"
-                    >
-                      <span>Submit Another Inquiry</span>
-                    </button>
+
+                    <div className="space-y-2 max-w-lg mx-auto">
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7C8B6F]/10 border border-[#7C8B6F]/25 text-[#7C8B6F] font-mono text-[11px] uppercase tracking-widest font-semibold">
+                        <span className="w-2 h-2 rounded-full bg-[#7C8B6F] animate-pulse" />
+                        <span>TRANSMISSION CONFIRMED // EXECUTIVE DESK</span>
+                      </div>
+                      
+                      <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A16] tracking-tight">
+                        Inquiry Successfully Dispatched
+                      </h3>
+                      
+                      <p className="font-sans text-sm sm:text-base text-[#7A7A70] font-light leading-relaxed pt-1">
+                        Thank you for contacting <strong className="text-[#1A1A16] font-semibold">Trisecure Solutions</strong>. Your brief has been securely logged with our senior advisory team. A dedicated practice lead will review your specifications and reach out to you shortly.
+                      </p>
+                    </div>
+
+                    {/* SLA & Security Pillars */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-left max-w-lg mx-auto">
+                      <div className="p-3.5 rounded-2xl bg-white border border-[#1A1A16]/10 shadow-xs">
+                        <div className="flex items-center gap-1.5 text-[#7C8B6F] mb-1">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-mono text-[10px] uppercase font-bold text-[#1A1A16]">Response SLA</span>
+                        </div>
+                        <p className="font-sans text-xs text-[#7A7A70]">Within 2 business hours</p>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white border border-[#1A1A16]/10 shadow-xs">
+                        <div className="flex items-center gap-1.5 text-[#C9AF6B] mb-1">
+                          <Lock className="w-4 h-4" />
+                          <span className="font-mono text-[10px] uppercase font-bold text-[#1A1A16]">Confidential</span>
+                        </div>
+                        <p className="font-sans text-xs text-[#7A7A70]">100% NDA & data privacy</p>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white border border-[#1A1A16]/10 shadow-xs">
+                        <div className="flex items-center gap-1.5 text-[#1A1A16] mb-1">
+                          <ShieldCheck className="w-4 h-4" />
+                          <span className="font-mono text-[10px] uppercase font-bold text-[#1A1A16]">Assignment</span>
+                        </div>
+                        <p className="font-sans text-xs text-[#7A7A70]">Direct vertical specialist</p>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                      <button
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            name: '',
+                            email: '',
+                            phone: '',
+                            service: 'General Advisory',
+                            message: '',
+                          });
+                        }}
+                        className="btn-editorial-primary text-xs w-full sm:w-auto"
+                      >
+                        <span>Submit Another Inquiry</span>
+                      </button>
+
+                      <a
+                        href="tel:+918585999922"
+                        className="btn-editorial-secondary text-xs w-full sm:w-auto inline-flex items-center justify-center gap-2"
+                      >
+                        <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                        <span>Urgent Support Desk</span>
+                      </a>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -304,7 +362,7 @@ export const Contact: React.FC = () => {
                         Send Us Your Requirements
                       </h3>
                       <p className="font-sans text-xs text-[#7A7A70]">
-                        Submissions route directly to Senior Director Desk (<strong className="text-[#1A1A16]">anuragsharma0120@gmail.com</strong>).
+                        Submissions are securely routed directly to our Senior Advisory & Compliance Desk.
                       </p>
                     </div>
 
@@ -387,7 +445,7 @@ export const Contact: React.FC = () => {
                         {loading ? (
                           <span className="flex items-center gap-2">
                             <Loader2 className="w-4 h-4 animate-spin" />
-                            <span>Sending directly to anuragsharma0120@gmail.com...</span>
+                            <span>Securing & dispatching brief...</span>
                           </span>
                         ) : (
                           <>

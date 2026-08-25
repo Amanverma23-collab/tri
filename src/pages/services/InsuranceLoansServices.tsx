@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, CircleDollarSign, Car, Home as HomeIcon, Briefcase } from 'lucide-react';
+
+import { ArrowUpRight, CircleDollarSign, Car, Home as HomeIcon, Briefcase } from 'lucide-react';
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { HorizontalScrollSection, HorizontalCardItem } from '../../components/HorizontalScrollSection';
 import { PageTransition } from '../../components/PageTransition';

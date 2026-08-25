@@ -1,22 +1,7 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import {
-  ShieldCheck,
-  Award,
-  Users,
-  Building2,
-  TrendingUp,
-  FileCheck,
-  Phone,
-  Mail,
-  ArrowRight,
-  CheckCircle2,
-  Lock,
-  Briefcase,
-  Layers,
-  Scale,
-} from 'lucide-react';
+import { ShieldCheck, Users, FileCheck, Phone, Mail, ArrowRight } from 'lucide-react';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
 import { InfiniteSlider } from '../components/core/infinite-slider';

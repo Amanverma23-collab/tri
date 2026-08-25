@@ -33,6 +33,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 
 import { ConsultationModal } from './components/ConsultationModal';
+import { Preloader } from './components/Preloader';
 
 import { SmoothScrollProvider } from './components/SmoothScrollProvider';
 import { SEO } from './components/SEO';
@@ -100,6 +101,8 @@ export function App() {
 
   return (
     <HelmetProvider>
+      {/* Luxury Branded Preloader (First Visit per Session) */}
+      <Preloader />
     <Router>
       {/* Dynamic Per-Page SEO Titles, Descriptions & Meta Tags */}
       <SEO />
@@ -110,7 +113,6 @@ export function App() {
       <SmoothScrollProvider>
         <div className="min-h-screen bg-[#F5F0E6] text-[#1A1A16] flex flex-col font-sans relative selection:bg-[#1A1A16] selection:text-[#F5F0E6]">
           {/* Interactive Custom Cursor */}
-          
 
           {/* Persistent Editorial Sticky Navbar */}
           <Navbar onOpenConsultation={handleOpenConsultation} />
@@ -121,7 +123,6 @@ export function App() {
           </main>
 
           {/* Persistent Floating Consultation Pill */}
-          
 
           {/* Minimal Glassmorphic Cookie Consent Banner */}
           <CookieBanner />

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { ShieldCheck, Scale, FileText, CheckCircle2, ArrowRight, Phone, Mail } from 'lucide-react';
+
+import { ShieldCheck, Scale, CheckCircle2, ArrowRight, Phone } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 
 interface TermsConditionsProps {

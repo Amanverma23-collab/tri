@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Phone, ShieldCheck, CheckCircle2, Receipt, FileText, CreditCard } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Receipt, FileText, CreditCard } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 

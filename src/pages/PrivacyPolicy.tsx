@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { ShieldCheck, Lock, Eye, FileText, CheckCircle2, ArrowRight, Phone, Mail } from 'lucide-react';
+
+import { ShieldCheck, Lock, CheckCircle2, Phone, Mail } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 
 interface PrivacyPolicyProps {

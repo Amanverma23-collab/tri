@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ShieldCheck, Home, Compass, Phone } from 'lucide-react';
+import { ArrowRight, Home, Compass, Phone } from 'lucide-react';
 import { PageTransition } from '../components/PageTransition';
 
 interface NotFoundProps {

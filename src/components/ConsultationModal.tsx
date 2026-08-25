@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { X, Send, ShieldCheck, CheckCircle2, Building2, User, Mail, Phone, MessageSquare, Loader2 } from 'lucide-react';
+import { X, Send, ShieldCheck, CheckCircle2, Phone, Loader2, Clock, Lock } from 'lucide-react';
 import { CustomServiceSelect } from './CustomServiceSelect';
 
 interface ConsultationModalProps {
@@ -86,28 +86,55 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
         </button>
 
         {submitted ? (
-          <div className="py-8 text-center flex flex-col items-center">
-            {/* 360 Continuous Rotating Logo */}
-            <div className="w-16 h-16 flex items-center justify-center mb-4">
-              <img
-                src="/images/trisecure_logo.png"
-                alt="Trisecure F&B Solutions"
-                className="w-full h-full object-contain animate-logo-spin"
-              />
+          <div className="py-6 text-center flex flex-col items-center space-y-5 animate-fadeIn">
+            {/* 360 Continuous Rotating Logo & Confirmation Badge */}
+            <div className="relative inline-flex items-center justify-center">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7C8B6F]/20 to-[#C9AF6B]/20 text-[#7C8B6F] flex items-center justify-center relative z-10 border border-[#7C8B6F]/30 shadow-md">
+                <CheckCircle2 className="w-8 h-8 stroke-[2.2]" />
+              </div>
+              <div className="absolute -inset-1 rounded-2xl bg-[#7C8B6F]/10 animate-pulse" />
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7C8B6F]/20 text-[#7C8B6F] font-mono text-xs uppercase tracking-wider mb-3">
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Email Dispatched to Executive Desk</span>
+
+            <div className="space-y-2 max-w-md mx-auto">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7C8B6F]/10 border border-[#7C8B6F]/25 text-[#7C8B6F] font-mono text-[10px] uppercase tracking-widest font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7C8B6F] animate-pulse" />
+                <span>TRANSMISSION CONFIRMED // EXECUTIVE DESK</span>
+              </div>
+              
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1A16]">
+                Consultation Dispatched
+              </h3>
+              
+              <p className="font-sans text-xs sm:text-sm text-[#7A7A70] leading-relaxed pt-1">
+                Thank you, <strong className="text-[#1A1A16] font-semibold">{formData.name || 'valued partner'}</strong>. Your brief has been securely logged with our senior advisory desk. A dedicated practice lead will review your specifications and connect with you shortly.
+              </p>
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2">
-              Consultation Dispatched
-            </h3>
-            <p className="font-sans text-xs sm:text-sm text-[#7A7A70] max-w-md mx-auto mb-6">
-              Thank you, <strong className="text-[#1A1A16]">{formData.name}</strong>. Your inquiry has been sent directly to Founder Anurag Sharma (<strong className="text-[#0072EF]">anuragsharma0120@gmail.com</strong>). We will connect with you within 2 business hours.
-            </p>
+
+            {/* Reassurance Grid */}
+            <div className="grid grid-cols-2 gap-3 w-full max-w-sm text-left">
+              <div className="p-3 rounded-2xl bg-white border border-[#1A1A16]/10">
+                <div className="flex items-center gap-1.5 text-[#7C8B6F] mb-0.5">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span className="font-mono text-[10px] uppercase font-bold text-[#1A1A16]">SLA Window</span>
+                </div>
+                <p className="font-sans text-[11px] text-[#7A7A70]">&lt; 2 business hours</p>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-white border border-[#1A1A16]/10">
+                <div className="flex items-center gap-1.5 text-[#C9AF6B] mb-0.5">
+                  <Lock className="w-3.5 h-3.5" />
+                  <span className="font-mono text-[10px] uppercase font-bold text-[#1A1A16]">Privacy</span>
+                </div>
+                <p className="font-sans text-[11px] text-[#7A7A70]">100% NDA protected</p>
+              </div>
+            </div>
+
             <button
-              onClick={onClose}
-              className="btn-editorial-primary text-xs"
+              onClick={() => {
+                setSubmitted(false);
+                onClose();
+              }}
+              className="btn-editorial-primary text-xs w-full sm:w-auto mt-2"
             >
               Back to Site
             </button>
@@ -133,7 +160,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   Schedule an Advisory Session
                 </h2>
                 <p className="font-sans text-xs text-[#7A7A70] mt-1">
-                  Inquiries are routed directly to Senior Director Desk (<strong className="text-[#1A1A16]">anuragsharma0120@gmail.com</strong>).
+                  Inquiries are securely routed directly to our Executive Advisory Desk.
                 </p>
               </div>
             </div>
@@ -229,7 +256,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   {loading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Sending to anuragsharma0120@gmail.com...</span>
+                      <span>Securing & dispatching brief...</span>
                     </span>
                   ) : (
                     <>
