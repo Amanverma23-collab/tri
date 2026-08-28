@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,16 +23,18 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const location = useLocation();
 
   useEffect(() => {
-    // Detect touch capability
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
+    // Premium studio-site gliding scroll configuration (like storeyarchitecture.co.uk)
     const lenis = new Lenis({
-      duration: 1.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.4,                                         // weighted, gliding feel
+      easing: (t) => Math.min(1, 1 - Math.pow(2, -10 * t)),  // custom exponential ease-out
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: isTouch ? 1.2 : 1.5,
+      wheelMultiplier: 0.9,                                  // controlled, less jumpy wheel input
+      touchMultiplier: 1.8,                                  // responsive touch on mobile
       infinite: false,
+      syncTouch: true,                                       // smooth mobile momentum
+      syncTouchLerp: 0.075,                                  // buttery touch interpolation
     });
 
     lenisRef.current = lenis;
@@ -40,7 +42,7 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     // CRITICAL: Sync Lenis scroll with GSAP ScrollTrigger on every frame
     lenis.on('scroll', ScrollTrigger.update);
 
-    // Drive Lenis with GSAP's ticker instead of requestAnimationFrame directly for frame-perfect sync
+    // Drive Lenis with GSAP's ticker for frame-perfect sync
     const tickerCallback = (time: number) => {
       lenis.raf(time * 1000);
     };

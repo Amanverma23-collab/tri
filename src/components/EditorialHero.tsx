@@ -28,7 +28,7 @@ export const EditorialHero: React.FC<EditorialHeroProps> = ({ onOpenConsultation
             end: '+=100%',
             pin: true,
             pinSpacing: true,
-            scrub: 1,
+            scrub: 1.2,
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
@@ -200,84 +200,15 @@ export const EditorialHero: React.FC<EditorialHeroProps> = ({ onOpenConsultation
 
               {/* Subtext */}
               <p className="font-sans text-base lg:text-lg text-[#5A5A50] max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
-                HR, insurance, licensing, and growth — handled under one roof, so you can focus on running your business.
+                Handled under one roof, so you can focus on running your business.
               </p>
             </div>
           </div>
         </div>
 
-        {/* 4 Service Verticals: 4 Columns on Desktop */}
-        <div className="editorial-container w-full relative z-10 px-6">
-          <div className="grid grid-cols-4 gap-0 pt-4 pb-2 text-left">
-            
-            {/* Column 01: HR */}
-            <div className="px-6 first:pl-0 border-r border-[#1A1A16]/10 space-y-1">
-              <span className="font-serif text-4xl lg:text-5xl font-light text-[#0072EF] block leading-none mb-1.5">
-                01
-              </span>
-              <p className="font-mono text-[10px] text-[#7A7A70] uppercase tracking-[0.22em] font-semibold">
-                HR
-              </p>
-              <h3 className="font-serif text-base lg:text-lg font-bold text-[#1A1A16] leading-snug">
-                HR & Payroll
-              </h3>
-              <p className="font-sans text-xs text-[#5A5A50] font-light leading-relaxed line-clamp-1">
-                Recruitment, compliance & workforce management
-              </p>
-            </div>
-
-            {/* Column 02: INSURANCE */}
-            <div className="px-6 border-r border-[#1A1A16]/10 space-y-1">
-              <span className="font-serif text-4xl lg:text-5xl font-light text-[#0072EF] block leading-none mb-1.5">
-                02
-              </span>
-              <p className="font-mono text-[10px] text-[#7A7A70] uppercase tracking-[0.22em] font-semibold">
-                INSURANCE
-              </p>
-              <h3 className="font-serif text-base lg:text-lg font-bold text-[#1A1A16] leading-snug">
-                Insurance & Loans
-              </h3>
-              <p className="font-sans text-xs text-[#5A5A50] font-light leading-relaxed line-clamp-1">
-                Life, health, business & personal financing
-              </p>
-            </div>
-
-            {/* Column 03: COMPLIANCE */}
-            <div className="px-6 border-r border-[#1A1A16]/10 space-y-1">
-              <span className="font-serif text-4xl lg:text-5xl font-light text-[#0072EF] block leading-none mb-1.5">
-                03
-              </span>
-              <p className="font-mono text-[10px] text-[#7A7A70] uppercase tracking-[0.22em] font-semibold">
-                COMPLIANCE
-              </p>
-              <h3 className="font-serif text-base lg:text-lg font-bold text-[#1A1A16] leading-snug">
-                Food Compliance
-              </h3>
-              <p className="font-sans text-xs text-[#5A5A50] font-light leading-relaxed line-clamp-1">
-                FSSAI, audits & regulatory licensing
-              </p>
-            </div>
-
-            {/* Column 04: MARKETING */}
-            <div className="px-6 last:pr-0 space-y-1">
-              <span className="font-serif text-4xl lg:text-5xl font-light text-[#0072EF] block leading-none mb-1.5">
-                04
-              </span>
-              <p className="font-mono text-[10px] text-[#7A7A70] uppercase tracking-[0.22em] font-semibold">
-                MARKETING
-              </p>
-              <h3 className="font-serif text-base lg:text-lg font-bold text-[#1A1A16] leading-snug">
-                Digital Marketing
-              </h3>
-              <p className="font-sans text-xs text-[#5A5A50] font-light leading-relaxed line-clamp-1">
-                Websites, SEO, branding & growth
-              </p>
-            </div>
-
-          </div>
-
-          {/* Minimalist Bottom Scroll Cue */}
-          <div className="flex items-center justify-between border-t border-[#1A1A16]/10 pt-4 mt-2 font-mono text-xs text-[#7A7A70] tracking-widest uppercase">
+        {/* Minimalist Bottom Scroll Cue */}
+        <div className="editorial-container w-full relative z-10 px-6 pb-2">
+          <div className="flex items-center justify-between border-t border-[#1A1A16]/10 pt-4 font-mono text-xs text-[#7A7A70] tracking-widest uppercase">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#0072EF] animate-ping" />
               <span>Scroll to explore solutions</span>

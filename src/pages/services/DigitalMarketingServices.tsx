@@ -1,6 +1,5 @@
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-﻿import React from 'react';
-
 import { SplitRevealSection, SplitSubItem } from '../../components/SplitRevealSection';
 import { PageTransition } from '../../components/PageTransition';
 import { EditorialCtaBanner } from '../../components/EditorialCtaBanner';
@@ -43,7 +42,7 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
   const columnA = [
     { title: 'Informative Business Website', desc: 'Bespoke responsive corporate websites tailored to establish industry credibility and capture qualified inbound leads.' },
     { title: 'E-Commerce Website', desc: 'Scalable digital storefronts with secure payment gateways, inventory management, and frictionless checkout flows.' },
-    { title: 'Logo Design', desc: 'Distinctive, memorable emblem and typography logo marks designed to embody your company\'s core values.' },
+    { title: 'Logo Design', desc: "Distinctive, memorable emblem and typography logo marks designed to embody your company's core values." },
     { title: 'Visiting Card & Letter Head Design', desc: 'Premium executive corporate stationery, business cards, and official digital documentation kits.' },
     { title: 'Google Business Listing & Review', desc: 'Local search optimization, map ranking dominance, and structured review management to boost customer trust.' },
     { title: 'Digital & Social Media Handling', desc: 'Consistent, curated feed content and active community management across Instagram, LinkedIn, and Facebook.' },
@@ -69,7 +68,8 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
         <meta property="og:description" content="Grow your brand with website development, SEO, social media management, ad campaigns, branding, and professional content creation." />
         <meta property="og:type" content="website" />
       </Helmet>
-      {/* 1. HERO: Split Curtain Reveal for DIGITAL MARKETING with Editorial Hero Image */}
+
+      {/* 1. HERO: Split Curtain Reveal for DIGITAL MARKETING */}
       <SplitRevealSection
         id="marketing-hero"
         badge="VERTICAL 04 // DIGITAL GROWTH & MEDIA"
@@ -87,8 +87,8 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <div className="flex items-center gap-3 font-mono text-xs text-[#7C8B6F] uppercase tracking-widest mb-3">
-                <span className="w-8 h-px bg-[#7C8B6F]" />
+              <div className="flex items-center gap-3 font-mono text-xs text-[#0072EF] uppercase tracking-widest mb-3">
+                <span className="w-8 h-px bg-[#0072EF]" />
                 <span>Scope of Capabilities // 04.A</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A16] tracking-tight">
@@ -103,22 +103,23 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Column A */}
             <div className="space-y-6">
-              <div className="p-4 bg-[#1A1A16] text-[#F5F0E6] rounded-2xl flex items-center justify-between">
+              <div className="p-4 bg-[#1A1A16] text-[#F5F0E6] rounded-2xl flex items-center justify-between shadow-xs">
                 <span className="font-serif text-xl font-bold">Category A: Digital Presence & Acquisition</span>
-                <span className="font-mono text-xs text-[#C9AF6B]">07 Services</span>
+                <span className="font-mono text-xs text-[#0072EF] font-bold">07 Services</span>
               </div>
 
               <div className="space-y-4">
                 {columnA.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/10 hover:border-[#7C8B6F] transition-all duration-300 group"
+                    onClick={() => onOpenConsultation(item.title)}
+                    className="p-6 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/10 hover:border-[#0072EF] transition-all duration-300 group cursor-pointer shadow-2xs hover:shadow-sm"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-3 mb-1.5">
-                          <span className="font-mono text-xs text-[#7C8B6F] font-bold">A.0{idx + 1}</span>
-                          <h3 className="font-serif text-xl font-bold text-[#1A1A16] group-hover:text-[#7C8B6F] transition-colors">
+                          <span className="font-mono text-xs text-[#0072EF] font-bold">A.0{idx + 1}</span>
+                          <h3 className="font-serif text-xl font-bold text-[#1A1A16] group-hover:text-[#0072EF] transition-colors">
                             {item.title}
                           </h3>
                         </div>
@@ -134,22 +135,23 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
 
             {/* Column B */}
             <div className="space-y-6">
-              <div className="p-4 bg-[#7C8B6F] text-[#F5F0E6] rounded-2xl flex items-center justify-between">
+              <div className="p-4 bg-[#1A1A16] text-[#F5F0E6] rounded-2xl flex items-center justify-between shadow-xs">
                 <span className="font-serif text-xl font-bold">Category B: Strategy, SEO & Visual Studio</span>
-                <span className="font-mono text-xs text-white">07 Services</span>
+                <span className="font-mono text-xs text-[#0072EF] font-bold">07 Services</span>
               </div>
 
               <div className="space-y-4">
                 {columnB.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/10 hover:border-[#C9AF6B] transition-all duration-300 group"
+                    onClick={() => onOpenConsultation(item.title)}
+                    className="p-6 rounded-2xl bg-[#FAF6EE] border border-[#1A1A16]/10 hover:border-[#0072EF] transition-all duration-300 group cursor-pointer shadow-2xs hover:shadow-sm"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="flex items-center gap-3 mb-1.5">
-                          <span className="font-mono text-xs text-[#C9AF6B] font-bold">B.0{idx + 1}</span>
-                          <h3 className="font-serif text-xl font-bold text-[#1A1A16] group-hover:text-[#C9AF6B] transition-colors">
+                          <span className="font-mono text-xs text-[#0072EF] font-bold">B.0{idx + 1}</span>
+                          <h3 className="font-serif text-xl font-bold text-[#1A1A16] group-hover:text-[#0072EF] transition-colors">
                             {item.title}
                           </h3>
                         </div>
@@ -166,7 +168,7 @@ export const DigitalMarketingServices: React.FC<DigitalMarketingServicesProps> =
         </div>
       </section>
 
-      {/* 3. REDESIGNED CTA STRIP: High-Converting Executive Bento Box */}
+      {/* 3. CTA STRIP: High-Converting Executive Bento Box */}
       <EditorialCtaBanner
         tagline="// DIGITAL GROWTH & BRAND INFRASTRUCTURE"
         title="Ready to transform your brand into an industry authority?"

@@ -1,8 +1,10 @@
-﻿import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, ShieldCheck, CheckCircle2, Award, FileCheck, Store, Building2, Factory } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
 import { EditorialHero } from '../components/EditorialHero';
+import { IntroServiceCycle } from '../components/IntroServiceCycle';
 import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
@@ -13,6 +15,15 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
+  const [introDone, setIntroDone] = useState(() => {
+    // Only play once per session
+    return !!sessionStorage.getItem('trisecure_intro_shown');
+  });
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem('trisecure_intro_shown', 'true');
+    setIntroDone(true);
+  };
   const serviceCards = [
     {
       number: '01',
@@ -158,6 +169,21 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         <meta property="og:type" content="website" />
       </Helmet>
       
+      {/* 0. INTRO SERVICE CYCLE: Full-screen word-cycling intro before Hero */}
+      <AnimatePresence mode="wait">
+        {!introDone && (
+          <motion.div
+            key="intro-service-cycle-wrapper"
+            initial={{ y: '0%' }}
+            exit={{ y: '-100%' }}
+            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-[9998] w-full h-full"
+          >
+            <IntroServiceCycle onComplete={handleIntroComplete} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* 1. HERO SECTION: Editorial 2-Column Hero */}
       <EditorialHero onOpenConsultation={() => onOpenConsultation()} />
 

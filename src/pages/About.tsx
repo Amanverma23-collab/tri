@@ -189,15 +189,19 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
       {/* =========================================================================
           2. LEADERSHIP SPOTLIGHT: ANURAG SHARMA (Clean & Essential Details Only)
           ========================================================================= */}
-      <section className="py-14 sm:py-28 bg-[#1A1A16] text-[#F5F0E6] relative overflow-hidden bg-charcoal-textured border-b border-white/10">
+      <section className="py-16 sm:py-28 bg-[#1A1A16] text-[#F5F0E6] relative overflow-hidden bg-charcoal-textured border-b border-white/10">
+        {/* Subtle Ambient Background Lighting */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#0072EF]/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C9AF6B]/8 rounded-full blur-3xl pointer-events-none" />
+
         <div className="editorial-container relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 sm:gap-6 border-b border-white/10 pb-5 sm:pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-4 sm:gap-6 border-b border-white/10 pb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-[#C9AF6B]/15 text-[#C9AF6B] font-mono text-[10px] sm:text-xs uppercase tracking-widest mb-2 sm:mb-3 border border-[#C9AF6B]/30">
-                <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0072EF]/15 text-[#0072EF] font-mono text-[10px] sm:text-xs uppercase tracking-widest mb-3 border border-[#0072EF]/30">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#0072EF]" />
                 <span>Executive Leadership</span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
                 Leadership & Vision
               </h2>
             </div>
@@ -206,67 +210,85 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
             </p>
           </div>
 
-          {/* Founder Editorial Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-start">
-            {/* Left: Portrait & Direct Contact Desk */}
-            <div className="lg:col-span-5 space-y-4 sm:space-y-6">
-              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 group bg-[#22221D]">
-                <img
-                  src="/images/anurag_sharma.jpg"
-                  alt="Anurag Sharma - Founder & Managing Director"
-                  className="w-full aspect-[4/4.8] sm:aspect-[4/5] object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A16] via-[#1A1A16]/30 to-transparent opacity-95" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-                  <span className="font-mono text-[10px] sm:text-xs text-[#C9AF6B] uppercase tracking-widest block mb-0.5 sm:mb-1 font-semibold">
-                    Founder & Managing Director
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-4xl font-bold text-white tracking-tight leading-snug">
+          {/* 2-Column Founder Showcase (Zero-Lag High Performance) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+            {/* Left Column: Framed Crisp Portrait & Direct Executive Desk */}
+            <div className="lg:col-span-5 space-y-5">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-[#14161B] group">
+                <div className="aspect-[4/4.9] w-full overflow-hidden relative">
+                  <img
+                    src="/images/anurag_sharma.png"
+                    alt="Anurag Sharma - Founder & Managing Director"
+                    className="w-full h-full object-cover object-top filter contrast-[1.04] brightness-[1.01] group-hover:scale-103 transition-transform duration-700 ease-out"
+                  />
+                  {/* Subtle Gradient Shadow for Typography Contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F14] via-[#0D0F14]/25 to-transparent" />
+                </div>
+
+                <div className="p-5 sm:p-6 bg-[#0D0F14] border-t border-white/10">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="font-mono text-[10px] sm:text-xs text-[#C9AF6B] uppercase tracking-widest font-semibold">
+                      Founder & Managing Director
+                    </span>
+                    <span className="font-mono text-[9px] px-2 py-0.5 rounded-full bg-[#0072EF]/15 text-[#0072EF] border border-[#0072EF]/30">
+                      12+ YRS EXP
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight leading-tight">
                     Anurag Sharma
                   </h3>
-                  <p className="font-sans text-[11px] sm:text-sm text-white/80 mt-0.5 sm:mt-1 font-light leading-snug">
+                  <p className="font-sans text-xs sm:text-sm text-white/75 mt-1 font-light leading-snug">
                     Human Capital Strategist & Corporate Growth Advisor
                   </p>
                 </div>
               </div>
 
               {/* Direct Executive Desk Contact Card */}
-              <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 space-y-2.5 sm:space-y-3 font-mono text-[11px] sm:text-xs">
-                <div className="text-white/60 uppercase tracking-widest text-[10px] sm:text-[11px] font-semibold border-b border-white/10 pb-1.5 sm:pb-2">
-                  Direct Executive Desk
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2.5 font-mono text-xs shadow-lg backdrop-blur-xs">
+                <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                  <span className="text-white/60 uppercase tracking-widest text-[10px] sm:text-xs font-semibold">
+                    Direct Executive Desk
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[9px] text-[#0072EF]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0072EF] animate-ping" />
+                    DIRECT ACCESS
+                  </span>
                 </div>
-                <div className="flex items-center justify-between text-white/90">
-                  <span className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                
+                <div className="flex items-center justify-between text-white/90 pt-0.5">
+                  <span className="flex items-center gap-2 text-white/70">
+                    <Phone className="w-3.5 h-3.5 text-[#0072EF]" />
                     <span>Mobile (Direct)</span>
                   </span>
                   <a
                     href="tel:+918585999922"
-                    className="text-[#C9AF6B] hover:underline font-mono font-semibold tracking-wider"
+                    className="text-[#0072EF] hover:underline font-mono font-bold tracking-wider"
                   >
                     +91 8585999922
                   </a>
                 </div>
+
                 <div className="flex items-center justify-between text-white/90">
-                  <span className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-[#7C8B6F]" />
+                  <span className="flex items-center gap-2 text-white/70">
+                    <Phone className="w-3.5 h-3.5 text-[#0072EF]" />
                     <span>Alternate Line</span>
                   </span>
                   <a
                     href="tel:+919716965062"
-                    className="text-[#C9AF6B] hover:underline font-mono font-semibold tracking-wider"
+                    className="text-[#0072EF] hover:underline font-mono font-bold tracking-wider"
                   >
                     +91 9716965062
                   </a>
                 </div>
+
                 <div className="flex items-center justify-between text-white/90">
-                  <span className="flex items-center gap-2">
-                    <Mail className="w-3.5 h-3.5 text-[#7C8B6F]" />
-                    <span>Email</span>
+                  <span className="flex items-center gap-2 text-white/70">
+                    <Mail className="w-3.5 h-3.5 text-[#0072EF]" />
+                    <span>Executive Email</span>
                   </span>
                   <a
                     href="mailto:anuragsharma0120@gmail.com"
-                    className="text-[#C9AF6B] hover:underline truncate max-w-[170px] sm:max-w-[200px]"
+                    className="text-white hover:text-[#0072EF] transition-colors truncate max-w-[180px]"
                   >
                     anuragsharma0120@gmail.com
                   </a>
@@ -274,41 +296,44 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
               </div>
             </div>
 
-            {/* Right: Crisp Executive Narrative & 3 Core Leadership Pillars */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-6 pt-3 lg:pt-0">
-              <div className="space-y-2.5 sm:space-y-4">
-                <h3 className="font-serif text-xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+            {/* Right Column: Narrative & Strategic Pillars */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="space-y-4">
+                <span className="font-mono text-xs text-[#C9AF6B] tracking-widest uppercase font-semibold block">
+                  // Leadership Philosophy
+                </span>
+                <h3 className="font-serif text-2xl sm:text-4xl font-bold text-white tracking-tight leading-snug">
                   A Vision Rooted in Corporate Governance & Operational Excellence
                 </h3>
-                <p className="font-sans text-xs sm:text-base text-white/80 leading-relaxed font-light">
+                <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light">
                   With over a decade of specialized leadership in Human Resource Administration, Statutory Regulatory Clearances, and Enterprise Operations, Anurag Sharma founded Trisecure Solutions to deliver single-window corporate advisory for modern enterprises across India.
                 </p>
-                <p className="font-sans text-xs sm:text-base text-white/80 leading-relaxed font-light">
+                <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light">
                   Under his direction, Trisecure Solutions bridges the gap between regulatory compliance, workforce scaling, and commercial risk security, enabling businesses to scale seamlessly with 100% audit readiness.
                 </p>
               </div>
 
               {/* 3 Core Leadership Pillars */}
-              <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2">
-                <h4 className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[#C9AF6B] font-semibold">
+              <div className="space-y-3 pt-2">
+                <h4 className="font-mono text-xs uppercase tracking-widest text-[#C9AF6B] font-semibold">
                   // Core Advisory Focus
                 </h4>
-                <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
+                <div className="grid grid-cols-1 gap-3">
                   {leadershipPillars.map((pillar, idx) => {
                     const PillarIcon = pillar.icon;
                     return (
                       <div
                         key={idx}
-                        className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 hover:border-[#7C8B6F]/50 transition-colors flex items-start gap-3 sm:gap-4"
+                        className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#0072EF]/50 transition-all flex items-start gap-4 group"
                       >
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 text-[#C9AF6B] flex items-center justify-center shrink-0">
-                          <PillarIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <div className="w-10 h-10 rounded-xl bg-[#0072EF]/10 border border-[#0072EF]/30 flex items-center justify-center text-[#0072EF] shrink-0 group-hover:bg-[#0072EF] group-hover:text-white transition-colors">
+                          <PillarIcon className="w-5 h-5" />
                         </div>
                         <div>
-                          <h5 className="font-serif text-xs sm:text-base font-bold text-white leading-tight">
+                          <h5 className="font-serif text-base font-bold text-white group-hover:text-[#0072EF] transition-colors leading-tight">
                             {pillar.title}
                           </h5>
-                          <p className="font-sans text-[11px] sm:text-sm text-white/70 mt-0.5 sm:mt-1 font-light leading-snug sm:leading-relaxed">
+                          <p className="font-sans text-xs text-white/70 mt-1 leading-relaxed font-light">
                             {pillar.desc}
                           </p>
                         </div>
@@ -316,17 +341,6 @@ export const About: React.FC<AboutProps> = ({ onOpenConsultation }) => {
                     );
                   })}
                 </div>
-              </div>
-
-              {/* Direct Booking CTA Button */}
-              <div className="pt-2 sm:pt-4">
-                <button
-                  onClick={() => onOpenConsultation('Executive Advisory')}
-                  className="w-full sm:w-auto py-3 px-6 rounded-full bg-[#F5F0E6] text-[#1A1A16] font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#C9AF6B] transition-colors shadow-md cursor-pointer"
-                >
-                  <span>Book Executive Consultation with Founder</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </div>

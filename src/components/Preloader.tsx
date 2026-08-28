@@ -11,11 +11,9 @@ export const Preloader: React.FC = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const brandCenterRef = useRef<HTMLDivElement>(null);
   const wordmarkRef = useRef<HTMLHeadingElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
-  const headerMetaRef = useRef<HTMLDivElement>(null);
   const footerMetaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,12 +62,6 @@ export const Preloader: React.FC = () => {
           ease: 'power1.inOut',
           onUpdate: function () {
             const prog = this.progress(); // 0 to 1
-            const val = Math.round(prog * 100);
-
-            // Update numerical counter
-            if (counterRef.current) {
-              counterRef.current.textContent = val < 10 ? `0${val}` : `${val}`;
-            }
 
             // Reveal each letter in real-time sync as progress passes each letter's milestone
             letters.forEach((letter, idx) => {
@@ -106,8 +98,9 @@ export const Preloader: React.FC = () => {
 
       // 5. SIMULTANEOUS EXIT SEQUENCE:
       // A) Shrink & Fly Brand Wordmark to Navbar Logo Position
-      // B) Curtain Wipe-Up of Dark Overlay exposing actual site content underneath
+      // B) Curtain Wipe-Up of Overlay exposing actual site content underneath
       masterTimeline.add(() => {
+        window.dispatchEvent(new CustomEvent('trisecure_preloader_done'));
         const exitTl = gsap.timeline();
 
         const navLogoEl = document.getElementById('navbar-brand-logo');
@@ -136,9 +129,9 @@ export const Preloader: React.FC = () => {
           );
         }
 
-        // Fade out tagline and auxiliary telemetry rapidly
+        // Fade out tagline and progress line rapidly
         exitTl.to(
-          [taglineRef.current, headerMetaRef.current, footerMetaRef.current],
+          [taglineRef.current, footerMetaRef.current],
           {
             opacity: 0,
             duration: 0.35,
@@ -147,7 +140,7 @@ export const Preloader: React.FC = () => {
           0
         );
 
-        // SIMULTANEOUS Curtain Wipe-Up of the dark background overlay from bottom to top
+        // SIMULTANEOUS Curtain Wipe-Up of the background overlay from bottom to top
         exitTl.to(
           overlayRef.current,
           {
@@ -174,58 +167,46 @@ export const Preloader: React.FC = () => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[99999] bg-[#06080D] flex flex-col justify-between p-6 sm:p-12 md:p-14 select-none overflow-hidden text-white [perspective:1200px] [clip-path:inset(0%_0%_0%_0%)]"
+      className="fixed inset-0 z-[99999] bg-[#F5F0E6] flex flex-col justify-between p-6 sm:p-12 md:p-14 select-none overflow-hidden text-[#1A1A16] [perspective:1200px] [clip-path:inset(0%_0%_0%_0%)]"
     >
-      {/* Deep Anamorphic Royal Blue Glow Backdrop */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[320px] bg-[#0052CC]/15 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:28px_28px] opacity-40 pointer-events-none" />
+      {/* Subtle Warm Blue Glow Backdrop */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[320px] bg-[#0072EF]/8 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Top Header Row: Status Telemetry & Brand Metadata */}
-      <div
-        ref={headerMetaRef}
-        className="relative z-10 flex items-center justify-between font-mono text-[10px] sm:text-[11px] text-white/45 tracking-widest uppercase"
-      >
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#0072EF] animate-pulse" />
-          <span className="text-white/80 font-medium">TRISECURE ADVISORY DESK</span>
-        </div>
-        <div className="hidden sm:flex items-center gap-3">
-          <span>PAN-INDIA NETWORK</span>
-          <span>//</span>
-          <span>STATUTORY & CORPORATE</span>
-        </div>
-      </div>
+      {/* Empty Top Spacer for Perfect Vertical Balance */}
+      <div className="h-6" />
 
       {/* Centerpiece: Brand Center Container (Animated into Navbar Logo) */}
       <div
         ref={brandCenterRef}
         className="relative z-20 my-auto flex flex-col items-center text-center px-2 will-change-transform transform-gpu origin-center"
       >
-        {/* Sleek Rotating Crest */}
+        {/* Sleek Direct Crest with 3D Drop-Shadow Depth Effect */}
         <div
           ref={logoRef}
-          className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-5 flex items-center justify-center relative opacity-0"
+          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mb-4 sm:mb-6 flex items-center justify-center relative opacity-0"
         >
-          <div className="absolute inset-0 rounded-2xl bg-[#0072EF]/20 blur-md animate-pulse" />
-          <div className="relative w-full h-full p-2 rounded-2xl bg-[#0D121F] border border-[#0072EF]/30 flex items-center justify-center shadow-lg">
-            <img
-              src="/images/trisecure_logo.png"
-              alt="Trisecure"
-              className="w-full h-full object-contain animate-logo-spin"
-            />
-          </div>
+          {/* Subtle Ambient Depth Lighting */}
+          <div className="absolute inset-0 rounded-full bg-[#0072EF]/18 blur-xl scale-110 pointer-events-none" />
+          <div className="absolute -bottom-2 w-2/3 h-3 bg-[#1A1A16]/12 rounded-full blur-md pointer-events-none" />
+
+          {/* Direct Logo with 3D Drop Shadow */}
+          <img
+            src="/images/trisecure_logo.png"
+            alt="Trisecure"
+            className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_8px_14px_rgba(0,114,239,0.28)] drop-shadow-[0_4px_6px_rgba(26,26,22,0.2)]"
+          />
         </div>
 
         {/* 3D Staggered Letter Container */}
         <div className="py-1 [perspective:1000px]">
           <h1
             ref={wordmarkRef}
-            className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[0.14em] sm:tracking-[0.18em] text-white flex justify-center leading-none"
+            className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[0.14em] sm:tracking-[0.18em] text-[#1A1A16] flex justify-center leading-none"
           >
             {'TRISECURE'.split('').map((char, index) => (
               <span
                 key={index}
-                className="preloader-letter inline-block opacity-0 translate-y-8 will-change-transform text-white [transform-style:preserve-3d]"
+                className="preloader-letter inline-block opacity-0 translate-y-8 will-change-transform text-[#1A1A16] [transform-style:preserve-3d]"
               >
                 {char}
               </span>
@@ -238,7 +219,7 @@ export const Preloader: React.FC = () => {
           ref={taglineRef}
           className="mt-4 sm:mt-5 flex items-center gap-2 sm:gap-3 opacity-0"
         >
-          <span className="font-mono text-xs sm:text-sm md:text-base tracking-[0.24em] sm:tracking-[0.28em] uppercase font-medium text-white/90">
+          <span className="font-mono text-xs sm:text-sm md:text-base tracking-[0.24em] sm:tracking-[0.28em] uppercase font-medium text-[#1A1A16]/80">
             Smart Solutions
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#0072EF]" />
@@ -248,28 +229,17 @@ export const Preloader: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Row: Minimalist Hairline Progress & Dual-Digit Rolling Counter */}
+      {/* Bottom Row: Minimalist Hairline Progress */}
       <div
         ref={footerMetaRef}
-        className="relative z-10 w-full max-w-xl mx-auto space-y-3"
+        className="relative z-10 w-full max-w-md mx-auto pb-4 sm:pb-8"
       >
-        {/* Ultra-Fine Hairline Laser Track */}
-        <div className="w-full h-[1.5px] bg-white/10 relative overflow-hidden rounded-full">
+        {/* Ultra-Fine Hairline Track */}
+        <div className="w-full h-[2px] bg-[#1A1A16]/10 relative overflow-hidden rounded-full">
           <div
             ref={lineRef}
-            className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-[#0052CC] via-[#0072EF] to-[#60A5FA] shadow-[0_0_10px_#0072EF]"
+            className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-[#0052CC] to-[#0072EF] rounded-full shadow-[0_0_8px_rgba(0,114,239,0.3)]"
           />
-        </div>
-
-        {/* Footer Meta Details */}
-        <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs text-white/40 tracking-widest">
-          <span className="uppercase">SYSTEM READY // 256-BIT ENCRYPTION</span>
-          <div className="flex items-baseline gap-1 text-white font-mono">
-            <span ref={counterRef} className="text-sm sm:text-base font-bold text-[#0072EF]">
-              00
-            </span>
-            <span className="text-[10px] text-white/40">/ 100</span>
-          </div>
         </div>
       </div>
     </div>

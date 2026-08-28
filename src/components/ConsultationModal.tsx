@@ -235,7 +235,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3.5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3.5">
                 <div>
                   <label className="block font-mono text-[9px] sm:text-[10px] text-[#7A7A70] uppercase mb-0.5 sm:mb-1 font-semibold tracking-wider">
                     Your Name *
@@ -265,7 +265,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3.5">
                 <div>
                   <label className="block font-mono text-[9px] sm:text-[10px] text-[#7A7A70] uppercase mb-0.5 sm:mb-1 font-semibold tracking-wider">
                     Email Address *

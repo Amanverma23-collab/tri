@@ -1,0 +1,128 @@
+.flowing-menu-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.flowing-menu-item {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(26, 26, 22, 0.1);
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.flowing-menu-item:hover {
+  background-color: #1A1A16;
+}
+
+.flowing-menu-item-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.25rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.flowing-menu-item:hover .flowing-menu-item-inner {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.flowing-menu-marquee {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  z-index: 3;
+}
+
+.flowing-menu-item:hover .flowing-menu-marquee {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flowing-menu-marquee-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: flowingMarquee 18s linear infinite;
+}
+
+.flowing-menu-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  font-family: var(--font-serif, serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #F5F0E6;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.flowing-menu-marquee-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #0072EF;
+  display: inline-block;
+}
+
+@keyframes flowingMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.flowing-menu-floating-image {
+  position: absolute;
+  width: 220px;
+  height: 150px;
+  border-radius: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.flowing-menu-item:hover ~ .flowing-menu-floating-image,
+.flowing-menu-item.active-hover .flowing-menu-floating-image {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 768px) {
+  .flowing-menu-item-inner {
+    padding: 1.15rem 0.75rem;
+  }
+  .flowing-menu-marquee-item {
+    font-size: 1.5rem;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  .flowing-menu-floating-image {
+    display: none;
+  }
+}
