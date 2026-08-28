@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 
 export interface ScrollStackProps {
   children: React.ReactNode[];

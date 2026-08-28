@@ -22,22 +22,31 @@ export const Preloader: React.FC = () => {
     // Lock body scroll during initial preloading
     document.body.style.overflow = 'hidden';
 
+    // Failsafe auto-dismiss after 1.6s to guarantee the user is NEVER blocked
+    const fallbackTimer = setTimeout(() => {
+      document.body.style.overflow = '';
+      sessionStorage.setItem('trisecure_preloaded', 'true');
+      setIsVisible(false);
+      ScrollTrigger.refresh();
+    }, 1600);
+
     const ctx = gsap.context(() => {
       const letters = gsap.utils.toArray<HTMLElement>('.preloader-letter');
       const totalLetters = letters.length;
 
-      // 1. Initial State: start completely hidden
+      // 1. Initial State
       gsap.set(letters, {
         opacity: 0,
-        y: 35,
-        rotateX: -45,
+        y: 20,
+        rotateX: -30,
         transformOrigin: '50% 100%',
       });
-      gsap.set(taglineRef.current, { opacity: 0, y: 15 });
-      gsap.set(logoRef.current, { opacity: 0, scale: 0.7 });
+      gsap.set(taglineRef.current, { opacity: 0, y: 10 });
+      gsap.set(logoRef.current, { opacity: 0, scale: 0.8 });
 
       const masterTimeline = gsap.timeline({
         onComplete: () => {
+          clearTimeout(fallbackTimer);
           document.body.style.overflow = '';
           sessionStorage.setItem('trisecure_preloaded', 'true');
           setIsVisible(false);
@@ -45,25 +54,24 @@ export const Preloader: React.FC = () => {
         },
       });
 
-      // 2. Emblem Entrance
+      // 2. Emblem Entrance (Fast & Crisp)
       masterTimeline.to(logoRef.current, {
         scale: 1,
         opacity: 1,
-        duration: 0.45,
+        duration: 0.3,
         ease: 'power3.out',
       });
 
-      // 3. Progress Bar Sweep & Synchronous Sequential Letter Reveal
+      // 3. Progress Bar Sweep & Synchronous Letter Reveal
       masterTimeline.to(
         lineRef.current,
         {
           width: '100%',
-          duration: 1.8,
-          ease: 'power1.inOut',
+          duration: 0.65,
+          ease: 'power2.inOut',
           onUpdate: function () {
             const prog = this.progress(); // 0 to 1
 
-            // Reveal each letter in real-time sync as progress passes each letter's milestone
             letters.forEach((letter, idx) => {
               const letterMilestone = (idx + 0.1) / totalLetters;
               if (prog >= letterMilestone && !letter.classList.contains('revealed')) {
@@ -72,91 +80,61 @@ export const Preloader: React.FC = () => {
                   opacity: 1,
                   y: 0,
                   rotateX: 0,
-                  duration: 0.45,
+                  duration: 0.25,
                   ease: 'power3.out',
                 });
               }
             });
 
-            // Reveal tagline halfway (>= 50%)
-            if (prog >= 0.5 && taglineRef.current && !taglineRef.current.classList.contains('revealed')) {
+            if (prog >= 0.4 && taglineRef.current && !taglineRef.current.classList.contains('revealed')) {
               taglineRef.current.classList.add('revealed');
               gsap.to(taglineRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 0.45,
+                duration: 0.25,
                 ease: 'power2.out',
               });
             }
           },
         },
-        '+=0.1'
+        '-=0.1'
       );
 
-      // 4. Brief cinematic pause at 100%
-      masterTimeline.to({}, { duration: 0.2 });
+      // 4. Brief hold
+      masterTimeline.to({}, { duration: 0.1 });
 
-      // 5. SIMULTANEOUS EXIT SEQUENCE:
-      // A) Shrink & Fly Brand Wordmark to Navbar Logo Position
-      // B) Curtain Wipe-Up of Overlay exposing actual site content underneath
+      // 5. Exit sequence: Curtain Wipe-Up
       masterTimeline.add(() => {
         window.dispatchEvent(new CustomEvent('trisecure_preloader_done'));
         const exitTl = gsap.timeline();
 
-        const navLogoEl = document.getElementById('navbar-brand-logo');
-        if (navLogoEl && brandCenterRef.current) {
-          const navRect = navLogoEl.getBoundingClientRect();
-          const brandRect = brandCenterRef.current.getBoundingClientRect();
-
-          // Calculate offset to land precisely on top of the navbar logo
-          const targetX = navRect.left + navRect.width / 2 - (brandRect.left + brandRect.width / 2);
-          const targetY = navRect.top + navRect.height / 2 - (brandRect.top + brandRect.height / 2);
-          
-          // Size ratio between navbar logo and preloader brand block
-          const scaleRatio = Math.min(navRect.height / brandRect.height, 0.28);
-
-          // Fly and shrink brand element into navbar
-          exitTl.to(
-            brandCenterRef.current,
-            {
-              x: targetX,
-              y: targetY,
-              scale: scaleRatio,
-              duration: 0.95,
-              ease: 'power3.inOut',
-            },
-            0
-          );
-        }
-
-        // Fade out tagline and progress line rapidly
         exitTl.to(
-          [taglineRef.current, footerMetaRef.current],
+          [taglineRef.current, footerMetaRef.current, brandCenterRef.current],
           {
             opacity: 0,
-            duration: 0.35,
+            y: -20,
+            duration: 0.3,
             ease: 'power2.out',
           },
           0
         );
 
-        // SIMULTANEOUS Curtain Wipe-Up of the background overlay from bottom to top
         exitTl.to(
           overlayRef.current,
           {
             clipPath: 'inset(0% 0% 100% 0%)',
-            duration: 0.95,
+            duration: 0.45,
             ease: 'power3.inOut',
           },
-          0
+          0.1
         );
       });
 
-      // Allow exit timeline duration to settle
-      masterTimeline.to({}, { duration: 1.05 });
+      masterTimeline.to({}, { duration: 0.45 });
     }, overlayRef);
 
     return () => {
+      clearTimeout(fallbackTimer);
       ctx.revert();
       document.body.style.overflow = '';
     };

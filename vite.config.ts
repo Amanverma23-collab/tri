@@ -1,4 +1,4 @@
-﻿import { defineConfig } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
@@ -30,16 +30,13 @@ export default defineConfig({
               id.includes('react') ||
               id.includes('react-dom') ||
               id.includes('react-router-dom') ||
-              id.includes('react-helmet-async')
-            ) {
-              return 'vendor-react';
-            }
-            if (
-              id.includes('gsap') ||
+              id.includes('react-helmet-async') ||
               id.includes('framer-motion') ||
-              id.includes('lenis') ||
               id.includes('motion')
             ) {
+              return 'vendor-framework';
+            }
+            if (id.includes('gsap') || id.includes('lenis')) {
               return 'vendor-animation';
             }
             if (id.includes('lucide-react')) {
