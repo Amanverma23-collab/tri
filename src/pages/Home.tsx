@@ -9,6 +9,7 @@ import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
 import { EditorialCtaBanner } from '../components/EditorialCtaBanner';
 import { PageTransition } from '../components/PageTransition';
 import { InfiniteSlider } from '../components/core/infinite-slider';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface HomeProps {
   onOpenConsultation: (service?: string) => void;
@@ -23,6 +24,9 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
   const handleIntroComplete = () => {
     sessionStorage.setItem('trisecure_intro_shown', 'true');
     setIntroDone(true);
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
   };
   const serviceCards = [
     {
@@ -184,17 +188,20 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         )}
       </AnimatePresence>
 
-      {/* 1. HERO SECTION: Editorial 2-Column Hero */}
-      <EditorialHero onOpenConsultation={() => onOpenConsultation()} />
+      {/* Main Home Sections (Mounted only when intro finishes, zero background CPU contention) */}
+      {introDone && (
+        <>
+          {/* 1. HERO SECTION: Editorial 2-Column Hero */}
+          <EditorialHero onOpenConsultation={() => onOpenConsultation()} />
 
-      {/* 2. WHAT WE DO: Horizontal Slidebar on Mobile & GSAP on Desktop */}
-      <HorizontalScrollSection
-        id="services-preview"
-        marker="02"
-        heading="What We Do"
-        subheading="Scroll to navigate through our four core corporate verticals designed to safeguard and scale your enterprise."
-        cards={serviceCards}
-      />
+          {/* 2. WHAT WE DO: Horizontal Slidebar on Mobile & GSAP on Desktop */}
+          <HorizontalScrollSection
+            id="services-preview"
+            marker="02"
+            heading="What We Do"
+            subheading="Scroll to navigate through our four core corporate verticals designed to safeguard and scale your enterprise."
+            cards={serviceCards}
+          />
 
       {/* 3. REDESIGNED LICENSES SHOWCASE STRIP: Modern Bento Grid on Mobile & Desktop */}
       <section className="py-14 sm:py-24 bg-[#FAF6EE] border-b border-[#1A1A16]/10">
@@ -380,6 +387,8 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         secondaryBtnLink="/services"
         onOpenConsultation={onOpenConsultation}
       />
+        </>
+      )}
     </PageTransition>
   );
 };

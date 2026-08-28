@@ -83,8 +83,12 @@ export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete
                     ease: [0.22, 1, 0.36, 1],
                     delay: staggerDelay,
                   }}
-                  className="inline-block will-change-transform transform-gpu"
-                  style={{ whiteSpace: letter === ' ' ? 'pre' : 'normal' }}
+                  className="inline-block transform-gpu will-change-transform"
+                  style={{
+                    whiteSpace: letter === ' ' ? 'pre' : 'normal',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden',
+                  }}
                 >
                   {letter === ' ' ? '\u00A0' : letter}
                 </motion.span>
