@@ -176,7 +176,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
             key="intro-service-cycle-wrapper"
             initial={{ y: '0%' }}
             exit={{ y: '-100%' }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[9998] w-full h-full"
           >
             <IntroServiceCycle onComplete={handleIntroComplete} />

@@ -31,19 +31,19 @@ export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete
     };
   }, [lenis]);
 
-  // 2. Word Cycle Timer (Smooth 2.0s cinematic display per word + automatic exit into Hero)
+  // 2. Word Cycle Timer (Relaxed 3.0s cinematic display per word + automatic exit into Hero)
   useEffect(() => {
     if (index === services.length - 1) {
-      // After final word has displayed for 2.0s, trigger smooth slide-up transition into Hero
+      // After final word has displayed for 3.0s, trigger smooth slide-up transition into Hero
       const timeout = setTimeout(() => {
         onComplete();
-      }, 2000);
+      }, 3000);
       return () => clearTimeout(timeout);
     }
 
     const interval = setTimeout(() => {
       setIndex((prev) => prev + 1);
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(interval);
   }, [index, onComplete]);
@@ -70,17 +70,17 @@ export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete
             className="leading-none text-center whitespace-nowrap tracking-tight select-none py-1 flex items-center justify-center"
           >
             {letters.map((letter, i) => {
-              const staggerDelay = i * (0.35 / letters.length);
+              const staggerDelay = i * 0.032;
 
               return (
                 <motion.span
                   key={`${currentWord}-${i}`}
-                  initial={{ y: '110%', skewY: 10, opacity: 0 }}
+                  initial={{ y: '110%', skewY: 8, opacity: 0 }}
                   animate={{ y: '0%', skewY: 0, opacity: 1 }}
-                  exit={{ y: '-110%', skewY: -10, opacity: 0 }}
+                  exit={{ y: '-110%', skewY: -8, opacity: 0 }}
                   transition={{
-                    duration: 0.45,
-                    ease: [0.65, 0, 0.35, 1],
+                    duration: 0.65,
+                    ease: [0.22, 1, 0.36, 1],
                     delay: staggerDelay,
                   }}
                   className="inline-block will-change-transform transform-gpu"
@@ -99,7 +99,7 @@ export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete
         {services.map((_, i) => (
           <div
             key={i}
-            className={`h-1 rounded-full transition-all duration-500 ${
+            className={`h-1 rounded-full transition-all duration-700 ${
               i === index
                 ? 'w-8 bg-[#0072EF]'
                 : i < index
