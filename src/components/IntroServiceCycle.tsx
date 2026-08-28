@@ -16,14 +16,9 @@ const services = [
 
 export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete }) => {
   const [index, setIndex] = useState(0);
-  const [isStarted, setIsStarted] = useState(() => {
-    // If preloader was already completed or skipped previously
-    return !!sessionStorage.getItem('trisecure_preloaded');
-  });
-
   const { lenis } = useSmoothScroll();
 
-  // 1. Lock scroll during the intro cycle
+  // 1. Lock scroll during the intro cycle & restore on unmount
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -36,45 +31,22 @@ export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete
     };
   }, [lenis]);
 
-  // 2. Synchronize start with preloader exit
+  // 2. Word Cycle Timer (Crisp 1.1s display per word + automatic exit into Hero)
   useEffect(() => {
-    if (isStarted) return;
-
-    const handlePreloaderDone = () => {
-      setIsStarted(true);
-    };
-
-    window.addEventListener('trisecure_preloader_done', handlePreloaderDone);
-
-    // Fallback in case event was dispatched before listener attached
-    const fallbackTimer = setTimeout(() => {
-      setIsStarted(true);
-    }, 2800);
-
-    return () => {
-      window.removeEventListener('trisecure_preloader_done', handlePreloaderDone);
-      clearTimeout(fallbackTimer);
-    };
-  }, [isStarted]);
-
-  // 3. Word Cycle Timer (0.5s transition + 2.2s display per word)
-  useEffect(() => {
-    if (!isStarted) return;
-
     if (index === services.length - 1) {
-      // After final word has finished full duration (2.2s), trigger slide-up transition into Hero
+      // After final word has displayed, trigger slide-up transition into Hero
       const timeout = setTimeout(() => {
         onComplete();
-      }, 2200);
+      }, 1100);
       return () => clearTimeout(timeout);
     }
 
     const interval = setTimeout(() => {
       setIndex((prev) => prev + 1);
-    }, 2200);
+    }, 1100);
 
     return () => clearTimeout(interval);
-  }, [index, isStarted, onComplete]);
+  }, [index, onComplete]);
 
   const currentWord = services[index];
   const letters = currentWord.split('');
