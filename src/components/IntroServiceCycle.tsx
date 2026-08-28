@@ -31,19 +31,19 @@ export const IntroServiceCycle: React.FC<IntroServiceCycleProps> = ({ onComplete
     };
   }, [lenis]);
 
-  // 2. Word Cycle Timer (Crisp 1.1s display per word + automatic exit into Hero)
+  // 2. Word Cycle Timer (Smooth 2.0s cinematic display per word + automatic exit into Hero)
   useEffect(() => {
     if (index === services.length - 1) {
-      // After final word has displayed, trigger slide-up transition into Hero
+      // After final word has displayed for 2.0s, trigger smooth slide-up transition into Hero
       const timeout = setTimeout(() => {
         onComplete();
-      }, 1100);
+      }, 2000);
       return () => clearTimeout(timeout);
     }
 
     const interval = setTimeout(() => {
       setIndex((prev) => prev + 1);
-    }, 1100);
+    }, 2000);
 
     return () => clearTimeout(interval);
   }, [index, onComplete]);

@@ -22,13 +22,13 @@ export const Preloader: React.FC = () => {
     // Lock body scroll during initial preloading
     document.body.style.overflow = 'hidden';
 
-    // Failsafe auto-dismiss after 1.6s to guarantee the user is NEVER blocked
+    // Failsafe auto-dismiss after 3.2s to guarantee the user is NEVER blocked
     const fallbackTimer = setTimeout(() => {
       document.body.style.overflow = '';
       sessionStorage.setItem('trisecure_preloaded', 'true');
       setIsVisible(false);
       ScrollTrigger.refresh();
-    }, 1600);
+    }, 3200);
 
     const ctx = gsap.context(() => {
       const letters = gsap.utils.toArray<HTMLElement>('.preloader-letter');
@@ -37,12 +37,12 @@ export const Preloader: React.FC = () => {
       // 1. Initial State
       gsap.set(letters, {
         opacity: 0,
-        y: 20,
-        rotateX: -30,
+        y: 28,
+        rotateX: -35,
         transformOrigin: '50% 100%',
       });
-      gsap.set(taglineRef.current, { opacity: 0, y: 10 });
-      gsap.set(logoRef.current, { opacity: 0, scale: 0.8 });
+      gsap.set(taglineRef.current, { opacity: 0, y: 12 });
+      gsap.set(logoRef.current, { opacity: 0, scale: 0.75 });
 
       const masterTimeline = gsap.timeline({
         onComplete: () => {
@@ -54,11 +54,11 @@ export const Preloader: React.FC = () => {
         },
       });
 
-      // 2. Emblem Entrance (Fast & Crisp)
+      // 2. Emblem Entrance
       masterTimeline.to(logoRef.current, {
         scale: 1,
         opacity: 1,
-        duration: 0.3,
+        duration: 0.4,
         ease: 'power3.out',
       });
 
@@ -67,8 +67,8 @@ export const Preloader: React.FC = () => {
         lineRef.current,
         {
           width: '100%',
-          duration: 0.65,
-          ease: 'power2.inOut',
+          duration: 1.4,
+          ease: 'power1.inOut',
           onUpdate: function () {
             const prog = this.progress(); // 0 to 1
 
@@ -80,28 +80,28 @@ export const Preloader: React.FC = () => {
                   opacity: 1,
                   y: 0,
                   rotateX: 0,
-                  duration: 0.25,
+                  duration: 0.35,
                   ease: 'power3.out',
                 });
               }
             });
 
-            if (prog >= 0.4 && taglineRef.current && !taglineRef.current.classList.contains('revealed')) {
+            if (prog >= 0.45 && taglineRef.current && !taglineRef.current.classList.contains('revealed')) {
               taglineRef.current.classList.add('revealed');
               gsap.to(taglineRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 0.25,
+                duration: 0.35,
                 ease: 'power2.out',
               });
             }
           },
         },
-        '-=0.1'
+        '+=0.05'
       );
 
       // 4. Brief hold
-      masterTimeline.to({}, { duration: 0.1 });
+      masterTimeline.to({}, { duration: 0.15 });
 
       // 5. Exit sequence: Curtain Wipe-Up
       masterTimeline.add(() => {
@@ -112,8 +112,8 @@ export const Preloader: React.FC = () => {
           [taglineRef.current, footerMetaRef.current, brandCenterRef.current],
           {
             opacity: 0,
-            y: -20,
-            duration: 0.3,
+            y: -25,
+            duration: 0.4,
             ease: 'power2.out',
           },
           0
@@ -123,14 +123,14 @@ export const Preloader: React.FC = () => {
           overlayRef.current,
           {
             clipPath: 'inset(0% 0% 100% 0%)',
-            duration: 0.45,
+            duration: 0.6,
             ease: 'power3.inOut',
           },
           0.1
         );
       });
 
-      masterTimeline.to({}, { duration: 0.45 });
+      masterTimeline.to({}, { duration: 0.6 });
     }, overlayRef);
 
     return () => {
